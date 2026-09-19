@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 第五關通關完美修復版</title>
+    <title>世界寶藏迷宮探險 - 神通指南與補給站版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -60,18 +60,6 @@
         #canvas-container { width: 100%; max-width: 600px; margin: 0 auto; aspect-ratio: 1 / 1; }
         canvas { width: 100%; height: 100%; background-color: #FFF; border: 6px solid #795548; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         
-        #god-panel { background: #FFF9C4; padding: 10px; border-radius: 15px; border: 3px solid #FBC02D; margin-bottom: 15px; display: none; }
-        .god-grid { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-        .god-btn { 
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            flex: 1 1 25%; min-width: 95px; max-width: 140px; padding: 8px; border-radius: 12px; color: white; border: none; font-weight: bold; cursor: pointer;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.2); transition: 0.1s;
-        }
-        .god-btn.supreme { flex: 1 1 100%; max-width: 350px; background: linear-gradient(45deg, #FF6D00, #FFD600); border: 2px solid #E65100; color: #3E2723; box-shadow: 0 6px 0 #E65100;}
-        .god-btn:active { transform: translateY(6px); box-shadow: 0 0 0 rgba(0,0,0,0); }
-        .god-icon { font-size: clamp(26px, 5.5vw, 36px); margin-bottom: 5px; }
-        .god-text { font-size: clamp(13px, 3vw, 15px); line-height: 1.2;}
-
         .controls { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
         .control-row { display: flex; justify-content: center; gap: 20px; margin-bottom: 15px; }
         .arrow-btn {
@@ -91,13 +79,13 @@
         
         .footer { font-size: clamp(16px, 4vw, 20px); font-weight: bold; color: #795548; margin-top: 20px; padding-top: 15px; border-top: 3px dashed #BCAAA4;}
 
-        #event-modal, #bwei-modal {
+        #event-modal, #bwei-modal, #god-help-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 1000;
         }
         .modal-content {
-            background: #FFFFFF; padding: clamp(20px, 5vw, 35px); border-radius: 25px; width: 90%; max-width: 450px;
-            text-align: center; border: 6px solid #FF5722;
+            background: #FFFFFF; padding: clamp(20px, 5vw, 35px); border-radius: 25px; width: 90%; max-width: 500px;
+            text-align: center; border: 6px solid #FF5722; max-height: 85vh; overflow-y: auto; box-sizing: border-box;
         }
         .modal-text { font-size: clamp(22px, 5.5vw, 28px); font-weight: bold; color: #BF360C; margin-bottom: 20px; line-height: 1.5;}
         
@@ -132,7 +120,7 @@
                     <option value="2">第 2 關起玩</option>
                     <option value="3">第 3 關起玩</option>
                     <option value="4">第 4 關起玩</option>
-                    <option value="5">第 5 關起玩 (測試通往第6關)</option>
+                    <option value="5">第 5 關起玩</option>
                     <option value="6">第 6 關起玩 (神壇解鎖)</option>
                     <option value="7">第 7 關起玩</option>
                     <option value="8">第 8 關起玩</option>
@@ -150,7 +138,7 @@
                 <button type="button" class="age-btn" onclick="selectAge('19-29', this)">青年/大學生<br>⚡極難挑戰</button>
                 <button type="button" class="age-btn" onclick="selectAge('30-39', this)">壯年 (30-39)<br>🎯進階級</button>
                 <button type="button" class="age-btn" onclick="selectAge('40-49', this)">中年 (40-49)<br>⚖️標準級</button>
-                <button type="button" class="age-btn selected" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
+                <button type="button" class="age-btn" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
                 <button type="button" class="age-btn" onclick="selectAge('60-69', this)">樂齡 (60-69)<br>🍵輕鬆級</button>
                 <button type="button" class="age-btn" onclick="selectAge('70-79', this)">高齡 (70-79)<br>🌸尊榮級</button>
                 <button type="button" class="age-btn selected" onclick="selectAge('80+', this)">耆老 (80+)<br>🍵養生級</button>
@@ -178,13 +166,23 @@
 
     <!-- 頁面2：說明 -->
     <div id="screen-instructions" class="screen">
-        <h1>📖 遊戲說明與經濟機制</h1>
-        <div style="font-size: clamp(16px, 4.5vw, 20px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 20px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>流暢過關：</b>每一關通關後自然無縫進入下一關（含第 5 關通往第 6 關神壇解鎖）！<br>
-            🔸 <b>絕境重生：</b>點數歸零或不足時，溫暖提示「您失敗了，勝敗乃兵家常事，再接再厲！」並送往流放地搬磚賺分，達標後返回原關卡。<br>
-            🔸 <b>神蹟解鎖（第 6 關起）：</b>解鎖神壇，消耗點數誠心擲筊請神。<br>
-            🔸 <b>五大流放地：</b>潮州(300) ➔ 惠州(500) ➔ 儋州(700) ➔ 永州(900) ➔ 寧古塔(1200)。
+        <h1>📖 遊戲說明與神通指南</h1>
+        <div style="font-size: clamp(16px, 4.5vw, 18px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 20px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
+            🔸 <b>順暢過關：</b>每一關通關後自然無縫進入下一關！<br>
+            🔸 <b>絕境重生：</b>點數歸零或不足時，溫暖提示並送往流放地搬磚賺分，達標後捲土重來！<br>
+            🔸 <b>⛩️ 神通指南（第 6 關起解鎖）：</b>
+            <ul style="margin: 5px 0; padding-left: 20px;">
+                <li>🏮 <b>土地公 (-300點)</b>：指引生路</li>
+                <li>⚔️ <b>溫王爺 (-500點)</b>：清除惡犬</li>
+                <li>🌊 <b>媽祖 (-1000點)</b>：清除炸彈</li>
+                <li>🌿 <b>觀世音 (-1500點)</b>：掃除壞人</li>
+                <li>🪷 <b>藥師佛 (-2000點)</b>：化解疾病/鬼怪</li>
+                <li>🌟 <b>玉皇大帝 (-5000點)</b>：清場與指路</li>
+            </ul>
+            🔸 <b>💰 點數補給站：</b>若想提早賺分，可隨時點擊下方按鈕前往流放地搬磚！
         </div>
+        <br>
+        <button class="btn-large" style="background-color: #FF9800; box-shadow: 0 6px 0 #E65100; width: 90%; max-width: 350px;" onclick="openBanishFromHelp()">💰 點數補給站 (搬磚賺分)</button>
         <br>
         <button class="btn-large btn-cancel" onclick="showScreen('screen-cover')">⬅️ 返回</button>
         <button class="btn-large" onclick="startGame()">開始探險 🚀</button>
@@ -199,28 +197,10 @@
         </div>
         <div class="target-text" id="ui-target">目標：尋找...</div>
         
-        <div id="god-panel">
-            <h3 style="margin: 0 0 10px 0; color: #F57F17; font-size: clamp(18px, 5vw, 24px);">⛩️ 點選神像擲筊請神 ⛩️</h3>
-            <div class="god-grid">
-                <button class="god-btn" style="background-color: #8D6E63;" onclick="startGodBwei('tudigong')">
-                    <div class="god-icon">🏮</div><div class="god-text">土地公<br>(-300)</div>
-                </button>
-                <button class="god-btn" style="background-color: #E53935;" onclick="startGodBwei('wen')">
-                    <div class="god-icon">⚔️</div><div class="god-text">溫王爺<br>(-500)</div>
-                </button>
-                <button class="god-btn" style="background-color: #1E88E5;" onclick="startGodBwei('mazu')">
-                    <div class="god-icon">🌊</div><div class="god-text">媽祖<br>(-1000)</div>
-                </button>
-                <button class="god-btn" style="background-color: #4CAF50;" onclick="startGodBwei('guanyin')">
-                    <div class="god-icon">🌿</div><div class="god-text">觀世音<br>(-1500)</div>
-                </button>
-                <button class="god-btn" style="background-color: #9C27B0;" onclick="startGodBwei('yaoshifo')">
-                    <div class="god-icon">🪷</div><div class="god-text">藥師佛<br>(-2000)</div>
-                </button>
-                <button class="god-btn supreme" onclick="startGodBwei('supreme')">
-                    <div class="god-icon">🌟</div><div class="god-text" style="font-size: 18px;">玉皇大帝<br>(清場+指路 / -5000)</div>
-                </button>
-            </div>
+        <!-- 頂部功能列：幫助與點數補給站 -->
+        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+            <button class="btn-large" style="font-size: 16px; padding: 8px 15px; margin: 0; width: auto; background-color: #0288D1; box-shadow: 0 4px 0 #01579B;" onclick="openGodHelpModal()">📖 神通指南與幫助</button>
+            <button class="btn-large" style="font-size: 16px; padding: 8px 15px; margin: 0; width: auto; background-color: #F57C00; box-shadow: 0 4px 0 #E65100;" onclick="openBanishFromHelp()">💰 點數補給站</button>
         </div>
 
         <div id="canvas-container">
@@ -239,13 +219,13 @@
         </div>
     </div>
 
-    <!-- 頁面4：流放勞動區 -->
+    <!-- 頁面4：流放勞動區 (點數補給站) -->
     <div id="screen-work" class="screen">
-        <h1 style="color:#5D4037; font-size: clamp(28px, 7vw, 36px);">🚧 流放邊疆 🚧</h1>
+        <h1 style="color:#5D4037; font-size: clamp(28px, 7vw, 36px);">🚧 點數補給站 (流放邊疆) 🚧</h1>
         <h2 id="ui-banish-location" style="color:#D32F2F; font-size: clamp(24px, 6vw, 32px); margin: 0;">流放地：潮州</h2>
         
         <div style="font-size: clamp(18px, 5vw, 26px); margin: 20px 0; background: #FFFFFF; padding: 20px; border-radius: 15px; border: 3px solid #8D6E63;">
-            <p style="font-weight: bold; color: #BF360C;">🚨 點數不足或歸零！請搬磚賺點數贖身！</p>
+            <p id="work-msg" style="font-weight: bold; color: #BF360C;">💡 努力搬磚賺取點數！達標後即可返回原關卡！</p>
             <p>已賺取：<b id="work-score" style="color:#388E3C; font-size: clamp(28px, 7vw, 40px);">0</b> / <span id="work-target-display">500</span> 點</p>
         </div>
         
@@ -270,6 +250,37 @@
             </div>
         </div>
         <button id="btn-rest-resume" class="btn-large" style="display:none; width: 100%; background-color: #4CAF50; box-shadow: 0 6px 0 #2E7D32;" onclick="resumeFromRest()">✅ 繼續探險</button>
+    </div>
+
+    <!-- 幫助與神通指南彈跳視窗 (內含神像請神按鈕) -->
+    <div id="god-help-modal">
+        <div class="modal-content">
+            <h2 style="color: #D84315; margin-top: 0;">📖 神通指南與請神面板</h2>
+            <p style="font-size: 15px; color: #555;">第 6 關起解鎖神壇。點擊下方神像即可擲筊請神化解危機！</p>
+            
+            <div class="god-grid" style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 15px 0;">
+                <button class="god-btn" style="background-color: #8D6E63; flex: 1 1 30%;" onclick="startGodBwei('tudigong')">
+                    <div class="god-icon">🏮</div><div class="god-text">土地公<br>(-300)</div>
+                </button>
+                <button class="god-btn" style="background-color: #E53935; flex: 1 1 30%;" onclick="startGodBwei('wen')">
+                    <div class="god-icon">⚔️</div><div class="god-text">溫王爺<br>(-500)</div>
+                </button>
+                <button class="god-btn" style="background-color: #1E88E5; flex: 1 1 30%;" onclick="startGodBwei('mazu')">
+                    <div class="god-icon">🌊</div><div class="god-text">媽祖<br>(-1000)</div>
+                </button>
+                <button class="god-btn" style="background-color: #4CAF50; flex: 1 1 30%;" onclick="startGodBwei('guanyin')">
+                    <div class="god-icon">🌿</div><div class="god-text">觀世音<br>(-1500)</div>
+                </button>
+                <button class="god-btn" style="background-color: #9C27B0; flex: 1 1 30%;" onclick="startGodBwei('yaoshifo')">
+                    <div class="god-icon">🪷</div><div class="god-text">藥師佛<br>(-2000)</div>
+                </button>
+                <button class="god-btn supreme" style="flex: 1 1 100%; background: linear-gradient(45deg, #FF6D00, #FFD600); color: #3E2723;" onclick="startGodBwei('supreme')">
+                    <div class="god-icon">🌟</div><div class="god-text" style="font-size: 16px;">玉皇大帝 (清場+指路 / -5000)</div>
+                </button>
+            </div>
+            
+            <button class="btn-large btn-cancel" style="width: 100%; margin-top: 10px;" onclick="closeGodHelpModal()">關閉指南</button>
+        </div>
     </div>
 
     <!-- 擲筊彈跳視窗 -->
@@ -401,6 +412,22 @@
             showScreen('screen-game'); loadLevel();
         }
 
+        function openGodHelpModal() {
+            if (currentLevel < 6) {
+                alert("⛩️ 神壇與請神神通將於【第 6 關】正式解鎖！目前請先努力累積點數！");
+                return;
+            }
+            document.getElementById('god-help-modal').style.display = 'flex';
+        }
+
+        function closeGodHelpModal() {
+            document.getElementById('god-help-modal').style.display = 'none';
+        }
+
+        function openBanishFromHelp() {
+            banishPlayer(500, 'manual_station');
+        }
+
         function loadLevel() {
             isEventActive = false; 
             hintActive = false;
@@ -451,20 +478,12 @@
             levelStartTime = Date.now(); 
         }
 
-        // --- 🎯 確保第五關通往第六關時神壇面板平滑解鎖而不卡畫面 ---
         function updateUI() {
             let ageInput = document.getElementById('selected-age');
             let selectedAge = ageInput ? ageInput.value : '50-59';
             document.getElementById('ui-level').innerText = "關卡: " + currentLevel + "/10 (" + selectedAge + ")";
             document.getElementById('ui-score').innerText = "總分: " + totalScore;
             if(currentTarget) document.getElementById('ui-target').innerText = "目標：" + currentTarget.n + " " + currentTarget.i;
-            
-            let godPanel = document.getElementById('god-panel');
-            if (currentLevel >= 6) {
-                godPanel.style.display = 'block';
-            } else {
-                godPanel.style.display = 'none';
-            }
         }
 
         window.onload = function() { 
@@ -504,7 +523,8 @@
         }
 
         function startGodBwei(godType) {
-            if (isEventActive || hintActive) return;
+            if (hintActive) return;
+            closeGodHelpModal();
             initAudio(); playSound('bump'); vibrate([30]);
             
             pendingGod = godType; pendingGodName = godsData[godType].n_tw;
@@ -610,7 +630,6 @@
             
             let locName = banishmentLocations[workTargetValue] || '寧古塔';
             document.getElementById('ui-banish-location').innerText = "🗺️ " + locName;
-            document.getElementById('work-msg').innerHTML = "🚨 點數不足或歸零！已被流放到【" + locName + "】！請勞動賺滿 <b>" + workTargetValue + " 點</b> 贖身！";
             
             isEventActive = true; 
             document.getElementById('work-target-display').innerText = workTargetValue;
