@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 全自動無縫過關版</title>
+    <title>世界寶藏迷宮探險 - 第五關通關完美修復版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -132,7 +132,7 @@
                     <option value="2">第 2 關起玩</option>
                     <option value="3">第 3 關起玩</option>
                     <option value="4">第 4 關起玩</option>
-                    <option value="5">第 5 關起玩</option>
+                    <option value="5">第 5 關起玩 (測試通往第6關)</option>
                     <option value="6">第 6 關起玩 (神壇解鎖)</option>
                     <option value="7">第 7 關起玩</option>
                     <option value="8">第 8 關起玩</option>
@@ -150,7 +150,7 @@
                 <button type="button" class="age-btn" onclick="selectAge('19-29', this)">青年/大學生<br>⚡極難挑戰</button>
                 <button type="button" class="age-btn" onclick="selectAge('30-39', this)">壯年 (30-39)<br>🎯進階級</button>
                 <button type="button" class="age-btn" onclick="selectAge('40-49', this)">中年 (40-49)<br>⚖️標準級</button>
-                <button type="button" class="age-btn" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
+                <button type="button" class="age-btn selected" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
                 <button type="button" class="age-btn" onclick="selectAge('60-69', this)">樂齡 (60-69)<br>🍵輕鬆級</button>
                 <button type="button" class="age-btn" onclick="selectAge('70-79', this)">高齡 (70-79)<br>🌸尊榮級</button>
                 <button type="button" class="age-btn selected" onclick="selectAge('80+', this)">耆老 (80+)<br>🍵養生級</button>
@@ -180,7 +180,7 @@
     <div id="screen-instructions" class="screen">
         <h1>📖 遊戲說明與經濟機制</h1>
         <div style="font-size: clamp(16px, 4.5vw, 20px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 20px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>順暢過關：</b>每一關通關後自然無縫進入下一關（含第 6 關通往第 7 關）！<br>
+            🔸 <b>流暢過關：</b>每一關通關後自然無縫進入下一關（含第 5 關通往第 6 關神壇解鎖）！<br>
             🔸 <b>絕境重生：</b>點數歸零或不足時，溫暖提示「您失敗了，勝敗乃兵家常事，再接再厲！」並送往流放地搬磚賺分，達標後返回原關卡。<br>
             🔸 <b>神蹟解鎖（第 6 關起）：</b>解鎖神壇，消耗點數誠心擲筊請神。<br>
             🔸 <b>五大流放地：</b>潮州(300) ➔ 惠州(500) ➔ 儋州(700) ➔ 永州(900) ➔ 寧古塔(1200)。
@@ -451,13 +451,20 @@
             levelStartTime = Date.now(); 
         }
 
+        // --- 🎯 確保第五關通往第六關時神壇面板平滑解鎖而不卡畫面 ---
         function updateUI() {
             let ageInput = document.getElementById('selected-age');
             let selectedAge = ageInput ? ageInput.value : '50-59';
             document.getElementById('ui-level').innerText = "關卡: " + currentLevel + "/10 (" + selectedAge + ")";
             document.getElementById('ui-score').innerText = "總分: " + totalScore;
             if(currentTarget) document.getElementById('ui-target').innerText = "目標：" + currentTarget.n + " " + currentTarget.i;
-            document.getElementById('god-panel').style.display = (currentLevel >= 6) ? 'block' : 'none';
+            
+            let godPanel = document.getElementById('god-panel');
+            if (currentLevel >= 6) {
+                godPanel.style.display = 'block';
+            } else {
+                godPanel.style.display = 'none';
+            }
         }
 
         window.onload = function() { 
