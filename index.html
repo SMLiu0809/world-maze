@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 神通指南與補給站版</title>
+    <title>世界寶藏迷宮探險 - 流放地理經濟學版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -72,14 +72,14 @@
         #screen-work { border-color: #8D6E63; background-color: #EFEBE9; }
         .work-btn {
             font-size: clamp(60px, 15vw, 90px); width: clamp(140px, 35vw, 200px); height: clamp(140px, 35vw, 200px); 
-            background-color: #5D4037; color: white; border-radius: 30px; border: none; box-shadow: 0 12px 0 #3E2723; cursor: pointer; user-select: none; margin: 20px;
+            background-color: #5D4037; color: white; border-radius: 30px; border: none; box-shadow: 0 12px 0 #3E2723; cursor: pointer; user-select: none; margin: 10px;
         }
         .work-btn:active { transform: translateY(12px); box-shadow: 0 0 0 #3E2723; }
-        progress { width: 90%; height: 40px; border-radius: 15px; accent-color: #FF5722; }
+        progress { width: 90%; height: 30px; border-radius: 15px; accent-color: #FF5722; }
         
         .footer { font-size: clamp(16px, 4vw, 20px); font-weight: bold; color: #795548; margin-top: 20px; padding-top: 15px; border-top: 3px dashed #BCAAA4;}
 
-        #event-modal, #bwei-modal, #god-help-modal {
+        #event-modal, #bwei-modal, #god-help-modal, #station-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 1000;
         }
@@ -116,7 +116,7 @@
             <div style="margin: 15px 0; background: #FFE082; padding: 12px; border-radius: 12px; border: 2px solid #FFA000;">
                 <label for="start-level-select" style="font-weight: bold; color: #E65100;">🛠️ 測試選關起始工具：</label>
                 <select id="start-level-select" style="font-size: 18px; padding: 5px 10px; border-radius: 8px; border: 2px solid #E65100; background: white; font-weight: bold;">
-                    <option value="1" selected>第 1 關起玩 (完整通關測試)</option>
+                    <option value="1" selected>第 1 關起玩</option>
                     <option value="2">第 2 關起玩</option>
                     <option value="3">第 3 關起玩</option>
                     <option value="4">第 4 關起玩</option>
@@ -166,23 +166,19 @@
 
     <!-- 頁面2：說明 -->
     <div id="screen-instructions" class="screen">
-        <h1>📖 遊戲說明與神通指南</h1>
-        <div style="font-size: clamp(16px, 4.5vw, 18px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 20px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>順暢過關：</b>每一關通關後自然無縫進入下一關！<br>
-            🔸 <b>絕境重生：</b>點數歸零或不足時，溫暖提示並送往流放地搬磚賺分，達標後捲土重來！<br>
-            🔸 <b>⛩️ 神通指南（第 6 關起解鎖）：</b>
+        <h1>📖 遊戲說明與流放地理經濟</h1>
+        <div style="font-size: clamp(15px, 4vw, 18px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 15px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
+            🔸 <b>流放地理經濟學：</b>貶得越遠敲磚次數多、上限高，但單次報酬遞減且回程機票越貴！
             <ul style="margin: 5px 0; padding-left: 20px;">
-                <li>🏮 <b>土地公 (-300點)</b>：指引生路</li>
-                <li>⚔️ <b>溫王爺 (-500點)</b>：清除惡犬</li>
-                <li>🌊 <b>媽祖 (-1000點)</b>：清除炸彈</li>
-                <li>🌿 <b>觀世音 (-1500點)</b>：掃除壞人</li>
-                <li>🪷 <b>藥師佛 (-2000點)</b>：化解疾病/鬼怪</li>
-                <li>🌟 <b>玉皇大帝 (-5000點)</b>：清場與指路</li>
+                <li>🏙️ <b>潮州（最近）</b>：每敲200點 (限5次/最高1000) ➔ 機票 <b>500點</b></li>
+                <li>🏡 <b>惠州</b>：每敲180點 (限7次/最高1260) ➔ 機票 <b>700點</b></li>
+                <li>🌴 <b>儋州</b>：每敲150點 (限10次/最高1500) ➔ 機票 <b>900點</b></li>
+                <li>⛰️ <b>永州</b>：每敲120點 (限15次/最高1800) ➔ 機票 <b>1100點</b></li>
+                <li>❄️ <b>寧古塔（最遠）</b>：每敲100點 (限20次/最高2000) ➔ 機票 <b>1300點</b></li>
             </ul>
-            🔸 <b>💰 點數補給站：</b>若想提早賺分，可隨時點擊下方按鈕前往流放地搬磚！
         </div>
         <br>
-        <button class="btn-large" style="background-color: #FF9800; box-shadow: 0 6px 0 #E65100; width: 90%; max-width: 350px;" onclick="openBanishFromHelp()">💰 點數補給站 (搬磚賺分)</button>
+        <button class="btn-large" style="background-color: #F57C00; box-shadow: 0 6px 0 #E65100; width: 90%; max-width: 350px;" onclick="openStationModal()">💰 前往點數補給站</button>
         <br>
         <button class="btn-large btn-cancel" onclick="showScreen('screen-cover')">⬅️ 返回</button>
         <button class="btn-large" onclick="startGame()">開始探險 🚀</button>
@@ -200,7 +196,7 @@
         <!-- 頂部功能列：幫助與點數補給站 -->
         <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
             <button class="btn-large" style="font-size: 16px; padding: 8px 15px; margin: 0; width: auto; background-color: #0288D1; box-shadow: 0 4px 0 #01579B;" onclick="openGodHelpModal()">📖 神通指南與幫助</button>
-            <button class="btn-large" style="font-size: 16px; padding: 8px 15px; margin: 0; width: auto; background-color: #F57C00; box-shadow: 0 4px 0 #E65100;" onclick="openBanishFromHelp()">💰 點數補給站</button>
+            <button class="btn-large" style="font-size: 16px; padding: 8px 15px; margin: 0; width: auto; background-color: #F57C00; box-shadow: 0 4px 0 #E65100;" onclick="openStationModal()">💰 點數補給站</button>
         </div>
 
         <div id="canvas-container">
@@ -219,24 +215,26 @@
         </div>
     </div>
 
-    <!-- 頁面4：流放勞動區 (點數補給站) -->
+    <!-- 頁面4：流放勞動與點數補給站畫面 -->
     <div id="screen-work" class="screen">
-        <h1 style="color:#5D4037; font-size: clamp(28px, 7vw, 36px);">🚧 點數補給站 (流放邊疆) 🚧</h1>
-        <h2 id="ui-banish-location" style="color:#D32F2F; font-size: clamp(24px, 6vw, 32px); margin: 0;">流放地：潮州</h2>
+        <h1 style="color:#5D4037; font-size: clamp(26px, 6vw, 34px);">🚧 流放邊疆勞動區 🚧</h1>
+        <h2 id="ui-banish-location" style="color:#D32F2F; font-size: clamp(22px, 5.5vw, 28px); margin: 0;">流放地：潮州</h2>
         
-        <div style="font-size: clamp(18px, 5vw, 26px); margin: 20px 0; background: #FFFFFF; padding: 20px; border-radius: 15px; border: 3px solid #8D6E63;">
-            <p id="work-msg" style="font-weight: bold; color: #BF360C;">💡 努力搬磚賺取點數！達標後即可返回原關卡！</p>
-            <p>已賺取：<b id="work-score" style="color:#388E3C; font-size: clamp(28px, 7vw, 40px);">0</b> / <span id="work-target-display">500</span> 點</p>
+        <div style="font-size: clamp(16px, 4vw, 20px); margin: 15px 0; background: #FFFFFF; padding: 15px; border-radius: 15px; border: 3px solid #8D6E63;">
+            <p id="work-rule-desc" style="font-weight: bold; color: #BF360C; margin: 5px 0;">每敲一次：200點 | 剩餘次數：5 | 機票費：500點</p>
+            <p style="margin: 5px 0;">已賺取點數：<b id="work-score" style="color:#388E3C; font-size: clamp(24px, 6vw, 32px);">0</b> / <span id="work-target-display">500</span> 點 (目標含回程機票)</p>
         </div>
         
-        <div style="margin: 30px 0;">
+        <div style="margin: 15px 0;">
             <progress id="work-progress" value="0" max="500"></progress>
-            <p id="work-status" style="font-size: clamp(18px, 5vw, 24px); font-weight: bold; color: #E65100; margin-top: 15px;">狂點按鈕！</p>
+            <p id="work-status" style="font-size: clamp(16px, 4vw, 20px); font-weight: bold; color: #E65100; margin-top: 8px;">狂點按鈕勞動！</p>
         </div>
         
         <button class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">⛏️</button>
-        <br><br>
-        <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 100%; background-color: #4CAF50; box-shadow: 0 6px 0 #2E7D32;" onclick="returnFromWork()">✅ 刑滿釋放，重返原關卡！</button>
+        <br>
+        <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 350px; background-color: #4CAF50; box-shadow: 0 6px 0 #2E7D32; margin-top: 10px;" onclick="returnFromWork()">✈️ 繳交機票費，重返原關卡！</button>
+        <br>
+        <button class="btn-large btn-cancel" style="width: 90%; max-width: 350px; margin-top: 5px;" onclick="cancelWorkToMenu()">⬅️ 返回主選單</button>
     </div>
 
     <!-- 頁面5：護眼休息區 -->
@@ -252,30 +250,48 @@
         <button id="btn-rest-resume" class="btn-large" style="display:none; width: 100%; background-color: #4CAF50; box-shadow: 0 6px 0 #2E7D32;" onclick="resumeFromRest()">✅ 繼續探險</button>
     </div>
 
-    <!-- 幫助與神通指南彈跳視窗 (內含神像請神按鈕) -->
+    <!-- 選擇流放地彈跳視窗 (點數補給站) -->
+    <div id="station-modal">
+        <div class="modal-content">
+            <h2 style="color: #D84315; margin-top: 0;">💰 選擇流放地與補給站</h2>
+            <p style="font-size: 15px; color: #555;">請選擇要前往勞動賺分的流放地（距離越近敲磚賺越快，距離越遠賺越多但機票越貴）：</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0;">
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #4CAF50; box-shadow: 0 4px 0 #2E7D32; font-size: 17px;" onclick="selectStation(0)">🏙️ 潮州 (近)｜每敲200點/限5次｜機票500</button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #8BC34A; box-shadow: 0 4px 0 #558B2F; font-size: 17px;" onclick="selectStation(1)">🏡 惠州 (二)｜每敲180點/限7次｜機票700</button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF9800; box-shadow: 0 4px 0 #E65100; font-size: 17px;" onclick="selectStation(2)">🌴 儋州 (三)｜每敲150點/限10次｜機票900</button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF5722; box-shadow: 0 4px 0 #D84315; font-size: 17px;" onclick="selectStation(3)">⛰️ 永州 (四)｜每敲120點/限15次｜機票1100</button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #9C27B0; box-shadow: 0 4px 0 #6A1B9A; font-size: 17px;" onclick="selectStation(4)">❄️ 寧古塔 (遠)｜每敲100點/限20次｜機票1300</button>
+            </div>
+            
+            <button class="btn-large btn-cancel" style="width: 100%; margin-top: 5px;" onclick="closeStationModal()">取消返回</button>
+        </div>
+    </div>
+
+    <!-- 幫助與神通指南彈跳視窗 -->
     <div id="god-help-modal">
         <div class="modal-content">
             <h2 style="color: #D84315; margin-top: 0;">📖 神通指南與請神面板</h2>
             <p style="font-size: 15px; color: #555;">第 6 關起解鎖神壇。點擊下方神像即可擲筊請神化解危機！</p>
             
             <div class="god-grid" style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 15px 0;">
-                <button class="god-btn" style="background-color: #8D6E63; flex: 1 1 30%;" onclick="startGodBwei('tudigong')">
-                    <div class="god-icon">🏮</div><div class="god-text">土地公<br>(-300)</div>
+                <button class="god-btn" style="background-color: #8D6E63; flex: 1 1 30%; padding: 10px; border-radius: 12px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('tudigong')">
+                    <div style="font-size: 28px;">🏮</div><div style="font-size: 13px;">土地公(指路)<br>(-300)</div>
                 </button>
-                <button class="god-btn" style="background-color: #E53935; flex: 1 1 30%;" onclick="startGodBwei('wen')">
-                    <div class="god-icon">⚔️</div><div class="god-text">溫王爺<br>(-500)</div>
+                <button class="god-btn" style="background-color: #E53935; flex: 1 1 30%; padding: 10px; border-radius: 12px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('wen')">
+                    <div style="font-size: 28px;">⚔️</div><div style="font-size: 13px;">溫王爺(鎮煞)<br>(-500)</div>
                 </button>
-                <button class="god-btn" style="background-color: #1E88E5; flex: 1 1 30%;" onclick="startGodBwei('mazu')">
-                    <div class="god-icon">🌊</div><div class="god-text">媽祖<br>(-1000)</div>
+                <button class="god-btn" style="background-color: #1E88E5; flex: 1 1 30%; padding: 10px; border-radius: 12px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('mazu')">
+                    <div style="font-size: 28px;">🌊</div><div style="font-size: 13px;">媽祖(化險)<br>(-1000)</div>
                 </button>
-                <button class="god-btn" style="background-color: #4CAF50; flex: 1 1 30%;" onclick="startGodBwei('guanyin')">
-                    <div class="god-icon">🌿</div><div class="god-text">觀世音<br>(-1500)</div>
+                <button class="god-btn" style="background-color: #4CAF50; flex: 1 1 30%; padding: 10px; border-radius: 12px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('guanyin')">
+                    <div style="font-size: 28px;">🌿</div><div style="font-size: 13px;">觀世音(掃除)<br>(-1500)</div>
                 </button>
-                <button class="god-btn" style="background-color: #9C27B0; flex: 1 1 30%;" onclick="startGodBwei('yaoshifo')">
-                    <div class="god-icon">🪷</div><div class="god-text">藥師佛<br>(-2000)</div>
+                <button class="god-btn" style="background-color: #9C27B0; flex: 1 1 30%; padding: 10px; border-radius: 12px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('yaoshifo')">
+                    <div style="font-size: 28px;">🪷</div><div style="font-size: 13px;">藥師佛(治病)<br>(-2000)</div>
                 </button>
-                <button class="god-btn supreme" style="flex: 1 1 100%; background: linear-gradient(45deg, #FF6D00, #FFD600); color: #3E2723;" onclick="startGodBwei('supreme')">
-                    <div class="god-icon">🌟</div><div class="god-text" style="font-size: 16px;">玉皇大帝 (清場+指路 / -5000)</div>
+                <button class="god-btn supreme" style="flex: 1 1 100%; background: linear-gradient(45deg, #FF6D00, #FFD600); color: #3E2723; padding: 10px; border-radius: 12px; border: 2px solid #E65100; font-weight: bold; cursor: pointer;" onclick="startGodBwei('supreme')">
+                    <div style="font-size: 28px;">🌟</div><div style="font-size: 15px;">玉皇大帝 (全場清場+指路 / -5000)</div>
                 </button>
             </div>
             
@@ -372,9 +388,17 @@
         let sessionPlayTime = 0; let isResting = false; let restStartTime = 0; let isPlaying = false; 
         let gameLoopInterval = null; let levelStartTime = 0;
 
-        const banishmentLocations = {
-            300: '潮州', 500: '惠州', 700: '儋州', 900: '永州', 1200: '寧古塔'
-        };
+        // 五大流放地地理經濟配置：[名稱, 每敲點數, 最大敲擊次數, 回程機票費]
+        const banishmentStations = [
+            { name: '潮州', reward: 200, maxClicks: 5, ticket: 500 },
+            { name: '惠州', reward: 180, maxClicks: 7, ticket: 700 },
+            { name: '儋州', reward: 150, maxClicks: 10, ticket: 900 },
+            { name: '永州', reward: 120, maxClicks: 15, ticket: 1100 },
+            { name: '寧古塔', reward: 100, maxClicks: 20, ticket: 1300 }
+        ];
+
+        let currentStationIndex = 0;
+        let currentStationClicks = 0;
 
         const godsData = {
             'tudigong': { cost: 300, n_tw: '土地公' },
@@ -390,7 +414,7 @@
         let userGender = 'male'; let currentLevel = 1; let totalScore = 500; let isEventActive = false;
         let maze = [], mazeSize = 7; let playerPos = {x: 1, y: 1}, targetPos = {x: 1, y: 1}; let currentTarget = {}, pendingMove = null;
         let pendingPenalty = 0; let currentSafePath = []; let currentDisplayPath = []; let hintActive = false;   
-        let jobsCompleted = 0; let currentWorkEarned = 0; let workTargetValue = 500; let workOrigin = '';
+        let currentWorkEarned = 0; let workTargetValue = 500;
         let bweiShengCount = 0; let pendingGod = ''; let pendingGodName = '';
 
         const canvas = document.getElementById('mazeCanvas'); const ctx = canvas.getContext('2d');
@@ -408,7 +432,7 @@
         }
 
         function startGame() {
-            initAudio(); jobsCompleted = 0; sessionPlayTime = 0; isPlaying = true;
+            initAudio(); sessionPlayTime = 0; isPlaying = true;
             showScreen('screen-game'); loadLevel();
         }
 
@@ -424,8 +448,38 @@
             document.getElementById('god-help-modal').style.display = 'none';
         }
 
-        function openBanishFromHelp() {
-            banishPlayer(500, 'manual_station');
+        function openStationModal() {
+            document.getElementById('station-modal').style.display = 'flex';
+        }
+
+        function closeStationModal() {
+            document.getElementById('station-modal').style.display = 'none';
+        }
+
+        function selectStation(idx) {
+            closeStationModal();
+            currentStationIndex = idx;
+            currentStationClicks = 0;
+            currentWorkEarned = 0;
+            
+            let st = banishmentStations[idx];
+            workTargetValue = st.ticket;
+            
+            document.getElementById('ui-banish-location').innerText = "🗺️ 流放地：" + st.name;
+            document.getElementById('work-rule-desc').innerText = `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks} | 機票費：${st.ticket}點`;
+            
+            isEventActive = true;
+            updateWorkUI();
+            showScreen('screen-work');
+        }
+
+        function cancelWorkToMenu() {
+            isEventActive = false;
+            if (isPlaying) {
+                showScreen('screen-game');
+            } else {
+                showScreen('screen-cover');
+            }
         }
 
         function loadLevel() {
@@ -436,16 +490,8 @@
             let selectedAge = ageInput ? ageInput.value : '50-59';
             
             let difficultyMap = {
-                '0-6': 1,   
-                '7-12': 2,  
-                '13-18': 5, 
-                '19-29': 5, 
-                '30-39': 3, 
-                '40-49': 3, 
-                '50-59': 2, 
-                '60-69': 2, 
-                '70-79': 1, 
-                '80+': 1    
+                '0-6': 1, '7-12': 2, '13-18': 5, '19-29': 5, 
+                '30-39': 3, '40-49': 3, '50-59': 2, '60-69': 2, '70-79': 1, '80+': 1    
             };
 
             let tier = difficultyMap[selectedAge] || 2;
@@ -565,7 +611,7 @@
             
             if (godType === 'supreme') {
                 if (totalScore < god.cost) {
-                    banishPlayer(500, 'supreme_shortage'); return;
+                    openStationModal(); return;
                 }
                 totalScore -= god.cost; updateUI();
                 for(let y=0; y<mazeSize; y++) {
@@ -577,7 +623,7 @@
             }
 
             if (totalScore < god.cost) { 
-                banishPlayer(500, 'god_shortage'); return; 
+                openStationModal(); return; 
             }
             
             totalScore -= god.cost; updateUI();
@@ -594,7 +640,7 @@
                     for(let x=0; x<mazeSize; x++) { if(maze[y][x] === 5 && clearedCount < 2) { maze[y][x] = 0; clearedCount++; } }
                 }
                 if (clearedCount > 0) { alert("⛩️ 觀世音菩薩慈悲顯靈，掃除了 " + clearedCount + " 個壞人！"); drawMaze(); isEventActive = false; }
-                else { playSound('bump'); vibrate([100, 100, 300]); banishPlayer(1200, 'wrong_god'); }
+                else { playSound('bump'); vibrate([100, 100, 300]); openStationModal(); }
             }
             else {
                 let cleared = false; let targetCode = (godType === 'wen') ? 2 : (godType === 'mazu' ? 3 : 4);
@@ -606,7 +652,7 @@
                     drawMaze(); isEventActive = false;
                 } else {
                     playSound('bump'); vibrate([100, 100, 300]);
-                    banishPlayer(1200, 'wrong_god');
+                    openStationModal();
                 }
             }
         }
@@ -623,39 +669,50 @@
             return path;
         }
 
-        function banishPlayer(penalty, origin) {
-            workOrigin = origin; 
-            workTargetValue = penalty || 500; 
-            currentWorkEarned = 0;
-            
-            let locName = banishmentLocations[workTargetValue] || '寧古塔';
-            document.getElementById('ui-banish-location').innerText = "🗺️ " + locName;
-            
-            isEventActive = true; 
-            document.getElementById('work-target-display').innerText = workTargetValue;
-            updateWorkUI(); 
-            showScreen('screen-work');
-        }
-
         function doWork() {
+            let st = banishmentStations[currentStationIndex];
+            if (currentStationClicks >= st.maxClicks) {
+                alert(`⚠️ 在【${st.name}】的敲磚額度（${st.maxClicks}次）已滿！請點擊下方按鈕支付機票費返程，或前往更遠的地方賺更多分！`);
+                return;
+            }
             playSound('work'); vibrate([20]);
-            let reward = 50 + (jobsCompleted * 5); 
-            currentWorkEarned += reward; jobsCompleted++; updateWorkUI();
+            currentWorkEarned += st.reward;
+            currentStationClicks++;
+            updateWorkUI();
         }
 
         function updateWorkUI() {
+            let st = banishmentStations[currentStationIndex];
             let scoreEl = document.getElementById('work-score');
             scoreEl.innerText = currentWorkEarned;
-            scoreEl.style.color = currentWorkEarned >= workTargetValue ? '#388E3C' : '#D32F2F';
-            document.getElementById('work-progress').max = workTargetValue; 
-            document.getElementById('work-progress').value = currentWorkEarned;
-            document.getElementById('work-status').innerText = "狂點！再 " + Math.ceil(Math.max(0, workTargetValue - currentWorkEarned)/(50 + (jobsCompleted * 5))) + " 下";
-            document.getElementById('ui-btn-work-return').style.display = (currentWorkEarned >= workTargetValue) ? 'block' : 'none';
+            
+            let targetTotal = st.ticket;
+            document.getElementById('work-target-display').innerText = targetTotal;
+            document.getElementById('work-rule-desc').innerText = `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`;
+            
+            document.getElementById('work-progress').max = targetTotal; 
+            document.getElementById('work-progress').value = Math.min(currentWorkEarned, targetTotal);
+            
+            if (currentWorkEarned >= targetTotal) {
+                document.getElementById('work-status').innerText = "🎉 賺取點數已達機票標準！可以搭飛機回台了！";
+                document.getElementById('work-status').style.color = '#388E3C';
+                document.getElementById('ui-btn-work-return').style.display = 'block';
+            } else {
+                let remClicks = st.maxClicks - currentStationClicks;
+                document.getElementById('work-status').innerText = `繼續敲磚！還差 ${targetTotal - currentWorkEarned} 點 (剩餘 ${remClicks} 次機會)`;
+                document.getElementById('work-status').style.color = '#E65100';
+                document.getElementById('ui-btn-work-return').style.display = 'none';
+            }
         }
 
         function returnFromWork() {
+            let st = banishmentStations[currentStationIndex];
+            if (currentWorkEarned < st.ticket) {
+                alert("😢 點數尚未達機票標準，無法搭飛機回台！");
+                return;
+            }
             playSound('move'); 
-            totalScore += currentWorkEarned; 
+            totalScore += (currentWorkEarned - st.ticket); // 扣除機票費後加入總分
             isEventActive = false; 
             updateUI(); 
             drawMaze(); 
@@ -758,8 +815,8 @@
 
                 if (totalScore <= 0) {
                     isEventActive = true;
-                    alert("😢 哎呀！您失敗了！點數已歸零，勝敗乃兵家常事，再接再厲！現在將您發配邊疆勞動賺取點數！");
-                    banishPlayer(500, 'zero_score');
+                    alert("😢 哎呀！您失敗了！點數已歸零，請前往點數補給站選擇流放地賺分捲土重來！");
+                    openStationModal();
                     return;
                 }
 
@@ -767,8 +824,8 @@
                     playSound('dog'); vibrate([100, 50, 100]);
                     pendingMove = {x: nx, y: ny}; 
                     if (totalScore < 300) {
-                        alert("😢 點數不足 300 點！勝敗乃兵家常事，再接再厲！");
-                        banishPlayer(300, 'dog_shortage');
+                        alert("😢 點數不足 300 點！請前往點數補給站賺取路費！");
+                        openStationModal();
                     } else {
                         showModal("🐺 惡犬擋道！花費 300 點買骨頭？", "choice");
                     }
@@ -777,8 +834,8 @@
                 if (cell === 3) { 
                     playSound('bomb'); vibrate([300, 100, 300]);
                     if (totalScore < 500) {
-                        alert("😢 點數不足 500 點！勝敗乃兵家常事，再接再厲！");
-                        banishPlayer(500, 'bomb_shortage');
+                        alert("😢 點數不足 500 點！請前往點數補給站賺取路費！");
+                        openStationModal();
                     } else {
                         totalScore -= 500; updateUI();
                         maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
@@ -789,8 +846,8 @@
                 if (cell === 4) { 
                     playSound('bomb'); vibrate([200, 200, 200]);
                     if (totalScore < 900) {
-                        alert("😢 點數不足 900 點！勝敗乃兵家常事，再接再厲！");
-                        banishPlayer(900, 'ghost_shortage');
+                        alert("😢 點數不足 900 點！請前往點數補給站賺取路費！");
+                        openStationModal();
                     } else {
                         totalScore -= 900; updateUI();
                         maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
@@ -801,8 +858,8 @@
                 if (cell === 5) { 
                     playSound('bump'); vibrate([400, 100, 400]);
                     if (totalScore < 500) {
-                        alert("😢 點數不足 500 點！勝敗乃兵家常事，再接再厲！");
-                        banishPlayer(500, 'robber_shortage');
+                        alert("😢 點數不足 500 點！請前往點數補給站賺取路費！");
+                        openStationModal();
                     } else {
                         totalScore -= 500; updateUI();
                         maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
@@ -834,16 +891,12 @@
                     drawMaze(); 
                     checkWin(); 
                 } else {
-                    alert("😢 點數不足！勝敗乃兵家常事，再接再厲！");
-                    banishPlayer(300, 'dog_shortage');
+                    alert("😢 點數不足！請前往點數補給站！");
+                    openStationModal();
                 }
             } else {
                 isEventActive = false;
             }
-        }
-
-        function resolveAlert() {
-            document.getElementById('event-modal').style.display = 'none'; 
         }
 
         window.addEventListener('keydown', function(e) {
