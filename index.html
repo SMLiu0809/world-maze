@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 極速流暢版</title>
+    <title>世界寶藏迷宮探險 - 連續選關版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -126,18 +126,18 @@
             
             <!-- 關卡快速選擇器 -->
             <div style="margin: 15px 0; background: #FFE082; padding: 12px; border-radius: 12px; border: 2px solid #FFA000;">
-                <label for="start-level-select" style="font-weight: bold; color: #E65100;">🛠️ 測試選關工具：</label>
+                <label for="start-level-select" style="font-weight: bold; color: #E65100;">🛠️ 測試選關起始工具：</label>
                 <select id="start-level-select" style="font-size: 18px; padding: 5px 10px; border-radius: 8px; border: 2px solid #E65100; background: white; font-weight: bold;">
-                    <option value="1">第 1 關</option>
-                    <option value="2">第 2 關</option>
-                    <option value="3">第 3 關</option>
-                    <option value="4" selected>第 4 關 (測試通關至第5關)</option>
-                    <option value="5">第 5 關</option>
-                    <option value="6">第 6 關 (神壇解鎖)</option>
-                    <option value="7">第 7 關</option>
-                    <option value="8">第 8 關</option>
-                    <option value="9">第 9 關</option>
-                    <option value="10">第 10 關</option>
+                    <option value="1">第 1 關起玩</option>
+                    <option value="2">第 2 關起玩</option>
+                    <option value="3">第 3 關起玩</option>
+                    <option value="4" selected>第 4 關起玩 (可一路通關)</option>
+                    <option value="5">第 5 關起玩</option>
+                    <option value="6">第 6 關起玩 (神壇解鎖)</option>
+                    <option value="7">第 7 關起玩</option>
+                    <option value="8">第 8 關起玩</option>
+                    <option value="9">第 9 關起玩</option>
+                    <option value="10">第 10 關起玩</option>
                 </select>
             </div>
 
@@ -180,7 +180,7 @@
     <div id="screen-instructions" class="screen">
         <h1>📖 遊戲說明與經濟機制</h1>
         <div style="font-size: clamp(16px, 4.5vw, 20px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 20px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>極速通關無縫銜接：</b>過關後自動進入下一關，有點數者暢行無阻！<br>
+            🔸 <b>連續通關無縫銜接：</b>選定起始關卡後，過關會自動累加並順暢進入下一關！<br>
             🔸 <b>絕境重生機制：</b>點數歸零時溫暖提示「您失敗了，勝敗乃兵家常事，再接再厲！」並送往流放地搬磚，達標後返回原關卡。<br>
             🔸 <b>神蹟解鎖（第 6 關起）：</b>解鎖神壇，消耗點數誠心擲筊請神。<br>
             🔸 <b>五大流放地：</b>潮州(300) ➔ 惠州(500) ➔ 儋州(700) ➔ 永州(900) ➔ 寧古塔(1200)。
@@ -830,7 +830,6 @@
             }
         });
 
-        // --- 🎯 核心修復：極速無縫過關並自動進入下一關 ---
         function checkWin() {
             if (playerPos.x === targetPos.x && playerPos.y === targetPos.y) {
                 isEventActive = true; 
@@ -842,10 +841,8 @@
                 totalScore += levelScore;
                 
                 let title = ["初心探險家", "見習尋寶者", "迷宮勇士", "遺跡行者", "尋寶達人", "降魔衛道士", "尋寶宗師", "傳奇探險家", "神鬼庇佑者", "世界尋寶之王"][currentLevel - 1];
-                let phrase = "太棒了！智慧無人能及！";
                 
                 if (currentLevel < 10) {
-                    // 使用非阻斷式通知，讓過關與進入下一關流暢無比
                     setTimeout(() => {
                         currentLevel++; 
                         loadLevel(); 
