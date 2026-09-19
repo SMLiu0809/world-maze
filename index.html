@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 流放地理經濟學版</title>
+    <title>世界寶藏迷宮探險 - 關卡導覽版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -79,7 +79,7 @@
         
         .footer { font-size: clamp(16px, 4vw, 20px); font-weight: bold; color: #795548; margin-top: 20px; padding-top: 15px; border-top: 3px dashed #BCAAA4;}
 
-        #event-modal, #bwei-modal, #god-help-modal, #station-modal {
+        #event-modal, #bwei-modal, #god-help-modal, #station-modal, #win-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 1000;
         }
@@ -138,7 +138,7 @@
                 <button type="button" class="age-btn" onclick="selectAge('19-29', this)">青年/大學生<br>⚡極難挑戰</button>
                 <button type="button" class="age-btn" onclick="selectAge('30-39', this)">壯年 (30-39)<br>🎯進階級</button>
                 <button type="button" class="age-btn" onclick="selectAge('40-49', this)">中年 (40-49)<br>⚖️標準級</button>
-                <button type="button" class="age-btn" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
+                <button type="button" class="age-btn selected" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
                 <button type="button" class="age-btn" onclick="selectAge('60-69', this)">樂齡 (60-69)<br>🍵輕鬆級</button>
                 <button type="button" class="age-btn" onclick="selectAge('70-79', this)">高齡 (70-79)<br>🌸尊榮級</button>
                 <button type="button" class="age-btn selected" onclick="selectAge('80+', this)">耆老 (80+)<br>🍵養生級</button>
@@ -166,16 +166,11 @@
 
     <!-- 頁面2：說明 -->
     <div id="screen-instructions" class="screen">
-        <h1>📖 遊戲說明與流放地理經濟</h1>
+        <h1>📖 遊戲說明與關卡導覽</h1>
         <div style="font-size: clamp(15px, 4vw, 18px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 15px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>流放地理經濟學：</b>貶得越遠敲磚次數多、上限高，但單次報酬遞減且回程機票越貴！
-            <ul style="margin: 5px 0; padding-left: 20px;">
-                <li>🏙️ <b>潮州（最近）</b>：每敲200點 (限5次/最高1000) ➔ 機票 <b>500點</b></li>
-                <li>🏡 <b>惠州</b>：每敲180點 (限7次/最高1260) ➔ 機票 <b>700點</b></li>
-                <li>🌴 <b>儋州</b>：每敲150點 (限10次/最高1500) ➔ 機票 <b>900點</b></li>
-                <li>⛰️ <b>永州</b>：每敲120點 (限15次/最高1800) ➔ 機票 <b>1100點</b></li>
-                <li>❄️ <b>寧古塔（最遠）</b>：每敲100點 (限20次/最高2000) ➔ 機票 <b>1300點</b></li>
-            </ul>
+            🔸 <b>關卡導覽（上一關 / 下一關）：</b>過關後會彈出結算視窗，可自由選擇前往下一關或返回上一關！<br>
+            🔸 <b>流放地理經濟：</b>貶得越遠賺越多但機票越貴（潮州 500 ➔ 寧古塔 1300）。<br>
+            🔸 <b>⛩️ 神通指南（第 6 關起解鎖）：</b>點擊頂部「神通指南」查看神明神通與擲筊請神。
         </div>
         <br>
         <button class="btn-large" style="background-color: #F57C00; box-shadow: 0 6px 0 #E65100; width: 90%; max-width: 350px;" onclick="openStationModal()">💰 前往點數補給站</button>
@@ -250,6 +245,19 @@
         <button id="btn-rest-resume" class="btn-large" style="display:none; width: 100%; background-color: #4CAF50; box-shadow: 0 6px 0 #2E7D32;" onclick="resumeFromRest()">✅ 繼續探險</button>
     </div>
 
+    <!-- 過關導覽彈跳視窗 (內含 上一關 / 下一關) -->
+    <div id="win-modal">
+        <div class="modal-content">
+            <h2 id="win-title" style="color: #D84315; margin-top: 0;">🎉 恭喜通關！</h2>
+            <div id="win-message" style="font-size: 18px; color: #3E2723; margin: 15px 0; line-height: 1.6;">找到寶藏！</div>
+            
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+                <button id="btn-prev-level" class="btn-large btn-cancel" style="font-size: 16px; padding: 12px 20px; margin: 0; width: 45%; max-width: 180px;" onclick="goToPrevLevel()">⬅️ 上一關</button>
+                <button id="btn-next-level" class="btn-large" style="font-size: 16px; padding: 12px 20px; margin: 0; width: 45%; max-width: 180px; background-color: #4CAF50; box-shadow: 0 4px 0 #2E7D32;" onclick="goToNextLevel()">➡️ 下一關</button>
+            </div>
+        </div>
+    </div>
+
     <!-- 選擇流放地彈跳視窗 (點數補給站) -->
     <div id="station-modal">
         <div class="modal-content">
@@ -261,7 +269,7 @@
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #8BC34A; box-shadow: 0 4px 0 #558B2F; font-size: 17px;" onclick="selectStation(1)">🏡 惠州 (二)｜每敲180點/限7次｜機票700</button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF9800; box-shadow: 0 4px 0 #E65100; font-size: 17px;" onclick="selectStation(2)">🌴 儋州 (三)｜每敲150點/限10次｜機票900</button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF5722; box-shadow: 0 4px 0 #D84315; font-size: 17px;" onclick="selectStation(3)">⛰️ 永州 (四)｜每敲120點/限15次｜機票1100</button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #9C27B0; box-shadow: 0 4px 0 #6A1B9A; font-size: 17px;" onclick="selectStation(4)">❄️ 寧古塔 (遠)｜每敲100點/限20次｜機票1300</button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #9C27B0; box-shadow: 0 4px 0 #6A1B9A; font-size: 17px;" onclick="❄️寧古塔 (遠)｜每敲100點/限20次｜機票1300</button>
             </div>
             
             <button class="btn-large btn-cancel" style="width: 100%; margin-top: 5px;" onclick="closeStationModal()">取消返回</button>
@@ -388,7 +396,6 @@
         let sessionPlayTime = 0; let isResting = false; let restStartTime = 0; let isPlaying = false; 
         let gameLoopInterval = null; let levelStartTime = 0;
 
-        // 五大流放地地理經濟配置：[名稱, 每敲點數, 最大敲擊次數, 回程機票費]
         const banishmentStations = [
             { name: '潮州', reward: 200, maxClicks: 5, ticket: 500 },
             { name: '惠州', reward: 180, maxClicks: 7, ticket: 700 },
@@ -712,7 +719,7 @@
                 return;
             }
             playSound('move'); 
-            totalScore += (currentWorkEarned - st.ticket); // 扣除機票費後加入總分
+            totalScore += (currentWorkEarned - st.ticket); 
             isEventActive = false; 
             updateUI(); 
             drawMaze(); 
@@ -925,17 +932,41 @@
                 ];
                 let title = titles[Math.min(currentLevel - 1, titles.length - 1)];
                 
+                // 彈出過關視窗，提供 上一關 / 下一關 導覽按鈕
+                let msg = `🎉 找到【${currentTarget.n}】！\n🏆 稱號：【${title}】\n⏱️ 花費 ${timeUsed} 秒\n💰 獲得積分：${levelScore} 點\n總分：${totalScore} 點`;
+                document.getElementById('win-message').innerText = msg;
+                
+                // 設定按鈕顯示狀態
+                document.getElementById('btn-prev-level').style.display = (currentLevel > 1) ? 'inline-block' : 'none';
+                let nextBtn = document.getElementById('btn-next-level');
                 if (currentLevel < 10) {
-                    setTimeout(() => {
-                        currentLevel++; 
-                        loadLevel(); 
-                    }, 300);
+                    nextBtn.innerText = "➡️ 下一關";
+                    nextBtn.style.display = 'inline-block';
                 } else {
-                    alert("🏆 恭喜全破關！\n總分：" + totalScore + "\n👑 稱號：【" + title + "】\n感謝您的遊玩！");
-                    isPlaying = false;
-                    isEventActive = false; 
-                    showScreen('screen-cover');
+                    nextBtn.innerText = "🏆 全破返回";
                 }
+                
+                document.getElementById('win-modal').style.display = 'flex';
+            }
+        }
+
+        function goToPrevLevel() {
+            document.getElementById('win-modal').style.display = 'none';
+            if (currentLevel > 1) {
+                currentLevel--;
+            }
+            loadLevel();
+        }
+
+        function goToNextLevel() {
+            document.getElementById('win-modal').style.display = 'none';
+            if (currentLevel < 10) {
+                currentLevel++;
+                loadLevel();
+            } else {
+                isPlaying = false;
+                isEventActive = false;
+                showScreen('screen-cover');
             }
         }
     </script>
