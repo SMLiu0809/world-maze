@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 失敗鼓勵重生版</title>
+    <title>世界寶藏迷宮探險 - 極速流暢版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -131,8 +131,8 @@
                     <option value="1">第 1 關</option>
                     <option value="2">第 2 關</option>
                     <option value="3">第 3 關</option>
-                    <option value="4">第 4 關</option>
-                    <option value="5" selected>第 5 關 (測試壞人與炸彈)</option>
+                    <option value="4" selected>第 4 關 (測試通關至第5關)</option>
+                    <option value="5">第 5 關</option>
                     <option value="6">第 6 關 (神壇解鎖)</option>
                     <option value="7">第 7 關</option>
                     <option value="8">第 8 關</option>
@@ -142,7 +142,7 @@
             </div>
 
             <p><strong>點擊選擇您的年齡層：</strong></p>
-            <input type="hidden" id="selected-age" value="50-59">
+            <input type="hidden" id="selected-age" value="80+">
             <div id="age-grid" class="age-grid">
                 <button type="button" class="age-btn" onclick="selectAge('0-6', this)">幼兒 (0-6)<br>🌸養生級</button>
                 <button type="button" class="age-btn" onclick="selectAge('7-12', this)">兒童 (7-12)<br>🍵護眼級</button>
@@ -150,10 +150,10 @@
                 <button type="button" class="age-btn" onclick="selectAge('19-29', this)">青年/大學生<br>⚡極難挑戰</button>
                 <button type="button" class="age-btn" onclick="selectAge('30-39', this)">壯年 (30-39)<br>🎯進階級</button>
                 <button type="button" class="age-btn" onclick="selectAge('40-49', this)">中年 (40-49)<br>⚖️標準級</button>
-                <button type="button" class="age-btn selected" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
+                <button type="button" class="age-btn" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
                 <button type="button" class="age-btn" onclick="selectAge('60-69', this)">樂齡 (60-69)<br>🍵輕鬆級</button>
                 <button type="button" class="age-btn" onclick="selectAge('70-79', this)">高齡 (70-79)<br>🌸尊榮級</button>
-                <button type="button" class="age-btn" onclick="selectAge('80+', this)">耆老 (80+)<br>🍵養生級</button>
+                <button type="button" class="age-btn selected" onclick="selectAge('80+', this)">耆老 (80+)<br>🍵養生級</button>
             </div>
         </div>
         <button class="btn-large" style="background-color: #FF9800; box-shadow: 0 6px 0 #E65100;" onclick="goToInstructions()">遊戲說明 📖</button>
@@ -180,9 +180,9 @@
     <div id="screen-instructions" class="screen">
         <h1>📖 遊戲說明與經濟機制</h1>
         <div style="font-size: clamp(16px, 4.5vw, 20px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 20px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>絕境重生機制：</b>若不小心點數歸零或陷入死局，系統會溫暖鼓勵並給予重生機會，絕不卡死！<br>
-            🔸 <b>前期累積（第 1 ➔ 5 關）：</b>請在前五關順利通關、累積點數（香油錢）。若點數不足支付懲罰，將被發配邊疆搬磚賺分，達標後自動返回原關卡繼續！<br>
-            🔸 <b>神蹟解鎖（第 6 關起）：</b>抵達第 6 關後解鎖神壇，消耗點數誠心擲筊請神。<br>
+            🔸 <b>極速通關無縫銜接：</b>過關後自動進入下一關，有點數者暢行無阻！<br>
+            🔸 <b>絕境重生機制：</b>點數歸零時溫暖提示「您失敗了，勝敗乃兵家常事，再接再厲！」並送往流放地搬磚，達標後返回原關卡。<br>
+            🔸 <b>神蹟解鎖（第 6 關起）：</b>解鎖神壇，消耗點數誠心擲筊請神。<br>
             🔸 <b>五大流放地：</b>潮州(300) ➔ 惠州(500) ➔ 儋州(700) ➔ 永州(900) ➔ 寧古塔(1200)。
         </div>
         <br>
@@ -424,8 +424,8 @@
             let tier = difficultyMap[selectedAge] || 2;
             let baseSize = 5 + (tier * 2); 
             let levelGrowth = Math.floor((currentLevel - 1) * (tier * 0.4));
-            mazeSize = Math.min(21, Math.max(5, baseSize + levelGrowth));
             
+            mazeSize = Math.min(21, Math.max(5, baseSize + levelGrowth));
             if (mazeSize % 2 === 0) mazeSize++;
 
             let arr = [
@@ -439,7 +439,15 @@
             else if (currentLevel <= 6) currentTarget = (userGender === 'female') ? arr[1][currentLevel - 4] : arr[2][currentLevel - 4];
             else currentTarget = arr[3][currentLevel - 7];
 
-            updateUI(); generateMaze(mazeSize); playerPos = {x: 1, y: 1}; targetPos = {x: mazeSize - 2, y: mazeSize - 2}; drawMaze();
+            updateUI(); 
+            generateMaze(mazeSize); 
+            playerPos = {x: 1, y: 1}; 
+            targetPos = {x: mazeSize - 2, y: mazeSize - 2}; 
+            
+            if(canvas.width !== 500) canvas.width = 500;
+            if(canvas.height !== 500) canvas.height = 500;
+            drawMaze();
+
             levelStartTime = Date.now(); 
         }
 
@@ -712,7 +720,6 @@
             ctx.fillText("🤠", (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
         }
 
-        // --- 🎯 核心防呆：點數歸零或不足時觸發失敗鼓勵並強制流放搬磚 ---
         function handleMove(dx, dy) {
             if (isEventActive || hintActive) return;
             initAudio(); 
@@ -723,7 +730,6 @@
                 
                 playSound('move');
 
-                // 檢查點數是否已經歸零或見底
                 if (totalScore <= 0) {
                     isEventActive = true;
                     alert("😢 哎呀！您失敗了！點數已歸零，勝敗乃兵家常事，再接再厲！現在將您發配邊疆勞動賺取點數！");
@@ -824,6 +830,7 @@
             }
         });
 
+        // --- 🎯 核心修復：極速無縫過關並自動進入下一關 ---
         function checkWin() {
             if (playerPos.x === targetPos.x && playerPos.y === targetPos.y) {
                 isEventActive = true; 
@@ -831,23 +838,24 @@
                 
                 let timeUsed = Math.floor((Date.now() - levelStartTime) / 1000);
                 let timeBonus = Math.max(0, ((20 + (currentLevel * 5)) - timeUsed) * 100);
-                let levelScore = currentTarget.s + timeBonus; totalScore += levelScore;
+                let levelScore = currentTarget.s + timeBonus; 
+                totalScore += levelScore;
                 
                 let title = ["初心探險家", "見習尋寶者", "迷宮勇士", "遺跡行者", "尋寶達人", "降魔衛道士", "尋寶宗師", "傳奇探險家", "神鬼庇佑者", "世界尋寶之王"][currentLevel - 1];
-                let phrases = ["太棒了！智慧無人能及！", "做得好！繼續保持！", "真厲害！尋寶大師！", "太神了！", "完美通關！", "了不起的成就！", "精彩絕倫！"];
-                let phrase = phrases[Math.floor(Math.random() * phrases.length)];
+                let phrase = "太棒了！智慧無人能及！";
                 
-                setTimeout(() => {
-                    if (currentLevel < 10) {
-                        alert("🎉 找到【" + currentTarget.n + "】！\n🏆 稱號：【" + title + "】\n⏱️ " + timeUsed + "秒\n💰 獲得 " + levelScore + "點\n\n💡 " + phrase + "\n\n準備前往下一關？");
+                if (currentLevel < 10) {
+                    // 使用非阻斷式通知，讓過關與進入下一關流暢無比
+                    setTimeout(() => {
                         currentLevel++; 
                         loadLevel(); 
-                    } else {
-                        alert("🏆 恭喜全破關！\n總分：" + totalScore + "\n👑 稱號：【" + title + "】\n💡 " + phrase + "\n感謝您的遊玩！");
-                        hasBeatenGame = true; devClickCount = 0; isPlaying = false;
-                        isEventActive = false; showScreen('screen-cover');
-                    }
-                }, 500);
+                    }, 300);
+                } else {
+                    alert("🏆 恭喜全破關！\n總分：" + totalScore + "\n👑 稱號：【" + title + "】\n感謝您的遊玩！");
+                    isPlaying = false;
+                    isEventActive = false; 
+                    showScreen('screen-cover');
+                }
             }
         }
     </script>
