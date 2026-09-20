@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 國際大師絕對流暢最終版</title>
+    <title>世界寶藏迷宮探險 - 大師品管終極版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -666,15 +666,13 @@
             updateInventoryUI();
             generateMaze(mazeSize); 
             
+            // 標準化起點與終點坐標
             playerPos = {x: 1, y: 1}; 
             targetPos = {x: mazeSize - 2, y: mazeSize - 2};
             
-            if (currentLevel >= 3 && currentLevel <= 6) {
-                if(mazeSize > 3) {
-                    maze[1][1] = 0;
-                    maze[mazeSize - 2][mazeSize - 2] = 0;
-                }
-            }
+            // 確保起點與終點絕對不是牆壁，且絕不重疊
+            maze[1][1] = 0;
+            maze[mazeSize - 2][mazeSize - 2] = 0;
             
             if(canvas.width !== 500) canvas.width = 500;
             if(canvas.height !== 500) canvas.height = 500;
