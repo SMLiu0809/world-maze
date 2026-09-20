@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 大師極致完美版</title>
+    <title>世界寶藏迷宮探險 - 大師不朽完美版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -173,7 +173,7 @@
     <div id="screen-instructions" class="screen">
         <h1>📖 遊戲說明與策略法寶</h1>
         <div style="font-size: clamp(15px, 4vw, 18px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 15px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>起終點絕對鎖定：</b>起點固定在左上角，目標固定在右下角！<br>
+            🔸 <b>起終點絕對鎖定：</b>起點固定在左上角 (1,1)，目標固定在右下角！<br>
             🔸 <b>第 4 關起隨機出現神話法寶（永久保留）：</b>
             <ul style="margin: 5px 0; padding-left: 20px;">
                 <li>🏺 <b>玉淨瓶</b>：消除病菌/鬼怪！</li>
@@ -655,7 +655,9 @@
             updateUI(); 
             updateInventoryUI();
             
-            // 嚴格建構迷宮並強制淨空起點與終點
+            // -------------------------------------------------------------
+            // 🛡️ 絕對鐵壁防護：徹底修復起點與終點被覆蓋或亂擺的問題
+            // -------------------------------------------------------------
             maze = Array(mazeSize).fill().map(() => Array(mazeSize).fill(1)); 
             function carve(x, y) {
                 maze[y][x] = 0; let dirs = [[0, -2], [0, 2], [-2, 0], [2, 0]].sort(() => Math.random() - 0.5);
@@ -666,9 +668,11 @@
             }
             carve(1, 1); 
             
+            // 強制設定起點與終點座標
             playerPos = {x: 1, y: 1}; 
             targetPos = {x: mazeSize - 2, y: mazeSize - 2};
             
+            // 將起點 (1,1) 與終點 (mazeSize-2, mazeSize-2) 以及周遭強制設為乾淨通道 (0)
             maze[1][1] = 0;
             maze[1][2] = 0;
             maze[2][1] = 0;
@@ -693,6 +697,7 @@
             let onSafeSpaces = [], offSafeSpaces = [];
             for (let y = 1; y < mazeSize - 1; y++) {
                 for (let x = 1; x < mazeSize - 1; x++) {
+                    // 絕對保護起點與終點周遭區域不被任何怪物或道具占用
                     if (maze[y][x] === 0 && !((x <= 2 && y <= 2) || (x >= mazeSize - 3 && y >= mazeSize - 3))) {
                         if (safePathSet.has(`${x},${y}`)) onSafeSpaces.push({x, y}); else offSafeSpaces.push({x, y});
                     }
@@ -733,6 +738,10 @@
                 if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 13; 
             }
 
+            // 再次保證起終點絕對乾淨，絕不生成任何東西
+            maze[playerPos.y][playerPos.x] = 0;
+            maze[targetPos.y][targetPos.x] = 0;
+
             if(canvas.width !== 500) canvas.width = 500;
             if(canvas.height !== 500) canvas.height = 500;
             drawMaze();
@@ -771,6 +780,7 @@
                     if (maze[y][x] === 13) ctx.fillText("🧹", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                 }
             }
+            // 嚴格渲染目標與玩家在各自固定坐標
             ctx.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
             ctx.fillText("🤠", (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
         }
