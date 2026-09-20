@@ -154,13 +154,12 @@
 
     <!-- 頁面2：說明 -->
     <div id="screen-instructions" class="screen">
-        <h1 id="ins-title">📖 五階段大師版遊戲說明</h1>
+        <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(14px, 3.8vw, 18px); text-align: left; line-height: 1.7; background: #E3F2FD; padding: 18px; border-radius: 12px; border: 2px solid #90CAF9; color: #1565C0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
             <p><b>🕹️ 操作與隱私：</b>支援鍵盤方向鍵、WASD與觸控。使用獨一無二的專屬代號保障個人隱私。</p>
             <p><b>⭐ 三星評分：</b>每關完成後將依據「是否通關、寶物收集、避開陷阱」給予 1~3 星評價。</p>
-            <p><b>↩️ 反悔功能：</b>點擊「上一步」按鈕可安全撤回上一步走錯的路徑。</p>
-            <p style="margin-bottom:0;"><b>⛩️ 擲筊與補給站：</b>第 6 關解鎖神壇擲筊動畫；點數不足可前往流放補給站賺取機票費[cite: 1]！</p>
+            <p style="margin-bottom:0;"><b>↩️ 反悔功能：</b>點擊「上一步」按鈕可安全撤回上一步走錯的路徑。</p>
         </div>
         <br>
         <button id="btn-station" class="btn-large" style="background-color: #F57C00; box-shadow: 0 5px 0 #E65100; width: 90%; max-width: 350px;" onclick="openStationModal()">💰 前往點數補給站</button>
@@ -327,13 +326,13 @@
         const i18n = {
             'zh-TW': {
                 title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號 (保障隱私)：", gender: "請選擇您的性別：",
-                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 測試選關起始工具：", modeLabel: "選擇遊戲模式 (由簡單到困難)：",
+                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 測試選關起始工具：", modeLabel: "選擇遊戲模式：",
                 easy: "🍵 輕鬆模式", easyDesc: "步調悠閒、適合放鬆",
                 std: "⚖️ 標準模式", stdDesc: "平衡挑戰與趣味",
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 操作與隱私：</b>支援鍵盤方向鍵、WASD與觸控。使用獨一無二的專屬代號保障個人隱私。</p><p><b>⭐ 三星評分：</b>每關完成後將依據「是否通關、寶物收集、避開陷阱」給予 1~3 星評價。</p><p><b>↩️ 反悔功能：</b>點擊「上一步」按鈕可安全撤回上一步走錯的路徑。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 操作與隱私：</b>支援鍵盤方向鍵、WASD與觸控。使用獨一無二的專屬代號保障個人隱私。</p><p><b>⭐ 三星評分：</b>每關完成後將依據「是否通關、寶物收集、避開陷阱」給予 1~3 星評價。</p><p style="margin-bottom:0;"><b>↩️ 反悔功能：</b>點擊「上一步」按鈕可安全撤回上一步走錯的路徑。</p>`,
                 stationBtn: "💰 前往點數補給站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 補給", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
@@ -343,21 +342,35 @@
                 bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
                 nicknameTip: "💡 系統將自動結合隨機碼確保您的代號獨一無二",
+                winTitle: "🎉 恭喜通關！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
                 levels: [
                     "第一站：臺灣・高雄", "第二站：日本・京都", "第三站：法國・巴黎",
                     "第四站：埃及・吉薩", "第五站：希臘・雅典", "第六站：義大利・羅馬",
                     "第七站：英國・倫敦", "第八站：美國・紐約", "第九站：澳洲・雪梨", "第十站：俄羅斯・莫斯科"
+                ],
+                targets: ["小貓 🐈", "小狗 🐶", "小鳥 🦜", "埃爾多拉多 👑", "聖殿騎士寶藏 🛡️", "王室琥珀屋 ✨", "英俊紳士 🤵‍♂️", "陽光衝浪男 🏄‍♂️", "仙氣公主 👸", "黑鬍子寶藏 🏴‍☠️"],
+                lores: [
+                    "臺灣高雄擁有豐富的港灣文化與在地常民信仰，愛河與駁二藝術特區是融合創意與歷史的重要據點。",
+                    "日本京都以千年古都聞名，擁有眾多世界文化遺產、傳統木造町屋與細緻的枯山水庭園藝術。",
+                    "法國巴黎是浪漫與藝術之都，羅浮宮與艾菲爾鐵塔見證了歐洲文藝復興與近代工業設計的輝煌。",
+                    "埃及吉薩金字塔群與人面獅身像展現了古代尼羅河文明高度發展的幾關工程與天文數學造詣。",
+                    "雅典帕德嫩神廟象徵西方民主政治與古典希臘建築的巔峰，對全球哲學與藝術影響深遠。",
+                    "羅馬競技場與梵蒂岡藝術寶藏體現了地中海帝國的雄偉規模與文藝復興大師的極致工藝。",
+                    "倫敦大笨鐘與大英博物館收藏了橫跨人類數千年歷史的世界文明精華與科學發明紀錄。",
+                    "紐約自由女神像與多元文化匯聚之處，象徵著現代自由貿易、當代藝術與都市文明的交織。",
+                    "雪梨歌劇院以獨特的貝殼屋頂結構聞名，是南半球現代建築美學與海洋生態保育的代表。",
+                    "莫斯科紅場與瓦西里升天大教堂擁有獨特的洋蔥頭穹頂建築風格，融合了歐亞交界的神祕歷史。"
                 ]
             },
             'zh-CN': {
                 title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (保障隐私)：", gender: "请选择您的性别：",
-                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 测试选关起始工具：", modeLabel: "选择游戏模式 (由简单到困难)：",
+                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 测试选关起始工具：", modeLabel: "选择游戏模式：",
                 easy: "🍵 轻松模式", easyDesc: "步调悠闲、适合放松",
                 std: "⚖️ 标准模式", stdDesc: "平衡挑战与趣味",
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
                 hel: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 操作与隐私：</b>支持键盘方向键、WASD与触控。使用独一无二的专属代号保障个人隐私。</p><p><b>⭐ 三星评分：</b>每关完成后将依据「是否通关、宝物收集、避开陷阱」给予 1~3 星评价。</p><p><b>↩️ 反悔功能：</b>点击「上一步」按钮可安全撤回上一步走错的路径。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 操作与隐私：</b>支持键盘方向键、WASD与触控。使用独一无二的专属代号保障个人隐私。</p><p><b>⭐ 三星评分：</b>每关完成后将依据「是否通关、宝物收集、避开陷阱」给予 1~3 星评价。</p><p style="margin-bottom:0;"><b>↩️ 反悔功能：</b>点击「上一步」按钮可安全撤回上一步走错的路径。</p>`,
                 stationBtn: "💰 前往点数补给站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 补给", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
@@ -367,15 +380,29 @@
                 bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
                 nicknameTip: "💡 系统将自动结合随机码确保您的代号独一无二",
+                winTitle: "🎉 恭喜通关！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
                 levels: [
                     "第一站：台湾・高雄", "第二站：日本・京都", "第三站：法国・巴黎",
                     "第四站：埃及・吉萨", "第五站：希腊・雅典", "第六站：意大利・罗马",
                     "第七站：英国・伦敦", "第八站：美国・纽约", "第九站：澳大利亚・悉尼", "第十站：俄罗斯・莫斯科"
+                ],
+                targets: ["小猫 🐈", "小狗 🐶", "小鸟 🦜", "埃尔多拉多 👑", "圣殿骑士宝藏 🛡️", "王室琥珀屋 ✨", "英俊绅士 🤵‍♂️", "阳光冲浪男 🏄‍♂️", "仙气公主 👸", "黑胡子宝藏 🏴‍☠️"],
+                lores: [
+                    "台湾高雄拥有丰富的港湾文化与在地常民信仰，爱河与驳二艺术特区是融合创意与历史的重要据点。",
+                    "日本京都以千年古都闻名，拥有众多世界文化遗产、传统木造町屋与细致的枯山水庭园艺术。",
+                    "法国巴黎是浪漫与艺术之都，卢浮宫与埃菲尔铁塔见证了欧洲文艺复兴与近代工业设计的辉煌。",
+                    "埃及吉萨金字塔群与人面狮身像展现了古代尼罗河文明高度发展的几关工程与天文数学造诣。",
+                    "雅典帕德嫩神庙象征西方民主政治与古典希腊建筑的巅峰，对全球哲学与艺术影响深远。",
+                    "罗马竞技场与梵蒂冈艺术宝藏体现了地中海帝国的雄伟规模与文艺复兴大师的极致工艺。",
+                    "伦敦大本钟与大英博物馆收藏了横跨人类数千年历史的世界文明精华与科学发明记录。",
+                    "纽约自由女神像与多元文化汇聚之处，象征着现代自由贸易、当代艺术与都市文明的交织。",
+                    "悉尼歌剧院以独特的贝壳屋顶结构闻名，是南半球现代建筑美学与海洋生态保育的代表。",
+                    "莫斯科红场与瓦西里升天大教堂拥有独特的洋葱头穹顶建筑风格，融合了欧亚交界的神祕历史。"
                 ]
             },
             'en': {
                 title: "🏆 World Treasure Maze Adventure 🏆", nickname: "Player ID / Unique Handle:", gender: "Select Gender:",
-                male: "Male 👨", female: "Female 👩", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode (Easy to Hard):",
+                male: "Male 👨", female: "Female 👩", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode:",
                 easy: "🍵 Casual", easyDesc: "Relaxed pace, casual fun",
                 std: "⚖️ Standard", stdDesc: "Balanced challenge & fun",
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
@@ -391,10 +418,24 @@
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
                 nicknameTip: "💡 System will attach a random suffix to ensure your handle is unique.",
+                winTitle: "🎉 Level Completed!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
                 levels: [
                     "Stage 1: Taiwan・Kaohsiung", "Stage 2: Japan・Kyoto", "Stage 3: France・Paris",
                     "Stage 4: Egypt・Giza", "Stage 5: Greece・Athens", "Stage 6: Italy・Rome",
                     "Stage 7: UK・London", "Stage 8: USA・New York", "Stage 9: Australia・Sydney", "Stage 10: Russia・Moscow"
+                ],
+                targets: ["Cat 🐈", "Dog 🐶", "Bird 🦜", "El Dorado 👑", "Templar Treasure 🛡️", "Amber Room ✨", "Gentleman 🤵‍♂️", "Surfer 🏄‍♂️", "Princess 👸", "Blackbeard's Loot 🏴‍☠️"],
+                lores: [
+                    "Kaohsiung, Taiwan features rich harbor culture and folk beliefs, blending modern creativity at the Pier-2 Art Center.",
+                    "Kyoto, Japan is renowned for its ancient temples, traditional machiya townhouses, and exquisite Zen rock gardens.",
+                    "Paris, France is the capital of art and romance, home to the Louvre and the Eiffel Tower.",
+                    "Giza, Egypt features majestic pyramids and the Sphinx, showcasing ancient engineering and astronomical mastery.",
+                    "Athens, Greece represents the cradle of Western democracy and classical architecture with the Parthenon.",
+                    "Rome, Italy boasts the Colosseum and Vatican treasures, reflecting the grandeur of the ancient Mediterranean empire.",
+                    "London, UK houses Big Ben and the British Museum, preserving millennia of global history and scientific heritage.",
+                    "New York, USA features the Statue of Liberty, symbolizing global freedom, modern art, and diverse urban culture.",
+                    "Sydney, Australia is famous for its iconic Opera House, a masterpiece of modern marine-inspired architecture.",
+                    "Moscow, Russia showcases Red Square and St. Basil's Cathedral with its iconic colorful onion domes."
                 ]
             }
         };
@@ -455,11 +496,15 @@
             document.getElementById('cert-title').innerText = t.certTitle;
             document.getElementById('cert-btn').innerText = t.certBtn;
 
-            // 更新選關清單名稱
+            document.getElementById('win-title').innerText = t.winTitle;
+            document.getElementById('btn-prev-level').innerText = t.btnPrev;
+            document.getElementById('btn-home-level').innerText = t.btnHome;
+            document.getElementById('btn-next-level').innerText = t.btnNext;
+
             for (let i = 1; i <= 10; i++) {
                 let opt = document.getElementById('opt-lvl' + i);
                 if (opt && t.levels[i-1]) {
-                    opt.innerText = (currentLang === 'en' ? `Level ${i} (${t.levels[i-1]})` : `第 ${i} 關 (${t.levels[i-1]})`);
+                    opt.innerText = (currentLang === 'en' ? `Level ${i} (${t.levels[i-1].split(': ')[1] || t.levels[i-1]})` : `第 ${i} 關 (${t.levels[i-1]})`);
                 }
             }
         }
@@ -545,18 +590,7 @@
         let currentTarget = {n:"小貓", s:500, i:"🐈", station:"第一站：臺灣・高雄", knowledge:"臺灣高雄擁有豐富的港灣文化與在地常民信仰。"};
         let bweiShengCount = 0; let pendingGod = '', pendingGodName = '';
 
-        const levelDataMap = [
-            { station: "第一站：臺灣・高雄", target: "小貓", score: 500, icon: "🐈", knowledge: "臺灣高雄擁有豐富的港灣文化與在地常民信仰，愛河與駁二藝術特區是融合創意與歷史的重要據點。" },
-            { station: "第二站：日本・京都", target: "小狗", score: 800, icon: "🐶", knowledge: "日本京都以千年古都聞名，擁有眾多世界文化遺產、傳統木造町屋與細緻的枯山水庭園藝術。" },
-            { station: "第三站：法國・巴黎", target: "小鳥", score: 1000, icon: "🦜", knowledge: "法國巴黎是浪漫與藝術之都，羅浮宮與艾菲爾鐵塔見證了歐洲文藝復興與近代工業設計的輝煌。" },
-            { station: "第四站：埃及・吉薩", target: "埃爾多拉多", score: 3500, icon: "👑", knowledge: "埃及吉薩金字塔群與人面獅身像展現了古代尼羅河文明高度發展的幾關工程與天文數學造詣。" },
-            { station: "第五站：希臘・雅典", target: "聖殿騎士寶藏", score: 6000, icon: "🛡️", knowledge: "雅典帕德嫩神廟象徵西方民主政治與古典希臘建築的巔峰，對全球哲學與藝術影響深遠。" },
-            { station: "第六站：義大利・羅馬", target: "王室琥珀屋", score: 10000, icon: "✨", knowledge: "羅馬競技場與梵蒂岡藝術寶藏體現了地中海帝國的雄偉規模與文藝復興大師的極致工藝。" },
-            { station: "第七站：英國・倫敦", target: "英俊紳士", score: 2500, icon: "🤵‍♂️", knowledge: "倫敦大笨鐘與大英博物館收藏了橫跨人類數千年歷史的世界文明精華與科學發明紀錄。" },
-            { station: "第八站：美國・紐約", target: "陽光衝浪男", score: 1500, icon: "🏄‍♂️", knowledge: "紐約自由女神像與多元文化匯聚之處，象徵著現代自由貿易、當代藝術與都市文明的交織。" },
-            { station: "第九站：澳洲・雪梨", target: "仙氣公主", score: 2000, icon: "👸", knowledge: "雪梨歌劇院以獨特的貝殼屋頂結構聞名，是南半球現代建築美學與海洋生態保育的代表。" },
-            { station: "第十站：俄羅斯・莫斯科", target: "黑鬍子寶藏", score: 4500, icon: "🏴‍☠️", knowledge: "莫斯科紅場與瓦西里升天大教堂擁有獨特的洋蔥頭穹頂建築風格，融合了歐亞交界的神祕歷史。" }
-        ];
+        const levelScoreList = [500, 800, 1000, 3500, 6000, 10000, 2500, 1500, 2000, 4500];
 
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -598,7 +632,7 @@
         function openKnowledgeModal() {
             let t = i18n[currentLang];
             document.getElementById('knowledge-title').innerText = "📖 " + t.levels[currentLevel-1] + " - " + (currentLang === 'en' ? "Culture & Lore" : "文化與寶藏知識");
-            document.getElementById('knowledge-text').innerText = currentTarget.knowledge;
+            document.getElementById('knowledge-text').innerText = t.lores[currentLevel-1];
             document.getElementById('knowledge-modal').style.display = 'flex';
         }
         function closeKnowledgeModal() { document.getElementById('knowledge-modal').style.display = 'none'; }
@@ -644,9 +678,14 @@
             else if (mode === 'challenge') mazeSize = 11;
             else if (mode === 'hell') mazeSize = 13;
 
-            let d = levelDataMap[Math.min(currentLevel - 1, levelDataMap.length - 1)];
             let t = i18n[currentLang];
-            currentTarget = { n: d.target, s: d.score, i: d.icon, station: t.levels[currentLevel-1], knowledge: d.knowledge };
+            currentTarget = { 
+                n: t.targets[currentLevel - 1], 
+                s: levelScoreList[currentLevel - 1], 
+                i: t.targets[currentLevel - 1].split(' ').pop(), 
+                station: t.levels[currentLevel - 1], 
+                knowledge: t.lores[currentLevel - 1] 
+            };
 
             document.getElementById('ui-station-banner').innerText = "📍 " + currentTarget.station;
             updateUI();
@@ -695,7 +734,7 @@
             let targetPrefix = (currentLang === 'en' ? "Target: " : "目標：");
             document.getElementById('ui-level').innerText = lvlPrefix + currentLevel + "/10";
             document.getElementById('ui-score').innerText = scorePrefix + totalScore;
-            document.getElementById('ui-target').innerText = targetPrefix + currentTarget.n + " " + currentTarget.i;
+            document.getElementById('ui-target').innerText = targetPrefix + currentTarget.n;
         }
 
         window.addEventListener('keydown', function(e) {
@@ -824,8 +863,8 @@
                 document.getElementById('ui-stars').innerText = starStr;
 
                 let msg = (currentLang === 'en' ? 
-                    `🎉 Completed [Level ${currentLevel}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n} ${currentTarget.i}\nScore: +${currentTarget.s}\nStars: ${starStr}\nTotal Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
-                    `🎉 通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n} ${currentTarget.i}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
+                    `Completed [Level ${currentLevel}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n}\nScore: +${currentTarget.s}\nStars: ${starStr}\nTotal Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
+                    `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
                 );
                 document.getElementById('win-message').innerText = msg;
                 
@@ -833,10 +872,11 @@
                 let nextBtn = document.getElementById('btn-next-level');
                 prevBtn.style.display = (currentLevel > 1) ? 'inline-block' : 'none';
                 
+                let t = i18n[currentLang];
                 if (currentLevel < 10) {
-                    nextBtn.innerText = (currentLang === 'en' ? "➡️ Next Level" : "➡️ 下一關");
+                    nextBtn.innerText = t.btnNext;
                 } else {
-                    nextBtn.innerText = (currentLang === 'en' ? "🏆 Certificate" : "🏆 結業證書");
+                    nextBtn.innerText = t.btnCert;
                 }
 
                 document.getElementById('win-modal').style.display = 'flex';
@@ -873,7 +913,7 @@
         function doWork() {
             let st = banishmentStations[currentStationIndex];
             if (currentStationClicks >= st.maxClicks) {
-                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : "⚠️ 敲磚額度已滿，請點擊下方按鈕支付機票費返程！");
+                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : "⚠️ 敲磚額度已滿,請點擊下方按鈕支付機票費返程！");
                 return;
             }
             playSound('item'); vibrate([20]);
@@ -891,7 +931,7 @@
             document.getElementById('work-rule-desc').innerText = descText;
             let prog = document.getElementById('work-progress');
             prog.max = st.ticket; prog.value = Math.min(currentWorkEarned, st.ticket);
-            let returnBtnText = (currentLang === 'en' ? "✈️ Pay Ticket & Return to Level!" : "✈️ 繳交機票費，重返原關卡！");
+            let returnBtnText = (currentLang === 'en' ? "✈️ Pay Ticket & Return to Level!" : "✈️ 繳交機票費,重返原關卡！");
             document.getElementById('ui-btn-work-return').innerText = returnBtnText;
             document.getElementById('ui-btn-work-return').style.display = (currentWorkEarned >= st.ticket) ? 'block' : 'none';
         }
@@ -939,7 +979,7 @@
                     if (bweiShengCount === 2) {
                         setTimeout(() => {
                             document.getElementById('bwei-modal').style.display = 'none';
-                            alert(currentLang === 'en' ? "⛩️ Divine Blessing Successful!" : "⛩️ 神明聖筊顯靈，庇佑成功！");
+                            alert(currentLang === 'en' ? "⛩️ Divine Blessing Successful!" : "⛩️ 神明聖筊顯靈,庇佑成功！");
                             isEventActive = false;
                         }, 500);
                     }
