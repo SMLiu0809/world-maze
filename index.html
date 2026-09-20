@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 邏輯對應完美版</title>
+    <title>世界寶藏迷宮探險 - 起終點絕對鎖定版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -126,9 +126,9 @@
                 <select id="start-level-select" style="font-size: 18px; padding: 5px 10px; border-radius: 8px; border: 2px solid #E65100; background: white; font-weight: bold;">
                     <option value="1" selected>第 1 關起玩</option>
                     <option value="2">第 2 關起玩</option>
-                    <option value="3">第 3 關起玩 (起終點對應)</option>
-                    <option value="4">第 4 關起玩 (解鎖法寶與邏輯道具)</option>
-                    <option value="5">第 5 關起玩</option>
+                    <option value="3">第 3 關起玩</option>
+                    <option value="4">第 4 關起玩 (起終點鎖定測試)</option>
+                    <option value="5">第 5 關起玩 (起終點鎖定測試)</option>
                     <option value="6">第 6 關起玩 (神壇解鎖)</option>
                     <option value="7">第 7 關起玩</option>
                     <option value="8">第 8 關起玩</option>
@@ -174,16 +174,16 @@
     <div id="screen-instructions" class="screen">
         <h1>📖 遊戲說明與策略法寶</h1>
         <div style="font-size: clamp(15px, 4vw, 18px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 15px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>危機與解法邏輯對應：</b>
+            🔸 <b>起終點絕對鎖定：</b>起點固定在左上角 `(1,1)`，目標固定在右下角！<br>
+            🔸 <b>第 4 關起隨機出現法寶（永久保留）：</b>
             <ul style="margin: 5px 0; padding-left: 20px;">
-                <li>🐺 惡犬 ➔ 可用 🪄 <b>金箍棒</b> 敲退</li>
-                <li>💣 炸彈 ➔ 可用 🧰 <b>拆彈工具箱</b> 解除</li>
-                <li>👻 病菌/鬼怪 ➔ 可用 🏺 <b>玉淨瓶</b> 淨化</li>
-                <li>🦹 壞人 ➔ 可用 🔗 <b>手銬</b> 逮捕</li>
-                <li>💩 狗狗大便 ➔ 可用 🧹 <b>魔法掃把</b> 清掃</li>
+                <li>🏺 <b>玉淨瓶</b>：消除病菌/鬼怪！</li>
+                <li>🪄 <b>金箍棒</b>：敲退惡犬！</li>
+                <li>🔗 <b>手銬</b>：逮捕壞人！</li>
+                <li>🧰 <b>拆彈工具箱</b>：解除 2 枚炸彈！</li>
+                <li>🧹 <b>哈利波特掃把</b>：一鍵清掃所有狗狗大便！</li>
             </ul>
-            🔸 <b>第 3~5 關起終點對應：</b>起點固定左上角，目標固定右下角。<br>
-            🔸 <b>關卡順暢銜接：</b>過關後自由選擇上一關或下一關！
+            🔸 <b>關卡導覽：</b>過關後可自由選擇上一關或下一關！
         </div>
         <br>
         <button class="btn-large" style="background-color: #F57C00; box-shadow: 0 6px 0 #E65100; width: 90%; max-width: 350px;" onclick="openStationModal()">💰 前往點數補給站</button>
@@ -665,12 +665,17 @@
             updateInventoryUI();
             generateMaze(mazeSize); 
             
-            // 確保起點與終點絕對對應且乾淨
+            // --- 🛡️ 鐵壁級起終點強制歸位 ---
             playerPos = {x: 1, y: 1}; 
             targetPos = {x: mazeSize - 2, y: mazeSize - 2};
             
+            // 強制將起點與終點周遭清空為通道，絕不允許被任何物件覆蓋
             maze[1][1] = 0;
+            maze[1][2] = 0;
+            maze[2][1] = 0;
             maze[mazeSize - 2][mazeSize - 2] = 0;
+            maze[mazeSize - 2][mazeSize - 3] = 0;
+            maze[mazeSize - 3][mazeSize - 2] = 0;
             
             if(canvas.width !== 500) canvas.width = 500;
             if(canvas.height !== 500) canvas.height = 500;
@@ -907,8 +912,8 @@
             let onSafeSpaces = [], offSafeSpaces = [];
             for (let y = 1; y < size - 1; y++) {
                 for (let x = 1; x < size - 1; x++) {
-                    // 嚴格排除起點與終點周遭區域，確保起終點絕對乾淨
-                    if (maze[y][x] === 0 && !(x <= 2 && y <= 2) && !(x >= size - 3 && y >= size - 3)) {
+                    // 嚴格排除起點與終點周遭區域 (x <= 2 && y <= 2 或距離終點 2 格內)
+                    if (maze[y][x] === 0 && !((x <= 2 && y <= 2) || (x >= size - 3 && y >= size - 3))) {
                         if (safePathSet.has(`${x},${y}`)) onSafeSpaces.push({x, y}); else offSafeSpaces.push({x, y});
                     }
                 }
@@ -940,13 +945,12 @@
             let goldCount = 1;
             for(let i=0; i<goldCount; i++) if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 8;
 
-            // 邏輯對應法寶投放：保證當有關卡危機時，對應的法寶會在場上出現
             if (currentLevel >= 4) {
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 9;  // 🏺 (對應病菌/鬼怪)
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 10; // 🪄 (對應惡犬)
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 11; // 🔗 (對應壞人)
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 12; // 🧰 (對應炸彈)
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 13; // 🧹 (對應大便)
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 9;  // 🏺
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 10; // 🪄
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 11; // 🔗
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 12; // 🧰
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 13; // 🧹
             }
         }
 
@@ -981,6 +985,7 @@
                     if (maze[y][x] === 13) ctx.fillText("🧹", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                 }
             }
+            // 確保目標與玩家絕對渲染在各自的固定坐標
             ctx.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
             ctx.fillText("🤠", (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
         }
