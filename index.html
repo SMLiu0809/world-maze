@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 說明全面簡潔升級版</title>
+    <title>世界寶藏迷宮探險 - 大師絕對渲染版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -169,7 +169,7 @@
         <div class="footer">國立高雄師範大學 劉世閔 老師設計</div>
     </div>
 
-    <!-- 頁面2：說明（已重新簡潔改寫） -->
+    <!-- 頁面2：說明 -->
     <div id="screen-instructions" class="screen">
         <h1>📖 遊戲說明與玩法指南</h1>
         <div style="font-size: clamp(16px, 4.2vw, 19px); text-align: left; line-height: 1.8; background: #E3F2FD; padding: 20px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
@@ -200,7 +200,7 @@
             <span id="ui-score" style="color: #D84315;">總分: 500</span>
             <span id="ui-time">0 秒</span>
         </div>
-        <div class="target-text" id="ui-target">目標：尋找...</div>
+        <div class="target-text" id="ui-target">目標：尋找小貓 🐈</div>
         
         <div class="inventory-bar" id="inventoryBar" style="display:none;">
             <span style="font-size: 12px; color: #2E7D32; font-weight: bold; align-self: center;">🎒 策略法寶：</span>
@@ -457,7 +457,7 @@
         };
 
         let userGender = 'male'; let currentLevel = 1; let totalScore = 500; let isEventActive = false;
-        let maze = [], mazeSize = 7; let playerPos = {x: 1, y: 1}, targetPos = {x: 5, y: 5}; let currentTarget = {}, pendingMove = null;
+        let maze = [], mazeSize = 7; let playerPos = {x: 1, y: 1}, targetPos = {x: 5, y: 5}; let currentTarget = {n:"小貓", s:500, i:"🐈"}, pendingMove = null;
         let currentSafePath = [], currentDisplayPath = [], hintActive = false;   
         let currentWorkEarned = 0; let workTargetValue = 500;
         let bweiShengCount = 0; let pendingGod = '', pendingGodName = '';
@@ -480,7 +480,8 @@
             initAudio(); sessionPlayTime = 0; isPlaying = true;
             inventory = { bottle: 0, stick: 0, cuffs: 0, expert: 0, broom: 0 };
             showScreen('screen-game'); 
-            setTimeout(() => { loadLevel(); }, 50);
+            // 立即執行，不依賴 setTimeout 避免渲染時序問題
+            loadLevel();
         }
 
         function openGodHelpModal() {
@@ -670,13 +671,17 @@
             updateUI(); 
             updateInventoryUI();
             
-            // 安全建構迷宮
+            // 建立迷宮陣列
             maze = Array(mazeSize).fill().map(() => Array(mazeSize).fill(1)); 
             function carve(x, y) {
-                maze[y][x] = 0; let dirs = [[0, -2], [0, 2], [-2, 0], [2, 0]].sort(() => Math.random() - 0.5);
+                maze[y][x] = 0; 
+                let dirs = [[0, -2], [0, 2], [-2, 0], [2, 0]].sort(() => Math.random() - 0.5);
                 for (let d of dirs) {
                     let nx = x + d[0], ny = y + d[1];
-                    if (nx > 0 && nx < mazeSize-1 && ny > 0 && ny < mazeSize-1 && maze[ny][nx] === 1) { maze[y + d[1]/2][x + d[0]/2] = 0; carve(nx, ny); }
+                    if (nx > 0 && nx < mazeSize-1 && ny > 0 && ny < mazeSize-1 && maze[ny][nx] === 1) { 
+                        maze[y + d[1]/2][x + d[0]/2] = 0; 
+                        carve(nx, ny); 
+                    }
                 }
             }
             carve(1, 1); 
@@ -684,6 +689,7 @@
             playerPos = {x: 1, y: 1}; 
             targetPos = {x: mazeSize - 2, y: mazeSize - 2};
             
+            // 淨化起終點
             maze[1][1] = 0;
             maze[1][2] = 0;
             maze[2][1] = 0;
@@ -736,14 +742,233 @@
             maze[playerPos.y][playerPos.x] = 0;
             maze[targetPos.y][targetPos.x] = 0;
 
-            let canvasEl = document.getElementById('mazeCanvas');
-            if (canvasEl) {
-                if(canvasEl.width !== 500) canvasEl.width = 500;
-                if(canvasEl.height !== 500) canvasEl.height = 500;
-                drawMaze();
+            // 立即繪製畫布
+            drawMaze();
+            levelStartTime = Date.now(); 
+        }
+
+        function updateUI() {
+            let ageInput = document.getElementById('selected-age');
+            let selectedAge = ageInput ? ageInput.value : '50-59';
+            let lvlEl = document.getElementById('ui-level'); if(lvlEl) lvlEl.innerText = "關卡: " + currentLevel + "/10 (" + selectedAge + ")";
+            let scoEl = document.getElementById('ui-score'); if(scoEl) scoEl.innerText = "總分: " + totalScore;
+            let tarEl = document.getElementById('ui-target');
+            if(tarEl && currentTarget && currentTarget.n) {
+                tarEl.innerText = "目標：" + currentTarget.n + " " + currentTarget.i;
+            }
+        }
+
+        window.onload = function() { 
+            gameLoopInterval = setInterval(() => {
+                if (isResting) {
+                    let diff = Math.floor((Date.now() - restStartTime) / 1000);
+                    let rem = REST_DURATION - diff;
+                    if (rem <= 0) {
+                        let resumeBtn = document.getElementById('btn-rest-resume'); if(resumeBtn) resumeBtn.style.display = 'block';
+                        let timerDisp = document.getElementById('rest-timer-display');
+                        if(timerDisp) {
+                            timerDisp.innerText = "休息完畢！";
+                            timerDisp.style.color = '#388E3C';
+                        }
+                    } else {
+                        let m = Math.floor(rem / 60).toString().padStart(2, '0'); let s = (rem % 60).toString().padStart(2, '0');
+                        let timerDisp = document.getElementById('rest-timer-display');
+                        if(timerDisp) timerDisp.innerText = `${m} : ${s}`;
+                    }
+                    return;
+                }
+                if (isPlaying && !isEventActive && !hintActive) {
+                    let levelTime = Math.floor((Date.now() - levelStartTime) / 1000);
+                    let timeEl = document.getElementById('ui-time'); if(timeEl) timeEl.innerText = levelTime + " 秒";
+                    sessionPlayTime++;
+                    if (sessionPlayTime >= MAX_PLAY_TIME) startRest();
+                }
+            }, 1000);
+        };
+
+        function startRest() {
+            isResting = true; restStartTime = Date.now();
+            let resumeBtn = document.getElementById('btn-rest-resume'); if(resumeBtn) resumeBtn.style.display = 'none';
+            let timerDisp = document.getElementById('rest-timer-display'); if(timerDisp) timerDisp.style.color = '#D32F2F';
+            showScreen('screen-rest');
+        }
+
+        function resumeFromRest() {
+            isResting = false; sessionPlayTime = 0; levelStartTime += (Date.now() - restStartTime);
+            showScreen('screen-game');
+        }
+
+        function startGodBwei(godType) {
+            if (hintActive) return;
+            closeGodHelpModal();
+            initAudio(); playSound('bump'); vibrate([30]);
+            
+            pendingGod = godType; pendingGodName = godsData[godType].n_tw;
+            
+            isEventActive = true; bweiShengCount = 0;
+            let titleEl = document.getElementById('bwei-title'); if(titleEl) titleEl.innerText = "🙏 誠心擲筊請示 " + pendingGodName;
+            let countEl = document.getElementById('bwei-count-display'); if(countEl) countEl.innerText = "目前連續聖筊：0 次";
+            let iconsEl = document.getElementById('bwei-icons'); if(iconsEl) iconsEl.innerHTML = "🌙 🌙";
+            let modalEl = document.getElementById('bwei-modal'); if(modalEl) modalEl.style.display = 'flex';
+        }
+
+        function closeBwei() { 
+            let modalEl = document.getElementById('bwei-modal'); if(modalEl) modalEl.style.display = 'none'; 
+            isEventActive = false; 
+        }
+
+        function throwBwei() {
+            playSound('bwei'); vibrate([50, 50, 50]);
+            let r = Math.random(); let resultIcon = ""; let isSheng = false;
+            if (r < 0.5) { resultIcon = "🌙 🌛"; isSheng = true; } 
+            else if (r < 0.75) { resultIcon = "🌛 🌛"; } 
+            else { resultIcon = "🌙 🌙"; } 
+
+            let iconsEl = document.getElementById('bwei-icons');
+            if (!iconsEl) return;
+            iconsEl.style.transform = 'translateY(-20px) rotate(10deg)';
+            setTimeout(() => {
+                iconsEl.style.transform = 'translateY(0) rotate(0deg)'; iconsEl.innerHTML = resultIcon;
+                if (isSheng) {
+                    bweiShengCount++; 
+                    let countEl = document.getElementById('bwei-count-display');
+                    if(countEl) countEl.innerText = "目前連續聖筊：" + bweiShengCount + " 次";
+                    if (bweiShengCount === 2) {
+                        setTimeout(() => { 
+                            let modalEl = document.getElementById('bwei-modal');
+                            if(modalEl) modalEl.style.display = 'none'; 
+                            summonGod(pendingGod); 
+                        }, 500);
+                    }
+                } else {
+                    bweiShengCount = 0; 
+                    let countEl = document.getElementById('bwei-count-display');
+                    if(countEl) countEl.innerText = "目前連續聖筊：0 次";
+                }
+            }, 200);
+        }
+
+        function summonGod(godType) {
+            playSound('god'); vibrate([200, 100, 200]); let god = godsData[godType];
+            
+            if (godType === 'supreme') {
+                if (totalScore < god.cost) {
+                    openStationModal(); return;
+                }
+                totalScore -= god.cost; updateUI();
+                for(let y=0; y<mazeSize; y++) {
+                    for(let x=0; x<mazeSize; x++) { if(maze[y][x] >= 2 && maze[y][x] <= 13) maze[y][x] = 0; }
+                }
+                hintActive = true; currentDisplayPath = currentSafePath; alert("🌟 玉皇大帝降臨！神威浩蕩！迷宮障礙全消！");
+                drawMaze(); setTimeout(() => { hintActive = false; drawMaze(); isEventActive = false; }, 4000);
+                return;
             }
 
-            levelStartTime = Date.now(); 
+            if (totalScore < god.cost) { 
+                openStationModal(); return; 
+            }
+            
+            totalScore -= god.cost; updateUI();
+
+            if (godType === 'tudigong') {
+                hintActive = true;
+                if (Math.random() < 0.2) { currentDisplayPath = generateWrongPath(); alert("⛩️ 土地公喝醉了，亂指路..."); } 
+                else { currentDisplayPath = currentSafePath; alert("⛩️ 土地公顯靈，指引生路！"); }
+                drawMaze(); setTimeout(() => { hintActive = false; drawMaze(); isEventActive = false; }, 3000);
+            } 
+            else if (godType === 'guanyin') {
+                let clearedCount = 0;
+                for(let y=0; y<mazeSize; y++) {
+                    for(let x=0; x<mazeSize; x++) { if(maze[y][x] === 5 && clearedCount < 2) { maze[y][x] = 0; clearedCount++; } }
+                }
+                if (clearedCount > 0) { alert("⛩️ 觀世音菩薩慈悲顯靈，掃除了 " + clearedCount + " 個壞人！"); drawMaze(); isEventActive = false; }
+                else { playSound('bump'); vibrate([100, 100, 300]); openStationModal(); }
+            }
+            else {
+                let cleared = false; let targetCode = (godType === 'wen') ? 2 : (godType === 'mazu' ? 3 : 4);
+                for(let y=0; y<mazeSize; y++) {
+                    for(let x=0; x<mazeSize; x++) if(maze[y][x] === targetCode) { maze[y][x] = 0; cleared = true; }
+                }
+                if (cleared) {
+                    alert("⛩️ 神尊顯靈，障礙已清除！");
+                    drawMaze(); isEventActive = false;
+                } else {
+                    playSound('bump'); vibrate([100, 100, 300]);
+                    openStationModal();
+                }
+            }
+        }
+
+        function generateWrongPath() {
+            let path = []; let cx = playerPos.x; let cy = playerPos.y; path.push(`${cx},${cy}`);
+            for(let i=0; i<20; i++) {
+                let dirs = [[0,-1],[0,1],[-1,0],[1,0]].sort(()=>Math.random()-0.5);
+                for(let d of dirs) {
+                    let nx = cx + d[0], ny = cy + d[1];
+                    if(nx>0 && nx<mazeSize-1 && ny>0 && ny<mazeSize-1) { cx = nx; cy = ny; path.push(`${cx},${cy}`); break; }
+                }
+            }
+            return path;
+        }
+
+        function doWork() {
+            let st = banishmentStations[currentStationIndex];
+            if (currentStationClicks >= st.maxClicks) {
+                alert(`⚠️ 在【${st.name}】的敲磚額度（${st.maxClicks}次）已滿！請點擊下方按鈕支付機票費返程！`);
+                return;
+            }
+            playSound('work'); vibrate([20]);
+            currentWorkEarned += st.reward;
+            currentStationClicks++;
+            updateWorkUI();
+        }
+
+        function updateWorkUI() {
+            let st = banishmentStations[currentStationIndex];
+            let scoreEl = document.getElementById('work-score');
+            if(scoreEl) scoreEl.innerText = currentWorkEarned;
+            
+            let targetTotal = st.ticket;
+            let targetDisp = document.getElementById('work-target-display'); if(targetDisp) targetDisp.innerText = targetTotal;
+            let ruleDesc = document.getElementById('work-rule-desc');
+            if(ruleDesc) ruleDesc.innerText = `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`;
+            
+            let prog = document.getElementById('work-progress');
+            if(prog) {
+                prog.max = targetTotal; 
+                prog.value = Math.min(currentWorkEarned, targetTotal);
+            }
+            
+            let statusEl = document.getElementById('work-status');
+            let returnBtn = document.getElementById('ui-btn-work-return');
+            if (currentWorkEarned >= targetTotal) {
+                if(statusEl) {
+                    statusEl.innerText = "🎉 賺取點數已達機票標準！可以搭飛機回台了！";
+                    statusEl.style.color = '#388E3C';
+                }
+                if(returnBtn) returnBtn.style.display = 'block';
+            } else {
+                let remClicks = st.maxClicks - currentStationClicks;
+                if(statusEl) {
+                    statusEl.innerText = `繼續敲磚！還差 ${targetTotal - currentWorkEarned} 點 (剩餘 ${remClicks} 次機會)`;
+                    statusEl.style.color = '#E65100';
+                }
+                if(returnBtn) returnBtn.style.display = 'none';
+            }
+        }
+
+        function returnFromWork() {
+            let st = banishmentStations[currentStationIndex];
+            if (currentWorkEarned < st.ticket) {
+                alert("😢 點數尚未達機票標準，無法搭飛機回台！");
+                return;
+            }
+            playSound('move'); 
+            totalScore += (currentWorkEarned - st.ticket); 
+            isEventActive = false; 
+            updateUI(); 
+            drawMaze(); 
+            showScreen('screen-game');
         }
 
         function drawMaze() {
@@ -772,7 +997,7 @@
                     if (maze[y][x] === 8) ctxEl.fillText("🪙", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                     if (maze[y][x] === 9) ctxEl.fillText("🏺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                     if (maze[y][x] === 10) ctxEl.fillText("🪄", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 11) ctx.fillText?.("🔗", (x + 0.5) * cellSize, (y + 0.5) * cellSize) || ctxEl.fillText("🔗", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 11) ctxEl.fillText("🔗", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                     if (maze[y][x] === 12) ctxEl.fillText("🧰", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                     if (maze[y][x] === 13) ctxEl.fillText("🧹", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                 }
