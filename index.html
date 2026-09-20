@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 關卡導覽版</title>
+    <title>世界寶藏迷宮探險 - 高齡友善國際版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -52,16 +52,24 @@
         .stats-table th { background-color: #FFE082; color: #3E2723; }
         
         .status-bar { 
-            font-size: clamp(18px, 4.5vw, 24px); font-weight: bold; display: flex; justify-content: space-between; flex-wrap: wrap; 
-            margin-bottom: 10px; background: #FFFDE7; padding: 12px; border-radius: 12px; border: 3px solid #FFD54F; color: #3E2723; gap: 10px;
+            font-size: clamp(16px, 4vw, 21px); font-weight: bold; display: flex; justify-content: space-between; flex-wrap: wrap; 
+            margin-bottom: 8px; background: #FFFDE7; padding: 10px; border-radius: 12px; border: 3px solid #FFD54F; color: #3E2723; gap: 8px;
         }
-        .target-text { font-size: clamp(20px, 5vw, 28px); color: #D84315; font-weight: bold; margin: 10px 0; background: #FBE9E7; padding: 10px; border-radius: 10px;}
+        .target-text { font-size: clamp(18px, 4.5vw, 26px); color: #D84315; font-weight: bold; margin: 8px 0; background: #FBE9E7; padding: 8px; border-radius: 10px;}
         
+        .inventory-bar {
+            display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; background: #E8F5E9; padding: 8px; border-radius: 10px; border: 2px solid #A5D6A7;
+        }
+        .item-badge {
+            font-size: clamp(13px, 3vw, 15px); font-weight: bold; background: white; padding: 4px 8px; border-radius: 8px; border: 1px solid #81C784; cursor: pointer; display: flex; align-items: center; gap: 4px;
+        }
+        .item-badge:active { background: #E0E0E0; }
+
         #canvas-container { width: 100%; max-width: 600px; margin: 0 auto; aspect-ratio: 1 / 1; }
         canvas { width: 100%; height: 100%; background-color: #FFF; border: 6px solid #795548; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         
-        .controls { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
-        .control-row { display: flex; justify-content: center; gap: 20px; margin-bottom: 15px; }
+        .controls { display: flex; flex-direction: column; align-items: center; margin-top: 12px; }
+        .control-row { display: flex; justify-content: center; gap: 20px; margin-bottom: 12px; }
         .arrow-btn {
             font-size: clamp(40px, 10vw, 60px); width: clamp(80px, 20vw, 110px); height: clamp(80px, 20vw, 110px); 
             background-color: #29B6F6; color: white; border-radius: 20px;
@@ -81,7 +89,7 @@
 
         #event-modal, #bwei-modal, #god-help-modal, #station-modal, #win-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 1000;
+            background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 2000;
         }
         .modal-content {
             background: #FFFFFF; padding: clamp(20px, 5vw, 35px); border-radius: 25px; width: 90%; max-width: 500px;
@@ -99,7 +107,7 @@
     <div id="screen-cover" class="screen active">
         <div class="lang-selector">
             🌐 語言 / Lang：
-            <select id="languageSelect" onchange="changeLanguage()">
+            <select id="languageSelect">
                 <option value="zh-TW" selected>繁體中文</option>
                 <option value="zh-CN">简体中文</option>
                 <option value="en">English</option>
@@ -119,7 +127,7 @@
                     <option value="1" selected>第 1 關起玩</option>
                     <option value="2">第 2 關起玩</option>
                     <option value="3">第 3 關起玩</option>
-                    <option value="4">第 4 關起玩</option>
+                    <option value="4">第 4 關起玩 (解鎖法寶)</option>
                     <option value="5">第 5 關起玩</option>
                     <option value="6">第 6 關起玩 (神壇解鎖)</option>
                     <option value="7">第 7 關起玩</option>
@@ -138,7 +146,7 @@
                 <button type="button" class="age-btn" onclick="selectAge('19-29', this)">青年/大學生<br>⚡極難挑戰</button>
                 <button type="button" class="age-btn" onclick="selectAge('30-39', this)">壯年 (30-39)<br>🎯進階級</button>
                 <button type="button" class="age-btn" onclick="selectAge('40-49', this)">中年 (40-49)<br>⚖️標準級</button>
-                <button type="button" class="age-btn selected" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
+                <button type="button" class="age-btn" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
                 <button type="button" class="age-btn" onclick="selectAge('60-69', this)">樂齡 (60-69)<br>🍵輕鬆級</button>
                 <button type="button" class="age-btn" onclick="selectAge('70-79', this)">高齡 (70-79)<br>🌸尊榮級</button>
                 <button type="button" class="age-btn selected" onclick="selectAge('80+', this)">耆老 (80+)<br>🍵養生級</button>
@@ -159,18 +167,22 @@
             <tr><td>高齡 (70-79)</td><td>3421</td><td>3905</td></tr>
             <tr><td>耆老 (80+)</td><td>1876</td><td>2110</td></tr>
         </table>
-        
-        <button id="dev-result-btn" class="btn-large" style="display:none; background: linear-gradient(45deg, #9C27B0, #E91E63); width:100%; max-width:100%; box-shadow: 0 6px 0 #6A1B9A;" onclick="showDevResult()">👑 開發者專屬結果</button>
-        <div class="footer">國立高雄師範大學 <span onclick="handleDevClick()" style="cursor:pointer;">劉世閔</span> 老師設計</div>
+        <div class="footer">國立高雄師範大學 劉世閔 老師設計</div>
     </div>
 
     <!-- 頁面2：說明 -->
     <div id="screen-instructions" class="screen">
-        <h1>📖 遊戲說明與關卡導覽</h1>
+        <h1>📖 遊戲說明與神話法寶</h1>
         <div style="font-size: clamp(15px, 4vw, 18px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 15px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>關卡導覽（上一關 / 下一關）：</b>過關後會彈出結算視窗，可自由選擇前往下一關或返回上一關！<br>
-            🔸 <b>流放地理經濟：</b>貶得越遠賺越多但機票越貴（潮州 500 ➔ 寧古塔 1300）。<br>
-            🔸 <b>⛩️ 神通指南（第 6 關起解鎖）：</b>點擊頂部「神通指南」查看神明神通與擲筊請神。
+            🔸 <b>第 4 關起隨機出現神話法寶（永久保留至通關）：</b>
+            <ul style="margin: 5px 0; padding-left: 20px;">
+                <li>🏺 <b>玉淨瓶</b>：清除一隻病菌/鬼怪！</li>
+                <li>🪄 <b>金箍棒</b>：刪除一隻惡犬！</li>
+                <li>🔗 <b>手銬</b>：逮捕一個壞人！</li>
+                <li>🧰 <b>拆彈專家工具箱</b>：自選拆除 2 枚炸彈！</li>
+            </ul>
+            🔸 <b>路上隨機奇遇：</b>💩大便(付500清潔費) ｜ 💵現金(+300) ｜ 🪙黃金(+800)。<br>
+            🔸 <b>關卡導覽：</b>過關後可自由選擇上一關或下一關！
         </div>
         <br>
         <button class="btn-large" style="background-color: #F57C00; box-shadow: 0 6px 0 #E65100; width: 90%; max-width: 350px;" onclick="openStationModal()">💰 前往點數補給站</button>
@@ -188,10 +200,19 @@
         </div>
         <div class="target-text" id="ui-target">目標：尋找...</div>
         
+        <!-- 法寶庫存顯示列 (跨關卡保留，點擊可主動使用) -->
+        <div class="inventory-bar" id="inventoryBar" style="display:none;">
+            <span style="font-size: 13px; color: #2E7D32; font-weight: bold; align-self: center;">🎒 攜帶法寶：</span>
+            <button class="item-badge" onclick="useItem('bottle')">🏺玉淨瓶 <span id="cnt-bottle" style="color:#D32F2F;">0</span></button>
+            <button class="item-badge" onclick="useItem('stick')">🪄金箍棒 <span id="cnt-stick" style="color:#D32F2F;">0</span></button>
+            <button class="item-badge" onclick="useItem('cuffs')">🔗手銬 <span id="cnt-cuffs" style="color:#D32F2F;">0</span></button>
+            <button class="item-badge" onclick="useItem('expert')">🧰拆彈工具 <span id="cnt-expert" style="color:#D32F2F;">0</span></button>
+        </div>
+
         <!-- 頂部功能列：幫助與點數補給站 -->
-        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
-            <button class="btn-large" style="font-size: 16px; padding: 8px 15px; margin: 0; width: auto; background-color: #0288D1; box-shadow: 0 4px 0 #01579B;" onclick="openGodHelpModal()">📖 神通指南與幫助</button>
-            <button class="btn-large" style="font-size: 16px; padding: 8px 15px; margin: 0; width: auto; background-color: #F57C00; box-shadow: 0 4px 0 #E65100;" onclick="openStationModal()">💰 點數補給站</button>
+        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap;">
+            <button class="btn-large" style="font-size: 15px; padding: 6px 12px; margin: 0; width: auto; background-color: #0288D1; box-shadow: 0 4px 0 #01579B;" onclick="openGodHelpModal()">📖 神通指南</button>
+            <button class="btn-large" style="font-size: 15px; padding: 6px 12px; margin: 0; width: auto; background-color: #F57C00; box-shadow: 0 4px 0 #E65100;" onclick="openStationModal()">💰 補給站</button>
         </div>
 
         <div id="canvas-container">
@@ -269,7 +290,7 @@
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #8BC34A; box-shadow: 0 4px 0 #558B2F; font-size: 17px;" onclick="selectStation(1)">🏡 惠州 (二)｜每敲180點/限7次｜機票700</button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF9800; box-shadow: 0 4px 0 #E65100; font-size: 17px;" onclick="selectStation(2)">🌴 儋州 (三)｜每敲150點/限10次｜機票900</button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF5722; box-shadow: 0 4px 0 #D84315; font-size: 17px;" onclick="selectStation(3)">⛰️ 永州 (四)｜每敲120點/限15次｜機票1100</button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #9C27B0; box-shadow: 0 4px 0 #6A1B9A; font-size: 17px;" onclick="❄️寧古塔 (遠)｜每敲100點/限20次｜機票1300</button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #9C27B0; box-shadow: 0 4px 0 #6A1B9A; font-size: 17px;" onclick="selectStation(4)">❄️ 寧古塔 (遠)｜每敲100點/限20次｜機票1300</button>
             </div>
             
             <button class="btn-large btn-cancel" style="width: 100%; margin-top: 5px;" onclick="closeStationModal()">取消返回</button>
@@ -327,9 +348,6 @@
                 <button class="btn-large" style="background-color: #4CAF50;" onclick="resolveEvent(true)">付費過路</button>
                 <button class="btn-large btn-cancel" onclick="resolveEvent(false)">退回</button>
             </div>
-            <div id="btn-group-ok" style="display:none;">
-                <button class="btn-large" onclick="resolveAlert()">接受懲罰</button>
-            </div>
         </div>
     </div>
 
@@ -358,14 +376,26 @@
                 osc.type = 'square'; osc.frequency.setValueAtTime(150, now); osc.frequency.exponentialRampToValueAtTime(50, now + 0.1);
                 gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
                 osc.start(now); osc.stop(now + 0.1);
+            } else if (type === 'item') {
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(400, now); osc.frequency.setValueAtTime(800, now + 0.15);
+                gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now); osc.stop(now + 0.3);
             } else if (type === 'dog') {
                 osc.type = 'sawtooth'; osc.frequency.setValueAtTime(300, now); osc.frequency.linearRampToValueAtTime(200, now + 0.2);
                 gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
                 osc.start(now); osc.stop(now + 0.2);
-            } else if (type === 'bomb') {
-                osc.type = 'square'; osc.frequency.setValueAtTime(100, now); osc.frequency.exponentialRampToValueAtTime(20, now + 0.5);
-                gain.gain.setValueAtTime(0.5, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
-                osc.start(now); osc.stop(now + 0.5);
+            } else if (type === 'cash') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(523.25, now); osc.frequency.setValueAtTime(659.25, now + 0.1);
+                gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+                osc.start(now); osc.stop(now + 0.2);
+            } else if (type === 'gold') {
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(659.25, now); osc.frequency.setValueAtTime(783.99, now + 0.1); osc.frequency.setValueAtTime(1046.50, now + 0.2);
+                gain.gain.setValueAtTime(0.4, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now); osc.stop(now + 0.3);
+            } else if (type === 'poop') {
+                osc.type = 'square'; osc.frequency.setValueAtTime(120, now); osc.frequency.linearRampToValueAtTime(80, now + 0.2);
+                gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+                osc.start(now); osc.stop(now + 0.2);
             } else if (type === 'bwei') {
                 osc.type = 'triangle'; osc.frequency.setValueAtTime(800, now);
                 gain.gain.setValueAtTime(0.3, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
@@ -416,13 +446,19 @@
             'supreme': { cost: 5000, n_tw: '玉皇大帝' }
         };
 
-        const ageKeys = ['0-6', '7-12', '13-18', '19-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80+'];
-        
+        // --- 🎒 全域持久化法寶庫存 (跨關卡保留) ---
+        let inventory = {
+            bottle: 0,  // 玉淨瓶 (刪除一隻病菌/鬼怪 4)
+            stick: 0,   // 金箍棒 (刪除一隻惡犬 2)
+            cuffs: 0,   // 手銬 (刪除一個壞人 5)
+            expert: 0   // 拆彈專家工具箱 (自選刪除 2 枚炸彈 3)
+        };
+
         let userGender = 'male'; let currentLevel = 1; let totalScore = 500; let isEventActive = false;
         let maze = [], mazeSize = 7; let playerPos = {x: 1, y: 1}, targetPos = {x: 1, y: 1}; let currentTarget = {}, pendingMove = null;
-        let pendingPenalty = 0; let currentSafePath = []; let currentDisplayPath = []; let hintActive = false;   
+        let currentSafePath = [], currentDisplayPath = [], hintActive = false;   
         let currentWorkEarned = 0; let workTargetValue = 500;
-        let bweiShengCount = 0; let pendingGod = ''; let pendingGodName = '';
+        let bweiShengCount = 0; let pendingGod = '', pendingGodName = '';
 
         const canvas = document.getElementById('mazeCanvas'); const ctx = canvas.getContext('2d');
 
@@ -440,6 +476,7 @@
 
         function startGame() {
             initAudio(); sessionPlayTime = 0; isPlaying = true;
+            inventory = { bottle: 0, stick: 0, cuffs: 0, expert: 0 };
             showScreen('screen-game'); loadLevel();
         }
 
@@ -489,6 +526,83 @@
             }
         }
 
+        // --- 🎒 主動使用法寶功能 (跨關卡保留) ---
+        function useItem(itemKey) {
+            if (inventory[itemKey] <= 0) {
+                let names = {bottle: '玉淨瓶', stick: '金箍棒', cuffs: '手銬', expert: '拆彈專家工具箱'};
+                alert(`⚠️ 您目前沒有【${names[itemKey]}】！請在迷宮中尋找寶箱獲得。`);
+                return;
+            }
+
+            if (itemKey === 'bottle') {
+                let count = removeEntityFromMaze(4);
+                if (count > 0) {
+                    inventory.bottle--;
+                    updateInventoryUI();
+                    playSound('god');
+                    alert("🏺 玉淨瓶神光一閃！成功淨化並刪除了一隻病菌/鬼怪！");
+                    drawMaze();
+                } else {
+                    alert("💡 目前迷宮中沒有發現病菌/鬼怪！");
+                }
+            } else if (itemKey === 'stick') {
+                let count = removeEntityFromMaze(2);
+                if (count > 0) {
+                    inventory.stick--;
+                    updateInventoryUI();
+                    playSound('god');
+                    alert("🪄 金箍棒金光大放！成功敲退了一隻惡犬！");
+                    drawMaze();
+                } else {
+                    alert("💡 目前迷宮中沒有發現惡犬！");
+                }
+            } else if (itemKey === 'cuffs') {
+                let count = removeEntityFromMaze(5);
+                if (count > 0) {
+                    inventory.cuffs--;
+                    updateInventoryUI();
+                    playSound('god');
+                    alert("🔗 手銬神威！成功將一名壞人繩之以法！");
+                    drawMaze();
+                } else {
+                    alert("💡 目前迷宮中沒有發現壞人！");
+                }
+            } else if (itemKey === 'expert') {
+                let count = removeEntityFromMaze(3, 2);
+                if (count > 0) {
+                    inventory.expert--;
+                    updateInventoryUI();
+                    playSound('god');
+                    alert(`🧰 拆彈專家工具箱使用成功！共解除 ${count} 枚炸彈危機！`);
+                    drawMaze();
+                } else {
+                    alert("💡 目前迷宮中沒有發現炸彈！");
+                }
+            }
+        }
+
+        function removeEntityFromMaze(code, maxCount = 1) {
+            let removed = 0;
+            for (let y = 0; y < mazeSize; y++) {
+                for (let x = 0; x < mazeSize; x++) {
+                    if (maze[y][x] === code && removed < maxCount) {
+                        maze[y][x] = 0;
+                        removed++;
+                    }
+                }
+            }
+            return removed;
+        }
+
+        function updateInventoryUI() {
+            document.getElementById('cnt-bottle').innerText = inventory.bottle;
+            document.getElementById('cnt-stick').innerText = inventory.stick;
+            document.getElementById('cnt-cuffs').innerText = inventory.cuffs;
+            document.getElementById('cnt-expert').innerText = inventory.expert;
+            
+            document.getElementById('inventoryBar').style.display = (currentLevel >= 4) ? 'flex' : 'none';
+        }
+
         function loadLevel() {
             isEventActive = false; 
             hintActive = false;
@@ -520,6 +634,7 @@
             else currentTarget = arr[3][currentLevel - 7];
 
             updateUI(); 
+            updateInventoryUI();
             generateMaze(mazeSize); 
             playerPos = {x: 1, y: 1}; 
             targetPos = {x: mazeSize - 2, y: mazeSize - 2}; 
@@ -622,7 +737,7 @@
                 }
                 totalScore -= god.cost; updateUI();
                 for(let y=0; y<mazeSize; y++) {
-                    for(let x=0; x<mazeSize; x++) { if(maze[y][x] >= 2 && maze[y][x] <= 5) maze[y][x] = 0; }
+                    for(let x=0; x<mazeSize; x++) { if(maze[y][x] >= 2 && maze[y][x] <= 12) maze[y][x] = 0; }
                 }
                 hintActive = true; currentDisplayPath = currentSafePath; alert("🌟 玉皇大帝降臨！神威浩蕩！迷宮障礙全消！");
                 drawMaze(); setTimeout(() => { hintActive = false; drawMaze(); isEventActive = false; }, 4000);
@@ -679,7 +794,7 @@
         function doWork() {
             let st = banishmentStations[currentStationIndex];
             if (currentStationClicks >= st.maxClicks) {
-                alert(`⚠️ 在【${st.name}】的敲磚額度（${st.maxClicks}次）已滿！請點擊下方按鈕支付機票費返程，或前往更遠的地方賺更多分！`);
+                alert(`⚠️ 在【${st.name}】的敲磚額度（${st.maxClicks}次）已滿！請點擊下方按鈕支付機票費返程！`);
                 return;
             }
             playSound('work'); vibrate([20]);
@@ -781,6 +896,22 @@
                 let ghostCount = Math.floor(currentLevel * 1.5);
                 for (let i = 0; i < ghostCount; i++) if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 4;
             }
+
+            let poopCount = 2 + Math.floor(currentLevel * 0.5);
+            for(let i=0; i<poopCount; i++) if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 6;
+            
+            let cashCount = 2;
+            for(let i=0; i<cashCount; i++) if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 7;
+
+            let goldCount = 1;
+            for(let i=0; i<goldCount; i++) if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 8;
+
+            if (currentLevel >= 4) {
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 9;  // 🏺
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 10; // 🪄
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 11; // 🔗
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 12; // 🧰 (拆彈工具箱)
+            }
         }
 
         function drawMaze() {
@@ -804,6 +935,13 @@
                     if (maze[y][x] === 3) ctx.fillText("💣", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                     if (maze[y][x] === 4) ctx.fillText("👻", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                     if (maze[y][x] === 5) ctx.fillText("🦹", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 6) ctx.fillText("💩", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 7) ctx.fillText("💵", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 8) ctx.fillText("🪙", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 9) ctx.fillText("🏺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 10) ctx.fillText("🪄", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 11) ctx.fillText("🔗", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 12) ctx.fillText("🧰", (x + 0.5) * cellSize, (y + 0.5) * cellSize); // 高齡友善工具箱
                 }
             }
             ctx.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
@@ -818,11 +956,67 @@
                 let cell = maze[ny][nx];
                 if (cell === 1) { playSound('bump'); vibrate([30]); return; }
                 
+                if (cell >= 9 && cell <= 12) {
+                    playSound('item'); vibrate([100, 50, 100]);
+                    let msg = "";
+                    if (cell === 9) { inventory.bottle++; msg = "🏺 獲得法寶【玉淨瓶】！可在背包隨時點擊消除病菌/鬼怪！"; }
+                    if (cell === 10) { inventory.stick++; msg = "🪄 獲得法寶【金箍棒】！可在背包隨時點擊敲退惡犬！"; }
+                    if (cell === 11) { inventory.cuffs++; msg = "🔗 獲得法寶【手銬】！可在背包隨時點擊逮捕壞人！"; }
+                    if (cell === 12) { inventory.expert++; msg = "🧰 獲得裝備【拆彈專家工具箱】！可在背包隨時點擊解除 2 枚炸彈！"; }
+                    
+                    updateInventoryUI();
+                    maze[ny][nx] = 0;
+                    playerPos.x = nx; playerPos.y = ny;
+                    drawMaze();
+                    alert(msg);
+                    return;
+                }
+
+                if (cell === 6) {
+                    playSound('poop'); vibrate([150, 50, 150]);
+                    totalScore -= 500;
+                    updateUI();
+                    maze[ny][nx] = 0;
+                    playerPos.x = nx; playerPos.y = ny;
+                    drawMaze();
+                    alert("💩 哎呀！踩到狗狗大便！清理鞋子支付清潔費 500 點！");
+                    if (totalScore <= 0) {
+                        isEventActive = true;
+                        alert("😢 點數已歸零！請前往點數補給站選擇流放地賺分捲土重來！");
+                        openStationModal();
+                    }
+                    return;
+                }
+
+                if (cell === 7) {
+                    playSound('cash'); vibrate([50, 50]);
+                    totalScore += 300;
+                    updateUI();
+                    maze[ny][nx] = 0;
+                    playerPos.x = nx; playerPos.y = ny;
+                    drawMaze();
+                    alert("💵 撿到現金！獲得 300 點獎勵！");
+                    checkWin();
+                    return;
+                }
+
+                if (cell === 8) {
+                    playSound('gold'); vibrate([100, 50, 100]);
+                    totalScore += 800;
+                    updateUI();
+                    maze[ny][nx] = 0;
+                    playerPos.x = nx; playerPos.y = ny;
+                    drawMaze();
+                    alert("🪙 撿到閃亮黃金！獲得 800 點巨額獎勵！");
+                    checkWin();
+                    return;
+                }
+
                 playSound('move');
 
                 if (totalScore <= 0) {
                     isEventActive = true;
-                    alert("😢 哎呀！您失敗了！點數已歸零，請前往點數補給站選擇流放地賺分捲土重來！");
+                    alert("😢 點數已歸零！請前往點數補給站選擇流放地賺分捲土重來！");
                     openStationModal();
                     return;
                 }
@@ -831,17 +1025,17 @@
                     playSound('dog'); vibrate([100, 50, 100]);
                     pendingMove = {x: nx, y: ny}; 
                     if (totalScore < 300) {
-                        alert("😢 點數不足 300 點！請前往點數補給站賺取路費！");
+                        alert("😢 點數不足 300 點！請使用背包中的【金箍棒】法寶或前往補給站！");
                         openStationModal();
                     } else {
-                        showModal("🐺 惡犬擋道！花費 300 點買骨頭？", "choice");
+                        showModal("🐺 惡犬擋道！花費 300 點買骨頭？（或使用背包中的🪄金箍棒）", "choice");
                     }
                     return; 
                 }
                 if (cell === 3) { 
                     playSound('bomb'); vibrate([300, 100, 300]);
                     if (totalScore < 500) {
-                        alert("😢 點數不足 500 點！請前往點數補給站賺取路費！");
+                        alert("😢 點數不足 500 點！請使用背包中的【拆彈工具箱】或前往補給站！");
                         openStationModal();
                     } else {
                         totalScore -= 500; updateUI();
@@ -853,19 +1047,19 @@
                 if (cell === 4) { 
                     playSound('bomb'); vibrate([200, 200, 200]);
                     if (totalScore < 900) {
-                        alert("😢 點數不足 900 點！請前往點數補給站賺取路費！");
+                        alert("😢 點數不足 900 點！請使用背包中的【玉淨瓶】法寶或前往補給站！");
                         openStationModal();
                     } else {
                         totalScore -= 900; updateUI();
                         maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert("👻 擊退鬼怪！扣除 900 點平安通過！");
+                        alert("👻 擊退病菌/鬼怪！扣除 900 點平安通過！");
                     }
                     return; 
                 }
                 if (cell === 5) { 
                     playSound('bump'); vibrate([400, 100, 400]);
                     if (totalScore < 500) {
-                        alert("😢 點數不足 500 點！請前往點數補給站賺取路費！");
+                        alert("😢 點數不足 500 點！請使用背包中的【手銬】法寶或前往補給站！");
                         openStationModal();
                     } else {
                         totalScore -= 500; updateUI();
@@ -882,7 +1076,6 @@
             isEventActive = true;
             document.getElementById('event-text').innerHTML = text;
             document.getElementById('btn-group-choice').style.display = (type === 'choice') ? 'block' : 'none';
-            document.getElementById('btn-group-ok').style.display = (type === 'alert') ? 'block' : 'none';
             document.getElementById('event-modal').style.display = 'flex';
         }
 
@@ -932,11 +1125,9 @@
                 ];
                 let title = titles[Math.min(currentLevel - 1, titles.length - 1)];
                 
-                // 彈出過關視窗，提供 上一關 / 下一關 導覽按鈕
                 let msg = `🎉 找到【${currentTarget.n}】！\n🏆 稱號：【${title}】\n⏱️ 花費 ${timeUsed} 秒\n💰 獲得積分：${levelScore} 點\n總分：${totalScore} 點`;
                 document.getElementById('win-message').innerText = msg;
                 
-                // 設定按鈕顯示狀態
                 document.getElementById('btn-prev-level').style.display = (currentLevel > 1) ? 'inline-block' : 'none';
                 let nextBtn = document.getElementById('btn-next-level');
                 if (currentLevel < 10) {
