@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 五階段大師完全版</title>
+    <title>世界寶藏迷宮探險 - 多語系大師完全版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -115,8 +115,8 @@
         <h1 id="txt-title">🏆 世界寶藏迷宮探險 🏆</h1>
         <div class="form-group">
             <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號 (保障隱私)：</b></p>
-            <input type="text" id="player-nickname" value="探險家-8823" placeholder="請輸入代號或暱稱">
-            <p style="font-size: 12px; color: #795548; margin: 4px 0;">💡 系統將自動結合隨機碼確保您的代號獨一無二</p>
+            <input type="text" id="player-nickname" value="探險家-劉世閔" placeholder="請輸入代號或暱稱">
+            <p id="lbl-nickname-tip" style="font-size: 12px; color: #795548; margin: 4px 0;">💡 系統將自動結合隨機碼確保您的代號獨一無二</p>
             <br>
             <p id="lbl-gender"><b>請選擇您的性別：</b></p>
             <label><input type="radio" name="gender" value="male" checked> <span id="opt-male">男性 👨</span></label>
@@ -343,7 +343,8 @@
                 stationTitle: "💰 選擇流放地與補給站", stationDesc: "點數不足時，選擇流放地敲磚賺取機票費：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！", godClose: "關閉指南",
                 bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
-                certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單"
+                certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
+                nicknameTip: "💡 系統將自動結合隨機碼確保您的代號獨一無二"
             },
             'zh-CN': {
                 title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (保障隐私)：", gender: "请选择您的性别：",
@@ -357,7 +358,8 @@
                 stationTitle: "💰 选择流放地与补给站", stationDesc: "点数不足时，选择流放地敲砖赚取机票费：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！", godClose: "关闭指南",
                 bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
-                certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单"
+                certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
+                nicknameTip: "💡 系统将自动结合随机码确保您的代号独一无二"
             },
             'en': {
                 title: "🏆 World Treasure Maze Adventure 🏆", nickname: "Player ID / Unique Handle:", gender: "Select Gender:",
@@ -371,18 +373,20 @@
                 stationTitle: "💰 Select Banishment Station", stationDesc: "Earn tickets by tapping at supply stations:", stationCancel: "Cancel",
                 godTitle: "⛩️ Divine Guidance", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close",
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
-                certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu"
+                certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
+                nicknameTip: "💡 System will attach a random suffix to ensure your handle is unique."
             }
         };
 
         let currentLang = 'zh-TW';
-        let uniquePlayerId = ""; // 確保全域唯一的代號
+        let uniquePlayerId = "";
 
         function changeLanguage(lang) {
             currentLang = lang;
             let t = i18n[lang] || i18n['zh-TW'];
             document.getElementById('txt-title').innerText = t.title;
             document.getElementById('lbl-nickname').innerHTML = `<b>${t.nickname}</b>`;
+            document.getElementById('lbl-nickname-tip').innerText = t.nicknameTip;
             document.getElementById('lbl-gender').innerHTML = `<b>${t.gender}</b>`;
             document.getElementById('opt-male').innerText = t.male;
             document.getElementById('opt-female').innerText = t.female;
@@ -529,8 +533,6 @@
 
         function startGame() {
             initAudio(); isPlaying = true;
-            
-            // 確保生成獨一無二的玩家代號
             let rawNick = document.getElementById('player-nickname').value.trim() || "Explorer";
             let randomCode = Math.floor(1000 + Math.random() * 9000);
             uniquePlayerId = `${rawNick}#${randomCode}`;
