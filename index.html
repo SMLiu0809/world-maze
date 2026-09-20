@@ -115,8 +115,8 @@
         <h1 id="txt-title">🏆 世界寶藏迷宮探險 🏆</h1>
         <div class="form-group">
             <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號 (保障隱私)：</b></p>
-            <input type="text" id="player-nickname" value="探險家-劉世閔" placeholder="請輸入代號或暱稱">
-            <p id="lbl-nickname-tip" style="font-size: 12px; color: #795548; margin: 4px 0;">💡 系統將自動結合隨機碼確保您的代號獨一無二</p>
+            <input type="text" id="player-nickname" maxlength="12" value="" placeholder="請輸入暱稱">
+            <p id="lbl-nickname-tip" style="font-size: 12px; color: #795548; margin: 4px 0;">💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼</p>
             <br>
             <p id="lbl-gender"><b>請選擇您的性別：</b></p>
             <label><input type="radio" name="gender" value="male" checked> <span id="opt-male">男性 👨</span></label>
@@ -341,7 +341,7 @@
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！", godClose: "關閉指南",
                 bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
-                nicknameTip: "💡 系統將自動結合隨機碼確保您的代號獨一無二",
+                nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
                 winTitle: "🎉 恭喜通關！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
                 levels: [
                     "第一站：臺灣・高雄", "第二站：日本・京都", "第三站：法國・巴黎",
@@ -379,7 +379,7 @@
                 godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！", godClose: "关闭指南",
                 bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
-                nicknameTip: "💡 系统将自动结合随机码确保您的代号独一无二",
+                nicknameTip: "💡 支持中英文、数字，最多 12 码，系统将自动加上专属识别码",
                 winTitle: "🎉 恭喜通关！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
                 levels: [
                     "第一站：台湾・高雄", "第二站：日本・京都", "第三站：法国・巴黎",
@@ -389,7 +389,7 @@
                 targets: ["小猫 🐈", "小狗 🐶", "小鸟 🦜", "埃尔多拉多 👑", "圣殿骑士宝藏 🛡️", "王室琥珀屋 ✨", "英俊绅士 🤵‍♂️", "阳光冲浪男 🏄‍♂️", "仙气公主 👸", "黑胡子宝藏 🏴‍☠️"],
                 lores: [
                     "台湾高雄拥有丰富的港湾文化与在地常民信仰，爱河与驳二艺术特区是融合创意与历史的重要据点。",
-                    "日本京都以千年古都闻名，拥有众多世界文化遗产、传统木造町屋与细致的枯山水庭园艺术。",
+                    "日本京都以千年古都闻名，拥有众多世界文化遗产、传统木造町屋与细緻的枯山水庭园艺术。",
                     "法国巴黎是浪漫与艺术之都，卢浮宫与埃菲尔铁塔见证了欧洲文艺复兴与近代工业设计的辉煌。",
                     "埃及吉萨金字塔群与人面狮身像展现了古代尼罗河文明高度发展的几关工程与天文数学造诣。",
                     "雅典帕德嫩神庙象征西方民主政治与古典希腊建筑的巅峰，对全球哲学与艺术影响深远。",
@@ -397,7 +397,7 @@
                     "伦敦大本钟与大英博物馆收藏了横跨人类数千年历史的世界文明精华与科学发明记录。",
                     "纽约自由女神像与多元文化汇聚之处，象征着现代自由贸易、当代艺术与都市文明的交织。",
                     "悉尼歌剧院以独特的贝壳屋顶结构闻名，是南半球现代建筑美学与海洋生态保育的代表。",
-                    "莫斯科红场与瓦西里升天大教堂拥有独特的洋葱头穹顶建筑风格，融合了欧亚交界的神祕历史。"
+                    "莫斯科红场与瓦西里升天大教堂拥有独特的洋蔥头穹顶建筑风格，融合了欧亚交界的神祕历史。"
                 ]
             },
             'en': {
@@ -417,7 +417,7 @@
                 godTitle: "⛩️ Divine Guidance", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close",
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
-                nicknameTip: "💡 System will attach a random suffix to ensure your handle is unique.",
+                nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
                 winTitle: "🎉 Level Completed!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
                 levels: [
                     "Stage 1: Taiwan・Kaohsiung", "Stage 2: Japan・Kyoto", "Stage 3: France・Paris",
@@ -448,6 +448,7 @@
             let t = i18n[lang] || i18n['zh-TW'];
             document.getElementById('txt-title').innerText = t.title;
             document.getElementById('lbl-nickname').innerHTML = `<b>${t.nickname}</b>`;
+            document.getElementById('player-nickname').placeholder = (lang === 'en' ? "Enter nickname" : "請輸入暱稱");
             document.getElementById('lbl-nickname-tip').innerText = t.nicknameTip;
             document.getElementById('lbl-gender').innerHTML = `<b>${t.gender}</b>`;
             document.getElementById('opt-male').innerText = t.male;
@@ -606,7 +607,7 @@
 
         function startGame() {
             initAudio(); isPlaying = true;
-            let rawNick = document.getElementById('player-nickname').value.trim() || "Explorer";
+            let rawNick = document.getElementById('player-nickname').value.trim() || (currentLang === 'en' ? "Explorer" : "探險家");
             let randomCode = Math.floor(1000 + Math.random() * 9000);
             uniquePlayerId = `${rawNick}#${randomCode}`;
 
@@ -813,7 +814,7 @@
                     totalScore -= 200; updateUI();
                     playSound('bump'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "💩 Hit a trap, -200 pts!" : "💩 踩到大便陷阱，扣除 200 點！");
+                    alert(currentLang === 'en' ? "💩 Hit a trap, -200 pts!" : (currentLang === 'zh-CN' ? "💩 踩到大便陷阱，扣除 200 点！" : "💩 踩到大便陷阱，扣除 200 點！"));
                     return;
                 }
                 if (cell === 7) {
@@ -821,7 +822,7 @@
                     totalScore += 300; updateUI();
                     playSound('item'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "💵 Found cash treasure, +300 pts!" : "💵 獲得現金寶物 300 點！");
+                    alert(currentLang === 'en' ? "💵 Found cash treasure, +300 pts!" : (currentLang === 'zh-CN' ? "💵 获得现金宝物 300 点！" : "💵 獲得現金寶物 300 點！"));
                     checkWin();
                     return;
                 }
@@ -833,11 +834,11 @@
 
         function undoMove() {
             if (undoCountLeft <= 0) {
-                alert(currentLang === 'en' ? "⚠️ Undo limit reached for this level!" : "⚠️ 本關的反悔次數已用完！");
+                alert(currentLang === 'en' ? "⚠️ Undo limit reached for this level!" : (currentLang === 'zh-CN' ? "⚠️ 本关的反悔次数已用完！" : "⚠️ 本關的反悔次數已用完！"));
                 return;
             }
             if (undoHistory.length === 0) {
-                alert(currentLang === 'en' ? "⚠️ No moves to undo!" : "⚠️ 目前沒有可撤回的步驟！");
+                alert(currentLang === 'en' ? "⚠️ No moves to undo!" : (currentLang === 'zh-CN' ? "⚠️ 目前没有可撤回的步骤！" : "⚠️ 目前沒有可撤回的步驟！"));
                 return;
             }
             let prev = undoHistory.pop();
@@ -864,7 +865,10 @@
 
                 let msg = (currentLang === 'en' ? 
                     `Completed [Level ${currentLevel}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n}\nScore: +${currentTarget.s}\nStars: ${starStr}\nTotal Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
-                    `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
+                    (currentLang === 'zh-CN' ?
+                        `通关【第 ${currentLevel} 关：${currentTarget.station}】！\n代号：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n获得积分：${currentTarget.s} 点\n本关星等：${starStr}\n总分：${totalScore} 点\n\n💡 知识小百科：\n${currentTarget.knowledge}` :
+                        `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
+                    )
                 );
                 document.getElementById('win-message').innerText = msg;
                 
@@ -899,7 +903,10 @@
                 isPlaying = false;
                 let certText = (currentLang === 'en' ? 
                     `This is to certify that <b>[${uniquePlayerId}]</b> has successfully completed the Global Treasure Maze Adventure!<br>Final Score: <b>${totalScore} pts</b><br>Congratulations on winning the "Master Explorer" honor!` :
-                    `特此證明 <b>[${uniquePlayerId}]</b> 探險家順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`
+                    (currentLang === 'zh-CN' ?
+                        `特此证明 <b>[${uniquePlayerId}]</b> 探险家顺利完成世界十大宝藏迷宫探险！<br>最终总分：<b>${totalScore} 点</b><br>恭喜荣获“世界寻宝之王”最高殊荣！` :
+                        `特此證明 <b>[${uniquePlayerId}]</b> 探險家順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`
+                    )
                 );
                 document.getElementById('cert-content').innerHTML = certText;
                 document.getElementById('certificate-modal').style.display = 'flex';
@@ -913,7 +920,7 @@
         function doWork() {
             let st = banishmentStations[currentStationIndex];
             if (currentStationClicks >= st.maxClicks) {
-                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : "⚠️ 敲磚額度已滿,請點擊下方按鈕支付機票費返程！");
+                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : (currentLang === 'zh-CN' ? "⚠️ 敲砖额度已满，请点击下方按钮支付机票费返程！" : "⚠️ 敲磚額度已滿，請點擊下方按鈕支付機票費返程！"));
                 return;
             }
             playSound('item'); vibrate([20]);
@@ -926,12 +933,15 @@
             document.getElementById('work-target-display').innerText = st.ticket;
             let descText = (currentLang === 'en' ? 
                 `Per Tap: ${st.reward} pts | Remaining: ${st.maxClicks - currentStationClicks} | Ticket: ${st.ticket} pts` :
-                `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`
+                (currentLang === 'zh-CN' ?
+                    `每敲一次：${st.reward}点 | 剩余次数：${st.maxClicks - currentStationClicks} | 机票费：${st.ticket}点` :
+                    `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`
+                )
             );
             document.getElementById('work-rule-desc').innerText = descText;
             let prog = document.getElementById('work-progress');
             prog.max = st.ticket; prog.value = Math.min(currentWorkEarned, st.ticket);
-            let returnBtnText = (currentLang === 'en' ? "✈️ Pay Ticket & Return to Level!" : "✈️ 繳交機票費,重返原關卡！");
+            let returnBtnText = (currentLang === 'en' ? "✈️ Pay Ticket & Return to Level!" : (currentLang === 'zh-CN' ? "✈️ 缴纳机票费，重返原关卡！" : "✈️ 繳交機票費，重返原關卡！"));
             document.getElementById('ui-btn-work-return').innerText = returnBtnText;
             document.getElementById('ui-btn-work-return').style.display = (currentWorkEarned >= st.ticket) ? 'block' : 'none';
         }
@@ -947,9 +957,9 @@
             closeGodHelpModal();
             pendingGod = godType; pendingGodName = godsData[godType].n_tw;
             isEventActive = true; bweiShengCount = 0;
-            let pTitle = (currentLang === 'en' ? "🙏 Praying to " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName);
+            let pTitle = (currentLang === 'en' ? "🙏 Praying to " + pendingGodName : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName));
             document.getElementById('bwei-title').innerText = pTitle;
-            let countText = (currentLang === 'en' ? "Consecutive Sheng Jiao: 0" : "目前連續聖筊：0 次");
+            let countText = (currentLang === 'en' ? "Consecutive Sheng Jiao: 0" : (currentLang === 'zh-CN' ? "目前连续圣筊：0 次" : "目前連續聖筊：0 次"));
             document.getElementById('bwei-count-display').innerText = countText;
             document.getElementById('cup1').innerText = "🌙";
             document.getElementById('cup2').innerText = "🌙";
@@ -974,18 +984,18 @@
 
                 if (isSheng) {
                     bweiShengCount++;
-                    let sText = (currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiShengCount}` : `目前連續聖筊：${bweiShengCount} 次`);
+                    let sText = (currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiShengCount}` : (currentLang === 'zh-CN' ? `目前连续圣筊：${bweiShengCount} 次` : `目前連續聖筊：${bweiShengCount} 次`));
                     document.getElementById('bwei-count-display').innerText = sText;
                     if (bweiShengCount === 2) {
                         setTimeout(() => {
                             document.getElementById('bwei-modal').style.display = 'none';
-                            alert(currentLang === 'en' ? "⛩️ Divine Blessing Successful!" : "⛩️ 神明聖筊顯靈,庇佑成功！");
+                            alert(currentLang === 'en' ? "⛩️ Divine Blessing Successful!" : (currentLang === 'zh-CN' ? "⛩️ 神明圣筊显灵，庇佑成功！" : "⛩️ 神明聖筊顯靈，庇佑成功！"));
                             isEventActive = false;
                         }, 500);
                     }
                 } else {
                     bweiShengCount = 0;
-                    let fText = (currentLang === 'en' ? "Consecutive Sheng Jiao: 0 (Failed)" : "目前連續聖筊：0 次 (笑筊/陰筊)");
+                    let fText = (currentLang === 'en' ? "Consecutive Sheng Jiao: 0 (Failed)" : (currentLang === 'zh-CN' ? "目前连续圣筊：0 次 (笑筊/阴筊)" : "目前連續聖筊：0 次 (笑筊/陰筊)"));
                     document.getElementById('bwei-count-display').innerText = fText;
                 }
             }, 500);
