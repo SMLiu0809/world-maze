@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 大師視覺旗艦版</title>
+    <title>世界寶藏迷宮探險 - 混合雙拼旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -224,7 +224,7 @@
             <span id="ui-time">0 秒</span>
         </div>
         <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
-        <div class="target-text" id="ui-target">目標：龍虎塔琉璃珠 🏮</div>
+        <div class="target-text" id="ui-target">目標：駁二鐵件藝術公仔 🤖</div>
         
         <div class="toolbar-top">
             <button class="tool-btn" id="t-god" style="background-color: #2980B9;" onclick="openGodHelpModal()">⛩️ 神通</button>
@@ -327,11 +327,11 @@
             <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇流放地與補給站</h2>
             <p id="station-modal-desc" style="font-size: 14px; color: #718096;">點數不足時，選擇流放地敲磚賺取機票費：</p>
             <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0;">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 14px;" onclick="selectStation(0)"><span id="st-0">🏙️ 潮州 (近)｜每敲200/限5次｜機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 14px;" onclick="selectStation(1)"><span id="st-1">🏡 惠州 (二)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 14px;" onclick="selectStation(2)"><span id="st-2">🌴 儋州 (三)｜每敲150/限10次｜機票900</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 14px;" onclick="selectStation(3)"><span id="st-3">⛰️ 永州 (四)｜每敲120/限15次｜機票1100</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 14px;" onclick="selectStation(4)"><span id="st-4">❄️ 寧古塔 (遠)｜每敲100/限20次｜機票1300</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 14px;" onclick="selectStation(0)"><span id="st-0">🏙️ Manila (Near) | 200 pts / 5 taps | Ticket: 500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 14px;" onclick="selectStation(1)"><span id="st-1">🏡 Singapore (II) | 180 pts / 7 taps | Ticket: 700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 14px;" onclick="selectStation(2)"><span id="st-2">🌴 Sydney (III) | 150 pts / 10 taps | Ticket: 900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 14px;" onclick="selectStation(3)"><span id="st-3">⛰️ London (IV) | 120 pts / 15 taps | Ticket: 1100</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 14px;" onclick="selectStation(4)"><span id="st-4">❄️ Vancouver (Far) | 100 pts / 20 taps | Ticket: 1300</span></button>
             </div>
             <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 6px;" onclick="closeStationModal()">取消返回</button>
         </div>
@@ -408,21 +408,21 @@
                     "第七站：英國・倫敦", "第八站：美國・紐約", "第九站：澳洲・雪梨", "第十站：俄羅斯・莫斯科"
                 ],
                 targets: [
-                    "龍虎塔琉璃珠 🏮", "清水寺檜木御守 ⛩️", "羅浮宮蒙娜麗莎拼圖 🖼️",
-                    "法老黃金面具 👑", "雅典娜智慧橄欖枝 🌿", "羅馬競技場古金幣 🪙",
+                    "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
+                    "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
                     "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
-                    "左營蓮池潭龍虎塔融合了在地宗教信仰與原住民琉璃珠工藝的文化結晶。",
-                    "京都清水寺象徵千年古都木造建築美學與細緻的枯山水庭園祈福文化。",
-                    "巴黎羅浮宮與蒙娜麗莎見證了歐洲文藝復興與近代藝術之都的輝煌。",
-                    "埃及吉薩金字塔群與法老黃金面具展現了古代尼羅河文明的頂級工藝。",
-                    "雅典帕德嫩神廟象徵西方民主政治、智慧與奧林匹克橄欖枝精神。",
-                    "羅馬競技場古金幣見證了地中海古羅馬帝國雄偉歷史與貿易的輝煌。",
-                    "倫敦大笨鐘精鋼齒輪呼應了英國工業革命與精密機械工藝的偉大象徵。",
-                    "紐約自由女神聖火象徵自由、民主、多元文化與移民的自由精神堡壘。",
-                    "雪梨港灣大貝殼珍珠結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
-                    "克里姆林宮法貝熱彩蛋寶石是俄羅斯帝國皇室工藝與珠寶設計的極致代表。"
+                    "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
+                    "代表日本茶道精神與京都精緻細膩的職人生活美學。",
+                    "象徵塞納河畔咖啡館與印象派畫家們的浪漫藝術日常。",
+                    "古代埃及用來記錄神話與歷史的獨特植物纖維紙張。",
+                    "展現基克拉澤斯群島風情與地中海陶藝裝飾藝術。",
+                    "見證地中海羅馬帝國雄偉歷史與貿易的古幣。",
+                    "呼應英國工業革命與精密機械工藝的象徵。",
+                    "象徵自由、民主與移民文化的紐約精神堡壘。",
+                    "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
+                    "俄羅斯帝國皇室工藝與珠寶設計的極致代表。"
                 ]
             },
             'zh-CN': {
@@ -431,7 +431,7 @@
                 easy: "🍵 轻松模式", easyDesc: "步调悠闲、适合放松",
                 std: "⚖️ 标准模式", stdDesc: "平衡挑战与趣味",
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
-                hell: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
+                hel: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
                 insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 操作与隐私：</b>支持键盘方向键、WASD与触控。使用独一无二的专属代号保障个人隐私。</p><p><b>⭐ 三星评分：</b>每关完成后将依据「是否通关、宝物收集、避开陷阱」给予 1~3 星评价。</p><p style="margin-bottom:0;"><b>↩️ 反悔功能：</b>点击「上一步」按钮可安全撤回上一步走错的路径。</p>`,
                 stationBtn: "💰 前往点数补给站", backCover: "⬅️ 返回主菜单",
@@ -462,21 +462,21 @@
                     "第七站：英国・伦敦", "第八站：美国・纽约", "第九站：澳大利亚・悉尼", "第十站：俄罗斯・莫斯科"
                 ],
                 targets: [
-                    "龙虎塔琉璃珠 🏮", "清水寺桧木御守 ⛩️", "卢浮宫蒙娜丽莎拼图 🖼️",
-                    "法老黄金面具 👑", "雅典娜智慧橄榄枝 🌿", "罗马竞技场古金币 🪙",
+                    "驳二铁件艺术公仔 🤖", "宇治抹茶茶道组 🍵", "塞纳河畔手绘油画 🎨",
+                    "尼罗河莎草纸画卷 📜", "爱琴海蓝白陶壶 🏺", "罗马竞技场古金币 🪙",
                     "大本钟精钢齿轮 ⚙️", "自由女神圣火微雕 🗽", "悉尼港湾大贝壳珍珠 🐚", "克里姆林宫彩蛋宝石 🥚"
                 ],
                 lores: [
-                    "左营莲池潭龙虎塔融合了在地宗教信仰与原住民琉璃珠工艺的文化结晶。",
-                    "京都清水寺象征千年古都木造建筑美学与细緻的枯山水庭园祈福文化。",
-                    "巴黎卢浮宫与蒙娜丽莎见证了欧洲文艺复兴与近代艺术之都的辉煌。",
-                    "埃及吉萨金字塔群与法老黄金面具展现了古代尼罗河文明的顶级工艺。",
-                    "雅典帕德嫩神庙象征西方民主政治、智慧与奥林匹克橄榄枝精神。",
-                    "罗马竞技场古金币见证了地中海古罗马帝国雄伟历史与贸易的辉煌。",
-                    "伦敦大本钟精钢齿轮呼应了英国工业革命与精密机械工艺的伟大象征。",
-                    "纽约自由女神圣火象征自由、民主、多元文化与移民的自由精神堡垒。",
-                    "悉尼港湾大贝壳珍珠结合悉尼歌剧院独特贝壳结构与南半球海洋生态。",
-                    "克里姆林宫法贝热彩蛋宝石是俄罗斯帝国皇室工艺与珠宝设计的极致代表。"
+                    "展现高雄由工业港口转型为当代艺术创意的文创精神。",
+                    "代表日本茶道精神与京都精致细腻的职人生活美学。",
+                    "象征塞纳河畔咖啡馆与印象派画家们的浪漫艺术日常。",
+                    "古代埃及用来记录神话与历史的独特植物纤维纸张。",
+                    "展现基克拉泽斯群岛风情与地中海陶艺装饰艺术。",
+                    "见证地中海罗马帝国雄伟历史与贸易的古币。",
+                    "呼应英国工业革命与精密机械工艺的象征。",
+                    "象征自由、民主与移民文化的纽约精神堡垒。",
+                    "结合悉尼歌剧院独特贝壳结构与南半球海洋生态。",
+                    "俄罗斯帝国皇室工艺与珠宝设计的极致代表。"
                 ]
             },
             'en': {
@@ -516,21 +516,21 @@
                     "Stage 7: UK・London", "Stage 8: USA・New York", "Stage 9: Australia・Sydney", "Stage 10: Russia・Moscow"
                 ],
                 targets: [
-                    "Lotus Tower Bead 🏮", "Kiyomizu Amulet ⛩️", "Louvre Mona Lisa Puzzle 🖼️",
-                    "Pharaoh Golden Mask 👑", "Athena Olive Branch 🌿", "Colosseum Ancient Coin 🪙",
+                    "Pier-2 Iron Art Toy 🤖", "Uji Matcha Tea Set 🍵", "Seine Oil Painting 🎨",
+                    "Nile Papyrus Scroll 📜", "Aegean Ceramic Pot 🏺", "Colosseum Ancient Coin 🪙",
                     "Big Ben Steel Gear ⚙️", "Statue of Liberty Torch 🗽", "Sydney Harbour Pearl 🐚", "Kremlin Faberge Egg 🥚"
                 ],
                 lores: [
-                    "Kaohsiung Lotus Pond Dragon and Tiger Pagodas blend local folk religion with indigenous glass bead arts.",
-                    "Kyoto Kiyomizu-dera symbolizes ancient wooden architecture and meticulous Zen rock garden blessings.",
-                    "Paris Louvre and the Mona Lisa witness the brilliance of the European Renaissance and art capitals.",
-                    "Giza Pyramids and the Pharaoh Golden Mask showcase the apex engineering of the ancient Nile civilization.",
-                    "Athens Parthenon symbolizes Western democracy, wisdom, and the Olympic olive branch spirit.",
-                    "Rome Colosseum ancient coins witness the magnificent history and trade of the Mediterranean Roman Empire.",
-                    "London Big Ben steel gear echoes the industrial revolution and precision mechanical craftsmanship.",
-                    "New York Statue of Liberty torch stands as a universal bastion of freedom, democracy, and immigration.",
-                    "Sydney Harbour pearl combines the iconic Opera House shell architecture with southern marine ecology.",
-                    "Kremlin Faberge egg gem is the ultimate masterpiece of Russian imperial royal craft and jewelry design."
+                    "Showcasing Kaohsiung's transformation from an industrial port to a hub of contemporary creative arts.",
+                    "Representing the spirit of Japanese tea ceremonies and Kyoto's refined artisan lifestyle.",
+                    "Symbolizing the romantic artistic routine of cafes along the Seine and Impressionist painters.",
+                    "Unique plant-fiber paper used by ancient Egyptians to record mythology and history.",
+                    "Showcasing the charm of the Cyclades islands and Mediterranean decorative ceramic art.",
+                    "Ancient coins witnessing the magnificent history and trade of the Mediterranean Roman Empire.",
+                    "Echoing the symbol of the British Industrial Revolution and precision mechanical craftsmanship.",
+                    "Standing as a bastion of freedom, democracy, and immigrant culture in New York.",
+                    "Combining the Sydney Opera House's unique shell structure with southern marine ecology.",
+                    "The ultimate masterpiece of Russian imperial royal craft and jewelry design."
                 ]
             }
         };
@@ -617,6 +617,10 @@
                     opt.innerText = (currentLang === 'en' ? `Level ${i} (${t.levels[i-1].split(': ')[1] || t.levels[i-1]})` : `第 ${i} 關 (${t.levels[i-1]})`);
                 }
             }
+
+            if (isPlaying) {
+                updateUI();
+            }
         }
 
         function selectMode(mode, btnEl) {
@@ -632,7 +636,7 @@
             let btn = document.getElementById('btn-sound-toggle');
             if(btn) {
                 btn.innerText = soundEnabled ? t.tSound : t.tSoundOff;
-                btn.style.backgroundColor = soundEnabled ? "#00796B" : "#616161";
+                btn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
             }
         }
         function initAudio() {
@@ -697,7 +701,7 @@
 
         let currentLevel = 1; let totalScore = 500; let isEventActive = false;
         let maze = [], mazeSize = 9; let playerPos = {x: 1, y: 1}, targetPos = {x: 7, y: 7}; 
-        let currentTarget = {n:"龍虎塔琉璃珠 🏮", s:500, i:"🏮", station:"第一站：臺灣・高雄", knowledge:"左營蓮池潭龍虎塔融合了在地宗教信仰與原住民琉璃珠工藝的文化結晶。"};
+        let currentTarget = {n:"駁二鐵件藝術公仔 🤖", s:500, i:"🤖", station:"第一站：臺灣・高雄", knowledge:"展現高雄由工業港口轉型為當代藝術創意的文創精神。"};
         let bweiShengCount = 0; let pendingGod = '', pendingGodName = '';
 
         const levelScoreList = [500, 800, 1000, 3500, 6000, 10000, 2500, 1500, 2000, 4500];
