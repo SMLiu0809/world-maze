@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 大師不朽完美版</title>
+    <title>世界寶藏迷宮探險 - 說明全面簡潔升級版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -115,7 +115,7 @@
         </div>
         <h1>🏆 世界寶藏迷宮探險 🏆</h1>
         <div class="form-group">
-            <p><strong>請選擇您的性別：</strong></p>
+            <p><b>請選擇您的性別：</b></p>
             <label><input type="radio" name="gender" value="male" checked> 男性 👨</label>
             <label><input type="radio" name="gender" value="female"> 女性 👩</label>
             <br><br>
@@ -136,7 +136,7 @@
                 </select>
             </div>
 
-            <p><strong>點擊選擇您的年齡層：</strong></p>
+            <p><b>點擊選擇您的年齡層：</b></p>
             <input type="hidden" id="selected-age" value="50-59">
             <div id="age-grid" class="age-grid">
                 <button type="button" class="age-btn" onclick="selectAge('0-6', this)">幼兒 (0-6)<br>🌸養生級</button>
@@ -169,25 +169,27 @@
         <div class="footer">國立高雄師範大學 劉世閔 老師設計</div>
     </div>
 
-    <!-- 頁面2：說明 -->
+    <!-- 頁面2：說明（已重新簡潔改寫） -->
     <div id="screen-instructions" class="screen">
-        <h1>📖 遊戲說明與策略法寶</h1>
-        <div style="font-size: clamp(15px, 4vw, 18px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 15px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>起終點絕對鎖定：</b>起點固定在左上角 (1,1)，目標固定在右下角！<br>
-            🔸 <b>第 4 關起隨機出現神話法寶（永久保留）：</b>
+        <h1>📖 遊戲說明與玩法指南</h1>
+        <div style="font-size: clamp(16px, 4.2vw, 19px); text-align: left; line-height: 1.8; background: #E3F2FD; padding: 20px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
+            <p style="margin-top:0;"><b>🎯 遊戲目標：</b>從左上角出發（🤠），避開障礙，抵達右下角尋找每一關的寶藏！</p>
+            <p><b>💰 點數與補給站：</b>若點數不足，可隨時點擊「點數補給站」前往邊疆流放地敲磚賺分，賺夠機票費即可重返原關卡。</p>
+            <p><b>💩 路上奇遇：</b>踩到狗狗大便需付 500 點清潔費；撿到現金（💵）與黃金（🪙）可增加積分。</p>
+            <p><b>🎒 神話法寶（第 4 關起解鎖，永久保留）：</b></p>
             <ul style="margin: 5px 0; padding-left: 20px;">
-                <li>🏺 <b>玉淨瓶</b>：消除病菌/鬼怪！</li>
-                <li>🪄 <b>金箍棒</b>：敲退惡犬！</li>
-                <li>🔗 <b>手銬</b>：逮捕壞人！</li>
-                <li>🧰 <b>拆彈工具箱</b>：解除 2 枚炸彈！</li>
-                <li>🧹 <b>哈利波特掃把</b>：一鍵清掃所有狗狗大便！</li>
+                <li>🏺 <b>玉淨瓶</b>：清除病菌與鬼怪</li>
+                <li>🪄 <b>金箍棒</b>：敲退擋路惡犬</li>
+                <li>🔗 <b>手銬</b>：逮捕壞人</li>
+                <li>🧰 <b>拆彈工具箱</b>：解除炸彈危機</li>
+                <li>🧹 <b>哈利波特掃把</b>：一鍵清掃所有狗狗大便</li>
             </ul>
-            🔸 <b>關卡導覽：</b>過關後可自由選擇上一關或下一關！
+            <p style="margin-bottom:0;"><b>⛩️ 神明庇佑（第 6 關起）：</b>點擊頂部「神通指南」誠心擲筊請神明協助！</p>
         </div>
         <br>
         <button class="btn-large" style="background-color: #F57C00; box-shadow: 0 6px 0 #E65100; width: 90%; max-width: 350px;" onclick="openStationModal()">💰 前往點數補給站</button>
         <br>
-        <button class="btn-large btn-cancel" onclick="showScreen('screen-cover')">⬅️ 返回</button>
+        <button class="btn-large btn-cancel" onclick="showScreen('screen-cover')">⬅️ 返回主選單</button>
         <button class="btn-large" onclick="startGame()">開始探險 🚀</button>
     </div>
 
@@ -353,73 +355,78 @@
     <script>
         function selectAge(age, btnEl) {
             document.querySelectorAll('.age-btn').forEach(b => b.classList.remove('selected'));
-            btnEl.classList.add('selected');
-            document.getElementById('selected-age').value = age;
+            if(btnEl) btnEl.classList.add('selected');
+            let ageInput = document.getElementById('selected-age');
+            if (ageInput) ageInput.value = age;
         }
 
         let audioCtx = null;
         function initAudio() {
-            if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-            if (audioCtx.state === 'suspended') audioCtx.resume();
+            try {
+                if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+            } catch(e) {}
         }
 
         function playSound(type) {
-            if (!audioCtx) return;
-            let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination); let now = audioCtx.currentTime;
-            if (type === 'move') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(600, now);
-                gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-                osc.start(now); osc.stop(now + 0.1);
-            } else if (type === 'bump') {
-                osc.type = 'square'; osc.frequency.setValueAtTime(150, now); osc.frequency.exponentialRampToValueAtTime(50, now + 0.1);
-                gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
-                osc.start(now); osc.stop(now + 0.1);
-            } else if (type === 'item') {
-                osc.type = 'triangle'; osc.frequency.setValueAtTime(400, now); osc.frequency.setValueAtTime(800, now + 0.15);
-                gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
-                osc.start(now); osc.stop(now + 0.3);
-            } else if (type === 'dog') {
-                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(300, now); osc.frequency.linearRampToValueAtTime(200, now + 0.2);
-                gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
-                osc.start(now); osc.stop(now + 0.2);
-            } else if (type === 'cash') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(523.25, now); osc.frequency.setValueAtTime(659.25, now + 0.1);
-                gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
-                osc.start(now); osc.stop(now + 0.2);
-            } else if (type === 'gold') {
-                osc.type = 'triangle'; osc.frequency.setValueAtTime(659.25, now); osc.frequency.setValueAtTime(783.99, now + 0.1); osc.frequency.setValueAtTime(1046.50, now + 0.2);
-                gain.gain.setValueAtTime(0.4, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
-                osc.start(now); osc.stop(now + 0.3);
-            } else if (type === 'poop') {
-                osc.type = 'square'; osc.frequency.setValueAtTime(120, now); osc.frequency.linearRampToValueAtTime(80, now + 0.2);
-                gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
-                osc.start(now); osc.stop(now + 0.2);
-            } else if (type === 'bwei') {
-                osc.type = 'triangle'; osc.frequency.setValueAtTime(800, now);
-                gain.gain.setValueAtTime(0.3, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-                osc.start(now); osc.stop(now + 0.1);
-            } else if (type === 'god') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(440, now); osc.frequency.setValueAtTime(659.25, now + 0.2);
-                gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0, now + 1.5);
-                osc.start(now); osc.stop(now + 1.5);
-            } else if (type === 'work') {
-                osc.type = 'square'; osc.frequency.setValueAtTime(200, now); osc.frequency.exponentialRampToValueAtTime(50, now + 0.1);
-                gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
-                osc.start(now); osc.stop(now + 0.1);
-            } else if (type === 'win') {
-                osc.type = 'sine';
-                [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
-                    let o = audioCtx.createOscillator(); let g = audioCtx.createGain();
-                    o.connect(g); g.connect(audioCtx.destination);
-                    o.type = 'square'; o.frequency.value = freq;
-                    g.gain.setValueAtTime(0.1, now + i*0.1); g.gain.linearRampToValueAtTime(0, now + i*0.1 + 0.2);
-                    o.start(now + i*0.1); o.stop(now + i*0.1 + 0.2);
-                });
-            }
+            try {
+                if (!audioCtx) return;
+                let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination); let now = audioCtx.currentTime;
+                if (type === 'move') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(600, now);
+                    gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+                } else if (type === 'bump') {
+                    osc.type = 'square'; osc.frequency.setValueAtTime(150, now); osc.frequency.exponentialRampToValueAtTime(50, now + 0.1);
+                    gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+                } else if (type === 'item') {
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(400, now); osc.frequency.setValueAtTime(800, now + 0.15);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                    osc.start(now); osc.stop(now + 0.3);
+                } else if (type === 'dog') {
+                    osc.type = 'sawtooth'; osc.frequency.setValueAtTime(300, now); osc.frequency.linearRampToValueAtTime(200, now + 0.2);
+                    gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+                    osc.start(now); osc.stop(now + 0.2);
+                } else if (type === 'cash') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(523.25, now); osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+                    osc.start(now); osc.stop(now + 0.2);
+                } else if (type === 'gold') {
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(659.25, now); osc.frequency.setValueAtTime(783.99, now + 0.1); osc.frequency.setValueAtTime(1046.50, now + 0.2);
+                    gain.gain.setValueAtTime(0.4, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                    osc.start(now); osc.stop(now + 0.3);
+                } else if (type === 'poop') {
+                    osc.type = 'square'; osc.frequency.setValueAtTime(120, now); osc.frequency.linearRampToValueAtTime(80, now + 0.2);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+                    osc.start(now); osc.stop(now + 0.2);
+                } else if (type === 'bwei') {
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(800, now);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+                } else if (type === 'god') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(440, now); osc.frequency.setValueAtTime(659.25, now + 0.2);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0, now + 1.5);
+                    osc.start(now); osc.stop(now + 1.5);
+                } else if (type === 'work') {
+                    osc.type = 'square'; osc.frequency.setValueAtTime(200, now); osc.frequency.exponentialRampToValueAtTime(50, now + 0.1);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+                } else if (type === 'win') {
+                    osc.type = 'sine';
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                        let o = audioCtx.createOscillator(); let g = audioCtx.createGain();
+                        o.connect(g); g.connect(audioCtx.destination);
+                        o.type = 'square'; o.frequency.value = freq;
+                        g.gain.setValueAtTime(0.1, now + i*0.1); g.gain.linearRampToValueAtTime(0, now + i*0.1 + 0.2);
+                        o.start(now + i*0.1); o.stop(now + i*0.1 + 0.2);
+                    });
+                }
+            } catch(e) {}
         }
 
-        function vibrate(pattern) { if (navigator.vibrate) navigator.vibrate(pattern); }
+        function vibrate(pattern) { try { if (navigator.vibrate) navigator.vibrate(pattern); } catch(e) {} }
 
         const MAX_PLAY_TIME = 1800; const REST_DURATION = 600;  
         let sessionPlayTime = 0; let isResting = false; let restStartTime = 0; let isPlaying = false; 
@@ -450,29 +457,30 @@
         };
 
         let userGender = 'male'; let currentLevel = 1; let totalScore = 500; let isEventActive = false;
-        let maze = [], mazeSize = 7; let playerPos = {x: 1, y: 1}, targetPos = {x: 1, y: 1}; let currentTarget = {}, pendingMove = null;
+        let maze = [], mazeSize = 7; let playerPos = {x: 1, y: 1}, targetPos = {x: 5, y: 5}; let currentTarget = {}, pendingMove = null;
         let currentSafePath = [], currentDisplayPath = [], hintActive = false;   
         let currentWorkEarned = 0; let workTargetValue = 500;
         let bweiShengCount = 0; let pendingGod = '', pendingGodName = '';
 
-        const canvas = document.getElementById('mazeCanvas'); const ctx = canvas.getContext('2d');
-
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+            let targetEl = document.getElementById(id);
+            if (targetEl) targetEl.classList.add('active');
         }
 
         function goToInstructions() {
-            userGender = document.querySelector('input[name="gender"]:checked').value;
-            let selectedLv = document.getElementById('start-level-select').value;
-            currentLevel = parseInt(selectedLv) || 1;
+            let genderEl = document.querySelector('input[name="gender"]:checked');
+            userGender = genderEl ? genderEl.value : 'male';
+            let selectedLv = document.getElementById('start-level-select');
+            currentLevel = selectedLv ? (parseInt(selectedLv.value) || 1) : 1;
             showScreen('screen-instructions');
         }
 
         function startGame() {
             initAudio(); sessionPlayTime = 0; isPlaying = true;
             inventory = { bottle: 0, stick: 0, cuffs: 0, expert: 0, broom: 0 };
-            showScreen('screen-game'); loadLevel();
+            showScreen('screen-game'); 
+            setTimeout(() => { loadLevel(); }, 50);
         }
 
         function openGodHelpModal() {
@@ -480,19 +488,23 @@
                 alert("⛩️ 神壇與請神神通將於【第 6 關】正式解鎖！目前請先努力累積點數！");
                 return;
             }
-            document.getElementById('god-help-modal').style.display = 'flex';
+            let modal = document.getElementById('god-help-modal');
+            if (modal) modal.style.display = 'flex';
         }
 
         function closeGodHelpModal() {
-            document.getElementById('god-help-modal').style.display = 'none';
+            let modal = document.getElementById('god-help-modal');
+            if (modal) modal.style.display = 'none';
         }
 
         function openStationModal() {
-            document.getElementById('station-modal').style.display = 'flex';
+            let modal = document.getElementById('station-modal');
+            if (modal) modal.style.display = 'flex';
         }
 
         function closeStationModal() {
-            document.getElementById('station-modal').style.display = 'none';
+            let modal = document.getElementById('station-modal');
+            if (modal) modal.style.display = 'none';
         }
 
         function selectStation(idx) {
@@ -504,8 +516,10 @@
             let st = banishmentStations[idx];
             workTargetValue = st.ticket;
             
-            document.getElementById('ui-banish-location').innerText = "🗺️ 流放地：" + st.name;
-            document.getElementById('work-rule-desc').innerText = `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks} | 機票費：${st.ticket}點`;
+            let locEl = document.getElementById('ui-banish-location');
+            if (locEl) locEl.innerText = "🗺️ 流放地：" + st.name;
+            let ruleEl = document.getElementById('work-rule-desc');
+            if (ruleEl) ruleEl.innerText = `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks} | 機票費：${st.ticket}點`;
             
             isEventActive = true;
             updateWorkUI();
@@ -613,13 +627,14 @@
         }
 
         function updateInventoryUI() {
-            document.getElementById('cnt-bottle').innerText = inventory.bottle;
-            document.getElementById('cnt-stick').innerText = inventory.stick;
-            document.getElementById('cnt-cuffs').innerText = inventory.cuffs;
-            document.getElementById('cnt-expert').innerText = inventory.expert;
-            document.getElementById('cnt-broom').innerText = inventory.broom;
+            let bEl = document.getElementById('cnt-bottle'); if(bEl) bEl.innerText = inventory.bottle;
+            let sEl = document.getElementById('cnt-stick'); if(sEl) sEl.innerText = inventory.stick;
+            let cEl = document.getElementById('cnt-cuffs'); if(cEl) cEl.innerText = inventory.cuffs;
+            let eEl = document.getElementById('cnt-expert'); if(eEl) eEl.innerText = inventory.expert;
+            let brEl = document.getElementById('cnt-broom'); if(brEl) brEl.innerText = inventory.broom;
             
-            document.getElementById('inventoryBar').style.display = (currentLevel >= 4) ? 'flex' : 'none';
+            let barEl = document.getElementById('inventoryBar');
+            if (barEl) barEl.style.display = (currentLevel >= 4) ? 'flex' : 'none';
         }
 
         function loadLevel() {
@@ -655,9 +670,7 @@
             updateUI(); 
             updateInventoryUI();
             
-            // -------------------------------------------------------------
-            // 🛡️ 絕對鐵壁防護：徹底修復起點與終點被覆蓋或亂擺的問題
-            // -------------------------------------------------------------
+            // 安全建構迷宮
             maze = Array(mazeSize).fill().map(() => Array(mazeSize).fill(1)); 
             function carve(x, y) {
                 maze[y][x] = 0; let dirs = [[0, -2], [0, 2], [-2, 0], [2, 0]].sort(() => Math.random() - 0.5);
@@ -668,11 +681,9 @@
             }
             carve(1, 1); 
             
-            // 強制設定起點與終點座標
             playerPos = {x: 1, y: 1}; 
             targetPos = {x: mazeSize - 2, y: mazeSize - 2};
             
-            // 將起點 (1,1) 與終點 (mazeSize-2, mazeSize-2) 以及周遭強制設為乾淨通道 (0)
             maze[1][1] = 0;
             maze[1][2] = 0;
             maze[2][1] = 0;
@@ -680,34 +691,18 @@
             maze[mazeSize - 2][mazeSize - 3] = 0;
             maze[mazeSize - 3][mazeSize - 2] = 0;
 
-            let safePathSet = new Set(); let queue = [{x: 1, y: 1, path: ["1,1"]}];
-            let visited = Array(mazeSize).fill().map(() => Array(mazeSize).fill(false)); visited[1][1] = true;
-
-            while (queue.length > 0) {
-                let curr = queue.shift();
-                if (curr.x === mazeSize - 2 && curr.y === mazeSize - 2) { curr.path.forEach(p => safePathSet.add(p)); currentSafePath = Array.from(safePathSet); break; }
-                for (let d of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
-                    let nx = curr.x + d[0], ny = curr.y + d[1];
-                    if (nx > 0 && nx < mazeSize-1 && ny > 0 && ny < mazeSize-1 && maze[ny][nx] === 0 && !visited[ny][nx]) {
-                        visited[ny][nx] = true; queue.push({x: nx, y: ny, path: [...curr.path, `${nx},${ny}`]});
-                    }
-                }
-            }
-
-            let onSafeSpaces = [], offSafeSpaces = [];
+            let offSafeSpaces = [];
             for (let y = 1; y < mazeSize - 1; y++) {
                 for (let x = 1; x < mazeSize - 1; x++) {
-                    // 絕對保護起點與終點周遭區域不被任何怪物或道具占用
                     if (maze[y][x] === 0 && !((x <= 2 && y <= 2) || (x >= mazeSize - 3 && y >= mazeSize - 3))) {
-                        if (safePathSet.has(`${x},${y}`)) onSafeSpaces.push({x, y}); else offSafeSpaces.push({x, y});
+                        offSafeSpaces.push({x, y});
                     }
                 }
             }
-            onSafeSpaces.sort(() => Math.random() - 0.5); offSafeSpaces.sort(() => Math.random() - 0.5);
+            offSafeSpaces.sort(() => Math.random() - 0.5);
 
             if (currentLevel >= 2) {
                 let dogCount = Math.floor(currentLevel * 1.5); let placed = 0;
-                if (onSafeSpaces.length > 0) { let p = onSafeSpaces.pop(); maze[p.y][p.x] = 2; placed++; }
                 while(placed < dogCount && offSafeSpaces.length > 0) { let p = offSafeSpaces.pop(); maze[p.y][p.x] = 2; placed++; }
             }
             if (currentLevel >= 5) {
@@ -738,51 +733,54 @@
                 if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 13; 
             }
 
-            // 再次保證起終點絕對乾淨，絕不生成任何東西
             maze[playerPos.y][playerPos.x] = 0;
             maze[targetPos.y][targetPos.x] = 0;
 
-            if(canvas.width !== 500) canvas.width = 500;
-            if(canvas.height !== 500) canvas.height = 500;
-            drawMaze();
+            let canvasEl = document.getElementById('mazeCanvas');
+            if (canvasEl) {
+                if(canvasEl.width !== 500) canvasEl.width = 500;
+                if(canvasEl.height !== 500) canvasEl.height = 500;
+                drawMaze();
+            }
 
             levelStartTime = Date.now(); 
         }
 
         function drawMaze() {
-            let cellSize = canvas.width / mazeSize; ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let canvasEl = document.getElementById('mazeCanvas');
+            if (!canvasEl) return;
+            let ctxEl = canvasEl.getContext('2d');
+            let cellSize = canvasEl.width / mazeSize; 
+            ctxEl.clearRect(0, 0, canvasEl.width, canvasEl.height);
             for (let y = 0; y < mazeSize; y++) {
                 for (let x = 0; x < mazeSize; x++) {
                     if (maze[y][x] === 1) {
-                        ctx.fillStyle = '#8D6E63'; ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
-                        ctx.strokeStyle = '#5D4037'; ctx.lineWidth = 2; ctx.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
-                    } else { ctx.fillStyle = '#FFF8E1'; ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize); }
+                        ctxEl.fillStyle = '#8D6E63'; ctxEl.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                        ctxEl.strokeStyle = '#5D4037'; ctxEl.lineWidth = 2; ctxEl.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                    } else { ctxEl.fillStyle = '#FFF8E1'; ctxEl.fillRect(x * cellSize, y * cellSize, cellSize, cellSize); }
                 }
             }
-            if (hintActive && currentDisplayPath.length > 0) {
-                ctx.fillStyle = 'rgba(139, 195, 74, 0.5)';
-                for (let pos of currentDisplayPath) { let parts = pos.split(','); ctx.fillRect(parseInt(parts[0]) * cellSize, parseInt(parts[1]) * cellSize, cellSize, cellSize); }
-            }
-            ctx.font = `${cellSize * 0.85}px Arial`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctxEl.font = `${cellSize * 0.85}px Arial`; ctxEl.textAlign = 'center'; ctxEl.textBaseline = 'middle';
             for (let y = 0; y < mazeSize; y++) {
                 for (let x = 0; x < mazeSize; x++) {
-                    if (maze[y][x] === 2) ctx.fillText("🐺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 3) ctx.fillText("💣", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 4) ctx.fillText("👻", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 5) ctx.fillText("🦹", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 6) ctx.fillText("💩", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 7) ctx.fillText("💵", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 8) ctx.fillText("🪙", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 9) ctx.fillText("🏺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 10) ctx.fillText("🪄", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 11) ctx.fillText("🔗", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 12) ctx.fillText("🧰", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                    if (maze[y][x] === 13) ctx.fillText("🧹", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 2) ctxEl.fillText("🐺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 3) ctxEl.fillText("💣", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 4) ctxEl.fillText("👻", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 5) ctxEl.fillText("🦹", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 6) ctxEl.fillText("💩", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 7) ctxEl.fillText("💵", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 8) ctxEl.fillText("🪙", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 9) ctxEl.fillText("🏺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 10) ctxEl.fillText("🪄", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 11) ctx.fillText?.("🔗", (x + 0.5) * cellSize, (y + 0.5) * cellSize) || ctxEl.fillText("🔗", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 12) ctxEl.fillText("🧰", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    if (maze[y][x] === 13) ctxEl.fillText("🧹", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                 }
             }
-            // 嚴格渲染目標與玩家在各自固定坐標
-            ctx.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
-            ctx.fillText("🤠", (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
+            if(currentTarget && currentTarget.i) {
+                ctxEl.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
+            }
+            ctxEl.fillText("🤠", (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
         }
 
         function handleMove(dx, dy) {
@@ -912,13 +910,16 @@
 
         function showModal(text, type) {
             isEventActive = true;
-            document.getElementById('event-text').innerHTML = text;
-            document.getElementById('btn-group-choice').style.display = (type === 'choice') ? 'block' : 'none';
-            document.getElementById('event-modal').style.display = 'flex';
+            let txtEl = document.getElementById('event-text'); if(txtEl) txtEl.innerHTML = text;
+            let choiceEl = document.getElementById('btn-group-choice');
+            if(choiceEl) choiceEl.style.display = (type === 'choice') ? 'block' : 'none';
+            let modalEl = document.getElementById('event-modal');
+            if(modalEl) modalEl.style.display = 'flex';
         }
 
         function resolveEvent(payScore) {
-            document.getElementById('event-modal').style.display = 'none'; 
+            let modalEl = document.getElementById('event-modal');
+            if(modalEl) modalEl.style.display = 'none'; 
             if (payScore) {
                 if (totalScore >= 300) { 
                     totalScore -= 300; 
@@ -938,7 +939,8 @@
         }
 
         window.addEventListener('keydown', function(e) {
-            if (document.getElementById('screen-game').classList.contains('active')) {
+            let gameScreen = document.getElementById('screen-game');
+            if (gameScreen && gameScreen.classList.contains('active')) {
                 if (['ArrowUp', 'w', 'W'].includes(e.key)) handleMove(0, -1);
                 if (['ArrowDown', 's', 'S'].includes(e.key)) handleMove(0, 1);
                 if (['ArrowLeft', 'a', 'A'].includes(e.key)) handleMove(-1, 0);
@@ -964,23 +966,28 @@
                 let title = titles[Math.min(currentLevel - 1, titles.length - 1)];
                 
                 let msg = `🎉 找到【${currentTarget.n}】！\n🏆 稱號：【${title}】\n⏱️ 花費 ${timeUsed} 秒\n💰 獲得積分：${levelScore} 點\n總分：${totalScore} 點`;
-                document.getElementById('win-message').innerText = msg;
+                let msgEl = document.getElementById('win-message'); if(msgEl) msgEl.innerText = msg;
                 
-                document.getElementById('btn-prev-level').style.display = (currentLevel > 1) ? 'inline-block' : 'none';
+                let prevBtn = document.getElementById('btn-prev-level');
+                if(prevBtn) prevBtn.style.display = (currentLevel > 1) ? 'inline-block' : 'none';
                 let nextBtn = document.getElementById('btn-next-level');
-                if (currentLevel < 10) {
-                    nextBtn.innerText = "➡️ 下一關";
-                    nextBtn.style.display = 'inline-block';
-                } else {
-                    nextBtn.innerText = "🏆 全破返回";
+                if (nextBtn) {
+                    if (currentLevel < 10) {
+                        nextBtn.innerText = "➡️ 下一關";
+                        nextBtn.style.display = 'inline-block';
+                    } else {
+                        nextBtn.innerText = "🏆 全破返回";
+                    }
                 }
                 
-                document.getElementById('win-modal').style.display = 'flex';
+                let winModal = document.getElementById('win-modal');
+                if(winModal) winModal.style.display = 'flex';
             }
         }
 
         function goToPrevLevel() {
-            document.getElementById('win-modal').style.display = 'none';
+            let winModal = document.getElementById('win-modal');
+            if(winModal) winModal.style.display = 'none';
             if (currentLevel > 1) {
                 currentLevel--;
             }
@@ -988,7 +995,8 @@
         }
 
         function goToNextLevel() {
-            document.getElementById('win-modal').style.display = 'none';
+            let winModal = document.getElementById('win-modal');
+            if(winModal) winModal.style.display = 'none';
             if (currentLevel < 10) {
                 currentLevel++;
                 loadLevel();
