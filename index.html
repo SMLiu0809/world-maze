@@ -35,17 +35,17 @@
         input[type="radio"], select, input[type="text"] { transform: scale(1.1); margin: 0 4px; accent-color: #FF9800; cursor: pointer;}
         input[type="text"] { padding: 6px; font-size: 15px; border-radius: 8px; border: 2px solid #FFB300; width: 65%; text-align: center; }
 
-        .age-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin-top: 12px;
+        .mode-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px;
         }
-        .age-btn {
-            background-color: #FFFFFF; border: 2px solid #FFB300; border-radius: 10px;
-            padding: 8px 4px; font-size: clamp(13px, 3.2vw, 16px); font-weight: bold;
-            color: #3E2723; cursor: pointer; transition: 0.2s; box-shadow: 0 3px 0 #FFE082; line-height: 1.3;
+        .mode-btn {
+            background-color: #FFFFFF; border: 2px solid #FFB300; border-radius: 12px;
+            padding: 12px 8px; font-size: clamp(14px, 3.8vw, 18px); font-weight: bold;
+            color: #3E2723; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 0 #FFE082; line-height: 1.4;
         }
-        .age-btn.selected {
+        .mode-btn.selected {
             background-color: #FF9800; color: #FFFFFF; border-color: #E65100;
-            box-shadow: 0 0 0 #E65100; transform: translateY(3px);
+            box-shadow: 0 0 0 #E65100; transform: translateY(4px);
         }
 
         .status-bar { 
@@ -139,19 +139,13 @@
                 </select>
             </div>
 
-            <p id="lbl-age"><b>點擊選擇您的年齡層：</b></p>
-            <input type="hidden" id="selected-age" value="50-59">
-            <div id="age-grid" class="age-grid">
-                <button type="button" class="age-btn" onclick="selectAge('0-6', this)">幼兒 (0-6)</button>
-                <button type="button" class="age-btn" onclick="selectAge('7-12', this)">兒童 (7-12)</button>
-                <button type="button" class="age-btn" onclick="selectAge('13-18', this)">青少年 (13-18)</button>
-                <button type="button" class="age-btn" onclick="selectAge('19-29', this)">青年/大學</button>
-                <button type="button" class="age-btn" onclick="selectAge('30-39', this)">壯年 (30-39)</button>
-                <button type="button" class="age-btn" onclick="selectAge('40-49', this)">中年 (40-49)</button>
-                <button type="button" class="age-btn selected" onclick="selectAge('50-59', this)">熟齡 (50-59)</button>
-                <button type="button" class="age-btn" onclick="selectAge('60-69', this)">樂齡 (60-69)</button>
-                <button type="button" class="age-btn" onclick="selectAge('70-79', this)">高齡 (70-79)</button>
-                <button type="button" class="age-btn" onclick="selectAge('80+', this)">耆老 (80+)</button>
+            <p id="lbl-mode"><b>選擇遊戲模式：</b></p>
+            <input type="hidden" id="selected-mode" value="standard">
+            <div id="mode-grid" class="mode-grid">
+                <button type="button" class="mode-btn" onclick="selectMode('easy', this)"><span id="m-easy">🍵 輕鬆模式</span><br><span style="font-size:12px; font-weight:normal;">步調悠閒、適合放鬆</span></button>
+                <button type="button" class="mode-btn selected" onclick="selectMode('standard', this)"><span id="m-std">⚖️ 標準模式</span><br><span style="font-size:12px; font-weight:normal;">平衡挑戰與趣味</span></button>
+                <button type="button" class="mode-btn" onclick="selectMode('challenge', this)"><span id="m-cha">🎯 挑戰模式</span><br><span style="font-size:12px; font-weight:normal;">刁鑽迷宮、高手過招</span></button>
+                <button type="button" class="mode-btn" onclick="selectMode('hell', this)"><span id="m-hel">🔥 地獄模式</span><br><span style="font-size:12px; font-weight:normal;">極致難關、頂級榮耀</span></button>
             </div>
         </div>
         <button id="btn-instructions" class="btn-large" style="background-color: #FF9800; box-shadow: 0 5px 0 #E65100;" onclick="goToInstructions()">遊戲說明 📖</button>
@@ -333,7 +327,8 @@
         const i18n = {
             'zh-TW': {
                 title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號 (保障隱私)：", gender: "請選擇您的性別：",
-                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 測試選關起始工具：", age: "點擊選擇您的年齡層：",
+                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 測試選關起始工具：", modeLabel: "選擇遊戲模式：",
+                easy: "🍵 輕鬆模式", std: "⚖️ 標準模式", cha: "🎯 挑戰模式", hel: "🔥 地獄模式",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 五階段大師版遊戲說明",
                 insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 操作與隱私：</b>支援鍵盤方向鍵、WASD與觸控。使用獨一無二的專屬代號保障個人隱私。</p><p><b>⭐ 三星評分：</b>每關完成後將依據「是否通關、寶物收集、避開陷阱」給予 1~3 星評價。</p><p><b>↩️ 反悔功能：</b>點擊「上一步」按鈕可安全撤回上一步走錯的路徑。</p><p style="margin-bottom:0;"><b>⛩️ 擲筊與補給站：</b>第 6 關解鎖神壇擲筊動畫；點數不足可前往流放補給站賺取機票費！</p>`,
                 stationBtn: "💰 前往點數補給站", backCover: "⬅️ 返回主選單",
@@ -348,7 +343,8 @@
             },
             'zh-CN': {
                 title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (保障隐私)：", gender: "请选择您的性别：",
-                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 测试选关起始工具：", age: "点击选择您的年龄层：",
+                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 测试选关起始工具：", modeLabel: "选择游戏模式：",
+                easy: "🍵 轻松模式", std: "⚖️ 标准模式", cha: "🎯 挑战模式", hel: "🔥 地狱模式",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 五阶段大师版游戏说明",
                 insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 操作与隐私：</b>支持键盘方向键、WASD与触控。使用独一无二的专属代号保障个人隐私。</p><p><b>⭐ 三星评分：</b>每关完成后将依据「是否通关、宝物收集、避开陷阱」给予 1~3 星评价。</p><p><b>↩️ 反悔功能：</b>点击「上一步」按钮可安全撤回上一步走错的路径。</p><p style="margin-bottom:0;"><b>⛩️ 掷筊与补给站：</b>第 6 关解锁神坛掷筊动画；点数不足可前往流放补给站赚取机票费！</p>`,
                 stationBtn: "💰 前往点数补给站", backCover: "⬅️ 返回主菜单",
@@ -363,7 +359,8 @@
             },
             'en': {
                 title: "🏆 World Treasure Maze Adventure 🏆", nickname: "Player ID / Unique Handle:", gender: "Select Gender:",
-                male: "Male 👨", female: "Female 👩", testTool: "🛠️ Level Select Tool:", age: "Select Age Group:",
+                male: "Male 👨", female: "Female 👩", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode:",
+                easy: "🍵 Casual", std: "⚖️ Standard", cha: "🎯 Challenge", hel: "🔥 Hell",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions",
                 insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Controls & Privacy:</b> Supports arrow keys, WASD, touch gestures, and unique privacy-friendly handles.</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars based on completion, treasure collection, and trap avoidance.</p><p><b>↩️ Undo:</b> Use the undo button to safely step back.</p>`,
                 stationBtn: "💰 Point Supply Station", backCover: "⬅️ Main Menu",
@@ -391,7 +388,13 @@
             document.getElementById('opt-male').innerText = t.male;
             document.getElementById('opt-female').innerText = t.female;
             document.getElementById('lbl-test-tool').innerText = t.testTool;
-            document.getElementById('lbl-age').innerHTML = `<b>${t.age}</b>`;
+            document.getElementById('lbl-mode').innerHTML = `<b>${t.modeLabel}</b>`;
+            
+            document.getElementById('m-easy').innerText = t.easy;
+            document.getElementById('m-std').innerText = t.std;
+            document.getElementById('m-cha').innerText = t.cha;
+            document.getElementById('m-hel').innerText = t.hel;
+
             document.getElementById('btn-instructions').innerText = t.instructions;
             document.getElementById('ins-title').innerText = t.insTitle;
             document.getElementById('ins-desc').innerHTML = t.insDesc;
@@ -425,10 +428,10 @@
             document.getElementById('cert-btn').innerText = t.certBtn;
         }
 
-        function selectAge(age, btnEl) {
-            document.querySelectorAll('.age-btn').forEach(b => b.classList.remove('selected'));
+        function selectMode(mode, btnEl) {
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
             if(btnEl) btnEl.classList.add('selected');
-            document.getElementById('selected-age').value = age;
+            document.getElementById('selected-mode').value = mode;
         }
 
         let audioCtx = null; let soundEnabled = true;
@@ -490,7 +493,7 @@
             { name: '永州', reward: 120, maxClicks: 15, ticket: 1100 },
             { name: '寧古塔', reward: 100, maxClicks: 20, ticket: 1300 }
         ];
-        let currentStationIndex = 0; let currentStationClicks = 0; let currentWorkEarned = 0; let workTargetValue = 500;
+        let currentStationIndex = 0; let currentStationClicks = 0; let currentWorkEarned = 0; workTargetValue = 500;
 
         const godsData = {
             'tudigong': { cost: 300, n_tw: '土地公' },
@@ -599,7 +602,12 @@
             trapHitThisLevel = false; treasureCollectedThisLevel = false;
             document.getElementById('undo-count').innerText = undoCountLeft;
 
-            mazeSize = 9; 
+            let mode = document.getElementById('selected-mode').value;
+            if (mode === 'easy') mazeSize = 7;
+            else if (mode === 'standard') mazeSize = 9;
+            else if (mode === 'challenge') mazeSize = 11;
+            else if (mode === 'hell') mazeSize = 13;
+
             let d = levelDataMap[Math.min(currentLevel - 1, levelDataMap.length - 1)];
             currentTarget = { n: d.target, s: d.score, i: d.icon, station: d.station, knowledge: d.knowledge };
 
