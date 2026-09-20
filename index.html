@@ -277,33 +277,33 @@
     <!-- 選擇流放地彈跳視窗 -->
     <div id="station-modal">
         <div class="modal-content">
-            <h2 id="station-title" style="color: #D84315; margin-top: 0;">💰 選擇流放地與補給站</h2>
-            <p id="station-desc" style="font-size: 14px; color: #555;">點數不足時，選擇流放地敲磚賺取機票費[cite: 1]：</p>
+            <h2 id="station-modal-title" style="color: #D84315; margin-top: 0;">💰 選擇流放地與補給站</h2>
+            <p id="station-modal-desc" style="font-size: 14px; color: #555;">點數不足時，選擇流放地敲磚賺取機票費：</p>
             <div style="display: flex; flex-direction: column; gap: 8px; margin: 12px 0;">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #4CAF50; font-size: 15px;" onclick="selectStation(0)">🏙️ 潮州 (近)｜每敲200/限5次｜機票500</button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #8BC34A; font-size: 15px;" onclick="selectStation(1)">🏡 惠州 (二)｜每敲180/限7次｜機票700</button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF9800; font-size: 15px;" onclick="selectStation(2)">🌴 儋州 (三)｜每敲150/限10次｜機票900</button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF5722; font-size: 15px;" onclick="selectStation(3)">⛰️ 永州 (四)｜每敲120/限15次｜機票1100</button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #9C27B0; font-size: 15px;" onclick="selectStation(4)">❄️ 寧古塔 (遠)｜每敲100/限20次｜機票1300</button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #4CAF50; font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🏙️ 潮州 (近)｜每敲200/限5次｜機票500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #8BC34A; font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🏡 惠州 (二)｜每敲180/限7次｜機票700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF9800; font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🌴 儋州 (三)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #FF5722; font-size: 15px;" onclick="selectStation(3)"><span id="st-3">⛰️ 永州 (四)｜每敲120/限15次｜機票1100</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background-color: #9C27B0; font-size: 15px;" onclick="selectStation(4)"><span id="st-4">❄️ 寧古塔 (遠)｜每敲100/限20次｜機票1300</span></button>
             </div>
-            <button id="station-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 4px;" onclick="closeStationModal()">取消返回</button>
+            <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 4px;" onclick="closeStationModal()">取消返回</button>
         </div>
     </div>
 
     <!-- 幫助與神通指南彈跳視窗 -->
     <div id="god-help-modal">
         <div class="modal-content">
-            <h2 id="god-title" style="color: #D84315; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
-            <p id="god-desc" style="font-size: 14px; color: #555;">第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神[cite: 1]！</p>
+            <h2 id="god-modal-title" style="color: #D84315; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
+            <p id="god-modal-desc" style="font-size: 14px; color: #555;">第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！</p>
             <div style="display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin: 12px 0;">
-                <button style="background-color: #8D6E63; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('tudigong')">🏮土地公(-300)</button>
-                <button style="background-color: #E53935; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('wen')">⚔️溫王爺(-500)</button>
-                <button style="background-color: #1E88E5; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('mazu')">🌊媽祖(-1000)</button>
-                <button style="background-color: #4CAF50; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('guanyin')">🌿觀世音(-1500)</button>
-                <button style="background-color: #9C27B0; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('yaoshifo')">🪷藥師佛(-2000)</button>
-                <button style="flex: 1 1 100%; background: linear-gradient(45deg, #FF6D00, #FFD600); color: #3E2723; padding: 8px; border-radius: 10px; border: 2px solid #E65100; font-weight: bold; cursor: pointer;" onclick="startGodBwei('supreme')">🌟玉皇大帝 (全清場+指路 / -5000)</button>
+                <button style="background-color: #8D6E63; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('tudigong')"><span id="g-tudi">🏮土地公(-300)</span></button>
+                <button style="background-color: #E53935; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('wen')"><span id="g-wen">⚔️溫王爺(-500)</span></button>
+                <button style="background-color: #1E88E5; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('mazu')"><span id="g-mazu">🌊媽祖(-1000)</span></button>
+                <button style="background-color: #4CAF50; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('guanyin')"><span id="g-guanyin">🌿觀世音(-1500)</span></button>
+                <button style="background-color: #9C27B0; flex: 1 1 30%; padding: 8px; border-radius: 10px; color: white; border: none; font-weight: bold; cursor: pointer;" onclick="startGodBwei('yaoshifo')"><span id="g-yaoshi">🪷藥師佛(-2000)</span></button>
+                <button style="flex: 1 1 100%; background: linear-gradient(45deg, #FF6D00, #FFD600); color: #3E2723; padding: 8px; border-radius: 10px; border: 2px solid #E65100; font-weight: bold; cursor: pointer;" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟玉皇大帝 (全清場+指路 / -5000)</span></button>
             </div>
-            <button id="god-close" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeGodHelpModal()">關閉指南</button>
+            <button id="god-modal-close" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeGodHelpModal()">關閉指南</button>
         </div>
     </div>
 
@@ -343,6 +343,17 @@
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
                 nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
                 winTitle: "🎉 恭喜通關！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
+                stations: [
+                    "🏙️ 潮州 (近)｜每敲200/限5次｜機票500",
+                    "🏡 惠州 (二)｜每敲180/限7次｜機票700",
+                    "🌴 儋州 (三)｜每敲150/限10次｜機票900",
+                    "⛰️ 永州 (四)｜每敲120/限15次｜機票1100",
+                    "❄️ 寧古塔 (遠)｜每敲100/限20次｜機票1300"
+                ],
+                gods: [
+                    "🏮土地公(-300)", "⚔️溫王爺(-500)", "🌊媽祖(-1000)", 
+                    "🌿觀世音(-1500)", "🪷藥師佛(-2000)", "🌟玉皇大帝 (全清場+指路 / -5000)"
+                ],
                 levels: [
                     "第一站：臺灣・高雄", "第二站：日本・京都", "第三站：法國・巴黎",
                     "第四站：埃及・吉薩", "第五站：希臘・雅典", "第六站：義大利・羅馬",
@@ -381,6 +392,17 @@
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
                 nicknameTip: "💡 支持中英文、数字，最多 12 码，系统将自动加上专属识别码",
                 winTitle: "🎉 恭喜通关！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
+                stations: [
+                    "🏙️ 潮州 (近)｜每敲200/限5次｜机票500",
+                    "🏡 惠州 (二)｜每敲180/限7次｜机票700",
+                    "🌴 儋州 (三)｜每敲150/限10次｜机票900",
+                    "⛰️ 永州 (四)｜每敲120/限15次｜机票1100",
+                    "❄️ 宁古塔 (远)｜每敲100/限20次｜机票1300"
+                ],
+                gods: [
+                    "🏮土地公(-300)", "⚔️温王爷(-500)", "🌊妈祖(-1000)", 
+                    "🌿观世音(-1500)", "🪷药师佛(-2000)", "🌟玉皇大帝 (全清场+指路 / -5000)"
+                ],
                 levels: [
                     "第一站：台湾・高雄", "第二站：日本・京都", "第三站：法国・巴黎",
                     "第四站：埃及・吉萨", "第五站：希腊・雅典", "第六站：意大利・罗马",
@@ -419,6 +441,17 @@
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
                 nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
                 winTitle: "🎉 Level Completed!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
+                stations: [
+                    "🏙️ Chaozhou (Near) | 200pts/5max | Ticket: 500",
+                    "🏡 Huizhou (II) | 180pts/7max | Ticket: 700",
+                    "🌴 Danzhou (III) | 150pts/10max | Ticket: 900",
+                    "⛰️ Yongzhou (IV) | 120pts/15max | Ticket: 1100",
+                    "❄️ Ningut (Far) | 100pts/20max | Ticket: 1300"
+                ],
+                gods: [
+                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-500)", "🌊Mazu (-1000)", 
+                    "🌿Guanyin (-1500)", "🪷Medicine Buddha (-2000)", "🌟Jade Emperor (Clear All / -5000)"
+                ],
                 levels: [
                     "Stage 1: Taiwan・Kaohsiung", "Stage 2: Japan・Kyoto", "Stage 3: France・Paris",
                     "Stage 4: Egypt・Giza", "Stage 5: Greece・Athens", "Stage 6: Italy・Rome",
@@ -484,16 +517,26 @@
             document.getElementById('p-home').innerText = t.pHome;
             document.getElementById('knowledge-title').innerText = t.knowTitle;
             document.getElementById('k-close').innerText = t.kClose;
-            document.getElementById('station-title').innerText = t.stationTitle;
-            document.getElementById('station-desc').innerText = t.stationDesc;
-            document.getElementById('station-cancel').innerText = t.stationCancel;
-            document.getElementById('god-title').innerText = t.godTitle;
-            document.getElementById('god-desc').innerText = t.godDesc;
-            document.getElementById('god-close').innerText = t.godClose;
-            document.getElementById('bwei-title').innerText = t.bweiTitle;
-            document.getElementById('bwei-rule').innerText = t.bweiRule;
-            document.getElementById('bwei-throw-btn').innerText = t.bweiBtn;
-            document.getElementById('bwei-cancel-btn').innerText = t.bweiCancel;
+
+            // 補給站與流放地內頁
+            document.getElementById('station-modal-title').innerText = (lang === 'en' ? "💰 Select Banishment Station" : (lang === 'zh-CN' ? "💰 选择流放地与补给站" : "💰 選擇流放地與補給站"));
+            document.getElementById('station-modal-desc').innerText = (lang === 'en' ? "Earn tickets by tapping at supply stations:" : (lang === 'zh-CN' ? "点数不足时，选择流放地敲砖赚取机票费：" : "點數不足時，選擇流放地敲磚賺取機票費："));
+            document.getElementById('station-modal-cancel').innerText = (lang === 'en' ? "Cancel" : (lang === 'zh-CN' ? "取消返回" : "取消返回"));
+            for(let i=0; i<5; i++) {
+                document.getElementById('st-' + i).innerText = t.stations[i];
+            }
+
+            // 神通指南內頁
+            document.getElementById('god-modal-title').innerText = (lang === 'en' ? "⛩️ Divine Guidance & Prayer" : (lang === 'zh-CN' ? "⛩️ 神通指南与请神面板" : "⛩️ 神通指南與請神面板"));
+            document.getElementById('god-modal-desc').innerText = (lang === 'en' ? "Unlocked at Level 6. Pray for divine assistance!" : (lang === 'zh-CN' ? "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！" : "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！"));
+            document.getElementById('god-modal-close').innerText = (lang === 'en' ? "Close Guide" : (lang === 'zh-CN' ? "关闭指南" : "關閉指南"));
+            document.getElementById('g-tudi').innerText = t.gods[0];
+            document.getElementById('g-wen').innerText = t.gods[1];
+            document.getElementById('g-mazu').innerText = t.gods[2];
+            document.getElementById('g-guanyin').innerText = t.gods[3];
+            document.getElementById('g-yaoshi').innerText = t.gods[4];
+            document.getElementById('g-supreme').innerText = t.gods[5];
+
             document.getElementById('cert-title').innerText = t.certTitle;
             document.getElementById('cert-btn').innerText = t.certBtn;
 
@@ -640,7 +683,7 @@
 
         function openGodHelpModal() {
             if (currentLevel < 6) {
-                alert(currentLang === 'en' ? "⛩️ Divine Guidance unlocks at Level 6!" : "⛩️ 神壇與請神神通將於【第 6 關】正式解鎖！[cite: 1]");
+                alert(currentLang === 'en' ? "⛩️ Divine Guidance unlocks at Level 6!" : "⛩️ 神壇與請神神通將於【第 6 關】正式解鎖！");
                 return;
             }
             document.getElementById('god-help-modal').style.display = 'flex';
@@ -655,7 +698,8 @@
             currentStationIndex = idx; currentStationClicks = 0; currentWorkEarned = 0;
             let st = banishmentStations[idx];
             workTargetValue = st.ticket;
-            document.getElementById('ui-banish-location').innerText = "🗺️ " + (currentLang === 'en' ? "Station: " : "流放地：") + st.name;
+            let stName = i18n[currentLang].stations[idx].split(' ')[1] || st.name;
+            document.getElementById('ui-banish-location').innerText = "🗺️ " + (currentLang === 'en' ? "Station: " : "流放地：") + stName;
             isEventActive = true;
             updateWorkUI();
             showScreen('screen-work');
@@ -955,7 +999,9 @@
 
         function startGodBwei(godType) {
             closeGodHelpModal();
-            pendingGod = godType; pendingGodName = godsData[godType].n_tw;
+            pendingGod = godType; 
+            let godIdx = Object.keys(godsData).indexOf(godType);
+            pendingGodName = i18n[currentLang].gods[godIdx] || godsData[godType].n_tw;
             isEventActive = true; bweiShengCount = 0;
             let pTitle = (currentLang === 'en' ? "🙏 Praying to " + pendingGodName : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName));
             document.getElementById('bwei-title').innerText = pTitle;
