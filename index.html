@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 起終點絕對鎖定版</title>
+    <title>世界寶藏迷宮探險 - 大師極致完美版</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
@@ -120,15 +120,14 @@
             <label><input type="radio" name="gender" value="female"> 女性 👩</label>
             <br><br>
             
-            <!-- 關卡快速選擇器 -->
             <div style="margin: 15px 0; background: #FFE082; padding: 12px; border-radius: 12px; border: 2px solid #FFA000;">
                 <label for="start-level-select" style="font-weight: bold; color: #E65100;">🛠️ 測試選關起始工具：</label>
                 <select id="start-level-select" style="font-size: 18px; padding: 5px 10px; border-radius: 8px; border: 2px solid #E65100; background: white; font-weight: bold;">
                     <option value="1" selected>第 1 關起玩</option>
                     <option value="2">第 2 關起玩</option>
                     <option value="3">第 3 關起玩</option>
-                    <option value="4">第 4 關起玩 (起終點鎖定測試)</option>
-                    <option value="5">第 5 關起玩 (起終點鎖定測試)</option>
+                    <option value="4">第 4 關起玩</option>
+                    <option value="5">第 5 關起玩</option>
                     <option value="6">第 6 關起玩 (神壇解鎖)</option>
                     <option value="7">第 7 關起玩</option>
                     <option value="8">第 8 關起玩</option>
@@ -138,7 +137,7 @@
             </div>
 
             <p><strong>點擊選擇您的年齡層：</strong></p>
-            <input type="hidden" id="selected-age" value="80+">
+            <input type="hidden" id="selected-age" value="50-59">
             <div id="age-grid" class="age-grid">
                 <button type="button" class="age-btn" onclick="selectAge('0-6', this)">幼兒 (0-6)<br>🌸養生級</button>
                 <button type="button" class="age-btn" onclick="selectAge('7-12', this)">兒童 (7-12)<br>🍵護眼級</button>
@@ -146,10 +145,10 @@
                 <button type="button" class="age-btn" onclick="selectAge('19-29', this)">青年/大學生<br>⚡極難挑戰</button>
                 <button type="button" class="age-btn" onclick="selectAge('30-39', this)">壯年 (30-39)<br>🎯進階級</button>
                 <button type="button" class="age-btn" onclick="selectAge('40-49', this)">中年 (40-49)<br>⚖️標準級</button>
-                <button type="button" class="age-btn" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
+                <button type="button" class="age-btn selected" onclick="selectAge('50-59', this)">熟齡 (50-59)<br>🌿舒適級</button>
                 <button type="button" class="age-btn" onclick="selectAge('60-69', this)">樂齡 (60-69)<br>🍵輕鬆級</button>
                 <button type="button" class="age-btn" onclick="selectAge('70-79', this)">高齡 (70-79)<br>🌸尊榮級</button>
-                <button type="button" class="age-btn selected" onclick="selectAge('80+', this)">耆老 (80+)<br>🍵養生級</button>
+                <button type="button" class="age-btn" onclick="selectAge('80+', this)">耆老 (80+)<br>🍵養生級</button>
             </div>
         </div>
         <button class="btn-large" style="background-color: #FF9800; box-shadow: 0 6px 0 #E65100;" onclick="goToInstructions()">遊戲說明 📖</button>
@@ -174,8 +173,8 @@
     <div id="screen-instructions" class="screen">
         <h1>📖 遊戲說明與策略法寶</h1>
         <div style="font-size: clamp(15px, 4vw, 18px); text-align: left; line-height: 1.6; background: #E3F2FD; padding: 15px; border-radius: 15px; border: 2px solid #90CAF9; color: #1565C0;">
-            🔸 <b>起終點絕對鎖定：</b>起點固定在左上角 `(1,1)`，目標固定在右下角！<br>
-            🔸 <b>第 4 關起隨機出現法寶（永久保留）：</b>
+            🔸 <b>起終點絕對鎖定：</b>起點固定在左上角，目標固定在右下角！<br>
+            🔸 <b>第 4 關起隨機出現神話法寶（永久保留）：</b>
             <ul style="margin: 5px 0; padding-left: 20px;">
                 <li>🏺 <b>玉淨瓶</b>：消除病菌/鬼怪！</li>
                 <li>🪄 <b>金箍棒</b>：敲退惡犬！</li>
@@ -201,7 +200,6 @@
         </div>
         <div class="target-text" id="ui-target">目標：尋找...</div>
         
-        <!-- 法寶庫存顯示列 (跨關卡保留) -->
         <div class="inventory-bar" id="inventoryBar" style="display:none;">
             <span style="font-size: 12px; color: #2E7D32; font-weight: bold; align-self: center;">🎒 策略法寶：</span>
             <button class="item-badge" onclick="useItem('bottle')">🏺玉淨瓶 <span id="cnt-bottle" style="color:#D32F2F;">0</span></button>
@@ -211,7 +209,6 @@
             <button class="item-badge" onclick="useItem('broom')">🧹掃把 <span id="cnt-broom" style="color:#D32F2F;">0</span></button>
         </div>
 
-        <!-- 頂部功能列：幫助與點數補給站 -->
         <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap;">
             <button class="btn-large" style="font-size: 15px; padding: 6px 12px; margin: 0; width: auto; background-color: #0288D1; box-shadow: 0 4px 0 #01579B;" onclick="openGodHelpModal()">📖 神通指南</button>
             <button class="btn-large" style="font-size: 15px; padding: 6px 12px; margin: 0; width: auto; background-color: #F57C00; box-shadow: 0 4px 0 #E65100;" onclick="openStationModal()">💰 補給站</button>
@@ -268,7 +265,7 @@
         <button id="btn-rest-resume" class="btn-large" style="display:none; width: 100%; background-color: #4CAF50; box-shadow: 0 6px 0 #2E7D32;" onclick="resumeFromRest()">✅ 繼續探險</button>
     </div>
 
-    <!-- 過關導覽彈跳視窗 (內含 上一關 / 下一關) -->
+    <!-- 過關導覽彈跳視窗 -->
     <div id="win-modal">
         <div class="modal-content">
             <h2 id="win-title" style="color: #D84315; margin-top: 0;">🎉 恭喜通關！</h2>
@@ -281,7 +278,7 @@
         </div>
     </div>
 
-    <!-- 選擇流放地彈跳視窗 (點數補給站) -->
+    <!-- 選擇流放地彈跳視窗 -->
     <div id="station-modal">
         <div class="modal-content">
             <h2 style="color: #D84315; margin-top: 0;">💰 選擇流放地與補給站</h2>
@@ -448,13 +445,8 @@
             'supreme': { cost: 5000, n_tw: '玉皇大帝' }
         };
 
-        // --- 🎒 全域持久化法寶庫存 (含魔法掃把 broom) ---
         let inventory = {
-            bottle: 0,  // 玉淨瓶 (4)
-            stick: 0,   // 金箍棒 (2)
-            cuffs: 0,   // 手銬 (5)
-            expert: 0,  // 拆彈工具箱 (3)
-            broom: 0    // 哈利波特掃把 (6)
+            bottle: 0, stick: 0, cuffs: 0, expert: 0, broom: 0
         };
 
         let userGender = 'male'; let currentLevel = 1; let totalScore = 500; let isEventActive = false;
@@ -529,10 +521,9 @@
             }
         }
 
-        // --- 🎒 主動使用法寶功能 ---
         function useItem(itemKey) {
             if (inventory[itemKey] <= 0) {
-                let names = {bottle: '玉淨瓶', stick: '金箍棒', cuffs: '手銬', expert: '拆彈工具箱', broom: '哈利波特掃把'};
+                let names = {bottle: '玉淨瓶', stick: '金箍棒', cuffs: '手銬', expert: '拆彈專家工具箱', broom: '哈利波特掃把'};
                 alert(`⚠️ 您目前沒有【${names[itemKey]}】！請在迷宮中尋找寶箱獲得。`);
                 return;
             }
@@ -663,257 +654,46 @@
 
             updateUI(); 
             updateInventoryUI();
-            generateMaze(mazeSize); 
             
-            // --- 🛡️ 鐵壁級起終點強制歸位 ---
+            // 嚴格建構迷宮並強制淨空起點與終點
+            maze = Array(mazeSize).fill().map(() => Array(mazeSize).fill(1)); 
+            function carve(x, y) {
+                maze[y][x] = 0; let dirs = [[0, -2], [0, 2], [-2, 0], [2, 0]].sort(() => Math.random() - 0.5);
+                for (let d of dirs) {
+                    let nx = x + d[0], ny = y + d[1];
+                    if (nx > 0 && nx < mazeSize-1 && ny > 0 && ny < mazeSize-1 && maze[ny][nx] === 1) { maze[y + d[1]/2][x + d[0]/2] = 0; carve(nx, ny); }
+                }
+            }
+            carve(1, 1); 
+            
             playerPos = {x: 1, y: 1}; 
             targetPos = {x: mazeSize - 2, y: mazeSize - 2};
             
-            // 強制將起點與終點周遭清空為通道，絕不允許被任何物件覆蓋
             maze[1][1] = 0;
             maze[1][2] = 0;
             maze[2][1] = 0;
             maze[mazeSize - 2][mazeSize - 2] = 0;
             maze[mazeSize - 2][mazeSize - 3] = 0;
             maze[mazeSize - 3][mazeSize - 2] = 0;
-            
-            if(canvas.width !== 500) canvas.width = 500;
-            if(canvas.height !== 500) canvas.height = 500;
-            drawMaze();
-
-            levelStartTime = Date.now(); 
-        }
-
-        function updateUI() {
-            let ageInput = document.getElementById('selected-age');
-            let selectedAge = ageInput ? ageInput.value : '50-59';
-            document.getElementById('ui-level').innerText = "關卡: " + currentLevel + "/10 (" + selectedAge + ")";
-            document.getElementById('ui-score').innerText = "總分: " + totalScore;
-            if(currentTarget) document.getElementById('ui-target').innerText = "目標：" + currentTarget.n + " " + currentTarget.i;
-        }
-
-        window.onload = function() { 
-            gameLoopInterval = setInterval(() => {
-                if (isResting) {
-                    let diff = Math.floor((Date.now() - restStartTime) / 1000);
-                    let rem = REST_DURATION - diff;
-                    if (rem <= 0) {
-                        document.getElementById('btn-rest-resume').style.display = 'block';
-                        document.getElementById('rest-timer-display').innerText = "休息完畢！";
-                        document.getElementById('rest-timer-display').style.color = '#388E3C';
-                    } else {
-                        let m = Math.floor(rem / 60).toString().padStart(2, '0'); let s = (rem % 60).toString().padStart(2, '0');
-                        document.getElementById('rest-timer-display').innerText = `${m} : ${s}`;
-                    }
-                    return;
-                }
-                if (isPlaying && !isEventActive && !hintActive) {
-                    let levelTime = Math.floor((Date.now() - levelStartTime) / 1000);
-                    document.getElementById('ui-time').innerText = levelTime + " 秒";
-                    sessionPlayTime++;
-                    if (sessionPlayTime >= MAX_PLAY_TIME) startRest();
-                }
-            }, 1000);
-        };
-
-        function startRest() {
-            isResting = true; restStartTime = Date.now();
-            document.getElementById('btn-rest-resume').style.display = 'none';
-            document.getElementById('rest-timer-display').style.color = '#D32F2F';
-            showScreen('screen-rest');
-        }
-
-        function resumeFromRest() {
-            isResting = false; sessionPlayTime = 0; levelStartTime += (Date.now() - restStartTime);
-            showScreen('screen-game');
-        }
-
-        function startGodBwei(godType) {
-            if (hintActive) return;
-            closeGodHelpModal();
-            initAudio(); playSound('bump'); vibrate([30]);
-            
-            pendingGod = godType; pendingGodName = godsData[godType].n_tw;
-            
-            isEventActive = true; bweiShengCount = 0;
-            document.getElementById('bwei-title').innerText = "🙏 誠心擲筊請示 " + pendingGodName;
-            document.getElementById('bwei-count-display').innerText = "目前連續聖筊：0 次";
-            document.getElementById('bwei-icons').innerHTML = "🌙 🌙";
-            document.getElementById('bwei-modal').style.display = 'flex';
-        }
-
-        function closeBwei() { document.getElementById('bwei-modal').style.display = 'none'; isEventActive = false; }
-
-        function throwBwei() {
-            playSound('bwei'); vibrate([50, 50, 50]);
-            let r = Math.random(); let resultIcon = ""; let isSheng = false;
-            if (r < 0.5) { resultIcon = "🌙 🌛"; isSheng = true; } 
-            else if (r < 0.75) { resultIcon = "🌛 🌛"; } 
-            else { resultIcon = "🌙 🌙"; } 
-
-            let iconsEl = document.getElementById('bwei-icons');
-            iconsEl.style.transform = 'translateY(-20px) rotate(10deg)';
-            setTimeout(() => {
-                iconsEl.style.transform = 'translateY(0) rotate(0deg)'; iconsEl.innerHTML = resultIcon;
-                if (isSheng) {
-                    bweiShengCount++; document.getElementById('bwei-count-display').innerText = "目前連續聖筊：" + bweiShengCount + " 次";
-                    if (bweiShengCount === 2) {
-                        setTimeout(() => { document.getElementById('bwei-modal').style.display = 'none'; summonGod(pendingGod); }, 500);
-                    }
-                } else {
-                    bweiShengCount = 0; document.getElementById('bwei-count-display').innerText = "目前連續聖筊：0 次";
-                }
-            }, 200);
-        }
-
-        function summonGod(godType) {
-            playSound('god'); vibrate([200, 100, 200]); let god = godsData[godType];
-            
-            if (godType === 'supreme') {
-                if (totalScore < god.cost) {
-                    openStationModal(); return;
-                }
-                totalScore -= god.cost; updateUI();
-                for(let y=0; y<mazeSize; y++) {
-                    for(let x=0; x<mazeSize; x++) { if(maze[y][x] >= 2 && maze[y][x] <= 13) maze[y][x] = 0; }
-                }
-                hintActive = true; currentDisplayPath = currentSafePath; alert("🌟 玉皇大帝降臨！神威浩蕩！迷宮障礙全消！");
-                drawMaze(); setTimeout(() => { hintActive = false; drawMaze(); isEventActive = false; }, 4000);
-                return;
-            }
-
-            if (totalScore < god.cost) { 
-                openStationModal(); return; 
-            }
-            
-            totalScore -= god.cost; updateUI();
-
-            if (godType === 'tudigong') {
-                hintActive = true;
-                if (Math.random() < 0.2) { currentDisplayPath = generateWrongPath(); alert("⛩️ 土地公喝醉了，亂指路..."); } 
-                else { currentDisplayPath = currentSafePath; alert("⛩️ 土地公顯靈，指引生路！"); }
-                drawMaze(); setTimeout(() => { hintActive = false; drawMaze(); isEventActive = false; }, 3000);
-            } 
-            else if (godType === 'guanyin') {
-                let clearedCount = 0;
-                for(let y=0; y<mazeSize; y++) {
-                    for(let x=0; x<mazeSize; x++) { if(maze[y][x] === 5 && clearedCount < 2) { maze[y][x] = 0; clearedCount++; } }
-                }
-                if (clearedCount > 0) { alert("⛩️ 觀世音菩薩慈悲顯靈，掃除了 " + clearedCount + " 個壞人！"); drawMaze(); isEventActive = false; }
-                else { playSound('bump'); vibrate([100, 100, 300]); openStationModal(); }
-            }
-            else {
-                let cleared = false; let targetCode = (godType === 'wen') ? 2 : (godType === 'mazu' ? 3 : 4);
-                for(let y=0; y<mazeSize; y++) {
-                    for(let x=0; x<mazeSize; x++) if(maze[y][x] === targetCode) { maze[y][x] = 0; cleared = true; }
-                }
-                if (cleared) {
-                    alert("⛩️ 神尊顯靈，障礙已清除！");
-                    drawMaze(); isEventActive = false;
-                } else {
-                    playSound('bump'); vibrate([100, 100, 300]);
-                    openStationModal();
-                }
-            }
-        }
-
-        function generateWrongPath() {
-            let path = []; let cx = playerPos.x; let cy = playerPos.y; path.push(`${cx},${cy}`);
-            for(let i=0; i<20; i++) {
-                let dirs = [[0,-1],[0,1],[-1,0],[1,0]].sort(()=>Math.random()-0.5);
-                for(let d of dirs) {
-                    let nx = cx + d[0], ny = cy + d[1];
-                    if(nx>0 && nx<mazeSize-1 && ny>0 && ny<mazeSize-1) { cx = nx; cy = ny; path.push(`${cx},${cy}`); break; }
-                }
-            }
-            return path;
-        }
-
-        function doWork() {
-            let st = banishmentStations[currentStationIndex];
-            if (currentStationClicks >= st.maxClicks) {
-                alert(`⚠️ 在【${st.name}】的敲磚額度（${st.maxClicks}次）已滿！請點擊下方按鈕支付機票費返程！`);
-                return;
-            }
-            playSound('work'); vibrate([20]);
-            currentWorkEarned += st.reward;
-            currentStationClicks++;
-            updateWorkUI();
-        }
-
-        function updateWorkUI() {
-            let st = banishmentStations[currentStationIndex];
-            let scoreEl = document.getElementById('work-score');
-            scoreEl.innerText = currentWorkEarned;
-            
-            let targetTotal = st.ticket;
-            document.getElementById('work-target-display').innerText = targetTotal;
-            document.getElementById('work-rule-desc').innerText = `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`;
-            
-            document.getElementById('work-progress').max = targetTotal; 
-            document.getElementById('work-progress').value = Math.min(currentWorkEarned, targetTotal);
-            
-            if (currentWorkEarned >= targetTotal) {
-                document.getElementById('work-status').innerText = "🎉 賺取點數已達機票標準！可以搭飛機回台了！";
-                document.getElementById('work-status').style.color = '#388E3C';
-                document.getElementById('ui-btn-work-return').style.display = 'block';
-            } else {
-                let remClicks = st.maxClicks - currentStationClicks;
-                document.getElementById('work-status').innerText = `繼續敲磚！還差 ${targetTotal - currentWorkEarned} 點 (剩餘 ${remClicks} 次機會)`;
-                document.getElementById('work-status').style.color = '#E65100';
-                document.getElementById('ui-btn-work-return').style.display = 'none';
-            }
-        }
-
-        function returnFromWork() {
-            let st = banishmentStations[currentStationIndex];
-            if (currentWorkEarned < st.ticket) {
-                alert("😢 點數尚未達機票標準，無法搭飛機回台！");
-                return;
-            }
-            playSound('move'); 
-            totalScore += (currentWorkEarned - st.ticket); 
-            isEventActive = false; 
-            updateUI(); 
-            drawMaze(); 
-            showScreen('screen-game');
-        }
-
-        function generateMaze(size) {
-            maze = Array(size).fill().map(() => Array(size).fill(1)); 
-            function carve(x, y) {
-                maze[y][x] = 0; let dirs = [[0, -2], [0, 2], [-2, 0], [2, 0]].sort(() => Math.random() - 0.5);
-                for (let d of dirs) {
-                    let nx = x + d[0], ny = y + d[1];
-                    if (nx > 0 && nx < size-1 && ny > 0 && ny < size-1 && maze[ny][nx] === 1) { maze[y + d[1]/2][x + d[0]/2] = 0; carve(nx, ny); }
-                }
-            }
-            carve(1, 1); maze[size-2][size-2] = 0; 
-            let extraPaths = Math.max(0, 3 - Math.floor(currentLevel / 3)); 
-            for(let i = 0; i < extraPaths; i++) {
-                let rx = 1 + Math.floor(Math.random() * (size-2)), ry = 1 + Math.floor(Math.random() * (size-2));
-                if (maze[ry][rx] === 1) maze[ry][rx] = 0;
-            }
 
             let safePathSet = new Set(); let queue = [{x: 1, y: 1, path: ["1,1"]}];
-            let visited = Array(size).fill().map(() => Array(size).fill(false)); visited[1][1] = true;
+            let visited = Array(mazeSize).fill().map(() => Array(mazeSize).fill(false)); visited[1][1] = true;
 
             while (queue.length > 0) {
                 let curr = queue.shift();
-                if (curr.x === size - 2 && curr.y === size - 2) { curr.path.forEach(p => safePathSet.add(p)); currentSafePath = Array.from(safePathSet); break; }
+                if (curr.x === mazeSize - 2 && curr.y === mazeSize - 2) { curr.path.forEach(p => safePathSet.add(p)); currentSafePath = Array.from(safePathSet); break; }
                 for (let d of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
                     let nx = curr.x + d[0], ny = curr.y + d[1];
-                    if (nx > 0 && nx < size-1 && ny > 0 && ny < size-1 && maze[ny][nx] === 0 && !visited[ny][nx]) {
+                    if (nx > 0 && nx < mazeSize-1 && ny > 0 && ny < mazeSize-1 && maze[ny][nx] === 0 && !visited[ny][nx]) {
                         visited[ny][nx] = true; queue.push({x: nx, y: ny, path: [...curr.path, `${nx},${ny}`]});
                     }
                 }
             }
 
             let onSafeSpaces = [], offSafeSpaces = [];
-            for (let y = 1; y < size - 1; y++) {
-                for (let x = 1; x < size - 1; x++) {
-                    // 嚴格排除起點與終點周遭區域 (x <= 2 && y <= 2 或距離終點 2 格內)
-                    if (maze[y][x] === 0 && !((x <= 2 && y <= 2) || (x >= size - 3 && y >= size - 3))) {
+            for (let y = 1; y < mazeSize - 1; y++) {
+                for (let x = 1; x < mazeSize - 1; x++) {
+                    if (maze[y][x] === 0 && !((x <= 2 && y <= 2) || (x >= mazeSize - 3 && y >= mazeSize - 3))) {
                         if (safePathSet.has(`${x},${y}`)) onSafeSpaces.push({x, y}); else offSafeSpaces.push({x, y});
                     }
                 }
@@ -946,12 +726,18 @@
             for(let i=0; i<goldCount; i++) if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 8;
 
             if (currentLevel >= 4) {
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 9;  // 🏺
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 10; // 🪄
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 11; // 🔗
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 12; // 🧰
-                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 13; // 🧹
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 9;  
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 10; 
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 11; 
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 12; 
+                if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 13; 
             }
+
+            if(canvas.width !== 500) canvas.width = 500;
+            if(canvas.height !== 500) canvas.height = 500;
+            drawMaze();
+
+            levelStartTime = Date.now(); 
         }
 
         function drawMaze() {
@@ -985,7 +771,6 @@
                     if (maze[y][x] === 13) ctx.fillText("🧹", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                 }
             }
-            // 確保目標與玩家絕對渲染在各自的固定坐標
             ctx.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
             ctx.fillText("🤠", (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
         }
