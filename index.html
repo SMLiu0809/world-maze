@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 長辮子女俠旗艦版</title>
+    <title>世界寶藏迷宮探險 - 圖標完美還原旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -133,9 +133,9 @@
 
         #screen-work { border-color: #D35400; background-color: #FDFEFE; }
         
-        /* 🥋 武林大師/長辮子女俠朝天蹬按鈕動畫 */
+        /* 🥋 打工主按鈕樣式（前四站大圖示 Emoji，第五站寧古塔呈現雙人組） */
         .work-btn {
-            width: clamp(130px, 32vw, 170px); height: clamp(130px, 32vw, 170px); 
+            width: clamp(120px, 30vw, 150px); height: clamp(120px, 30vw, 150px); 
             background: linear-gradient(135deg, #D35400 0%, #BA4A00 100%); color: white; border-radius: 35px; border: none; 
             box-shadow: 0 8px 22px rgba(211, 84, 0, 0.4); cursor: pointer; user-select: none; margin: 10px; 
             display: inline-flex; align-items: center; justify-content: center; transition: all 0.15s ease-out;
@@ -304,7 +304,7 @@
         
         <!-- 打工主按鈕 -->
         <button id="work-action-icon" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">
-            <span id="work-inner-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">🪵</span>
+            <span id="work-inner-icon" style="font-size: 50px; display: inline-flex; align-items: center; justify-content: center; width: 100%; height: 100%;">🪵</span>
         </button>
         <br>
         <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 320px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); margin-top: 8px;" onclick="returnFromWork()">✈️ 賺足機票費，穿越回原關卡！</button>
@@ -374,7 +374,7 @@
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="triggerTimeWarp(1)"><span id="st-1">🦪 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 13px;" onclick="triggerTimeWarp(2)"><span id="st-2">🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 13px;" onclick="triggerTimeWarp(3)"><span id="st-3">🪨 永州｜柳宗元 (尋小石潭)｜每敲120/機票1100</span></button>
-                <button class="btn-large" style="width: 100% !important; max-width: 100% !important; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px; white-space: normal; line-height: 1.4;" onclick="triggerTimeWarp(4)"><span id="st-4">🦵 寧古塔｜押解甄嬛老爹 (使出朝天蹬踢歹徒拿甄嬛賞金)｜每敲100/機票1300</span></button>
+                <button class="btn-large" style="width: 100% !important; max-width: 100% !important; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px; white-space: normal; line-height: 1.4;" onclick="triggerTimeWarp(4)"><span id="st-4">🦵 寧古塔｜押解甄嬛老爹 (使出無影腳踢歹徒拿甄嬛賞金)｜每敲100/機票1300</span></button>
             </div>
             <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 6px;" onclick="closeStationModal()">取消返回</button>
         </div>
@@ -560,7 +560,7 @@
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
                     "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
-                    "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
+                    "大本鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
                     "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
@@ -644,7 +644,7 @@
                 easy: "🍵 Casual", easyDesc: "Relaxed pace, casual fun",
                 std: "⚖️ Standard", stdDesc: "Balanced challenge & fun",
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
-                hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
+                hell: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
                 insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will trigger a time-warp banishment to historical trade stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
                 stationBtn: "💰 Historical Supply Station", backCover: "⬅️ Main Menu",
@@ -1303,12 +1303,12 @@
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
             
-            // 渲染：如果為寧古塔（索引4），按鈕內顯示「左側完整朝天蹬武俠人形 + 右側甄嬛娘娘」；否則顯示對應 Emoji
+            // 渲染：如果為寧古塔（索引4），按鈕內顯示「左側完整朝天蹬武俠人形 + 右側甄嬛娘娘」；否則還原為大器醒目的大 Emoji
             let iconContainer = document.getElementById('work-inner-icon');
             if (wData.isLeg) {
                 iconContainer.innerHTML = getKungFuPersonSVG() + zhenHuanFullSVG;
             } else {
-                iconContainer.innerHTML = wData.icon;
+                iconContainer.innerHTML = `<span style="font-size: 55px; line-height: 1;">${wData.icon}</span>`;
             }
             
             let descText = (currentLang === 'en' ? 
