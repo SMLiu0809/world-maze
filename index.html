@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 完整人形旗艦版</title>
+    <title>世界寶藏迷宮探險 - 朝天蹬武林旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -133,7 +133,7 @@
 
         #screen-work { border-color: #D35400; background-color: #FDFEFE; }
         
-        /* 🥋 完整人形武俠打工按鈕動畫 */
+        /* 🥋 武林大師朝天蹬按鈕動畫 */
         .work-btn {
             width: clamp(130px, 32vw, 170px); height: clamp(130px, 32vw, 170px); 
             background: linear-gradient(135deg, #D35400 0%, #BA4A00 100%); color: white; border-radius: 35px; border: none; 
@@ -144,11 +144,11 @@
         .work-btn:active { transform: scale(0.92); box-shadow: 0 2px 8px rgba(211, 84, 0, 0.2); }
 
         .kick-action {
-            animation: kungfuKick 0.25s ease-out;
+            animation: masterKick 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        @keyframes kungfuKick {
+        @keyframes masterKick {
             0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.25) rotate(-25deg) translateX(10px); }
+            40% { transform: scale(1.3) rotate(-35deg) translateX(15px) translateY(-10px); }
             100% { transform: scale(1) rotate(0deg); }
         }
 
@@ -413,7 +413,7 @@
     </div>
 
     <script>
-        // 🥋 取得少俠/女俠稱謂的動態輔助函式
+        // 🥋 動態取得少俠/女俠稱謂
         function getHeroTitle() {
             let genderRadio = document.querySelector('input[name="gender"]:checked');
             let isFemale = genderRadio && genderRadio.value === 'female';
@@ -421,19 +421,21 @@
             return isFemale ? "女俠" : "少俠";
         }
 
-        // 🥋 穿著傳統古裝功夫褲與黑鞋白底功夫鞋的完整武俠人形 SVG (左側)
-        const kungfuPersonSVG = `
-            <svg width="65" height="65" viewBox="0 0 100 100" style="position: absolute; left: 12px; bottom: 10px; filter: drop-shadow(0 3px 4px rgba(0,0,0,0.3));">
-                <!-- 武俠頭部與髮髻 -->
-                <circle cx="50" cy="22" r="12" fill="#FEEBC8"/>
-                <path d="M40,15 Q50,8 60,15 L58,20 Q50,16 42,20 Z" fill="#1A202C"/>
-                <!-- 傳統古裝武俠服飾與功夫褲 -->
-                <path d="M35,34 Q50,30 65,34 L72,68 Q60,78 50,78 Q40,78 28,68 Z" fill="#2B6CB0" stroke="#1A202C" stroke-width="2"/>
-                <!-- 黑色功夫寬褲與白底功夫鞋 -->
-                <path d="M32,68 Q40,88 45,95 L52,95 Q48,85 46,68 Z" fill="#1A202C"/>
-                <path d="M52,68 Q54,85 58,95 L65,95 Q60,88 58,68 Z" fill="#1A202C"/>
-                <path d="M40,93 L50,93 Q52,96 46,96 L40,93 Z" fill="#FFFFFF"/>
-                <path d="M56,93 L66,93 Q68,96 62,96 L56,93 Z" fill="#FFFFFF"/>
+        // 🥋 頂級武林大師「朝天蹬高踢腿」標準武俠人形 SVG (左側)
+        const kungfuMasterSVG = `
+            <svg width="65" height="65" viewBox="0 0 100 100" style="position: absolute; left: 10px; bottom: 8px; filter: drop-shadow(0 3px 4px rgba(0,0,0,0.3));">
+                <!-- 頭部與髮髻 -->
+                <circle cx="50" cy="20" r="10" fill="#FEEBC8"/>
+                <path d="M42,13 Q50,7 58,13 L56,18 Q50,14 44,18 Z" fill="#1A202C"/>
+                <!-- 武俠身軀與傳統功夫服 -->
+                <path d="M38,30 Q50,27 62,30 L68,65 Q50,75 32,65 Z" fill="#2B6CB0" stroke="#1A202C" stroke-width="2"/>
+                <!-- 立正站立支撐腿 -->
+                <path d="M38,65 Q42,85 45,95 L50,95 Q48,82 43,65 Z" fill="#1A202C"/>
+                <!-- 霸氣「朝天蹬」高踢腿（筆直指向天空的腿與功夫鞋） -->
+                <path d="M55,50 Q75,35 88,22 Q94,15 92,25 Q85,42 62,55 Z" fill="#1A202C" stroke="#2D3748" stroke-width="1.5"/>
+                <path d="M85,20 L96,15 Q100,18 97,25 L88,28 Z" fill="#FFFFFF"/>
+                <!-- 氣功流線特效 -->
+                <path d="M78,32 Q88,20 95,12" stroke="#F6AD55" stroke-width="3" stroke-linecap="round" fill="none"/>
             </svg>
         `;
 
@@ -461,10 +463,10 @@
             { name: "惠州（蘇東坡）", task: "工作任務：炭火炙烤新鮮生蠔，鮮美蚌肉直冒湯汁", icon: "🦪", isLeg: false, chats: ["東坡口水直流：「生蠔殼冒汁了！快灑上蒜蓉與蔥花！」", "「炭火炙烤滋滋作響，肥美生蠔蚌肉香氣四溢...」", "「東坡大讚：『鮮美無比，此味只應天上有！』」"] },
             { name: "儋州（吃貨東坡）", task: "工作任務：拿斧頭砍椰子、搬運茅草講學", icon: "🥥", isLeg: false, chats: ["東坡大笑：「海南島沒肉吃，但椰子水喝到飽！」", "「椰子殼製成斗笠中，東坡靈感大發！」", "「茅草屋板凳搬好，準備聽吃貨東坡開講！」"] },
             { name: "永州（柳宗元）", task: "工作任務：拿竹杖隨柳宗元尋找小石潭與奇石", icon: "🪨", isLeg: false, chats: ["柳宗元嘆氣：「此地寂寞，幸好有你陪我找小石潭。」", "「撥開灌木叢，記錄永州八記山水遊記中...」", "「潭中魚可百許頭，皆若空游無所依。」"] },
-            { name: "寧古塔（押解甄遠道）", task: "工作任務：押解甄嬛老爹，使出無影腳踢歹徒拿甄嬛賞金", icon: "🦵", isLeg: true, chats: [
-                () => `甄遠道讚嘆：「${getHeroTitle()}好腿法！老夫這條老命就靠你護送了！」`, 
-                () => `「使出佛山無影腳，一腳踢飛半路攔道的歹徒！」`, 
-                () => `「收到甄嬛娘娘宮中密信：『賞金已匯，請${getHeroTitle()}繼續狠狠地踢！』」`
+            { name: "寧古塔（押解甄遠道）", task: "工作任務：押解甄嬛老爹，使出朝天蹬踢退歹徒拿甄嬛賞金", icon: "🦵", isLeg: true, chats: [
+                () => `甄遠道讚嘆：「${getHeroTitle()}好一式朝天蹬！老夫這條老命就靠你護送了！」`, 
+                () => `「展現武林大師風範，一腳凌空踢飛半路攔道的歹徒！」`, 
+                () => `「收到甄嬛娘娘宮中密信：『賞金已匯，請${getHeroTitle()}繼續展現高超腿法！』」`
             ] }
         ];
 
@@ -473,10 +475,10 @@
             { name: "惠州（苏东坡）", task: "工作任务：炭火炙烤新鲜生蠔，鲜美蚌肉直冒汤汁", icon: "🦪", isLeg: false, chats: ["东坡口水直流：“生蠔壳冒汁了！快灑上蒜蓉与葱花！”", "“炭火炙烤滋滋作响，肥美生蠔蚌肉香气四溢...”", "“东坡大赞：『鲜美无比，此味只应天上有！』”"] },
             { name: "儋州（吃货东坡）", task: "工作任务：拿斧头砍椰子、搬运茅草讲学", icon: "🥥", isLeg: false, chats: ["东坡大笑：“海南岛没肉吃，但椰子水喝到饱！”", "“椰子壳制成斗笠中，东坡灵感大发！”", "“茅草屋板凳搬好，准备听吃货东坡开讲！”"] },
             { name: "永州（柳宗元）", task: "工作任务：拿竹杖随柳宗元寻找小石潭与奇石", icon: "🪨", isLeg: false, chats: ["柳宗元叹气：“此地寂寞，幸好有你陪我找小石潭。”", "“拨开灌木丛，记录永州八记山水游记中...”", "“潭中鱼可百许头，皆若空游无所依。”"] },
-            { name: "宁古塔（押解甄远道）", task: "工作任务：押解甄嬛老爹，使出无影脚踢退歹徒拿甄嬛赏金", icon: "🦵", isLeg: true, chats: [
-                () => `甄远道赞叹：“${getHeroTitle()}好腿法！老夫这条老命就靠你护送了！”`, 
-                () => `“使出佛山无影脚，一脚踢飞半路拦道的歹徒！”`, 
-                () => `“收到甄嬛娘娘宫中密信：‘赏金已汇，请${getHeroTitle()}继续狠狠地踢！’”`
+            { name: "宁古塔（押解甄远道）", task: "工作任务：押解甄嬛老爹，使出朝天蹬击退歹徒拿甄嬛赏金", icon: "🦵", isLeg: true, chats: [
+                () => `甄远道赞叹：“${getHeroTitle()}好一式朝天蹬！老夫这条老命就靠你护送了！”`, 
+                () => `“展现武林大师风范，一脚凌空踢飞半路拦道的歹徒！”`, 
+                () => `“收到甄嬛娘娘宫中密信：‘赏金已汇，请${getHeroTitle()}继续展现高超腿法！’”`
             ] }
         ];
 
@@ -516,7 +518,7 @@
                     "🦪 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700",
                     "🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900",
                     "🪨 永州｜柳宗元 (尋小石潭)｜每敲120/機票1100",
-                    "🦵 寧古塔｜押解甄嬛老爹 (使出無影腳踢歹徒拿甄嬛賞金)｜每敲100/機票1300"
+                    "🦵 寧古塔｜押解甄嬛老爹 (使出朝天蹬踢歹徒拿甄嬛賞金)｜每敲100/機票1300"
                 ],
                 warpTexts: [
                     "⏳ 正在穿越至唐代潮州江岸...",
@@ -579,7 +581,7 @@
                     "🦪 惠州｜苏东坡 (炭火烤生蠔)｜每敲180/机票700",
                     "🥥 儋州｜吃货东坡 (砍椰讲学)｜每敲150/机票900",
                     "🪨 永州｜柳宗元 (寻小石潭)｜每敲120/机票1100",
-                    "🦵 宁古塔｜押解甄嬛老爹 (使出无影脚拿甄嬛赏金)｜每敲100/机票1300"
+                    "🦵 宁古塔｜押解甄嬛老爹 (使出朝天蹬拿甄嬛赏金)｜每敲100/机票1300"
                 ],
                 warpTexts: [
                     "⏳ 正在穿越至唐代潮州江岸...",
@@ -652,7 +654,7 @@
                     "⏳ Time-warp to arctic Vancouver fur post..."
                 ],
                 gods: [
-                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-500)", "🌊妈祖 (-1000)", 
+                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-500)", "🌊Mazu (-1000)", 
                     "🌿Guanyin (-1500)", "🪷Medicine Buddha (-2000)", "🌟Jade Emperor (Clear All / -5000)"
                 ],
                 levels: [
@@ -1243,7 +1245,7 @@
             let activeTasks = (currentLang === 'en') ? workTasksEN : ((currentLang === 'zh-CN') ? workTasksCN : workTasksTW);
             let wData = activeTasks[currentStationIndex];
 
-            // 觸發音效與無影腳飛踢動畫
+            // 觸發音效與朝天蹬高踢腿動畫
             if (wData.isLeg) {
                 playSound('kick');
                 vibrate([40, 20, 40]);
@@ -1280,10 +1282,10 @@
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
             
-            // 渲染：如果為寧古塔（索引4），按鈕內顯示「左側完整人形武俠 + 右側甄嬛娘娘」；否則顯示對應 Emoji
+            // 渲染：如果為寧古塔（索引4），按鈕內顯示「左側朝天蹬武俠人形 + 右側甄嬛娘娘」；否則顯示對應 Emoji
             let iconContainer = document.getElementById('work-inner-icon');
             if (wData.isLeg) {
-                iconContainer.innerHTML = kungfuPersonSVG + zhenHuanFullSVG;
+                iconContainer.innerHTML = kungfuMasterSVG + zhenHuanFullSVG;
             } else {
                 iconContainer.innerHTML = wData.icon;
             }
