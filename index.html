@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 旅費經濟旗艦版</title>
+    <title>世界寶藏迷宮探險 - 歷史打工旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -204,11 +204,11 @@
         <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(14px, 3.8vw, 17px); text-align: left; line-height: 1.7; background: #EBF8FF; padding: 20px; border-radius: 18px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
-            <p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p>
+            <p><b>🕹️ 歷史打工與流放經濟：</b>旅費不足時將流放至古代/歷史邊疆，協助名人打工賺取機票費與旅費！</p>
             <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
         </div>
         <br>
-        <button id="btn-station" class="btn-large" style="background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); box-shadow: 0 6px 20px rgba(211, 84, 0, 0.3);" onclick="openStationModal()">💰 前往點數補給站</button>
+        <button id="btn-station" class="btn-large" style="background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); box-shadow: 0 6px 20px rgba(211, 84, 0, 0.3);" onclick="openStationModal()">💰 前往歷史流放站</button>
         <br>
         <button id="btn-back-cover" class="btn-large btn-cancel" onclick="showScreen('screen-cover')">⬅️ 返回主選單</button>
         <button id="btn-start" class="btn-large" onclick="startGame()">開始探險 🚀</button>
@@ -227,7 +227,7 @@
         
         <div class="toolbar-top">
             <button class="tool-btn" id="t-god" style="background-color: #2980B9;" onclick="openGodHelpModal()">⛩️ 神通</button>
-            <button class="tool-btn" id="t-station" style="background-color: #D35400;" onclick="openStationModal()">💰 補給</button>
+            <button class="tool-btn" id="t-station" style="background-color: #D35400;" onclick="openStationModal()">💰 流放站</button>
             <button class="tool-btn" id="t-know" style="background-color: #8E44AD;" onclick="openKnowledgeModal()">📖 知識</button>
             <button class="tool-btn" id="t-undo" style="background-color: #27AE60;" onclick="undoMove()">↩️ 上一步(<span id="undo-count">3</span>)</button>
             <button class="tool-btn" id="t-pause" style="background-color: #34495E;" onclick="openPauseModal()">⏸️ 暫停</button>
@@ -251,26 +251,27 @@
         </div>
     </div>
 
-    <!-- 頁面4：流放勞動與點數補給站畫面 -->
+    <!-- 頁面4：歷史流放勞動與打工賺錢畫面 -->
     <div id="screen-work" class="screen">
-        <h1 id="work-title" style="color:#D35400; font-size: clamp(24px, 5vw, 32px);">🚧 流放邊疆勞動區 🚧</h1>
-        <h2 id="ui-banish-location" style="color:#C0392B; font-size: clamp(20px, 5vw, 26px); margin: 0;">流放地：潮州</h2>
+        <h1 id="work-title" style="color:#D35400; font-size: clamp(22px, 5vw, 30px);">📜 時空流放打工區 📜</h1>
+        <h2 id="ui-banish-location" style="color:#C0392B; font-size: clamp(18px, 4.5vw, 24px); margin: 0;">流放地：潮州（韓愈）</h2>
         
-        <div style="font-size: clamp(14px, 3.8vw, 18px); margin: 15px 0; background: #FDFEFE; padding: 16px; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <p id="work-rule-desc" style="font-weight: 700; color: #C0392B; margin: 4px 0;">每敲一次：200點 | 剩餘次數：5 | 機票費：500點</p>
-            <p id="work-score-wrap" style="margin: 6px 0;">已賺取點數：<b id="work-score" style="color:#27AE60; font-size: clamp(22px, 5vw, 30px);">0</b> / <span id="work-target-display">500</span> 點</p>
+        <div style="font-size: clamp(14px, 3.8vw, 17px); margin: 12px 0; background: #FDFEFE; padding: 14px; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+            <p id="work-rule-desc" style="font-weight: 700; color: #C0392B; margin: 4px 0;">工作任務：驅逐鱷魚寫文章 | 每敲一次：200點 | 機票費：500點</p>
+            <p id="work-chat-bubble" style="font-style: italic; color: #2B6CB0; background: #EBF8FF; padding: 8px; border-radius: 10px; margin: 8px 0; font-weight: 600;">「今日進度：墨水滴了兩滴...」</p>
+            <p id="work-score-wrap" style="margin: 6px 0;">已賺取工資：<b id="work-score" style="color:#27AE60; font-size: clamp(20px, 5vw, 26px);">0</b> / <span id="work-target-display">500</span> 點</p>
         </div>
         
-        <div style="margin: 15px 0;">
+        <div style="margin: 12px 0;">
             <progress id="work-progress" value="0" max="500"></progress>
-            <p id="work-status" style="font-size: clamp(15px, 4vw, 19px); font-weight: 700; color: #D35400; margin-top: 8px;">狂點按鈕勞動！</p>
+            <p id="work-status" style="font-size: clamp(14px, 3.8vw, 18px); font-weight: 700; color: #D35400; margin-top: 6px;">狂點滑鼠幫名人打工！</p>
         </div>
         
-        <button class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">⛏️</button>
+        <button class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">✍️</button>
         <br>
-        <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 320px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); margin-top: 10px;" onclick="returnFromWork()">✈️ 繳交機票費，重返原關卡！</button>
+        <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 320px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); margin-top: 8px;" onclick="returnFromWork()">✈️ 賺足機票費，穿越回原關卡！</button>
         <br>
-        <button id="work-back-btn" class="btn-large btn-cancel" style="width: 90%; max-width: 320px; margin-top: 6px;" onclick="cancelWorkToMenu()">⬅️ 返回主選單</button>
+        <button id="work-back-btn" class="btn-large btn-cancel" style="width: 90%; max-width: 320px; margin-top: 4px;" onclick="cancelWorkToMenu()">⬅️ 返回主選單</button>
     </div>
 
     <!-- 暫停選單彈跳視窗 -->
@@ -325,17 +326,17 @@
         </div>
     </div>
 
-    <!-- 選擇流放地彈跳視窗 -->
+    <!-- 選擇歷史流放地彈跳視窗 -->
     <div id="station-modal">
         <div class="modal-content">
-            <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇流放地與補給站</h2>
-            <p id="station-modal-desc" style="font-size: 14px; color: #718096;">點數不足時，選擇流放地敲磚賺取機票費：</p>
+            <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">📜 選擇歷史流放地打工</h2>
+            <p id="station-modal-desc" style="font-size: 14px; color: #718096;">旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：</p>
             <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0;">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 14px;" onclick="selectStation(0)"><span id="st-0">🏙️ 潮州 (近)｜每敲200/限5次｜機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 14px;" onclick="selectStation(1)"><span id="st-1">🏡 惠州 (二)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 14px;" onclick="selectStation(2)"><span id="st-2">🌴 儋州 (三)｜每敲150/限10次｜機票900</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 14px;" onclick="selectStation(3)"><span id="st-3">⛰️ 永州 (四)｜每敲120/限15次｜機票1100</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 14px;" onclick="selectStation(4)"><span id="st-4">❄️ 寧古塔 (遠)｜每敲100/限20次｜機票1300</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 13px;" onclick="selectStation(0)"><span id="st-0">🏛️ 潮州｜韓愈 (驅鱷寫文)｜每敲200/機票500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="selectStation(1)"><span id="st-1">🍖 惠州｜蘇東坡 (築堤烤蠔)｜每敲180/機票700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 13px;" onclick="selectStation(2)"><span id="st-2">🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 13px;" onclick="selectStation(3)"><span id="st-3">🪨 永州｜柳宗元 (遊歷石潭)｜每敲120/機票1100</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px;" onclick="selectStation(4)"><span id="st-4">❄️ 寧古塔｜清代文人 (雪地劈柴)｜每敲100/機票1300</span></button>
             </div>
             <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 6px;" onclick="closeStationModal()">取消返回</button>
         </div>
@@ -383,25 +384,32 @@
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
-                stationBtn: "💰 前往點數補給站", backCover: "⬅️ 返回主選單",
-                tGod: "⛩️ 神通", tStation: "💰 補給", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 歷史打工與流放經濟：</b>旅費不足時將流放至歷史邊疆，協助韓愈、蘇東坡等名人打工賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                stationBtn: "💰 前往歷史流放站", backCover: "⬅️ 返回主選單",
+                tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
                 knowTitle: "📖 文化與寶藏知識", kClose: "了解了，繼續探險！",
-                stationTitle: "💰 選擇流放地與補給站", stationDesc: "點數不足時，選擇流放地敲磚賺取機票費：", stationCancel: "取消返回",
+                stationTitle: "📜 選擇歷史流放地打工", stationDesc: "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！", godClose: "關閉指南",
                 bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
                 nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
-                buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
+                buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放到歷史邊疆打工！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
                 stations: [
-                    "🏙️ 潮州 (近)｜每敲200/限5次｜機票500",
-                    "🏡 惠州 (二)｜每敲180/限7次｜機票700",
-                    "🌴 儋州 (三)｜每敲150/限10次｜機票900",
-                    "⛰️ 永州 (四)｜每敲120/限15次｜機票1100",
-                    "❄️ 寧古塔 (遠)｜每敲100/限20次｜機票1300"
+                    "🏛️ 潮州｜韓愈 (驅鱷寫文)｜每敲200/機票500",
+                    "🍖 惠州｜蘇東坡 (築堤烤蠔)｜每敲180/機票700",
+                    "🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900",
+                    "🪨 永州｜柳宗元 (遊歷石潭)｜每敲120/機票1100",
+                    "❄️ 寧古塔｜清代文人 (雪地劈柴)｜每敲100/機票1300"
+                ],
+                workData: [
+                    { name: "潮州（韓愈）", task: "任務：幫韓愈揮毫寫《祭鱷魚文》與驅逐鱷魚", icon: "✍️", chats: ["「今日進度：墨水滴了兩滴...」", "韓愈大喊：「快把鱷魚趕跑，本官要寫文章！」", "「墨硯快乾了，加把勁！」"] },
+                    { name: "惠州（蘇東坡）", task: "任務：幫東坡先生揮鏟築蘇堤、翻烤生蠔", icon: "🍢", chats: ["東坡笑稱：「別告訴朝廷我在這吃生蠔！」", "「土方搬運中，東坡肉香味陣陣飄來...」", "「再揮幾次鏟子，蘇堤就完工啦！」"] },
+                    { name: "儋州（吃貨東坡）", task: "任務：幫吃貨東坡砍椰子、辦學堂講學", icon: "🥥", chats: ["東坡大笑：「沒肉吃沒關係，椰子水喝到飽！」", "「椰子殼製成帽子中，創意 +1！」", "「茅草屋板凳搬好，準備聽東坡講學啦！」"] },
+                    { name: "永州（柳宗元）", task: "任務：陪柳宗元尋找小石潭、抄寫遊記", icon: "📜", chats: ["柳宗元嘆氣：「此地寂寞，幸好有你幫忙抄書。」", "「記錄永州奇山異水中...」", "「小石潭的魚好像在笑我們加班呢。」"] },
+                    { name: "寧古塔（清代文人）", task: "任務：在冰天雪地中幫流放文人劈柴生火", icon: "🪓", chats: ["流放秀才直打哆嗦：「凍死老夫了，快劈柴！」", "「柴火熱度上升中，終於有點暖意了...」", "「頂住零下酷寒，撐過這關就能回台啦！」"] }
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-500)", "🌊媽祖(-1000)", 
@@ -436,27 +444,34 @@
                 easy: "🍵 轻松模式", easyDesc: "步调悠闲、适合放松",
                 std: "⚖️ 标准模式", stdDesc: "平衡挑战与趣味",
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
-                hel: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
+                hell: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付等差级数纪念品运费（每关递增500点）。旅费不足将被流放至边疆补给站赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
-                stationBtn: "💰 前往点数补给站", backCover: "⬅️ 返回主菜单",
-                tGod: "⛩️ 神通", tStation: "💰 补给", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 历史打工与流放经济：</b>旅费不足时将流放至历史边疆，协助韩愈、苏东坡等名人打工赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
+                stationBtn: "💰 前往历史流放站", backCover: "⬅️ 返回主菜单",
+                tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
                 knowTitle: "📖 文化与宝藏知识", kClose: "了解了，继续探险！",
-                stationTitle: "💰 选择流放地与补给站", stationDesc: "点数不足时，选择流放地敲砖赚取机票费：", stationCancel: "取消返回",
+                stationTitle: "📜 选择历史流放地打工", stationDesc: "旅费透支时，选择前往古代/历史名人处打工赚取机票费：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！", godClose: "关闭指南",
                 bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
                 nicknameTip: "💡 支持中英文、数字，最多 12 码，系统将自动加上专属识别码",
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
-                buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放至边疆补给站！",
+                buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放到历史边疆打工！",
                 footer: "高雄师范大学 刘世闵 老师设计",
                 stations: [
-                    "🏙️ 潮州 (近)｜每敲200/限5次｜机票500",
-                    "🏡 惠州 (二)｜每敲180/限7次｜机票700",
-                    "🌴 儋州 (三)｜每敲150/限10次｜机票900",
-                    "⛰️ 永州 (四)｜每敲120/限15次｜机票1100",
-                    "❄️ 宁古塔 (远)｜每敲100/限20次｜机票1300"
+                    "🏛️ 潮州｜韩愈 (驱鳄写文)｜每敲200/机票500",
+                    "🍖 惠州｜苏东坡 (筑堤烤蠔)｜每敲180/机票700",
+                    "🥥 儋州｜吃货东坡 (砍椰讲学)｜每敲150/机票900",
+                    "🪨 永州｜柳宗元 (游历石潭)｜每敲120/机票1100",
+                    "❄️ 宁古塔｜清代文人 (雪地劈柴)｜每敲100/机票1300"
+                ],
+                workData: [
+                    { name: "潮州（韩愈）", task: "任务：帮韩愈挥毫写《祭鳄鱼文》与驱逐鳄鱼", icon: "✍️", chats: ["「今日进度：墨水滴了两滴...」", "韩愈大喊：「快把鳄鱼赶跑，本官要写文章！」", "「墨砚快干了，加把劲！」"] },
+                    { name: "惠州（苏东坡）", task: "任务：帮东坡先生挥铲筑苏堤、翻烤生蠔", icon: "🍢", chats: ["东坡笑称：「别告诉朝廷我在这吃生蠔！」", "「土方搬运中，东坡肉香味阵阵飘来...」", "「再挥几下铲子，苏堤就完工啦！」"] },
+                    { name: "儋州（吃货东坡）", task: "任务：帮吃货东坡砍椰子、办学堂讲学", icon: "🥥", chats: ["东坡大笑：「没肉吃没关系，椰子水喝到饱！」", "「椰子壳制成帽子中，创意 +1！」", "「茅草屋板凳搬好，准备听东坡讲学啦！」"] },
+                    { name: "永州（柳宗元）", task: "任务：陪柳宗元寻找小石潭、抄写游记", icon: "📜", chats: ["柳宗元叹气：「此地寂寞，幸好有你帮忙抄书。」", "「记录永州奇山异水中...」", "「小石潭的鱼好像在笑我们加班呢。」"] },
+                    { name: "宁古塔（清代文人）", task: "任务：在冰天雪地中帮流放文人劈柴生火", icon: "🪓", chats: ["流放秀才直打哆嗦：「冻死老夫了，快劈柴！」", "「柴火热度上升中，终于有点暖意了...」", "「顶住零下酷寒，撑过这关就能回台啦！」"] }
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️温王爷(-500)", "🌊妈祖(-1000)", 
@@ -493,25 +508,32 @@
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
                 hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
-                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
-                stationBtn: "💰 Point Supply Station", backCover: "⬅️ Main Menu",
+                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to historical exploration stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
+                stationBtn: "💰 Historical Supply Station", backCover: "⬅️ Main Menu",
                 tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
                 knowTitle: "📖 Culture & Treasure Lore", kClose: "Got it, Continue!",
-                stationTitle: "💰 Select Banishment Station", stationDesc: "Earn tickets by tapping at supply stations:", stationCancel: "Cancel",
+                stationTitle: "💰 Select Historical Banishment Station", stationDesc: "Earn tickets by assisting historical figures at supply stations:", stationCancel: "Cancel",
                 godTitle: "⛩️ Divine Guidance", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close",
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
                 nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
                 winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
-                buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
+                buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the historical supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
                 stations: [
-                    "🏙️ Manila (Near) | 200 pts / 5 taps | Ticket: 500",
-                    "🏡 Singapore (II) | 180 pts / 7 taps | Ticket: 700",
-                    "🌴 Sydney (III) | 150 pts / 10 taps | Ticket: 900",
-                    "⛰️ London (IV) | 120 pts / 15 taps | Ticket: 1100",
-                    "❄️ Vancouver (Far) | 100 pts / 20 taps | Ticket: 1300"
+                    "🏙️ Manila (Spice Clerk) | 200 pts / Ticket: 500",
+                    "🏡 Singapore (Port Clerk) | 180 pts / Ticket: 700",
+                    "🌴 Sydney (Cartographer) | 150 pts / Ticket: 900",
+                    "⛰️ London (Globe Theatre) | 120 pts / Ticket: 1100",
+                    "❄️ Vancouver (Fur Sorter) | 100 pts / Ticket: 1300"
+                ],
+                workData: [
+                    { name: "Manila (Spice Clerk)", task: "Task: Sort cinnamon & spice sacks for Spanish traders", icon: "📦", chats: ["“Inventory check: Cinnamon bags count +1...”", "Trader yells: “Make sure the spice ledger balances!”", "“Heavy cargo, keep pushing!”"] },
+                    { name: "Singapore (Port Clerk)", task: "Task: Stamp shipping manifests for Raffles' port", icon: "📜", chats: ["Clerk whispers: “The colony trade is booming today.”", "“Stamping trade permits rapidly...”", "“Vessels clearing port successfully!”"] },
+                    { name: "Sydney (Cartography Asst)", task: "Task: Assist Captain Cook in mapping southern coastlines", icon: "🗺️", chats: ["Captain Cook: “Watch the quill ink, chart the reef carefully.”", "“Drawing coastal contour lines...”", "“New uncharted land mapped successfully!”"] },
+                    { name: "London (Globe Theatre)", task: "Task: Help Shakespeare manage stage props & scripts", icon: "🎭", chats: ["Shakespeare sighs: “To be, or not to be... pass me that scroll!”", "“Organizing royal costume props...”", "“Curtain rising for Act 1!”"] },
+                    { name: "Vancouver (Fur Sorter)", task: "Task: Sort arctic winter furs at the trading post", icon: "🧥", chats: ["Trader shivers: “Brrr, sort those polar pelts quickly!”", "“Inspecting warm winter fur quality...”", "“Ready for the polar shipping expedition!”"] }
                 ],
                 gods: [
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-500)", "🌊Mazu (-1000)", 
@@ -588,8 +610,8 @@
             document.getElementById('knowledge-title').innerText = t.knowTitle;
             document.getElementById('k-close').innerText = t.kClose;
 
-            document.getElementById('station-modal-title').innerText = (lang === 'en' ? "💰 Select Banishment Station" : (lang === 'zh-CN' ? "💰 选择流放地与补给站" : "💰 選擇流放地與補給站"));
-            document.getElementById('station-modal-desc').innerText = (lang === 'en' ? "Earn tickets by tapping at supply stations:" : (lang === 'zh-CN' ? "点数不足时，选择流放地敲砖赚取机票费：" : "點數不足時，選擇流放地敲磚賺取機票費："));
+            document.getElementById('station-modal-title').innerText = (lang === 'en' ? "💰 Select Historical Station" : (lang === 'zh-CN' ? "💰 选择历史流放地打工" : "📜 選擇歷史流放地打工"));
+            document.getElementById('station-modal-desc').innerText = (lang === 'en' ? "Earn tickets by assisting historical figures:" : (lang === 'zh-CN' ? "旅费透支时，选择前往古代/历史名人处打工赚取机票费：" : "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費："));
             document.getElementById('station-modal-cancel').innerText = (lang === 'en' ? "Cancel" : (lang === 'zh-CN' ? "取消返回" : "取消返回"));
             for(let i=0; i<5; i++) {
                 document.getElementById('st-' + i).innerText = t.stations[i];
@@ -628,6 +650,7 @@
 
             if (isPlaying) {
                 updateUI();
+                updateWorkUI();
             }
         }
 
@@ -776,8 +799,6 @@
             currentStationIndex = idx; currentStationClicks = 0; currentWorkEarned = 0;
             let st = banishmentStations[idx];
             workTargetValue = st.ticket;
-            let stName = i18n[currentLang].stations[idx].split(' ')[1] || st.name;
-            document.getElementById('ui-banish-location').innerText = "🗺️ " + (currentLang === 'en' ? "Station: " : "流放地：") + stName;
             isEventActive = true;
             updateWorkUI();
             showScreen('screen-work');
@@ -996,7 +1017,6 @@
                 );
                 document.getElementById('win-message').innerText = msg;
 
-                // 顯示購買紀念品區域，隱藏導航按鈕
                 document.getElementById('purchase-area').style.display = 'block';
                 let buyDescText = (currentLang === 'en' ? 
                     `🛍️ Souvenir & Shipping Fee for Level ${currentLevel}: ${shippingFee} pts` :
@@ -1015,12 +1035,10 @@
             if (totalScore < shippingFee) {
                 alert(t.insufficient);
                 document.getElementById('win-modal').style.display = 'none';
-                // 強制流放至補給站
                 openStationModal();
                 return;
             }
 
-            // 扣除運費並加上關卡獎勵分
             totalScore -= shippingFee;
             totalScore += currentTarget.s;
             updateUI();
@@ -1075,31 +1093,48 @@
         function doWork() {
             let st = banishmentStations[currentStationIndex];
             if (currentStationClicks >= st.maxClicks) {
-                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : (currentLang === 'zh-CN' ? "⚠️ 敲砖额度已满，请点击下方按钮支付机票费返程！" : "⚠️ 敲磚額度已滿，請點擊下方按鈕支付機票費返程！"));
+                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : (currentLang === 'zh-CN' ? "⚠️ 打工额度已满，请点击下方按钮支付机票费返程！" : "⚠️ 打工額度已滿，請點擊下方按鈕支付機票費返程！"));
                 return;
             }
             playSound('item'); vibrate([20]);
             currentWorkEarned += st.reward; currentStationClicks++;
+            
+            // 隨機切換一句名人打工碎唸對話
+            let t = i18n[currentLang];
+            let wData = t.workData[currentStationIndex];
+            if (wData && wData.chats) {
+                let randomChat = wData.chats[Math.floor(Math.random() * wData.chats.length)];
+                document.getElementById('work-chat-bubble').innerText = randomChat;
+            }
+
             updateWorkUI();
         }
+
         function updateWorkUI() {
             let st = banishmentStations[currentStationIndex];
+            let t = i18n[currentLang];
+            let wData = t.workData[currentStationIndex];
+
+            document.getElementById('ui-banish-location').innerText = "🗺️ " + (currentLang === 'en' ? "Station: " : "流放地：") + wData.name;
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
+            
             let descText = (currentLang === 'en' ? 
-                `Per Tap: ${st.reward} pts | Remaining: ${st.maxClicks - currentStationClicks} | Ticket: ${st.ticket} pts` :
+                `${wData.task} | Per Tap: ${st.reward} pts | Remaining: ${st.maxClicks - currentStationClicks} | Ticket: ${st.ticket} pts` :
                 (currentLang === 'zh-CN' ?
-                    `每敲一次：${st.reward}点 | 剩余次数：${st.maxClicks - currentStationClicks} | 机票费：${st.ticket}点` :
-                    `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`
+                    `${wData.task} | 每敲一次：${st.reward}点 | 剩余次数：${st.maxClicks - currentStationClicks} | 机票费：${st.ticket}点` :
+                    `${wData.task} | 每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`
                 )
             );
             document.getElementById('work-rule-desc').innerText = descText;
             let prog = document.getElementById('work-progress');
             prog.max = st.ticket; prog.value = Math.min(currentWorkEarned, st.ticket);
+            
             let returnBtnText = (currentLang === 'en' ? "✈️ Pay Ticket & Return to Level!" : (currentLang === 'zh-CN' ? "✈️ 缴纳机票费，重返原关卡！" : "✈️ 繳交機票費，重返原關卡！"));
             document.getElementById('ui-btn-work-return').innerText = returnBtnText;
             document.getElementById('ui-btn-work-return').style.display = (currentWorkEarned >= st.ticket) ? 'block' : 'none';
         }
+
         function returnFromWork() {
             let st = banishmentStations[currentStationIndex];
             if (currentWorkEarned < st.ticket) return;
