@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 歷史打工旗艦版</title>
+    <title>世界寶藏迷宮探險 - 時空穿越歷史旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -39,6 +39,20 @@
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* 🌀 時空穿越特效畫面 */
+        #time-warp-screen {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #2C3E50 0%, #000000 100%); z-index: 3000;
+            flex-direction: column; align-items: center; justify-content: center; color: #F1C40F;
+            animation: warpFlash 1.5s infinite alternate;
+        }
+        @keyframes warpFlash {
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            100% { filter: hue-rotate(360deg) brightness(1.5); }
+        }
+        .warp-text { font-size: clamp(22px, 6vw, 36px); font-weight: 900; margin: 15px; text-shadow: 0 0 15px #F39C12; color: #FFF; }
+        .warp-sub { font-size: clamp(16px, 4vw, 22px); color: #F39C12; font-weight: 700; }
         
         .lang-selector { 
             background: #FFF3CD; padding: 8px 18px; border-radius: 30px; margin-bottom: 15px; 
@@ -149,6 +163,13 @@
 </head>
 <body>
 
+    <!-- 🌀 時空穿越特效遮罩層 -->
+    <div id="time-warp-screen">
+        <div style="font-size: 75px; animation: spinWarp 2s linear infinite;">⏳⚡</div>
+        <div class="warp-text" id="warp-title-txt">時空隧道穿越中...</div>
+        <div class="warp-sub" id="warp-sub-txt">正被流放至古代邊疆打工賺取機票！</div>
+    </div>
+
     <!-- 頁面1：封面 -->
     <div id="screen-cover" class="screen active">
         <div class="lang-selector">
@@ -180,7 +201,7 @@
                     <option value="5" id="opt-lvl5">第 5 關 (希臘・雅典)</option>
                     <option value="6" id="opt-lvl6">第 6 關 (義大利・羅馬/神壇)</option>
                     <option value="7" id="opt-lvl7">第 7 關 (英國・倫敦)</option>
-                    <option value="8" id="opt-lvl8">第 8 關 (美國・紐約)</option>
+                    <option value="8" id="opt-lvl8">第 8 关 (美國・紐約)</option>
                     <option value="9" id="opt-lvl9">第 9 關 (澳洲・雪梨)</option>
                     <option value="10" id="opt-lvl10">第 10 關 (俄羅斯・莫斯科)</option>
                 </select>
@@ -204,7 +225,7 @@
         <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(14px, 3.8vw, 17px); text-align: left; line-height: 1.7; background: #EBF8FF; padding: 20px; border-radius: 18px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
-            <p><b>🕹️ 歷史打工與流放經濟：</b>旅費不足時將流放至古代/歷史邊疆，協助名人打工賺取機票費與旅費！</p>
+            <p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發「時空穿越特效」，被流放至古代邊疆幫韓愈、蘇東坡、衙役押解打工賺取機票費！</p>
             <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
         </div>
         <br>
@@ -257,17 +278,17 @@
         <h2 id="ui-banish-location" style="color:#C0392B; font-size: clamp(18px, 4.5vw, 24px); margin: 0;">流放地：潮州（韓愈）</h2>
         
         <div style="font-size: clamp(14px, 3.8vw, 17px); margin: 12px 0; background: #FDFEFE; padding: 14px; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <p id="work-rule-desc" style="font-weight: 700; color: #C0392B; margin: 4px 0;">工作任務：驅逐鱷魚寫文章 | 每敲一次：200點 | 機票費：500點</p>
-            <p id="work-chat-bubble" style="font-style: italic; color: #2B6CB0; background: #EBF8FF; padding: 8px; border-radius: 10px; margin: 8px 0; font-weight: 600;">「今日進度：墨水滴了兩滴...」</p>
+            <p id="work-rule-desc" style="font-weight: 700; color: #C0392B; margin: 4px 0;">工作任務：拿木棍幫韓愈驅趕鱷魚 | 每敲一次：200點 | 機票費：500點</p>
+            <p id="work-chat-bubble" style="font-style: italic; color: #2B6CB0; background: #EBF8FF; padding: 8px; border-radius: 10px; margin: 8px 0; font-weight: 600;">「拿木棍敲打江岸，驅趕惡獸鱷魚中...」</p>
             <p id="work-score-wrap" style="margin: 6px 0;">已賺取工資：<b id="work-score" style="color:#27AE60; font-size: clamp(20px, 5vw, 26px);">0</b> / <span id="work-target-display">500</span> 點</p>
         </div>
         
         <div style="margin: 12px 0;">
             <progress id="work-progress" value="0" max="500"></progress>
-            <p id="work-status" style="font-size: clamp(14px, 3.8vw, 18px); font-weight: 700; color: #D35400; margin-top: 6px;">狂點滑鼠幫名人打工！</p>
+            <p id="work-status" style="font-size: clamp(14px, 3.8vw, 18px); font-weight: 700; color: #D35400; margin-top: 6px;">狂點按鈕打工賺取機票！</p>
         </div>
         
-        <button class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">✍️</button>
+        <button id="work-action-icon" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">🪵</button>
         <br>
         <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 320px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); margin-top: 8px;" onclick="returnFromWork()">✈️ 賺足機票費，穿越回原關卡！</button>
         <br>
@@ -332,11 +353,11 @@
             <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">📜 選擇歷史流放地打工</h2>
             <p id="station-modal-desc" style="font-size: 14px; color: #718096;">旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：</p>
             <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0;">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 13px;" onclick="selectStation(0)"><span id="st-0">🏛️ 潮州｜韓愈 (驅鱷寫文)｜每敲200/機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="selectStation(1)"><span id="st-1">🍖 惠州｜蘇東坡 (築堤烤蠔)｜每敲180/機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 13px;" onclick="selectStation(2)"><span id="st-2">🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 13px;" onclick="selectStation(3)"><span id="st-3">🪨 永州｜柳宗元 (遊歷石潭)｜每敲120/機票1100</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px;" onclick="selectStation(4)"><span id="st-4">❄️ 寧古塔｜清代文人 (雪地劈柴)｜每敲100/機票1300</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 13px;" onclick="triggerTimeWarp(0)"><span id="st-0">🪵 潮州｜韓愈 (拿木棍驅鱷)｜每敲200/機票500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="triggerTimeWarp(1)"><span id="st-1">🍢 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 13px;" onclick="triggerTimeWarp(2)"><span id="st-2">🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 13px;" onclick="triggerTimeWarp(3)"><span id="st-3">🪨 永州｜柳宗元 (尋小石潭)｜每敲120/機票1100</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px;" onclick="triggerTimeWarp(4)"><span id="st-4">⚔️ 寧古塔｜衙役 (雪地押解犯人)｜每敲100/機票1300</span></button>
             </div>
             <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 6px;" onclick="closeStationModal()">取消返回</button>
         </div>
@@ -384,7 +405,7 @@
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 歷史打工與流放經濟：</b>旅費不足時將流放至歷史邊疆，協助韓愈、蘇東坡等名人打工賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發炫酷時空穿越，流放至古代邊疆拿木棍驅鱷、烤生蠔、擔任衙役押解犯人賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
                 stationBtn: "💰 前往歷史流放站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
@@ -395,21 +416,28 @@
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
                 nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
-                buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放到歷史邊疆打工！",
+                buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，即將啟動時空隧道流放至古代邊疆打工！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
                 stations: [
-                    "🏛️ 潮州｜韓愈 (驅鱷寫文)｜每敲200/機票500",
-                    "🍖 惠州｜蘇東坡 (築堤烤蠔)｜每敲180/機票700",
+                    "🪵 潮州｜韓愈 (拿木棍驅鱷)｜每敲200/機票500",
+                    "🍢 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700",
                     "🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900",
-                    "🪨 永州｜柳宗元 (遊歷石潭)｜每敲120/機票1100",
-                    "❄️ 寧古塔｜清代文人 (雪地劈柴)｜每敲100/機票1300"
+                    "🪨 永州｜柳宗元 (尋小石潭)｜每敲120/機票1100",
+                    "⚔️ 寧古塔｜衙役 (雪地押解犯人)｜每敲100/機票1300"
                 ],
                 workData: [
-                    { name: "潮州（韓愈）", task: "任務：幫韓愈揮毫寫《祭鱷魚文》與驅逐鱷魚", icon: "✍️", chats: ["「今日進度：墨水滴了兩滴...」", "韓愈大喊：「快把鱷魚趕跑，本官要寫文章！」", "「墨硯快乾了，加把勁！」"] },
-                    { name: "惠州（蘇東坡）", task: "任務：幫東坡先生揮鏟築蘇堤、翻烤生蠔", icon: "🍢", chats: ["東坡笑稱：「別告訴朝廷我在這吃生蠔！」", "「土方搬運中，東坡肉香味陣陣飄來...」", "「再揮幾次鏟子，蘇堤就完工啦！」"] },
-                    { name: "儋州（吃貨東坡）", task: "任務：幫吃貨東坡砍椰子、辦學堂講學", icon: "🥥", chats: ["東坡大笑：「沒肉吃沒關係，椰子水喝到飽！」", "「椰子殼製成帽子中，創意 +1！」", "「茅草屋板凳搬好，準備聽東坡講學啦！」"] },
-                    { name: "永州（柳宗元）", task: "任務：陪柳宗元尋找小石潭、抄寫遊記", icon: "📜", chats: ["柳宗元嘆氣：「此地寂寞，幸好有你幫忙抄書。」", "「記錄永州奇山異水中...」", "「小石潭的魚好像在笑我們加班呢。」"] },
-                    { name: "寧古塔（清代文人）", task: "任務：在冰天雪地中幫流放文人劈柴生火", icon: "🪓", chats: ["流放秀才直打哆嗦：「凍死老夫了，快劈柴！」", "「柴火熱度上升中，終於有點暖意了...」", "「頂住零下酷寒，撐過這關就能回台啦！」"] }
+                    { name: "潮州（韓愈）", task: "打工任務：手持木棍在江岸敲打、驅趕惡獸鱷魚", icon: "🪵", chats: ["「用木棍大力敲擊江岸，鱷魚嚇得直發抖！」", "韓愈大喊：「好棒的棍法！快幫本官把這群惡獸趕跑！」", "「今日進度：木棍敲擊聲迴盪山谷...」"] },
+                    { name: "惠州（蘇東坡）", task: "打工任務：扇動炭火、在烤網上炙烤新鮮生蠔", icon: "🍢", chats: ["東坡笑口常開：「生蠔殼冒汁了！快灑蒜蓉！」", "「炭火炙烤滋滋作響，東坡肉與生蠔香氣四溢...」", "「再翻面烤幾個，今晚宵夜有著落啦！」"] },
+                    { name: "儋州（吃貨東坡）", task: "打工任務：拿斧頭砍椰子、搬運茅草講學", icon: "🥥", chats: ["東坡大笑：「海南島沒肉吃，但椰子水喝到飽！」", "「椰子殼製成斗笠中，東坡靈感大發！」", "「茅草屋板凳搬好，準備聽吃貨東坡開講！」"] },
+                    { name: "永州（柳宗元）", task: "打工任務：拿竹杖隨柳宗元尋找小石潭與奇石", icon: "🪨", chats: ["柳宗元嘆氣：「此地寂寞，幸好有你陪我找小石潭。」", "「撥開灌木叢，記錄永州八記山水遊記中...」", "「潭中魚可百許頭，皆若空游無所依。」"] },
+                    { name: "寧古塔（衙役押解）", task: "打工任務：擔任官府衙役，在風雪中押解犯人前行", icon: "⚔️", chats: ["犯人直打哆嗦：「差大哥饒命，這風雪快把人凍僵啦！」", "「手持官府令牌與長枷，雪地押解前行中...」", "「頂住零下酷寒酷雪，完成押解任務就能回台！」"] }
+                ],
+                warpTexts: [
+                    "⏳ 正在穿越至唐代潮州江岸...",
+                    "⏳ 正在穿越至北宋惠州炭火烤肉架...",
+                    "⏳ 正在穿越至海南島儋州吃貨東坡身旁...",
+                    "⏳ 正在穿越至湖南永州小石潭旁...",
+                    "⏳ 正在穿越至清代黑龍江寧古塔風雪刑场..."
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-500)", "🌊媽祖(-1000)", 
@@ -446,7 +474,7 @@
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
                 hell: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 历史打工与流放经济：</b>旅费不足时将流放至历史边疆，协助韩愈、苏东坡等名人打工赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 历史打工与时空穿越：</b>旅费不足时将触发炫酷时空穿越，流放至古代边疆拿木棍驱鳄、烤生蠔、担任衙役押解犯人赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
                 stationBtn: "💰 前往历史流放站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
@@ -457,24 +485,31 @@
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
                 nicknameTip: "💡 支持中英文、数字，最多 12 码，系统将自动加上专属识别码",
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
-                buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放到历史边疆打工！",
+                buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，即将启动时空隧道流放至古代边疆打工！",
                 footer: "高雄师范大学 刘世闵 老师设计",
                 stations: [
-                    "🏛️ 潮州｜韩愈 (驱鳄写文)｜每敲200/机票500",
-                    "🍖 惠州｜苏东坡 (筑堤烤蠔)｜每敲180/机票700",
+                    "🪵 潮州｜韩愈 (拿木棍驱鳄)｜每敲200/机票500",
+                    "🍢 惠州｜苏东坡 (炭火烤生蠔)｜每敲180/机票700",
                     "🥥 儋州｜吃货东坡 (砍椰讲学)｜每敲150/机票900",
-                    "🪨 永州｜柳宗元 (游历石潭)｜每敲120/机票1100",
-                    "❄️ 宁古塔｜清代文人 (雪地劈柴)｜每敲100/机票1300"
+                    "🪨 永州｜柳宗元 (寻小石潭)｜每敲120/机票1100",
+                    "⚔️ 宁古塔｜衙役 (雪地押解犯人)｜每敲100/机票1300"
                 ],
                 workData: [
-                    { name: "潮州（韩愈）", task: "任务：帮韩愈挥毫写《祭鳄鱼文》与驱逐鳄鱼", icon: "✍️", chats: ["「今日进度：墨水滴了两滴...」", "韩愈大喊：「快把鳄鱼赶跑，本官要写文章！」", "「墨砚快干了，加把劲！」"] },
-                    { name: "惠州（苏东坡）", task: "任务：帮东坡先生挥铲筑苏堤、翻烤生蠔", icon: "🍢", chats: ["东坡笑称：「别告诉朝廷我在这吃生蠔！」", "「土方搬运中，东坡肉香味阵阵飘来...」", "「再挥几下铲子，苏堤就完工啦！」"] },
-                    { name: "儋州（吃货东坡）", task: "任务：帮吃货东坡砍椰子、办学堂讲学", icon: "🥥", chats: ["东坡大笑：「没肉吃没关系，椰子水喝到饱！」", "「椰子壳制成帽子中，创意 +1！」", "「茅草屋板凳搬好，准备听东坡讲学啦！」"] },
-                    { name: "永州（柳宗元）", task: "任务：陪柳宗元寻找小石潭、抄写游记", icon: "📜", chats: ["柳宗元叹气：「此地寂寞，幸好有你帮忙抄书。」", "「记录永州奇山异水中...」", "「小石潭的鱼好像在笑我们加班呢。」"] },
-                    { name: "宁古塔（清代文人）", task: "任务：在冰天雪地中帮流放文人劈柴生火", icon: "🪓", chats: ["流放秀才直打哆嗦：「冻死老夫了，快劈柴！」", "「柴火热度上升中，终于有点暖意了...」", "「顶住零下酷寒，撑过这关就能回台啦！」"] }
+                    { name: "潮州（韩愈）", task: "打工任务：手持木棍在江岸敲打、驱赶恶兽鳄鱼", icon: "🪵", chats: ["「用木棍大力敲击江岸，鳄鱼吓得直发抖！」", "韩愈大喊：「好棒的棍法！快帮本官把这群恶兽赶跑！」", "「今日进度：木棍敲击声回荡山谷...」"] },
+                    { name: "惠州（苏东坡）", task: "打工任务：扇动炭火、在烤网上炙烤新鲜生蠔", icon: "🍢", chats: ["东坡笑口常开：「生蠔壳冒汁了！快撒蒜蓉！」", "「炭火炙烤滋滋作响，东坡肉与生蠔香气四溢...」", "「再翻面烤几个，今晚宵夜有着落啦！」"] },
+                    { name: "儋州（吃货东坡）", task: "打工任务：拿斧头砍椰子、搬运茅草讲学", icon: "🥥", chats: ["东坡大笑：「海南岛没肉吃，但椰子水喝到饱！」", "「椰子壳制成斗笠中，东坡灵感大发！」", "「茅草屋板凳搬好，准备听吃货东坡开讲！」"] },
+                    { name: "永州（柳宗元）", task: "打工任务：拿竹杖随柳宗元寻找小石潭与奇石", icon: "🪨", chats: ["柳宗元叹气：「此地寂寞，幸好有你陪我找小石潭。」", "「拨开灌木丛，记录永州八记山水游记中...」", "「潭中鱼可百许头，皆若空游无所依。」"] },
+                    { name: "宁古塔（衙役押解）", task: "打工任务：担任官府衙役，在风雪中押解犯人前行", icon: "⚔️", chats: ["犯人直打哆嗦：「差大哥饶命，这风雪快把人冻僵啦！」", "「手持官府令牌与长枷，雪地押解前行中...」", "「顶住零下酷寒酷雪，完成押解任务就能回台！」"] }
+                ],
+                warpTexts: [
+                    "⏳ 正在穿越至唐代潮州江岸...",
+                    "⏳ 正在穿越至北宋惠州炭火烤肉架...",
+                    "⏳ 正在穿越至海南岛儋州吃货东坡身旁...",
+                    "⏳ 正在穿越至湖南永州小石潭旁...",
+                    "⏳ 正在穿越至清代黑龙江宁古塔风雪刑场..."
                 ],
                 gods: [
-                    "🏮土地公(-300)", "⚔️温王爷(-500)", "🌊妈祖(-1000)", 
+                    "🏮土地公(-300)", "⚔️温王爺(-500)", "🌊妈祖(-1000)", 
                     "🌿观世音(-1500)", "🪷药师佛(-2000)", "🌟玉皇大帝 (全清场+指路 / -5000)"
                 ],
                 levels: [
@@ -508,7 +543,7 @@
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
                 hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
-                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to historical exploration stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will trigger a time-warp banishment to historical trade stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
                 stationBtn: "💰 Historical Supply Station", backCover: "⬅️ Main Menu",
                 tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
@@ -519,7 +554,7 @@
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
                 nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
                 winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
-                buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the historical supply station!",
+                buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Time-warp banishment activated to historical supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
                 stations: [
                     "🏙️ Manila (Spice Clerk) | 200 pts / Ticket: 500",
@@ -534,6 +569,13 @@
                     { name: "Sydney (Cartography Asst)", task: "Task: Assist Captain Cook in mapping southern coastlines", icon: "🗺️", chats: ["Captain Cook: “Watch the quill ink, chart the reef carefully.”", "“Drawing coastal contour lines...”", "“New uncharted land mapped successfully!”"] },
                     { name: "London (Globe Theatre)", task: "Task: Help Shakespeare manage stage props & scripts", icon: "🎭", chats: ["Shakespeare sighs: “To be, or not to be... pass me that scroll!”", "“Organizing royal costume props...”", "“Curtain rising for Act 1!”"] },
                     { name: "Vancouver (Fur Sorter)", task: "Task: Sort arctic winter furs at the trading post", icon: "🧥", chats: ["Trader shivers: “Brrr, sort those polar pelts quickly!”", "“Inspecting warm winter fur quality...”", "“Ready for the polar shipping expedition!”"] }
+                ],
+                warpTexts: [
+                    "⏳ Time-warp to Spanish Manila spice docks...",
+                    "⏳ Time-warp to colonial Singapore port...",
+                    "⏳ Time-warp to Captain Cook's Sydney coast...",
+                    "⏳ Time-warp to Shakespeare's Globe Theatre...",
+                    "⏳ Time-warp to arctic Vancouver fur post..."
                 ],
                 gods: [
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-500)", "🌊Mazu (-1000)", 
@@ -794,8 +836,23 @@
         function openStationModal() { document.getElementById('station-modal').style.display = 'flex'; }
         function closeStationModal() { document.getElementById('station-modal').style.display = 'none'; }
 
-        function selectStation(idx) {
+        // 🌀 觸發時空穿越特效動畫
+        function triggerTimeWarp(idx) {
             closeStationModal();
+            let t = i18n[currentLang];
+            document.getElementById('warp-title-txt').innerText = (currentLang === 'en' ? "Time-Warping to Historical Era..." : "⏳ 時空隧道穿越中...");
+            document.getElementById('warp-sub-txt').innerText = t.warpTexts[idx] || "正被流放至古代邊疆打工賺取機票！";
+            
+            let warpScreen = document.getElementById('time-warp-screen');
+            warpScreen.style.display = 'flex';
+
+            setTimeout(() => {
+                warpScreen.style.display = 'none';
+                selectStationDirect(idx);
+            }, 1800);
+        }
+
+        function selectStationDirect(idx) {
             currentStationIndex = idx; currentStationClicks = 0; currentWorkEarned = 0;
             let st = banishmentStations[idx];
             workTargetValue = st.ticket;
@@ -1099,7 +1156,6 @@
             playSound('item'); vibrate([20]);
             currentWorkEarned += st.reward; currentStationClicks++;
             
-            // 隨機切換一句名人打工碎唸對話
             let t = i18n[currentLang];
             let wData = t.workData[currentStationIndex];
             if (wData && wData.chats) {
@@ -1118,6 +1174,7 @@
             document.getElementById('ui-banish-location').innerText = "🗺️ " + (currentLang === 'en' ? "Station: " : "流放地：") + wData.name;
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
+            document.getElementById('work-action-icon').innerText = wData.icon;
             
             let descText = (currentLang === 'en' ? 
                 `${wData.task} | Per Tap: ${st.reward} pts | Remaining: ${st.maxClicks - currentStationClicks} | Ticket: ${st.ticket} pts` :
