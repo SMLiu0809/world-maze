@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 圖標完美還原旗艦版</title>
+    <title>世界寶藏迷宮探險 - 清代考據最終決定版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -133,9 +133,9 @@
 
         #screen-work { border-color: #D35400; background-color: #FDFEFE; }
         
-        /* 🥋 打工主按鈕樣式（前四站大圖示 Emoji，第五站寧古塔呈現雙人組） */
+        /* 🥋 打工主按鈕動畫 */
         .work-btn {
-            width: clamp(120px, 30vw, 150px); height: clamp(120px, 30vw, 150px); 
+            width: clamp(130px, 32vw, 170px); height: clamp(130px, 32vw, 170px); 
             background: linear-gradient(135deg, #D35400 0%, #BA4A00 100%); color: white; border-radius: 35px; border: none; 
             box-shadow: 0 8px 22px rgba(211, 84, 0, 0.4); cursor: pointer; user-select: none; margin: 10px; 
             display: inline-flex; align-items: center; justify-content: center; transition: all 0.15s ease-out;
@@ -231,7 +231,7 @@
             </div>
         </div>
         <button id="btn-instructions" class="btn-large" onclick="goToInstructions()">遊戲說明 📖</button>
-        <div class="footer" id="txt-footer">國立高雄師範大學 劉世閔 老師設計[cite: 1]</div>
+        <div class="footer" id="txt-footer">國立高雄師範大學 劉世閔 老師設計</div>
     </div>
 
     <!-- 頁面2：說明 -->
@@ -239,7 +239,8 @@
         <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(14px, 3.8vw, 17px); text-align: left; line-height: 1.7; background: #EBF8FF; padding: 20px; border-radius: 18px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
-            <p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發「時空穿越特效」，被流放至古代邊疆幫韓愈、蘇東坡、甄嬛老爹打工賺取機票費！</p>
+            <p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。連續擲出兩次聖筊即可獲得神明庇佑清場或指路！</p>
+            <p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發時空穿越，流放至古代邊疆幫韓愈、蘇東坡、甄嬛老爹打工賺取機票費！</p>
             <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
         </div>
         <br>
@@ -257,7 +258,7 @@
             <span id="ui-stars">⭐⭐⭐</span>
             <span id="ui-time">0 秒</span>
         </div>
-        <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
+        <div class="station-banner" id="ui-station-banner">📍 第一站 : 臺灣・高雄</div>
         <div class="target-text" id="ui-target">目標：駁二鐵件藝術公仔 🤖</div>
         
         <div class="toolbar-top">
@@ -304,7 +305,7 @@
         
         <!-- 打工主按鈕 -->
         <button id="work-action-icon" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">
-            <span id="work-inner-icon" style="font-size: 50px; display: inline-flex; align-items: center; justify-content: center; width: 100%; height: 100%;">🪵</span>
+            <span id="work-inner-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">🪵</span>
         </button>
         <br>
         <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 320px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); margin-top: 8px;" onclick="returnFromWork()">✈️ 賺足機票費，穿越回原關卡！</button>
@@ -407,13 +408,13 @@
                 <span class="bwei-cup" id="cup2">🌙</span>
             </div>
             <div class="sheng-count" id="bwei-count-display">目前連續聖筊：0 次</div>
-            <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);">🙌 擲筊！</button>
+            <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);" onclick="throwBweiAnimation()">🙌 擲筊！</button>
             <button id="bwei-cancel-btn" class="btn-large btn-cancel" style="width: 100%; margin-top: 10px;" onclick="closeBwei()">取消</button>
         </div>
     </div>
 
     <script>
-        // 🥋 動態取得少俠/女俠稱謂
+        // 🥋 動態取得少俠/女俠稱謂 (清代武林風格)
         function getHeroTitle() {
             let genderRadio = document.querySelector('input[name="gender"]:checked');
             let isFemale = genderRadio && genderRadio.value === 'female';
@@ -421,37 +422,40 @@
             return isFemale ? "女俠" : "少俠";
         }
 
-        // 🥋 完整人形武林大師（男：少俠束髮，女：長辮子女俠，均著功夫褲與朝天蹬高踢腿）SVG (左側)
+        // 🥋 完整人形武林大師（男：清代少俠束髮與長辮短打武服，女：清代女俠優雅長辮與宮廷武裝，均著朝天蹬高踢腿）SVG (左側)
         function getKungFuPersonSVG() {
             let genderRadio = document.querySelector('input[name="gender"]:checked');
             let isFemale = genderRadio && genderRadio.value === 'female';
             
             if (isFemale) {
-                // 女性：長辮子女俠朝天蹬
+                // 女性：清代女俠（優雅長辮、粉黛清裝武服與朝天蹬）
                 return `
                     <svg width="65" height="65" viewBox="0 0 100 100" style="position: absolute; left: 10px; bottom: 8px; filter: drop-shadow(0 3px 4px rgba(0,0,0,0.3));">
-                        <!-- 頭部與長辮子 -->
                         <circle cx="50" cy="20" r="10" fill="#FEEBC8"/>
-                        <path d="M42,13 Q50,7 58,13 L65,35 Q68,55 75,70" stroke="#1A202C" stroke-width="4" stroke-linecap="round" fill="none"/>
-                        <!-- 傳統武俠女裝與功夫褲 -->
+                        <!-- 清代女性流暢長辮子 -->
+                        <path d="M42,13 Q50,7 58,13 L65,35 Q70,55 78,75" stroke="#1A202C" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <!-- 清代宮廷武裝與腰身 -->
                         <path d="M38,30 Q50,27 62,30 L68,65 Q50,75 32,65 Z" fill="#ED64A6" stroke="#1A202C" stroke-width="2"/>
-                        <!-- 立正支撐腿 -->
+                        <!-- 支撐腿 -->
                         <path d="M38,65 Q42,85 45,95 L50,95 Q48,82 43,65 Z" fill="#1A202C"/>
                         <!-- 朝天蹬高踢腿 -->
                         <path d="M55,50 Q75,35 88,22 Q94,15 92,25 Q85,42 62,55 Z" fill="#1A202C" stroke="#2D3748" stroke-width="1.5"/>
                         <path d="M85,20 L96,15 Q100,18 97,25 L88,28 Z" fill="#FFFFFF"/>
-                        <!-- 氣功流線 -->
                         <path d="M78,32 Q88,20 95,12" stroke="#F6AD55" stroke-width="3" stroke-linecap="round" fill="none"/>
                     </svg>
                 `;
             } else {
-                // 男性：少俠束髮朝天蹬
+                // 男性：清代少俠（沉穩藍衫、清代剃髮長辮與朝天蹬）
                 return `
                     <svg width="65" height="65" viewBox="0 0 100 100" style="position: absolute; left: 10px; bottom: 8px; filter: drop-shadow(0 3px 4px rgba(0,0,0,0.3));">
                         <circle cx="50" cy="20" r="10" fill="#FEEBC8"/>
-                        <path d="M42,13 Q50,7 58,13 L56,18 Q50,14 44,18 Z" fill="#1A202C"/>
+                        <!-- 清代男性前額剃光後腦長辮 -->
+                        <path d="M48,10 Q55,7 62,13 L68,32 Q72,52 78,70" stroke="#1A202C" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <!-- 清代少俠短打武服 -->
                         <path d="M38,30 Q50,27 62,30 L68,65 Q50,75 32,65 Z" fill="#2B6CB0" stroke="#1A202C" stroke-width="2"/>
+                        <!-- 支撐腿 -->
                         <path d="M38,65 Q42,85 45,95 L50,95 Q48,82 43,65 Z" fill="#1A202C"/>
+                        <!-- 朝天蹬高踢腿 -->
                         <path d="M55,50 Q75,35 88,22 Q94,15 92,25 Q85,42 62,55 Z" fill="#1A202C" stroke="#2D3748" stroke-width="1.5"/>
                         <path d="M85,20 L96,15 Q100,18 97,25 L88,28 Z" fill="#FFFFFF"/>
                         <path d="M78,32 Q88,20 95,12" stroke="#F6AD55" stroke-width="3" stroke-linecap="round" fill="none"/>
@@ -463,18 +467,14 @@
         // 👑 甄嬛娘娘身著清代宮廷正式旗裝（圓領直身氅衣、二把頭旗頭、一耳三鉗）完整人形 SVG (右側坐鎮)
         const zhenHuanFullSVG = `
             <svg width="75" height="75" viewBox="0 0 100 100" style="position: absolute; right: 8px; bottom: 8px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.25)); pointer-events: none;">
-                <!-- 旗頭二把頭與一耳三鉗金色點綴 -->
                 <path d="M35,12 Q50,4 65,12 Q68,18 60,22 Q50,25 40,22 Q32,18 35,12 Z" fill="#1A202C"/>
                 <circle cx="42" cy="15" r="2" fill="#D69E2E"/>
                 <circle cx="58" cy="15" r="2" fill="#D69E2E"/>
-                <!-- 慈祥端莊面容與一耳三鉗耳飾 -->
                 <circle cx="50" cy="30" r="12" fill="#FEEBC8"/>
                 <circle cx="42" cy="32" r="3" fill="#FBD38D"/>
                 <circle cx="58" cy="32" r="3" fill="#FBD38D"/>
-                <!-- 清代宮廷正式旗裝（粉紅圓領直身氅衣與華麗刺繡邊緣） -->
                 <path d="M30,42 Q50,38 70,42 Q78,65 84,92 Q50,98 16,92 Q22,65 30,42 Z" fill="#ED64A6" stroke="#97266D" stroke-width="2"/>
                 <path d="M40,42 Q50,45 60,42 L65,60 Q50,65 35,60 Z" fill="#FEEBC8"/>
-                <!-- 賞賜金元寶 -->
                 <text x="68" y="25" font-size="16">🪙</text>
             </svg>
         `;
@@ -486,8 +486,8 @@
             { name: "永州（柳宗元）", task: "工作任務：拿竹杖隨柳宗元尋找小石潭與奇石", icon: "🪨", isLeg: false, chats: ["柳宗元嘆氣：「此地寂寞，幸好有你陪我找小石潭。」", "「撥開灌木叢，記錄永州八記山水遊記中...」", "「潭中魚可百許頭，皆若空游無所依。」"] },
             { name: "寧古塔（押解甄遠道）", task: "工作任務：押解甄嬛老爹，使出朝天蹬踢歹徒拿甄嬛賞金", icon: "🦵", isLeg: true, chats: [
                 () => `甄遠道讚嘆：「${getHeroTitle()}好一式朝天蹬！老夫這條老命就靠你護送了！」`, 
-                () => `「展現武林大師風範，一腳凌空踢飛半路攔道的歹徒！」`, 
-                () => `「收到甄嬛娘娘宮中密信：『賞金已匯，請${getHeroTitle()}繼續展現高超腿法！』」`
+                () => `<b>「展現武林大師風範，一腳凌空踢飛半路攔道的歹徒！」</b>`, 
+                () => `<b>「收到甄嬛娘娘宮中密信：『賞金已匯，請${getHeroTitle()}繼續展現高超腿法！』」</b>`
             ] }
         ];
 
@@ -498,8 +498,8 @@
             { name: "永州（柳宗元）", task: "工作任务：拿竹杖随柳宗元寻找小石潭与奇石", icon: "🪨", isLeg: false, chats: ["柳宗元叹气：“此地寂寞，幸好有你陪我找小石潭。”", "“拨开灌木丛，记录永州八记山水游记中...”", "“潭中鱼可百许头，皆若空游无所依。”"] },
             { name: "宁古塔（押解甄远道）", task: "工作任务：押解甄嬛老爹，使出朝天蹬击退歹徒拿甄嬛赏金", icon: "🦵", isLeg: true, chats: [
                 () => `甄远道赞叹：“${getHeroTitle()}好一式朝天蹬！老夫这条老命就靠你护送了！”`, 
-                () => `“展现武林大师风范，一脚凌空踢飞半路拦道的歹徒！”`, 
-                () => `“收到甄嬛娘娘宫中密信：‘赏金已汇，请${getHeroTitle()}继续展现高超腿法！’”`
+                () => `<b>“展现武大师风范，一脚凌空踢飞半路拦道的歹徒！”</b>`, 
+                () => `<b>“收到甄嬛娘娘宫中密信：‘赏金已汇，请${getHeroTitle()}继续展现高超腿法！’”</b>`
             ] }
         ];
 
@@ -520,26 +520,26 @@
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發「時空穿越特效」，被流放至古代邊疆幫韓愈、蘇東坡、押解甄嬛老爹打工賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。連續擲出兩次聖筊即可獲得神明庇佑清場或指路！</p><p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發時空穿越，流放至古代邊疆幫韓愈、蘇東坡、甄嬛老爹打工賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
                 stationBtn: "💰 前往歷史流放站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
                 knowTitle: "📖 文化與寶藏知識", kClose: "了解了，繼續探險！",
                 stationTitle: "📜 選擇歷史流放地打工", stationDesc: "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！", godClose: "關閉指南",
-                bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
+                bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明 (輕鬆7次，標準6次，挑戰5次，地獄4次)", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
                 nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
                 buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，即將啟動時空隧道流放至古代邊疆打工！",
                 workHeaderTitle: "📜 時空流放打工區 📜", workEarnedLabel: "已賺取工資：", workUnitLabel: "點", workTapTip: "狂點按鈕打工賺取機票！", workReturnBtn: "✈️ 賺足機票費，穿越回原關卡！", workBackBtn: "⬅️ 返回主選單",
-                footer: "國立高雄師範大學 劉世閔 老師設計[cite: 1]",
+                footer: "國立高雄師範大學 劉世閔 老師設計",
                 stations: [
                     "🪵 潮州｜韓愈 (拿木棍驅鱷)｜每敲200/機票500",
                     "🦪 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700",
                     "🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900",
                     "🪨 永州｜柳宗元 (尋小石潭)｜每敲120/機票1100",
-                    "🦵 寧古塔｜押解甄嬛老爹 (使出朝天蹬踢歹徒拿甄嬛賞金)｜每敲100/機票1300"
+                    "🦵 寧古塔｜押解甄嬛老爹 (使出無影腳踢歹徒拿甄嬛賞金)｜每敲100/機票1300"
                 ],
                 warpTexts: [
                     "⏳ 正在穿越至唐代潮州江岸...",
@@ -560,7 +560,7 @@
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
                     "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
-                    "大本鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
+                    "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
                     "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
@@ -583,14 +583,14 @@
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
                 hell: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 历史打工与时空穿越：</b>旅费不足时将触发炫酷时空穿越，流放至古代边疆拿木棍驱鳄、烤生蠔、押解甄嬛老爹打工赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>⛩️ 第 6 关起神明请筊与次数限制：</b>解锁神坛后可诚心掷筊请神，依游戏难度享有不同最高尝试次数（<b>轻松 7 次</b>、<b>标准 6 次</b>、<b>挑战 5 次</b>、<b>地狱 4 次</b>）。连续掷出两次圣筊即可获得神明庇佑清场或指路！</p><p><b>🕹️ 历史打工与时空穿越：</b>旅费不足时将触发时空穿越，流放至古代边疆帮韩愈、苏东坡、甄嬛老爹打工赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
                 stationBtn: "💰 前往历史流放站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
                 knowTitle: "📖 文化与宝藏知识", kClose: "了解了，继续探险！",
                 stationTitle: "📜 选择历史流放地打工", stationDesc: "旅费透支时，选择前往古代/历史名人处打工赚取机票费：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！", godClose: "关闭指南",
-                bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
+                bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明 (轻松7次，标准6次，挑战5次，地狱4次)", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
                 nicknameTip: "💡 支持中英文、数字，最多 12 码，系统将自动加上专属识别码",
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
@@ -646,14 +646,14 @@
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
                 hell: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
-                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will trigger a time-warp banishment to historical trade stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>⛩️ Divine Prayer & Attempts:</b> Unlocked at Level 6. Enjoy dynamic maximum attempts based on difficulty (<b>Casual 7</b>, <b>Standard 6</b>, <b>Challenge 5</b>, <b>Hell 4</b>). Throw two consecutive 'Sheng Jiao' for divine blessings!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee or trigger a time-warp banishment to historical trade stations if funds are low!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
                 stationBtn: "💰 Historical Supply Station", backCover: "⬅️ Main Menu",
                 tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
                 knowTitle: "📖 Culture & Treasure Lore", kClose: "Got it, Continue!",
                 stationTitle: "💰 Select Historical Banishment Station", stationDesc: "Earn tickets by assisting historical figures at supply stations:", stationCancel: "Cancel",
                 godTitle: "⛩️ Divine Guidance", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close",
-                bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
+                bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed (Dynamic attempts by mode)", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
                 nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
                 winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
@@ -726,7 +726,7 @@
             document.getElementById('m-cha').innerText = t.cha;
             document.getElementById('md-cha').innerText = t.chaDesc;
             document.getElementById('m-hel').innerText = t.hel;
-            document.getElementById('md-hel').innerText = t.helDesc;
+            document.getElementById('md-hel').innerText = t.hellDesc;
 
             document.getElementById('btn-instructions').innerText = t.instructions;
             document.getElementById('ins-title').innerText = t.insTitle;
@@ -786,6 +786,7 @@
             let soundBtn = document.getElementById('btn-sound-toggle');
             if(soundBtn) {
                 soundBtn.innerText = soundEnabled ? t.tSound : t.tSoundOff;
+                soundBtn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
             }
 
             for (let i = 1; i <= 10; i++) {
@@ -884,7 +885,7 @@
         let currentLevel = 1; let totalScore = 500; let isEventActive = false;
         let maze = [], mazeSize = 9; let playerPos = {x: 1, y: 1}, targetPos = {x: 7, y: 7}; 
         let currentTarget = {n:"駁二鐵件藝術公仔 🤖", s:500, i:"🤖", station:"第一站 : 臺灣・高雄", knowledge:"展現高雄由工業港口轉型為當代藝術創意的文創精神。"};
-        let bweiShengCount = 0; let pendingGod = '', pendingGodName = '';
+        let bweiShengCount = 0; let bweiAttemptsLeft = 6; let maxBweiAttempts = 6; let pendingGod = '', pendingGodName = '';
 
         const levelScoreList = [500, 800, 1000, 3500, 6000, 10000, 2500, 1500, 2000, 4500];
 
@@ -1303,7 +1304,7 @@
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
             
-            // 渲染：如果為寧古塔（索引4），按鈕內顯示「左側完整朝天蹬武俠人形 + 右側甄嬛娘娘」；否則還原為大器醒目的大 Emoji
+            // 渲染：如果為寧古塔（索引4），按鈕內顯示「左側朝天蹬武俠人形 + 右側甄嬛娘娘」；否則還原為大 Emoji
             let iconContainer = document.getElementById('work-inner-icon');
             if (wData.isLeg) {
                 iconContainer.innerHTML = getKungFuPersonSVG() + zhenHuanFullSVG;
@@ -1340,10 +1341,25 @@
             pendingGod = godType; 
             let godIdx = Object.keys(godsData).indexOf(godType);
             pendingGodName = i18n[currentLang].gods[godIdx] || godsData[godType].n_tw;
-            isEventActive = true; bweiShengCount = 0;
+            isEventActive = true; 
+            bweiShengCount = 0;
+            
+            // 依遊戲模式動態配置擲筊機會（輕鬆7次、標準6次、挑戰5次、地獄4次）
+            let mode = document.getElementById('selected-mode').value;
+            if (mode === 'easy') {
+                maxBweiAttempts = 7;
+            } else if (mode === 'standard') {
+                maxBweiAttempts = 6;
+            } else if (mode === 'challenge') {
+                maxBweiAttempts = 5;
+            } else {
+                maxBweiAttempts = 4; // 地獄模式 4 次機會
+            }
+            bweiAttemptsLeft = maxBweiAttempts;
+
             let pTitle = (currentLang === 'en' ? "🙏 Praying to " + pendingGodName : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName));
             document.getElementById('bwei-title').innerText = pTitle;
-            let countText = (currentLang === 'en' ? "Consecutive Sheng Jiao: 0" : (currentLang === 'zh-CN' ? "目前连续圣筊：0 次" : "目前連續聖筊：0 次"));
+            let countText = (currentLang === 'en' ? `Consecutive Sheng Jiao: 0 (Attempts left: ${bweiAttemptsLeft})` : (currentLang === 'zh-CN' ? `目前连续圣筊：0 次 (剩余机会: ${bweiAttemptsLeft} 次)` : `目前連續聖筊：0 次 (剩餘機會: ${bweiAttemptsLeft} 次)`));
             document.getElementById('bwei-count-display').innerText = countText;
             document.getElementById('cup1').innerText = "🌙";
             document.getElementById('cup2').innerText = "🌙";
@@ -1352,6 +1368,7 @@
         function closeBwei() { document.getElementById('bwei-modal').style.display = 'none'; isEventActive = false; }
         
         function throwBweiAnimation() {
+            if (bweiAttemptsLeft <= 0) return;
             playSound('item'); vibrate([50, 50]);
             let cup1 = document.getElementById('cup1');
             let cup2 = document.getElementById('cup2');
@@ -1362,25 +1379,87 @@
                 cup1.style.transform = 'rotate(0deg) scale(1)';
                 cup2.style.transform = 'rotate(0deg) scale(1)';
                 
-                let isSheng = Math.random() < 0.5;
+                let mode = document.getElementById('selected-mode').value;
+                let shengProb = 0.5;
+                if (mode === 'easy') shengProb = 0.6;
+                else if (mode === 'standard') shengProb = 0.5;
+                else if (mode === 'challenge') shengProb = 0.4;
+                else if (mode === 'hell') shengProb = 0.3;
+
+                let isSheng = Math.random() < shengProb;
                 cup1.innerText = isSheng ? "🌙" : "🌛";
                 cup2.innerText = isSheng ? "🌛" : "🌙";
 
+                bweiAttemptsLeft--;
+
                 if (isSheng) {
                     bweiShengCount++;
-                    let sText = (currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiShengCount}` : (currentLang === 'zh-CN' ? `目前连续圣筊：${bweiShengCount} 次` : `目前連續聖筊：${bweiShengCount} 次`));
+                    let sText = (currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiShengCount} (Attempts left: ${bweiAttemptsLeft})` : (currentLang === 'zh-CN' ? `目前连续圣筊：${bweiShengCount} 次 (剩余机会: ${bweiAttemptsLeft} 次)` : `目前連續聖筊：${bweiShengCount} 次 (剩餘機會: ${bweiAttemptsLeft} 次)`));
                     document.getElementById('bwei-count-display').innerText = sText;
                     if (bweiShengCount === 2) {
                         setTimeout(() => {
                             document.getElementById('bwei-modal').style.display = 'none';
-                            alert(currentLang === 'en' ? "⛩️ Divine Blessing Successful!" : (currentLang === 'zh-CN' ? "⛩️ 神明圣筊显灵，庇佑成功！" : "⛩️ 神明聖筊顯靈，庇佑成功！"));
+                            
+                            // 扣除香油錢與執行神蹟
+                            let cost = godsData[pendingGod].cost;
+                            totalScore -= cost;
+                            updateUI();
+
+                            if (pendingGod === 'supreme') {
+                                // 玉皇大帝：全清場並直接通關
+                                alert(currentLang === 'en' ? "🌟 Jade Emperor manifests! Maze cleared & direct victory!" : "🌟 玉皇大帝顯靈！全場清場並直接通關本關！");
+                                playerPos = {x: targetPos.x, y: targetPos.y};
+                                checkWin();
+                            } else {
+                                alert(currentLang === 'en' ? "⛩️ Divine Blessing Successful! Path illuminated." : "⛩️ 神明聖筊顯靈，庇佑成功！前路已為您指引。");
+                                if(maze[targetPos.y-1] && maze[targetPos.y-1][targetPos.x] !== undefined) {
+                                    maze[targetPos.y-1][targetPos.x] = 0;
+                                }
+                                drawMaze();
+                            }
                             isEventActive = false;
                         }, 500);
+                        return;
                     }
                 } else {
                     bweiShengCount = 0;
-                    let fText = (currentLang === 'en' ? "Consecutive Sheng Jiao: 0 (Failed)" : (currentLang === 'zh-CN' ? "目前连续圣筊：0 次 (笑筊/阴筊)" : "目前連續聖筊：0 次 (笑筊/陰筊)"));
+                    let fText = (currentLang === 'en' ? `Sheng Jiao Failed (Attempts left: ${bweiAttemptsLeft})` : (currentLang === 'zh-CN' ? `未得聖筊 (剩余机会: ${bweiAttemptsLeft} 次)` : `未得聖筊 (剩餘機會: ${bweiAttemptsLeft} 次)`));
                     document.getElementById('bwei-count-display').innerText = fText;
+                }
+
+                // 次數用盡仍未請到神：神明不在位隨機現象
+                if (bweiAttemptsLeft <= 0 && bweiShengCount < 2) {
+                    setTimeout(() => {
+                        document.getElementById('bwei-modal').style.display = 'none';
+                        
+                        const absentReasonsTW = [
+                            "🌴 【神明不在位】神明暫時請年休去帛琉度假了！香爐前掛著「本日公休，有事請找土地公代理」的牌子。",
+                            "🍑 【神明不在位】神明正在參加王母娘娘的蟠桃會！仙桃吃得正開心，暫時不接聽凡間急件。",
+                            "🀄 【神明不在位】神明跑去跟月老打麻將！三缺一正在血戰到底，完全聽不到你在擲筊。",
+                            "🧘 【神明不在位】神明正在閉關修練九轉玄功！天機不可洩漏，請少俠/女俠靠實力闖關吧！",
+                            "💤 【神明不在位】神明今天值班太累，正在南天門打瞌睡！呼嚕聲太大聽不到筊杯落地的聲音。"
+                        ];
+                        const absentReasonsCN = [
+                            "🌴 【神明不在位】神明暂时请年休去三亚度假了！香炉前挂着“本日歇业，有事请找土地公代理”的牌子。",
+                            "🍑 【神明不在位】神明正在参加王母娘娘的蟠桃会！蟠桃吃得正开心，暂时不在凌霄宝殿。",
+                            "🀄 【神明不在位】神明跑去和月老打麻将！三缺一正在血战到底，完全顾不上显灵。",
+                            "🧘 【神明不在位】神明正在闭关修炼九转玄功！天机不可泄露，请大侠凭硬实力通关！",
+                            "💤 【神明不在位】神明今天值班太累，正在南天门摸鱼打瞌睡！呼噜声太大，听不见您的圣筊。"
+                        ];
+                        const absentReasonsEN = [
+                            "🌴 [Deity Absent] The deity is on annual leave in Hawaii! A sign reads 'Out of office, please contact local Earth God.'",
+                            "🍑 [Deity Absent] The deity is attending the Queen Mother's Peach Banquet! Too busy eating heavenly peaches.",
+                            "🀄 [Deity Absent] The deity is playing mahjong with the Matchmaker! Four-player game in progress, no divine response.",
+                            "🧘 [Deity Absent] The deity is in deep meditation mastering heavenly arts! Rely on your own skills this time!",
+                            "💤 [Deity Absent] The deity is taking a nap at the South Heavenly Gate! Snoring too loudly to hear your oracle blocks."
+                        ];
+
+                        let reasons = (currentLang === 'en') ? absentReasonsEN : ((currentLang === 'zh-CN') ? absentReasonsCN : absentReasonsTW);
+                        let randomReason = reasons[Math.floor(Math.random() * reasons.length)];
+                        
+                        alert(randomReason);
+                        isEventActive = false;
+                    }, 600);
                 }
             }, 500);
         }
