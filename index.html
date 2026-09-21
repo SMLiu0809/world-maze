@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 甄嬛旗裝賞賜旗艦版</title>
+    <title>世界寶藏迷宮探險 - 甄嬛旗裝無影腳旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -133,22 +133,22 @@
 
         #screen-work { border-color: #D35400; background-color: #FDFEFE; }
         
-        /* 🦵 功夫無影腳按鈕動畫 */
+        /* 🦵 甄嬛清裝與功夫無影腳按鈕動畫 */
         .work-btn {
-            font-size: clamp(40px, 10vw, 60px); width: clamp(120px, 30vw, 160px); height: clamp(120px, 30vw, 160px); 
-            background: linear-gradient(135deg, #D35400 0%, #BA4A00 100%); color: white; border-radius: 35px; border: none; 
-            box-shadow: 0 8px 22px rgba(211, 84, 0, 0.4); cursor: pointer; user-select: none; margin: 10px; 
+            width: clamp(130px, 32vw, 170px); height: clamp(130px, 32vw, 170px); 
+            background: linear-gradient(135deg, #8E44AD 0%, #5B2C6F 100%); color: white; border-radius: 35px; border: 3px solid #F1C40F; 
+            box-shadow: 0 8px 22px rgba(142, 68, 173, 0.4); cursor: pointer; user-select: none; margin: 10px; 
             display: inline-flex; align-items: center; justify-content: center; transition: all 0.15s ease-out;
             position: relative; overflow: hidden;
         }
-        .work-btn:active { transform: scale(0.92); box-shadow: 0 2px 8px rgba(211, 84, 0, 0.2); }
+        .work-btn:active { transform: scale(0.92); box-shadow: 0 2px 8px rgba(142, 68, 173, 0.2); }
 
         .kick-action {
             animation: kungfuKick 0.25s ease-out;
         }
         @keyframes kungfuKick {
             0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.25) rotate(-35deg) translateX(15px); }
+            50% { transform: scale(1.25) rotate(-25deg) translateX(12px); }
             100% { transform: scale(1) rotate(0deg); }
         }
 
@@ -413,9 +413,9 @@
     </div>
 
     <script>
-        // 🥋 穿著清代圓領氅衣與旗頭的甄嬛娘娘賞賜與無影腳踢擊 SVG
+        // 🥋 穿著清代圓領氅衣、旗頭與無影腳踢擊特效的甄嬛娘娘 SVG
         const zhenHuanKungFuSVG = `
-            <svg width="85" height="85" viewBox="0 0 100 100" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
+            <svg width="90" height="90" viewBox="0 0 100 100" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
                 <!-- 旗頭二把頭與一耳三鉗點綴 -->
                 <path d="M35,12 Q50,4 65,12 Q68,18 60,22 Q50,25 40,22 Q32,18 35,12 Z" fill="#1A202C"/>
                 <circle cx="42" cy="15" r="2" fill="#D69E2E"/>
@@ -437,7 +437,7 @@
         `;
 
         const workTasksTW = [
-            { name: "潮州（韓愈）", task: "工作任務：拿木棍幫韓愈驅趕鱷魚", icon: "🪵", isLeg: false, chats: ["「用木棍大力敲擊江岸，鱷魚嚇得直發抖！」", "韓愈大喊：「好棒的棍法！快幫本官把這群惡獸趕跑！」", "「今日進度：木棍敲擊聲迴盪山谷...」"] },
+            { name: "潮州（韓愈）", task: "工作任務：拿木棍幫韓愈驅趕鱷魚", icon: "🪵", isLeg: false, chats: ["「用木棍大力敲擊江岸，鱷魚嚇得直發抖！」", "韓愈大喊：「好棒的棍法！快幫本官把這群惡獸趕跑！」", "C"] },
             { name: "惠州（蘇東坡）", task: "工作任務：炭火炙烤新鮮生蠔，鮮美蚌肉直冒湯汁", icon: "🦪", isLeg: false, chats: ["東坡口水直流：「生蠔殼冒汁了！快灑上蒜蓉與蔥花！」", "「炭火炙烤滋滋作響，肥美生蠔蚌肉香氣四溢...」", "「東坡大讚：『鮮美無比，此味只應天上有！』」"] },
             { name: "儋州（吃貨東坡）", task: "工作任務：拿斧頭砍椰子、搬運茅草講學", icon: "🥥", isLeg: false, chats: ["東坡大笑：「海南島沒肉吃，但椰子水喝到飽！」", "「椰子殼製成斗笠中，東坡靈感大發！」", "「茅草屋板凳搬好，準備聽吃貨東坡開講！」"] },
             { name: "永州（柳宗元）", task: "工作任務：拿竹杖隨柳宗元尋找小石潭與奇石", icon: "🪨", isLeg: false, chats: ["柳宗元嘆氣：「此地寂寞，幸好有你陪我找小石潭。」", "「撥開灌木叢，記錄永州八記山水遊記中...」", "「潭中魚可百許頭，皆若空游無所依。」"] },
@@ -446,9 +446,9 @@
 
         const workTasksCN = [
             { name: "潮州（韩愈）", task: "工作任务：拿木棍帮韩愈驱赶鳄鱼", icon: "🪵", isLeg: false, chats: ["「用木棍大力敲击江岸，鳄鱼吓得直发抖！」", "韩愈大喊：「好棒的棍法！快帮本官把这群恶兽赶跑！」", "「今日进度：木棍敲击声回荡山谷...」"] },
-            { name: "惠州（苏东坡）", task: "工作任务：炭火炙烤新鲜生蠔，鲜美蚌肉直冒汤汁", icon: "🦪", isLeg: false, chats: ["东坡口水直流：「生蠔壳冒汁了！快灑上蒜蓉与葱花！」", "「炭火炙烤滋滋作响，肥美生蠔蚌肉香气四溢...」", "「东坡大赞：『鲜美无比，此味只应天上有！』」"] },
-            { name: "儋州（吃货东坡）", task: "工作任务：拿斧头砍椰子、搬运茅草讲学", icon: "🥥", chats: ["东坡大笑：“海南岛没肉吃，但椰子水喝到饱！”", "“椰子壳制成斗笠中，东坡灵感大发！”", "“茅草屋板凳搬好，准备听吃货东坡开讲！”"] },
-            { name: "永州（柳宗元）", task: "工作任务：拿竹杖随柳宗元寻找小石潭与奇石", icon: "🪨", chats: ["柳宗元叹气：“此地寂寞，幸好有你陪我找小石潭。”", "“拨开灌木丛，记录永州八记山水游记中...”", "“潭中鱼可百许头，皆若空游无所依。”"] },
+            { name: "惠州（苏东坡）", task: "工作任务：炭火炙烤新鲜生蠔，鲜美蚌肉直冒汤汁", icon: "🦪", isLeg: false, chats: ["东坡口水直流：“生蠔壳冒汁了！快灑上蒜蓉与葱花！”", "“炭火炙烤滋滋作响，肥美生蠔蚌肉香气四溢...”", "“东坡大赞：『鲜美无比，此味只应天上有！』”"] },
+            { name: "儋州（吃货东坡）", task: "工作任务：拿斧头砍椰子、搬运茅草讲学", icon: "🥥", isLeg: false, chats: ["东坡大笑：“海南岛没肉吃，但椰子水喝到饱！”", "“椰子壳制成斗笠中，东坡灵感大发！”", "“茅草屋板凳搬好，准备听吃货东坡开讲！”"] },
+            { name: "永州（柳宗元）", task: "工作任务：拿竹杖随柳宗元寻找小石潭与奇石", icon: "🪨", isLeg: false, chats: ["柳宗元叹气：“此地寂寞，幸好有你陪我找小石潭。”", "“拨开灌木丛，记录永州八记山水游记中...”", "“潭中鱼可百许头，皆若空游无所依。”"] },
             { name: "宁古塔（押解甄远道）", task: "工作任务：押解甄嬛老爹，使出无影脚踢退歹徒拿甄嬛赏金", icon: "🦵", isLeg: true, chats: ["甄远道赞叹：“少侠好腿法！老夫这条老命就靠你护送了！”", "“使出佛山无影脚，一脚踢飞半路拦道的歹徒！”", "“收到甄嬛娘娘宫中密信：‘赏金已汇，请少侠继续狠狠地踢！’"] }
         ];
 
@@ -457,7 +457,7 @@
             { name: "Singapore (Port Clerk)", task: "Task: Stamp shipping manifests for Raffles' port", icon: "📜", isLeg: false, chats: ["Clerk whispers: “The colony trade is booming today.”", "“Stamping trade permits rapidly...”", "“Vessels clearing port successfully!”"] },
             { name: "Sydney (Cartography Asst)", task: "Task: Assist Captain Cook in mapping southern coastlines", icon: "🗺️", chats: ["Captain Cook: “Watch the quill ink, chart the reef carefully.”", "“Drawing coastal contour lines...”", "“New uncharted land mapped successfully!”"] },
             { name: "London (Globe Theatre)", task: "Task: Help Shakespeare manage stage props & scripts", icon: "🎭", chats: ["Shakespeare sighs: “To be, or not to be... pass me that scroll!”", "“Organizing royal costume props...”", "“Curtain rising for Act 1!”"] },
-            { name: "Vancouver (Fur Sorter)", task: "Task: Sort arctic winter furs at the trading post", icon: "🧥", chats: ["Trader shivers: “Brrr, sort those polar pelts quickly!”", "“Inspecting warm winter fur quality...”", "“Ready for the polar shipping expedition!”"] }
+            { name: "Vancouver (Fur Sorter)", task: "Task: Sort arctic winter furs at the trading post", icon: "🧥", isLeg: false, chats: ["Trader shivers: “Brrr, sort those polar pelts quickly!”", "“Inspecting warm winter fur quality...”", "“Ready for the polar shipping expedition!”"] }
         ];
 
         const i18n = {
@@ -518,7 +518,7 @@
                     "古代埃及用來記錄神話與歷史的獨特植物纖維紙張。",
                     "展現基克拉澤斯群島風情與地中海陶藝裝飾藝術。",
                     "見證地中海羅馬帝國雄偉歷史與貿易的古幣。",
-                    "呼應英國工業革命與精密機械工藝的象征。",
+                    "呼應英國工業革命與精密機械工藝的象徵。",
                     "象徵自由、民主與移民文化的紐約精神堡壘。",
                     "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
                     "俄羅斯帝國皇室工藝與珠寶設計的極致代表。"
@@ -593,7 +593,7 @@
                 easy: "🍵 Casual", easyDesc: "Relaxed pace, casual fun",
                 std: "⚖️ Standard", stdDesc: "Balanced challenge & fun",
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
-                hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
+                hell: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
                 insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will trigger a time-warp banishment to historical trade stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
                 stationBtn: "💰 Historical Supply Station", backCover: "⬅️ Main Menu",
@@ -1250,7 +1250,7 @@
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
             
-            // 如果是寧古塔無影腳，渲染功夫綁腿褲；否則顯示對應 Emoji
+            // 如果是寧古塔無影腳，渲染甄嬛清裝與功夫無影腳 SVG；否則顯示對應 Emoji
             let iconContainer = document.getElementById('work-inner-icon');
             if (wData.isLeg) {
                 iconContainer.innerHTML = zhenHuanKungFuSVG;
