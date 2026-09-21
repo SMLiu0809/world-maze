@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 少俠女俠旗艦版</title>
+    <title>世界寶藏迷宮探險 - 完整人形旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -133,7 +133,7 @@
 
         #screen-work { border-color: #D35400; background-color: #FDFEFE; }
         
-        /* 🦵 功夫無影腳按鈕動畫 */
+        /* 🥋 完整人形武俠打工按鈕動畫 */
         .work-btn {
             width: clamp(130px, 32vw, 170px); height: clamp(130px, 32vw, 170px); 
             background: linear-gradient(135deg, #D35400 0%, #BA4A00 100%); color: white; border-radius: 35px; border: none; 
@@ -148,7 +148,7 @@
         }
         @keyframes kungfuKick {
             0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.25) rotate(-30deg) translateX(12px); }
+            50% { transform: scale(1.25) rotate(-25deg) translateX(10px); }
             100% { transform: scale(1) rotate(0deg); }
         }
 
@@ -302,7 +302,7 @@
             <p id="work-status" style="font-size: clamp(14px, 3.8vw, 18px); font-weight: 700; color: #D35400; margin-top: 6px;">狂點按鈕打工賺取機票！</p>
         </div>
         
-        <!-- 結合右側甄嬛娘娘與左側單一功夫褲踢腳的精緻打工按鈕容器 -->
+        <!-- 打工主按鈕 -->
         <button id="work-action-icon" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">
             <span id="work-inner-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">🪵</span>
         </button>
@@ -407,13 +407,13 @@
                 <span class="bwei-cup" id="cup2">🌙</span>
             </div>
             <div class="sheng-count" id="bwei-count-display">目前連續聖筊：0 次</div>
-            <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);" onclick="throwBweiAnimation()">🙌 擲筊！</button>
+            <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);">🙌 擲筊！</button>
             <button id="bwei-cancel-btn" class="btn-large btn-cancel" style="width: 100%; margin-top: 10px;" onclick="closeBwei()">取消</button>
         </div>
     </div>
 
     <script>
-        // 🥋 獲取少俠/女俠稱謂的輔助函式
+        // 🥋 取得少俠/女俠稱謂的動態輔助函式
         function getHeroTitle() {
             let genderRadio = document.querySelector('input[name="gender"]:checked');
             let isFemale = genderRadio && genderRadio.value === 'female';
@@ -421,36 +421,38 @@
             return isFemale ? "女俠" : "少俠";
         }
 
-        // 🦵 獨立一隻穿著清代功夫褲與白底功夫鞋的無影腳 SVG
-        const pureKungfuLegSVG = `
-            <svg width="75" height="75" viewBox="0 0 100 100" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
-                <!-- 黑色古裝寬鬆功夫褲與白色綁腿 -->
-                <path d="M20,20 Q40,45 55,65 Q65,75 72,82 L85,70 Q75,50 55,30 Q35,15 20,20 Z" fill="#1A202C" stroke="#2D3748" stroke-width="2"/>
-                <rect x="58" y="70" width="14" height="4" transform="rotate(-30 58 70)" fill="#EDF2F7"/>
-                <rect x="62" y="74" width="14" height="4" transform="rotate(-30 62 74)" fill="#CBD5E1"/>
-                <!-- 古裝功夫布鞋 (黑色鞋面 + 白色厚鞋底) -->
-                <path d="M68,78 L90,68 Q98,66 95,75 Q92,82 82,88 L68,85 Z" fill="#1A202C"/>
-                <path d="M72,86 L92,82 Q96,83 94,87 L70,91 Z" fill="#FFFFFF"/>
-                <!-- 飛踢風氣流線 -->
-                <path d="M75,50 Q90,60 98,72" stroke="#F6AD55" stroke-width="3" stroke-linecap="round" fill="none"/>
+        // 🥋 穿著傳統古裝功夫褲與黑鞋白底功夫鞋的完整武俠人形 SVG (左側)
+        const kungfuPersonSVG = `
+            <svg width="65" height="65" viewBox="0 0 100 100" style="position: absolute; left: 12px; bottom: 10px; filter: drop-shadow(0 3px 4px rgba(0,0,0,0.3));">
+                <!-- 武俠頭部與髮髻 -->
+                <circle cx="50" cy="22" r="12" fill="#FEEBC8"/>
+                <path d="M40,15 Q50,8 60,15 L58,20 Q50,16 42,20 Z" fill="#1A202C"/>
+                <!-- 傳統古裝武俠服飾與功夫褲 -->
+                <path d="M35,34 Q50,30 65,34 L72,68 Q60,78 50,78 Q40,78 28,68 Z" fill="#2B6CB0" stroke="#1A202C" stroke-width="2"/>
+                <!-- 黑色功夫寬褲與白底功夫鞋 -->
+                <path d="M32,68 Q40,88 45,95 L52,95 Q48,85 46,68 Z" fill="#1A202C"/>
+                <path d="M52,68 Q54,85 58,95 L65,95 Q60,88 58,68 Z" fill="#1A202C"/>
+                <path d="M40,93 L50,93 Q52,96 46,96 L40,93 Z" fill="#FFFFFF"/>
+                <path d="M56,93 L66,93 Q68,96 62,96 L56,93 Z" fill="#FFFFFF"/>
             </svg>
         `;
 
-        // 👑 甄嬛娘娘身著清代宮廷粉紅/宮廷紅氅衣、二把頭旗頭與一耳三鉗 SVG (置於右側)
-        const zhenHuanPortraitSVG = `
-            <svg width="85" height="85" viewBox="0 0 100 100" style="position: absolute; right: 8px; top: 8px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.25)); pointer-events: none;">
+        // 👑 甄嬛娘娘身著清代宮廷正式旗裝（圓領直身氅衣、二把頭旗頭、一耳三鉗）完整人形 SVG (右側坐鎮)
+        const zhenHuanFullSVG = `
+            <svg width="75" height="75" viewBox="0 0 100 100" style="position: absolute; right: 8px; bottom: 8px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.25)); pointer-events: none;">
                 <!-- 旗頭二把頭與一耳三鉗金色點綴 -->
-                <path d="M35,15 Q50,6 65,15 Q68,21 60,25 Q50,28 40,25 Q32,21 35,15 Z" fill="#1A202C"/>
-                <circle cx="42" cy="18" r="2" fill="#D69E2E"/>
-                <circle cx="58" cy="18" r="2" fill="#D69E2E"/>
-                <!-- 清代宮廷旗裝（圓領直身氅衣粉紅色與刺繡領緣） -->
-                <path d="M30,28 Q50,25 70,28 Q78,48 82,78 Q50,90 18,78 Q22,48 30,28 Z" fill="#ED64A6" stroke="#97266D" stroke-width="2"/>
-                <path d="M38,28 Q50,31 62,28 L65,42 Q50,48 35,42 Z" fill="#FEEBC8"/>
-                <!-- 劇中精緻一耳三鉗耳飾與端莊面容 -->
-                <circle cx="44" cy="33" r="4" fill="#FBD38D"/>
-                <circle cx="56" cy="33" r="4" fill="#FBD38D"/>
+                <path d="M35,12 Q50,4 65,12 Q68,18 60,22 Q50,25 40,22 Q32,18 35,12 Z" fill="#1A202C"/>
+                <circle cx="42" cy="15" r="2" fill="#D69E2E"/>
+                <circle cx="58" cy="15" r="2" fill="#D69E2E"/>
+                <!-- 慈祥端莊面容與一耳三鉗耳飾 -->
+                <circle cx="50" cy="30" r="12" fill="#FEEBC8"/>
+                <circle cx="42" cy="32" r="3" fill="#FBD38D"/>
+                <circle cx="58" cy="32" r="3" fill="#FBD38D"/>
+                <!-- 清代宮廷正式旗裝（粉紅圓領直身氅衣與華麗刺繡邊緣） -->
+                <path d="M30,42 Q50,38 70,42 Q78,65 84,92 Q50,98 16,92 Q22,65 30,42 Z" fill="#ED64A6" stroke="#97266D" stroke-width="2"/>
+                <path d="M40,42 Q50,45 60,42 L65,60 Q50,65 35,60 Z" fill="#FEEBC8"/>
                 <!-- 賞賜金元寶 -->
-                <text x="65" y="20" font-size="16">🪙</text>
+                <text x="68" y="25" font-size="16">🪙</text>
             </svg>
         `;
 
@@ -467,8 +469,8 @@
         ];
 
         const workTasksCN = [
-            { name: "潮州（韩愈）", task: "工作任务：拿木棍帮韩愈驱赶鳄鱼", icon: "🪵", isLeg: false, chats: ["「用木棍大力敲击江岸，鳄鱼吓得直发抖！」", "韩愈大喊：「好棒的棍法！快帮本官把这群恶兽赶跑！」", "「今日进度：木棍敲击声回荡山谷...」"] },
-            { name: "惠州（苏东坡）", task: "工作任务：炭火炙烤新鲜生蠔，鲜美蚌肉直冒汤汁", icon: "🦪", isLeg: false, chats: ["东坡口水直流：「生蠔壳冒汁了！快灑上蒜蓉与葱花！」", "「炭火炙烤滋滋作响，肥美生蠔蚌肉香气四溢...」", "「东坡大赞：『鲜美无比，此味只应天上有！』」"] },
+            { name: "潮州（韩愈）", task: "工作任务：拿木棍帮韩愈驱赶鳄鱼", icon: "🪵", isLeg: false, chats: ["「用木棍大力敲击江岸，鳄鱼吓得直发抖！」", "韩愈大喊：“好棒的棍法！快帮本官把这群恶兽赶跑！”", "“今日进度：木棍敲击声回荡山谷...”"] },
+            { name: "惠州（苏东坡）", task: "工作任务：炭火炙烤新鲜生蠔，鲜美蚌肉直冒汤汁", icon: "🦪", isLeg: false, chats: ["东坡口水直流：“生蠔壳冒汁了！快灑上蒜蓉与葱花！”", "“炭火炙烤滋滋作响，肥美生蠔蚌肉香气四溢...”", "“东坡大赞：『鲜美无比，此味只应天上有！』”"] },
             { name: "儋州（吃货东坡）", task: "工作任务：拿斧头砍椰子、搬运茅草讲学", icon: "🥥", isLeg: false, chats: ["东坡大笑：“海南岛没肉吃，但椰子水喝到饱！”", "“椰子壳制成斗笠中，东坡灵感大发！”", "“茅草屋板凳搬好，准备听吃货东坡开讲！”"] },
             { name: "永州（柳宗元）", task: "工作任务：拿竹杖随柳宗元寻找小石潭与奇石", icon: "🪨", isLeg: false, chats: ["柳宗元叹气：“此地寂寞，幸好有你陪我找小石潭。”", "“拨开灌木丛，记录永州八记山水游记中...”", "“潭中鱼可百许头，皆若空游无所依。”"] },
             { name: "宁古塔（押解甄远道）", task: "工作任务：押解甄嬛老爹，使出无影脚踢退歹徒拿甄嬛赏金", icon: "🦵", isLeg: true, chats: [
@@ -650,7 +652,7 @@
                     "⏳ Time-warp to arctic Vancouver fur post..."
                 ],
                 gods: [
-                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-500)", "🌊Mazu (-1000)", 
+                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-500)", "🌊妈祖 (-1000)", 
                     "🌿Guanyin (-1500)", "🪷Medicine Buddha (-2000)", "🌟Jade Emperor (Clear All / -5000)"
                 ],
                 levels: [
@@ -1278,10 +1280,10 @@
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
             
-            // 渲染：如果為寧古塔（索引4），按鈕內顯示「左側單一功夫褲踢腳 + 右側甄嬛娘娘」；否則顯示對應 Emoji
+            // 渲染：如果為寧古塔（索引4），按鈕內顯示「左側完整人形武俠 + 右側甄嬛娘娘」；否則顯示對應 Emoji
             let iconContainer = document.getElementById('work-inner-icon');
             if (wData.isLeg) {
-                iconContainer.innerHTML = pureKungfuLegSVG + zhenHuanPortraitSVG;
+                iconContainer.innerHTML = kungfuPersonSVG + zhenHuanFullSVG;
             } else {
                 iconContainer.innerHTML = wData.icon;
             }
