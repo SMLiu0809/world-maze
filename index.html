@@ -354,7 +354,7 @@
             <p id="station-modal-desc" style="font-size: 14px; color: #718096;">旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：</p>
             <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0;">
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 13px;" onclick="triggerTimeWarp(0)"><span id="st-0">🪵 潮州｜韓愈 (拿木棍驅鱷)｜每敲200/機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="triggerTimeWarp(1)"><span id="st-1">🍢 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="triggerTimeWarp(1)"><span id="st-1">🦪 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 13px;" onclick="triggerTimeWarp(2)"><span id="st-2">🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 13px;" onclick="triggerTimeWarp(3)"><span id="st-3">🪨 永州｜柳宗元 (尋小石潭)｜每敲120/機票1100</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px;" onclick="triggerTimeWarp(4)"><span id="st-4">⚔️ 寧古塔｜衙役 (雪地押解犯人)｜每敲100/機票1300</span></button>
@@ -398,7 +398,7 @@
     <script>
         const workTasksTW = [
             { name: "潮州（韓愈）", task: "工作任務：拿木棍幫韓愈驅趕鱷魚", icon: "🪵", chats: ["「用木棍大力敲擊江岸，鱷魚嚇得直發抖！」", "韓愈大喊：「好棒的棍法！快幫本官把這群惡獸趕跑！」", "「今日進度：木棍敲擊聲迴盪山谷...」"] },
-            { name: "惠州（蘇東坡）", task: "工作任務：扇動炭火、在烤網上炙烤新鮮生蠔", icon: "🍢", chats: ["東坡笑口常開：「生蠔殼冒汁了！快灑蒜蓉！」", "「炭火炙烤滋滋作響，東坡肉與生蠔香氣四溢...」", "「再翻面烤幾個，今晚宵夜有著落啦！」"] },
+            { name: "惠州（蘇東坡）", task: "工作任務：炭火炙烤新鮮生蠔，鮮美蚌肉直冒湯汁", icon: "🦪", chats: ["東坡口水直流：「生蠔殼冒汁了！快灑上蒜蓉與蔥花！」", "「炭火炙烤滋滋作響，肥美生蠔蚌肉香氣四溢...」", "「東坡大讚：『鮮美無比，此味只應天上有！』」"] },
             { name: "儋州（吃貨東坡）", task: "工作任務：拿斧頭砍椰子、搬運茅草講學", icon: "🥥", chats: ["東坡大笑：「海南島沒肉吃，但椰子水喝到飽！」", "「椰子殼製成斗笠中，東坡靈感大發！」", "「茅草屋板凳搬好，準備聽吃貨東坡開講！」"] },
             { name: "永州（柳宗元）", task: "工作任務：拿竹杖隨柳宗元尋找小石潭與奇石", icon: "🪨", chats: ["柳宗元嘆氣：「此地寂寞，幸好有你陪我找小石潭。」", "「撥開灌木叢，記錄永州八記山水遊記中...」", "「潭中魚可百許頭，皆若空游無所依。」"] },
             { name: "寧古塔（衙役押解）", task: "工作任務：擔任官府衙役，在風雪中押解犯人前行", icon: "⚔️", chats: ["犯人直打哆嗦：「差大哥饒命，這風雪快把人凍僵啦！」", "「手持官府令牌與長枷，雪地押解前行中...」", "「頂住零下酷寒酷雪，完成押解任務就能回台！」"] }
@@ -406,7 +406,7 @@
 
         const workTasksCN = [
             { name: "潮州（韩愈）", task: "工作任务：拿木棍帮韩愈驱赶鳄鱼", icon: "🪵", chats: ["「用木棍大力敲击江岸，鳄鱼吓得直发抖！」", "韩愈大喊：「好棒的棍法！快帮本官把这群恶兽赶跑！」", "「今日进度：木棍敲击声回荡山谷...」"] },
-            { name: "惠州（苏东坡）", task: "工作任务：扇动炭火、在烤网上炙烤新鲜生蠔", icon: "🍢", chats: ["东坡笑口常开：「生蠔壳冒汁了！快灑蒜蓉！」", "「炭火炙烤滋滋作响，东坡肉与生蠔香气四溢...」", "「再翻面烤几个，今晚宵夜有着落啦！」"] },
+            { name: "惠州（苏东坡）", task: "工作任务：炭火炙烤新鲜生蠔，鲜美蚌肉直冒汤汁", icon: "🦪", chats: ["东坡口水直流：「生蠔壳冒汁了！快灑上蒜蓉与葱花！」", "「炭火炙烤滋滋作响，肥美生蠔蚌肉香气四溢...」", "「东坡大赞：『鲜美无比，此味只应天上有！』」"] },
             { name: "儋州（吃货东坡）", task: "工作任务：拿斧头砍椰子、搬运茅草讲学", icon: "🥥", chats: ["东坡大笑：“海南岛没肉吃，但椰子水喝到饱！”", "“椰子壳制成斗笠中，东坡灵感大发！”", "“茅草屋板凳搬好，准备听吃货东坡开讲！”"] },
             { name: "永州（柳宗元）", task: "工作任务：拿竹杖随柳宗元寻找小石潭与奇石", icon: "🪨", chats: ["柳宗元叹气：“此地寂寞，幸好有你陪我找小石潭。”", "“拨开灌木丛，记录永州八记山水游记中...”", "“潭中鱼可百许头，皆若空游无所依。”"] },
             { name: "宁古塔（衙役押解）", task: "工作任务：担任官府衙役，在风雪中押解犯人前行", icon: "⚔️", chats: ["犯人直打哆嗦：“差大哥饶命，这风雪快把人冻僵啦！”", "“手持官府令牌与长枷，雪地押解前行中...”", "“顶住零下酷寒酷雪，完成押解任务就能回台！”"] }
@@ -429,7 +429,7 @@
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發時空穿越，流放至古代邊疆拿木棍驅鱷、烤生蠔、擔任衙役押解犯人賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發「時空穿越特效」，被流放至古代邊疆幫韓愈、蘇東坡、衙役押解打工賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
                 stationBtn: "💰 前往歷史流放站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
@@ -444,7 +444,7 @@
                 footer: "國立高雄師範大學 劉世閔 老師設計[cite: 1]",
                 stations: [
                     "🪵 潮州｜韓愈 (拿木棍驅鱷)｜每敲200/機票500",
-                    "🍢 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700",
+                    "🦪 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700",
                     "🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900",
                     "🪨 永州｜柳宗元 (尋小石潭)｜每敲120/機票1100",
                     "⚔️ 寧古塔｜衙役 (雪地押解犯人)｜每敲100/機票1300"
@@ -489,7 +489,7 @@
                 easy: "🍵 轻松模式", easyDesc: "步调悠闲、适合放松",
                 std: "⚖️ 标准模式", stdDesc: "平衡挑战与趣味",
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
-                hell: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
+                hel: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
                 insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 历史打工与时空穿越：</b>旅费不足时将触发炫酷时空穿越，流放至古代边疆拿木棍驱鳄、烤生蠔、担任衙役押解犯人赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
                 stationBtn: "💰 前往历史流放站", backCover: "⬅️ 返回主菜单",
@@ -506,7 +506,7 @@
                 footer: "高雄师范大学 刘世闵 老师设计",
                 stations: [
                     "🪵 潮州｜韩愈 (拿木棍驱鳄)｜每敲200/机票500",
-                    "🍢 惠州｜苏东坡 (炭火烤生蠔)｜每敲180/机票700",
+                    "🦪 惠州｜苏东坡 (炭火烤生蠔)｜每敲180/机票700",
                     "🥥 儋州｜吃货东坡 (砍椰讲学)｜每敲150/机票900",
                     "🪨 永州｜柳宗元 (寻小石潭)｜每敲120/机票1100",
                     "⚔️ 宁古塔｜衙役 (雪地押解犯人)｜每敲100/机票1300"
@@ -519,7 +519,7 @@
                     "⏳ 正在穿越至清代黑龙江宁古塔风雪刑场..."
                 ],
                 gods: [
-                    "🏮土地公(-300)", "⚔️温王爺(-500)", "🌊妈祖(-1000)", 
+                    "🏮土地公(-300)", "⚔️溫王爺(-500)", "🌊妈祖(-1000)", 
                     "🌿观世音(-1500)", "🪷药师佛(-2000)", "🌟玉皇大帝 (全清场+指路 / -5000)"
                 ],
                 levels: [
@@ -1153,7 +1153,7 @@
         function doWork() {
             let st = banishmentStations[currentStationIndex];
             if (currentStationClicks >= st.maxClicks) {
-                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : (currentLang === 'zh-CN' ? "⚠️ 打工额度已满，请点击下方按钮支付机票费返程！" : "⚠️ 打工額度已滿，請點擊下方按鈕支付機票費返程！"));
+                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : (currentLang === 'zh-CN' ? "⚠️ 打工额度已满，请点击下方按钮支付机票费返程！" : "⚠️ 打工額度已滿,請點擊下方按鈕支付機票費返程！"));
                 return;
             }
             playSound('item'); vibrate([20]);
