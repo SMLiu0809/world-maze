@@ -186,12 +186,11 @@
         .bwei-mu-block {
             width: 60px; height: 80px; background: linear-gradient(135deg, #C0392B 0%, #962D22 100%);
             border: 2px solid #F1C40F; border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
-            display: flex; align-items: center; justify-content: center; font-size: 26px; color: #F1C40F;
+            display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #FFF;
             box-shadow: 0 6px 15px rgba(0,0,0,0.25); transition: transform 0.4s ease; position: relative;
         }
-        /* 正面(平麵)與反面(凸面)的視覺標示 */
-        .bwei-mu-block.flat::after { content: '平'; position: absolute; bottom: 6px; font-size: 11px; font-weight: bold; color: #FFF; background: rgba(0,0,0,0.2); padding: 1px 4px; border-radius: 4px; }
-        .bwei-mu-block.convex::after { content: '凸'; position: absolute; bottom: 6px; font-size: 11px; font-weight: bold; color: #FFF; background: rgba(0,0,0,0.2); padding: 1px 4px; border-radius: 4px; }
+        .bwei-mu-block.flat { background: linear-gradient(135deg, #D9534F 0%, #C9302C 100%); }
+        .bwei-mu-block.convex { background: linear-gradient(135deg, #A94442 0%, #843534 100%); }
 
         .sheng-count { font-size: 17px; color: #27AE60; font-weight: 700; background: #EAFAF1; padding: 10px; border-radius: 14px; margin-bottom: 16px; border: 1px solid #A9DFBF;}
     </style>
@@ -252,7 +251,7 @@
             </div>
         </div>
 
-        <!-- 📊 全球探險家即時真實累加統計儀表板 -->
+        <!-- 📊 全球統計數據儀表板 -->
         <div class="stats-dashboard">
             <div class="stat-box">
                 <div class="stat-value" id="stat-players">12,840</div>
@@ -277,7 +276,7 @@
         <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(14px, 3.8vw, 17px); text-align: left; line-height: 1.7; background: #EBF8FF; padding: 20px; border-radius: 18px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
-            <p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。必須<b>連續擲出兩次「聖筊」（一正一反）</b>才能獲得神明庇佑；若出現「兩正（笑筊）」或「兩反（陰筊）」則為無效！</p>
+            <p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。必須<b>連續擲出兩次「聖筊（一正一反）」</b>才能獲得神明庇佑；若擲出兩正（笑筊）或兩反（陰筊）則無效！</p>
             <p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發時空穿越，流放至古代邊疆幫韓愈、蘇東坡、甄嬛老爹打工賺取機票費！</p>
             <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
         </div>
@@ -440,7 +439,7 @@
     <div id="bwei-modal">
         <div class="modal-content">
             <div class="modal-text" id="bwei-title" style="color: #D35400;">🙏 誠心擲筊請示 神明</div>
-            <div id="bwei-rule" style="font-size: 14px; color: #718096;">需連續擲出兩次【聖筊（一正一反）】方可請神</div>
+            <div id="bwei-rule" style="font-size: 14px; color: #718096;">需連續擲出兩次【聖筊（一平一凸）】方可請神</div>
             
             <!-- 🏮 傳統半月紅木筊杯視覺呈現 -->
             <div class="bwei-cup-container">
@@ -557,14 +556,14 @@
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。連續擲出兩次「聖筊（一正一反）」即可獲得神明庇佑；若擲出兩正或兩反則無效！</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。必須<b>連續擲出兩次「聖筊（一正一反）」</b>才能獲得神明庇佑；若擲出兩正（笑筊）或兩反（陰筊）則無效！</p>`,
                 stationBtn: "💰 前往歷史流放站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
                 knowTitle: "📖 文化與寶藏知識", kClose: "了解了，繼續探險！",
                 stationTitle: "📜 選擇歷史流放地打工", stationDesc: "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！", godClose: "關閉指南",
-                bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊（一正一反）】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
+                bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊（一平一凸）】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
                 nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
@@ -606,7 +605,7 @@
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
                 hell: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>⛩️ 第 6 关起神明请筊与次数限制：</b>解锁神坛后可诚心掷筊请神！</p>`,
                 stationBtn: "💰 前往历史流放站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
@@ -1226,7 +1225,7 @@
             document.getElementById('bwei-title').innerText = "🙏 誠心擲筊請示 " + pendingGodName;
             document.getElementById('bwei-count-display').innerText = `目前連續聖筊：0 次 (剩餘機會: ${bweiAttemptsLeft} 次，需連續 2 次)`;
             
-            // 初始化顯示半月筊杯初始狀態
+            // 初始顯示一平一凸（聖筊範例）
             document.getElementById('cup1').className = "bwei-mu-block flat"; document.getElementById('cup1').innerText = "平";
             document.getElementById('cup2').className = "bwei-mu-block convex"; document.getElementById('cup2').innerText = "凸";
             
@@ -1247,7 +1246,7 @@
                 cup1.style.transform = 'rotate(0deg) scale(1)';
                 cup2.style.transform = 'rotate(0deg) scale(1)';
                 
-                // 模擬真實筊杯結果：0=聖筊(一正一反), 1=笑筊(兩正), 2=陰筊(兩反)
+                // 模擬真實筊杯結果：0=聖筊(一正一反), 1=笑筊(兩正/平平), 2=陰筊(兩反/凸凸)
                 let r = Math.floor(Math.random() * 3);
                 let resultType = "";
                 
@@ -1256,11 +1255,11 @@
                     cup1.className = "bwei-mu-block flat"; cup1.innerText = "平";
                     cup2.className = "bwei-mu-block convex"; cup2.innerText = "凸";
                 } else if (r === 1) {
-                    resultType = "xiao"; // 笑筊 (兩平 / 兩正)
+                    resultType = "xiao"; // 笑筊 (兩平 / 正正)
                     cup1.className = "bwei-mu-block flat"; cup1.innerText = "平";
                     cup2.className = "bwei-mu-block flat"; cup2.innerText = "平";
                 } else {
-                    resultType = "yin"; // 陰筊 (兩凸 / 兩反)
+                    resultType = "yin"; // 陰筊 (兩凸 / 反反)
                     cup1.className = "bwei-mu-block convex"; cup1.innerText = "凸";
                     cup2.className = "bwei-mu-block convex"; cup2.innerText = "凸";
                 }
