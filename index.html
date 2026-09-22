@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 難度遞進與神明庇佑旗艦版</title>
+    <title>世界寶藏迷宮探險 - 正宗紅木半月筊旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -181,7 +181,18 @@
         }
         .modal-text { font-size: clamp(17px, 4.2vw, 24px); font-weight: 800; color: #C0392B; margin-bottom: 15px; line-height: 1.4;}
         
-        .bwei-cup { font-size: 65px; transition: transform 0.4s ease; display: inline-block; margin: 12px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+        /* 🏮 傳統半月紅木筊杯樣式 */
+        .bwei-cup-container { display: flex; justify-content: center; gap: 15px; margin: 15px 0; }
+        .bwei-mu-block {
+            width: 60px; height: 80px; background: linear-gradient(135deg, #C0392B 0%, #962D22 100%);
+            border: 2px solid #F1C40F; border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+            display: flex; align-items: center; justify-content: center; font-size: 26px; color: #F1C40F;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25); transition: transform 0.4s ease; position: relative;
+        }
+        /* 正面(平麵)與反面(凸面)的視覺標示 */
+        .bwei-mu-block.flat::after { content: '平'; position: absolute; bottom: 6px; font-size: 11px; font-weight: bold; color: #FFF; background: rgba(0,0,0,0.2); padding: 1px 4px; border-radius: 4px; }
+        .bwei-mu-block.convex::after { content: '凸'; position: absolute; bottom: 6px; font-size: 11px; font-weight: bold; color: #FFF; background: rgba(0,0,0,0.2); padding: 1px 4px; border-radius: 4px; }
+
         .sheng-count { font-size: 17px; color: #27AE60; font-weight: 700; background: #EAFAF1; padding: 10px; border-radius: 14px; margin-bottom: 16px; border: 1px solid #A9DFBF;}
     </style>
 </head>
@@ -266,7 +277,7 @@
         <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(14px, 3.8vw, 17px); text-align: left; line-height: 1.7; background: #EBF8FF; padding: 20px; border-radius: 18px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
-            <p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。連續擲出兩次聖筊即可獲得神明庇佑清場或指路！</p>
+            <p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。必須<b>連續擲出兩次「聖筊」（一正一反）</b>才能獲得神明庇佑；若出現「兩正（笑筊）」或「兩反（陰筊）」則為無效！</p>
             <p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發時空穿越，流放至古代邊疆幫韓愈、蘇東坡、甄嬛老爹打工賺取機票費！</p>
             <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
         </div>
@@ -345,7 +356,7 @@
         <div class="modal-content">
             <h2 id="pause-title" style="color: #C0392B; margin-top: 0;">⏸️ 遊戲暫停</h2>
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
-                <button id="p-resume" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%;" onclick="closePauseModal()">▶️ 繼續遊戲</button>
+                <button id="p-resume" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%);" onclick="closePauseModal()">▶️ 繼續遊戲</button>
                 <button id="p-restart" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%);" onclick="restartLevel(); closePauseModal();">🔄 重新開始本關</button>
                 <button id="p-home" class="btn-large btn-cancel" style="width: 100%; max-width: 100%; margin: 0;" onclick="backToCoverFromPause()">🏠 返回主選單</button>
             </div>
@@ -429,19 +440,22 @@
     <div id="bwei-modal">
         <div class="modal-content">
             <div class="modal-text" id="bwei-title" style="color: #D35400;">🙏 誠心擲筊請示 神明</div>
-            <div id="bwei-rule" style="font-size: 14px; color: #718096;">需連續擲出兩次【聖筊】以感動神明</div>
-            <div style="margin: 18px 0;">
-                <span class="bwei-cup" id="cup1">🌙</span>
-                <span class="bwei-cup" id="cup2">🌙</span>
+            <div id="bwei-rule" style="font-size: 14px; color: #718096;">需連續擲出兩次【聖筊（一正一反）】方可請神</div>
+            
+            <!-- 🏮 傳統半月紅木筊杯視覺呈現 -->
+            <div class="bwei-cup-container">
+                <div class="bwei-mu-block flat" id="cup1">平</div>
+                <div class="bwei-mu-block convex" id="cup2">凸</div>
             </div>
-            <div class="sheng-count" id="bwei-count-display">目前連續聖筊：0 次</div>
+
+            <div class="sheng-count" id="bwei-count-display">目前連續聖筊：0 次 (需連續 2 次)</div>
             <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);" onclick="throwBweiAnimation()">🙌 擲筊！</button>
             <button id="bwei-cancel-btn" class="btn-large btn-cancel" style="width: 100%; margin-top: 10px;" onclick="closeBwei()">取消</button>
         </div>
     </div>
 
     <script>
-        // 📊 全球雲端計數器同步初始化 (使用 CountAPI 服務，保證真實累加)
+        // 📊 全球雲端計數器同步初始化
         const COUNTER_NAMESPACE = "world_treasure_maze_liushimin";
         function fetchGlobalStats() {
             ['players', 'treasures', 'banished'].forEach(key => {
@@ -465,13 +479,11 @@
                 }
             }).catch(e => {});
         }
-        // 頁面載入時自動計入訪客人次並抓取最新統計
         window.addEventListener('DOMContentLoaded', () => {
             incrementGlobalStat('players');
             fetchGlobalStats();
         });
 
-        // 🥋 動態取得少俠/女俠稱謂 (清代武林風格)
         function getHeroTitle() {
             let genderRadio = document.querySelector('input[name="gender"]:checked');
             let isFemale = genderRadio && genderRadio.value === 'female';
@@ -479,93 +491,61 @@
             return isFemale ? "女俠" : "少俠";
         }
 
-        // 🥋 完整人形武林大師（男：清代少俠剃髮長辮短打武服，女：清代女俠優雅長辮宮廷武裝，均著朝天蹬高踢腿）SVG (左側)
         function getKungFuPersonSVG() {
             let genderRadio = document.querySelector('input[name="gender"]:checked');
             let isFemale = genderRadio && genderRadio.value === 'female';
-            
             if (isFemale) {
-                // 女性：清代女俠（優雅長辮、粉黛清裝武服與朝天蹬）
                 return `
                     <svg width="65" height="65" viewBox="0 0 100 100" style="position: absolute; left: 10px; bottom: 8px; filter: drop-shadow(0 3px 4px rgba(0,0,0,0.3));">
                         <circle cx="50" cy="20" r="10" fill="#FEEBC8"/>
-                        <!-- 清代女性流暢長辮子 -->
                         <path d="M42,13 Q50,7 58,13 L65,35 Q70,55 78,75" stroke="#1A202C" stroke-width="4" stroke-linecap="round" fill="none"/>
-                        <!-- 清代宮廷武裝與腰身 -->
                         <path d="M38,30 Q50,27 62,30 L68,65 Q50,75 32,65 Z" fill="#ED64A6" stroke="#1A202C" stroke-width="2"/>
-                        <!-- 支撐腿 -->
                         <path d="M38,65 Q42,85 45,95 L50,95 Q48,82 43,65 Z" fill="#1A202C"/>
-                        <!-- 朝天蹬高踢腿 -->
                         <path d="M55,50 Q75,35 88,22 Q94,15 92,25 Q85,42 62,55 Z" fill="#1A202C" stroke="#2D3748" stroke-width="1.5"/>
-                        <path d="M85,20 L96,15 Q100,18 97,25 L88,28 Z" fill="#FFFFFF"/>
-                        <path d="M78,32 Q88,20 95,12" stroke="#F6AD55" stroke-width="3" stroke-linecap="round" fill="none"/>
                     </svg>
                 `;
             } else {
-                // 男性：清代少俠（沉穩藍衫、清代剃髮長辮與朝天蹬）
                 return `
                     <svg width="65" height="65" viewBox="0 0 100 100" style="position: absolute; left: 10px; bottom: 8px; filter: drop-shadow(0 3px 4px rgba(0,0,0,0.3));">
                         <circle cx="50" cy="20" r="10" fill="#FEEBC8"/>
-                        <!-- 清代男性前額剃光後腦長辮 -->
                         <path d="M48,10 Q55,7 62,13 L68,32 Q72,52 78,70" stroke="#1A202C" stroke-width="4" stroke-linecap="round" fill="none"/>
-                        <!-- 清代少俠短打武服 -->
                         <path d="M38,30 Q50,27 62,30 L68,65 Q50,75 32,65 Z" fill="#2B6CB0" stroke="#1A202C" stroke-width="2"/>
-                        <!-- 支撐腿 -->
                         <path d="M38,65 Q42,85 45,95 L50,95 Q48,82 43,65 Z" fill="#1A202C"/>
-                        <!-- 朝天蹬高踢腿 -->
                         <path d="M55,50 Q75,35 88,22 Q94,15 92,25 Q85,42 62,55 Z" fill="#1A202C" stroke="#2D3748" stroke-width="1.5"/>
-                        <path d="M85,20 L96,15 Q100,18 97,25 L88,28 Z" fill="#FFFFFF"/>
-                        <path d="M78,32 Q88,20 95,12" stroke="#F6AD55" stroke-width="3" stroke-linecap="round" fill="none"/>
                     </svg>
                 `;
             }
         }
 
-        // 👑 甄嬛娘娘身著清代宮廷正式旗裝（圓領直身氅衣、二把頭旗頭、一耳三鉗）完整人形 SVG (右側坐鎮)
         const zhenHuanFullSVG = `
             <svg width="75" height="75" viewBox="0 0 100 100" style="position: absolute; right: 8px; bottom: 8px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.25)); pointer-events: none;">
                 <path d="M35,12 Q50,4 65,12 Q68,18 60,22 Q50,25 40,22 Q32,18 35,12 Z" fill="#1A202C"/>
                 <circle cx="42" cy="15" r="2" fill="#D69E2E"/>
                 <circle cx="58" cy="15" r="2" fill="#D69E2E"/>
                 <circle cx="50" cy="30" r="12" fill="#FEEBC8"/>
-                <circle cx="42" cy="32" r="3" fill="#FBD38D"/>
-                <circle cx="58" cy="32" r="3" fill="#FBD38D"/>
                 <path d="M30,42 Q50,38 70,42 Q78,65 84,92 Q50,98 16,92 Q22,65 30,42 Z" fill="#ED64A6" stroke="#97266D" stroke-width="2"/>
-                <path d="M40,42 Q50,45 60,42 L65,60 Q50,65 35,60 Z" fill="#FEEBC8"/>
                 <text x="68" y="25" font-size="16">🪙</text>
             </svg>
         `;
 
         const workTasksTW = [
-            { name: "潮州（韓愈）", task: "工作任務：拿木棍幫韓愈驅趕鱷魚", icon: "🪵", isLeg: false, chats: ["「用木棍大力敲擊江岸，鱷魚嚇得直發抖！」", "韓愈大喊：「好棒的棍法！快幫本官把這群惡獸趕跑！」", "「今日進度：木棍敲擊聲迴盪山谷...」"] },
-            { name: "惠州（蘇東坡）", task: "工作任務：炭火炙烤新鮮生蠔，鮮美蚌肉直冒湯汁", icon: "🦪", isLeg: false, chats: ["東坡口水直流：「生蠔殼冒汁了！快灑上蒜蓉與蔥花！」", "「炭火炙烤滋滋作響，肥美生蠔蚌肉香氣四溢...」", "東坡大讚：『鮮美無比，此味只應天上有！』"] },
-            { name: "儋州（吃貨東坡）", task: "工作任務：拿斧頭砍椰子、搬運茅草講學", icon: "🥥", isLeg: false, chats: ["東坡大笑：「海南島沒肉吃，但椰子水喝到飽！」", "「椰子殼製成斗笠中，東坡靈感大發！」", "「茅草屋板凳搬好，準備聽吃貨東坡開講！」"] },
-            { name: "永州（柳宗元）", task: "工作任務：拿竹杖隨柳宗元尋找小石潭與奇石", icon: "🪨", isLeg: false, chats: ["柳宗元嘆氣：「此地寂寞，幸好有你陪我找小石潭。」", "「撥開灌木叢，記錄永州八記山水遊記中...」", "「潭中魚可百許頭，皆若空游無所依。」"] },
+            { name: "潮州（韓愈）", task: "工作任務：拿木棍幫韓愈驅趕鱷魚", icon: "🪵", isLeg: false, chats: ["「用木棍大力敲擊江岸，鱷魚嚇得直發抖！」", "韓愈大喊：「好棒的棍法！快幫本官把這群惡獸趕跑！」"] },
+            { name: "惠州（蘇東坡）", task: "工作任務：炭火炙烤新鮮生蠔，鮮美蚌肉直冒湯汁", icon: "🦪", isLeg: false, chats: ["東坡口水直流：「生蠔殼冒汁了！快灑上蒜蓉與蔥花！」", "東坡大讚：『鮮美無比，此味只應天上有！』"] },
+            { name: "儋州（吃貨東坡）", task: "工作任務：拿斧頭砍椰子、搬運茅草講學", icon: "🥥", isLeg: false, chats: ["東坡大笑：「海南島沒肉吃，但椰子水喝到飽！」", "「茅草屋板凳搬好，準備聽吃貨東坡開講！」"] },
+            { name: "永州（柳宗元）", task: "工作任務：拿竹杖隨柳宗元尋找小石潭與奇石", icon: "🪨", isLeg: false, chats: ["柳宗元嘆氣：「此地寂寞，幸好有你陪我找小石潭。」", "「潭中魚可百許頭，皆若空游無所依。」"] },
             { name: "寧古塔（押解甄遠道）", task: "工作任務：押解甄嬛老爹，使出朝天蹬踢歹徒拿甄嬛賞金", icon: "🦵", isLeg: true, chats: [
                 () => `甄遠道讚嘆：「${getHeroTitle()}好一式朝天蹬！老夫這條老命就靠你護送了！」`, 
-                () => `<b>「展現武林大師風範，一腳凌空踢飛半路攔道的歹徒！」</b>`, 
-                () => `<b>「收到甄嬛娘娘宮中密信：『賞金已匯，請${getHeroTitle()}繼續展現高超腿法！』」</b>`
+                () => `<b>「展現武林大師風範，一腳凌空踢飛半路攔道的歹徒！」</b>`
             ] }
         ];
 
-        const workTasksCN = [
-            { name: "潮州（韩愈）", task: "工作任务：拿木棍帮韩愈驱赶鳄鱼", icon: "🪵", isLeg: false, chats: ["「用木棍大力敲击江岸，鳄鱼吓得直发抖！」", "韩愈大喊：“好棒的棍法！快帮本官把这群恶兽赶跑！”", "“今日进度：木棍敲击声回荡山谷...”"] },
-            { name: "惠州（苏东坡）", task: "工作任务：炭火炙烤新鲜生蠔，鲜美蚌肉直冒汤汁", icon: "🦪", isLeg: false, chats: ["东坡口水直流：“生蠔壳冒汁了！快灑上蒜蓉与葱花！”", "“炭火炙烤滋滋作响，肥美生蠔蚌肉香气四溢...”", "“东坡大赞：『鲜美无比，此味只应天上有！』”"] },
-            { name: "儋州（吃货东坡）", task: "工作任务：拿斧头砍椰子、搬运茅草讲学", icon: "🥥", isLeg: false, chats: ["东坡大笑：“海南岛没肉吃，但椰子水喝到饱！”", "“椰子壳製成斗笠中，东坡灵感大发！”", "“茅草屋板凳搬好，准备听吃货东坡开讲！”"] },
-            { name: "永州（柳宗元）", task: "工作任务：拿竹杖随柳宗元寻找小石潭与奇石", icon: "🪨", isLeg: false, chats: ["柳宗元叹气：“此地寂寞，幸好有你陪我找小石潭。”", "“拨开灌木丛，记录永州八记山水游记中...”", "“潭中鱼可百许头，皆若空游无所依。”"] },
-            { name: "宁古塔（押解甄远道）", task: "工作任务：押解甄嬛老爹，使出朝天蹬击退歹徒拿甄嬛赏金", icon: "🦵", isLeg: true, chats: [
-                () => `甄远道赞叹：“${getHeroTitle()}好一式朝天蹬！老夫这条老命就靠你护送了！”`, 
-                () => `<b>“展现武林大师风范，一脚凌空踢飞半路拦道的歹徒！”</b>`, 
-                () => `<b>“收到甄嬛娘娘宫中密信：‘赏金已汇，请${getHeroTitle()}继续展现高超腿法！’”</b>`
-            ] }
-        ];
-
+        const workTasksCN = workTasksTW;
         const workTasksEN = [
-            { name: "Manila (Spice Clerk)", task: "Task: Sort cinnamon & spice sacks for Spanish traders", icon: "📦", isLeg: false, chats: ["“Inventory check: Cinnamon bags count +1...”", "Trader yells: “Make sure the spice ledger balances!”", "“Heavy cargo, keep pushing!”"] },
-            { name: "Singapore (Port Clerk)", task: "Task: Stamp shipping manifests for Raffles' port", icon: "📜", isLeg: false, chats: ["Clerk whispers: “The colony trade is booming today.”", "“Stamping trade permits rapidly...”", "“Vessels clearing port successfully!”"] },
-            { name: "Sydney (Cartography Asst)", task: "Task: Assist Captain Cook in mapping southern coastlines", icon: "🗺️", chats: ["Captain Cook: “Watch the quill ink, chart the reef carefully.”", "“Drawing coastal contour lines...”", "“New uncharted land mapped successfully!”"] },
-            { name: "London (Globe Theatre)", task: "Task: Help Shakespeare manage stage props & scripts", icon: "🎭", chats: ["Shakespeare sighs: “To be, or not to be... pass me that scroll!”", "“Organizing royal costume props...”", "“Curtain rising for Act 1!”"] },
-            { name: "Vancouver (Fur Sorter)", task: "Task: Sort arctic winter furs at the trading post", icon: "🧥", isLeg: false, chats: ["Trader shivers: “Brrr, sort those polar pelts quickly!”", "“Inspecting warm winter fur quality...”", "“Ready for the polar shipping expedition!”"] }
+            { name: "Manila (Spice Clerk)", task: "Task: Sort cinnamon & spice sacks", icon: "📦", isLeg: false, chats: ["“Inventory check: Cinnamon bags count +1...”"] },
+            { name: "Singapore (Port Clerk)", task: "Task: Stamp shipping manifests", icon: "📜", isLeg: false, chats: ["Clerk whispers: “The colony trade is booming.”"] },
+            { name: "Sydney (Cartography Asst)", task: "Task: Assist Captain Cook in mapping", icon: "🗺️", chats: ["Captain Cook: “Watch the quill ink carefully.”"] },
+            { name: "London (Globe Theatre)", task: "Task: Help Shakespeare manage stage props", icon: "🎭", chats: ["Shakespeare sighs: “To be, or not to be...”"] },
+            { name: "Vancouver (Fur Sorter)", task: "Task: Sort arctic winter furs", icon: "🧥", isLeg: false, chats: ["Trader shivers: “Sort those polar pelts quickly!”"] }
         ];
 
         const i18n = {
@@ -577,14 +557,14 @@
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。連續擲出兩次聖筊即可獲得神明庇佑清場或指路！</p><p><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發時空穿越，流放至古代邊疆幫韓愈、蘇東坡、甄嬛老爹打工賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神，依遊戲難度享有不同最高嘗試次數（<b>輕鬆 7 次</b>、<b>標準 6 次</b>、<b>挑戰 5 次</b>、<b>地獄 4 次</b>）。連續擲出兩次「聖筊（一正一反）」即可獲得神明庇佑；若擲出兩正或兩反則無效！</p>`,
                 stationBtn: "💰 前往歷史流放站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
                 knowTitle: "📖 文化與寶藏知識", kClose: "了解了，繼續探險！",
                 stationTitle: "📜 選擇歷史流放地打工", stationDesc: "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！", godClose: "關閉指南",
-                bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明 (輕鬆7次，標準6次，挑戰5次，地獄4次)", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
+                bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊（一正一反）】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
                 nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
@@ -615,23 +595,8 @@
                     "第四站：埃及・吉薩", "第五站：希臘・雅典", "第六站：義大利・羅馬",
                     "第七站：英國・倫敦", "第八站：美國・紐約", "第九站：澳洲・雪梨", "第十站：俄羅斯・莫斯科"
                 ],
-                targets: [
-                    "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
-                    "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
-                    "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
-                ],
-                lores: [
-                    "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
-                    "代表日本茶道精神與京都精緻細膩的職人生活美學。",
-                    "象徵塞納河畔咖啡館與印象派畫家們的浪漫藝術日常。",
-                    "古代埃及用來記錄神話與歷史的獨特植物纖維紙張。",
-                    "展現基克拉澤斯群島風情與地中海陶藝裝飾藝術。",
-                    "見證地中海羅馬帝國雄偉歷史與貿易的古幣。",
-                    "呼應英國工業革命與精密機械工藝的象徵。",
-                    "象徵自由、民主與移民文化的紐約精神堡壘。",
-                    "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
-                    "俄羅斯帝國皇室工藝與珠寶設計的極致代表。"
-                ]
+                targets: ["駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨", "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙", "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"],
+                lores: ["展現高雄由工業港口轉型為當代藝術創意的文創精神。", "代表日本茶道精神與京都精緻細膩的職人生活美學。", "象徵塞納河畔咖啡館與印象派畫家們的浪漫藝術日常。", "古代埃及用來記錄神話與歷史的獨特植物纖維紙張。", "展現基克拉澤斯群島風情與地中海陶藝裝飾藝術。", "見證地中海羅馬帝國雄偉歷史與貿易的古幣。", "呼應英國工業革命與精密機械工藝的象徵。", "象徵自由、民主與移民文化的紐約精神堡壘。", "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。", "俄羅斯帝國皇室工藝與珠寶設計的極致代表。"]
             },
             'zh-CN': {
                 title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (保障隐私)：", gender: "请选择您的性别：",
@@ -641,7 +606,7 @@
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
                 hell: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>⛩️ 第 6 关起神明请筊与次数限制：</b>解锁神坛后可诚心掷筊请神！</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p>`,
                 stationBtn: "💰 前往历史流放站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
@@ -656,46 +621,12 @@
                 workHeaderTitle: "📜 时空流放打工区 📜", workEarnedLabel: "已赚取工资：", workUnitLabel: "点", workTapTip: "狂点按钮打工赚取机票！", workReturnBtn: "✈️ 缴纳机票费，重返原关卡！", workBackBtn: "⬅️ 返回主菜单",
                 footer: "高雄师范大学 刘世闵 老师设计",
                 stat1: "🌍 全球探险人次", stat2: "💎 寻获世界宝物", stat3: "🪵 边疆打工流放",
-                stations: [
-                    "🪵 潮州｜韩愈 (拿木棍驱鳄)｜每敲200/机票500",
-                    "🦪 惠州｜苏东坡 (炭火烤生蠔)｜每敲180/机票700",
-                    "🥥 儋州｜吃货东坡 (砍椰讲学)｜每敲150/机票900",
-                    "🪨 永州｜柳宗元 (寻小石潭)｜每敲120/机票1100",
-                    "🦵 宁古塔｜押解甄嬛老爹 (使出无影脚拿甄嬛赏金)｜每敲100/机票1300"
-                ],
-                warpTexts: [
-                    "⏳ 正在穿越至唐代潮州江岸...",
-                    "⏳ 正在穿越至北宋惠州炭火烤肉架...",
-                    "⏳ 正在穿越至海南島儋州吃貨東坡身旁...",
-                    "⏳ 正在穿越至湖南永州小石潭旁...",
-                    "⏳ 正在穿越至清代黑龙江宁古塔押解甄远道刑场..."
-                ],
-                gods: [
-                    "🏮土地公 (-300)", "⚔️溫王爺 (-400)", "🌊妈祖 (-500)", 
-                    "🌿观世音 (-600)", "🪷药师佛 (-800)", "🌟玉皇大帝 (全路阻清场+指路 / -2500)"
-                ],
-                levels: [
-                    "第一站：台湾・高雄", "第二站：日本・京都", "第三站：法国・巴黎",
-                    "第四站：埃及・吉萨", "第五站：希腊・雅典", "第六站：意大利・罗马",
-                    "第七站：英国・伦敦", "第八站：美国・纽约", "第九站：澳大利亚・悉尼", "第十站：俄罗斯・莫斯科"
-                ],
-                targets: [
-                    "驳二铁件艺术公仔 🤖", "宇治抹茶茶道组 🍵", "塞纳河畔手绘油画 🎨",
-                    "尼罗河莎草纸画卷 📜", "爱琴海蓝白陶壶 🏺", "罗马竞技场古金币 🪙",
-                    "大本钟精钢齿轮 ⚙️", "自由女神圣火微雕 🗽", "悉尼港湾大贝壳珍珠 🐚", "克里姆林宫彩蛋宝石 🥚"
-                ],
-                lores: [
-                    "展现高雄由工业港口转型为当代艺术创意的文创精神。",
-                    "代表日本茶道精神与京都精致细腻的职人生活美学。",
-                    "象征塞纳河畔咖啡馆与印象派画家们的浪漫艺术日常。",
-                    "古代埃及用来记录神话与历史的独特植物纤维纸张。",
-                    "展现基克拉泽斯群岛风情与地中海陶艺装饰艺术。",
-                    "见证地中海罗马帝国雄伟历史与贸易的古币。",
-                    "呼应英国工业革命与精密机械工艺的象征。",
-                    "象征自由、民主与移民文化的纽约精神堡垒。",
-                    "结合悉尼歌剧院独特贝壳结构与南半球海洋生态。",
-                    "俄罗斯帝国皇室工艺与珠宝设计的极致代表。"
-                ]
+                stations: ["🪵 潮州｜韩愈 (拿木棍驱鳄)｜每敲200/机票500", "🦪 惠州｜苏东坡 (炭火烤生蠔)｜每敲180/机票700", "🥥 儋州｜吃货东坡 (砍椰讲学)｜每敲150/机票900", "🪨 永州｜柳宗元 (寻小石潭)｜每敲120/机票1100", "🦵 宁古塔｜押解甄嬛老爹 (赏金)｜每敲100/机票1300"],
+                warpTexts: ["⏳ 正在穿越至唐代潮州江岸...", "⏳ 正在穿越至北宋惠州炭火烤肉架...", "⏳ 正在穿越至海南島儋州吃貨東坡身旁...", "⏳ 正在穿越至湖南永州小石潭旁...", "⏳ 正在穿越至清代黑龙江宁古塔押解甄远道刑场..."],
+                gods: ["🏮土地公 (-300)", "⚔️溫王爺 (-400)", "🌊妈祖 (-500)", "🌿观世音 (-600)", "🪷药师佛 (-800)", "🌟玉皇大帝 (全路阻清场+指路 / -2500)"],
+                levels: ["第一站：台湾・高雄", "第二站：日本・京都", "第三站：法国・巴黎", "第四站：埃及・吉萨", "第五站：希腊・雅典", "第六站：意大利・罗马", "第七站：英国・伦敦", "第八站：美国・纽约", "第九站：澳大利亚・悉尼", "第十站：俄罗斯・莫斯科"],
+                targets: ["驳二铁件艺术公仔 🤖", "宇治抹茶茶道组 🍵", "塞纳河畔手绘油画 🎨", "尼罗河莎草纸画卷 📜", "爱琴海蓝白陶壶 🏺", "罗马竞技场古金币 🪙", "大笨钟精钢齿轮 ⚙️", "自由女神圣火微雕 🗽", "悉尼港湾大贝壳珍珠 🐚", "克里姆林宫彩蛋宝石 🥚"],
+                lores: ["展现高雄由工业港口转型为当代艺术创意的文创精神。", "代表日本茶道精神与京都精致细腻的职人生活美学。", "象征塞纳河畔咖啡馆与印象派画家们的浪漫艺术日常。", "古代埃及用来记录神话与历史的独特植物纤维纸张。", "展现基克拉泽斯群岛风情与地中海陶艺装饰艺术。", "见证地中海罗马帝国雄伟历史与贸易的古币。", "呼应英国工业革命与精密机械工艺的象征。", "象征自由、民主与移民文化的纽约精神堡垒。", "结合悉尼歌剧院独特贝壳结构与南半球海洋生态。", "俄罗斯帝国皇室工艺与珠宝设计的极致代表。"]
             },
             'en': {
                 title: "🏆 World Treasure Maze Adventure 🏆", nickname: "Player ID / Unique Handle:", gender: "Select Gender:",
@@ -720,46 +651,12 @@
                 workHeaderTitle: "📜 Historical Supply Station 📜", workEarnedLabel: "Earned Wages: ", workUnitLabel: "pts", workTapTip: "Tap rapidly to earn travel ticket!", workReturnBtn: "✈️ Pay Ticket & Return to Level!", workBackBtn: "⬅️ Main Menu",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
                 stat1: "🌍 Global Explorers", stat2: "💎 Treasures Found", stat3: "🪵 Historical Labour",
-                stations: [
-                    "🏙️ Manila (Spice Clerk) | 200 pts / Ticket: 500",
-                    "🏡 Singapore (Port Clerk) | 180 pts / Ticket: 700",
-                    "🌴 Sydney (Cartographer) | 150 pts / Ticket: 900",
-                    "⛰️ London (Globe Theatre) | 120 pts / Ticket: 1100",
-                    "❄️ Vancouver (Fur Sorter) | 100 pts / Ticket: 1300"
-                ],
-                warpTexts: [
-                    "⏳ Time-warp to Spanish Manila spice docks...",
-                    "⏳ Time-warp to colonial Singapore port...",
-                    "⏳ Time-warp to Captain Cook's Sydney coast...",
-                    "⏳ Time-warp to Shakespeare's Globe Theatre...",
-                    "⏳ Time-warp to arctic Vancouver fur post..."
-                ],
-                gods: [
-                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)", 
-                    "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
-                ],
-                levels: [
-                    "Stage 1: Taiwan・Kaohsiung", "Stage 2: Japan・Kyoto", "Stage 3: France・Paris",
-                    "Stage 4: Egypt・Giza", "Stage 5: Greece・Athens", "Stage 6: Italy・Rome",
-                    "Stage 7: UK・London", "Stage 8: USA・New York", "Stage 9: Australia・Sydney", "Stage 10: Russia・Moscow"
-                ],
-                targets: [
-                    "Pier-2 Iron Art Toy 🤖", "Uji Matcha Tea Set 🍵", "Seine Oil Painting 🎨",
-                    "Nile Papyrus Scroll 📜", "Aegean Ceramic Pot 🏺", "Colosseum Ancient Coin 🪙",
-                    "Big Ben Steel Gear ⚙️", "Statue of Liberty Torch 🗽", "Sydney Harbour Pearl 🐚", "Kremlin Faberge Egg 🥚"
-                ],
-                lores: [
-                    "Showcasing Kaohsiung's transformation from an industrial port to a hub of contemporary creative arts.",
-                    "Representing the spirit of Japanese tea ceremonies and Kyoto's refined artisan lifestyle.",
-                    "Symbolizing the romantic artistic routine of cafes along the Seine and Impressionist painters.",
-                    "Unique plant-fiber paper used by ancient Egyptians to record mythology and history.",
-                    "Showcasing the charm of the Cyclades islands and Mediterranean decorative ceramic art.",
-                    "Ancient coins witnessing the magnificent history and trade of the Mediterranean Roman Empire.",
-                    "Echoing the symbol of the British Industrial Revolution and precision mechanical craftsmanship.",
-                    "Standing as a bastion of freedom, democracy, and immigrant culture in New York.",
-                    "Combining the Sydney Opera House's unique shell structure with southern marine ecology.",
-                    "The ultimate masterpiece of Russian imperial royal craft and jewelry design."
-                ]
+                stations: ["Manila", "Singapore", "Sydney", "London", "Vancouver"],
+                warpTexts: ["⏳ Time-warp...", "⏳ Time-warp...", "⏳ Time-warp...", "⏳ Time-warp...", "⏳ Time-warp..."],
+                gods: ["🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)", "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (-2500)"],
+                levels: ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5", "Stage 6", "Stage 7", "Stage 8", "Stage 9", "Stage 10"],
+                targets: ["Toy 🤖", "Tea Set 🍵", "Painting 🎨", "Scroll 📜", "Pot 🏺", "Coin 🪙", "Gear ⚙️", "Torch 🗽", "Pearl 🐚", "Egg 🥚"],
+                lores: ["Lore 1", "Lore 2", "Lore 3", "Lore 4", "Lore 5", "Lore 6", "Lore 7", "Lore 8", "Lore 9", "Lore 10"]
             }
         };
 
@@ -813,16 +710,17 @@
             document.getElementById('knowledge-title').innerText = t.knowTitle;
             document.getElementById('k-close').innerText = t.kClose;
 
-            document.getElementById('station-modal-title').innerText = (lang === 'en' ? "💰 Select Historical Station" : (lang === 'zh-CN' ? "💰 选择历史流放地打工" : "📜 選擇歷史流放地打工"));
-            document.getElementById('station-modal-desc').innerText = (lang === 'en' ? "Earn tickets by assisting historical figures:" : (lang === 'zh-CN' ? "旅费透支时，选择前往古代/历史名人处打工赚取机票费：" : "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費："));
-            document.getElementById('station-modal-cancel').innerText = (lang === 'en' ? "Cancel" : (lang === 'zh-CN' ? "取消返回" : "取消返回"));
+            document.getElementById('station-modal-title').innerText = (lang === 'en' ? "💰 Select Historical Station" : "📜 選擇歷史流放地打工");
+            document.getElementById('station-modal-desc').innerText = (lang === 'en' ? "Earn tickets by assisting historical figures:" : "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：");
+            document.getElementById('station-modal-cancel').innerText = (lang === 'en' ? "Cancel" : "取消返回");
             for(let i=0; i<5; i++) {
-                document.getElementById('st-' + i).innerText = t.stations[i];
+                let stEl = document.getElementById('st-' + i);
+                if(stEl) stEl.innerText = t.stations[i];
             }
 
-            document.getElementById('god-modal-title').innerText = (lang === 'en' ? "⛩️ Divine Guidance & Prayer" : (lang === 'zh-CN' ? "⛩️ 神通指南与请神面板" : "⛩️ 神通指南與請神面板"));
-            document.getElementById('god-modal-desc').innerText = (lang === 'en' ? "Unlocked at Level 6. Pray for divine assistance!" : (lang === 'zh-CN' ? "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！" : "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！"));
-            document.getElementById('god-modal-close').innerText = (lang === 'en' ? "Close Guide" : (lang === 'zh-CN' ? "关闭指南" : "關閉指南"));
+            document.getElementById('god-modal-title').innerText = (lang === 'en' ? "⛩️ Divine Guidance" : "⛩️ 神通指南與請神面板");
+            document.getElementById('god-modal-desc').innerText = (lang === 'en' ? "Unlocked at Level 6." : "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！");
+            document.getElementById('god-modal-close').innerText = (lang === 'en' ? "Close" : "關閉指南");
             document.getElementById('g-tudi').innerText = t.gods[0];
             document.getElementById('g-wen').innerText = t.gods[1];
             document.getElementById('g-mazu').innerText = t.gods[2];
@@ -832,14 +730,12 @@
 
             document.getElementById('cert-title').innerText = t.certTitle;
             document.getElementById('cert-btn').innerText = t.certBtn;
-
             document.getElementById('win-title').innerText = t.winTitle;
             document.getElementById('btn-prev-level').innerText = t.btnPrev;
             document.getElementById('btn-home-level').innerText = t.btnHome;
             document.getElementById('btn-next-level').innerText = t.btnNext;
             document.getElementById('btn-buy-souvenir').innerText = t.buyText;
 
-            // 徹底更新打工頁面的純英/中字串
             document.getElementById('work-title').innerText = t.workHeaderTitle;
             document.getElementById('work-earned-label').innerText = t.workEarnedLabel;
             document.getElementById('work-unit-label').innerText = t.workUnitLabel;
@@ -856,13 +752,8 @@
             for (let i = 1; i <= 10; i++) {
                 let opt = document.getElementById('opt-lvl' + i);
                 if (opt && t.levels[i-1]) {
-                    opt.innerText = (currentLang === 'en' ? `Level ${i} (${t.levels[i-1].split(': ')[1] || t.levels[i-1]})` : `第 ${i} 關 (${t.levels[i-1]})`);
+                    opt.innerText = (currentLang === 'en' ? `Level ${i}` : `第 ${i} 關 (${t.levels[i-1]})`);
                 }
-            }
-
-            if (isPlaying) {
-                updateUI();
-                updateWorkUI();
             }
         }
 
@@ -975,7 +866,7 @@
 
         function startGame() {
             initAudio(); isPlaying = true;
-            let rawNick = document.getElementById('player-nickname').value.trim() || (currentLang === 'en' ? "Explorer" : "探險家");
+            let rawNick = document.getElementById('player-nickname').value.trim() || "探險家";
             let randomCode = Math.floor(1000 + Math.random() * 9000);
             uniquePlayerId = `${rawNick}#${randomCode}`;
 
@@ -1000,7 +891,7 @@
 
         function openKnowledgeModal() {
             let t = i18n[currentLang];
-            document.getElementById('knowledge-title').innerText = "📖 " + t.levels[currentLevel-1] + " - " + (currentLang === 'en' ? "Culture & Lore" : "文化與寶藏知識");
+            document.getElementById('knowledge-title').innerText = "📖 " + t.levels[currentLevel-1] + " - 文化與寶藏知識";
             document.getElementById('knowledge-text').innerText = t.lores[currentLevel-1];
             document.getElementById('knowledge-modal').style.display = 'flex';
         }
@@ -1008,7 +899,7 @@
 
         function openGodHelpModal() {
             if (currentLevel < 6) {
-                alert(currentLang === 'en' ? "⛩️ Divine Guidance unlocks at Level 6!" : "⛩️ 神壇與請神神通將於【第 6 關】正式解鎖！");
+                alert("⛩️ 神壇與請神神通將於【第 6 關】正式解鎖！");
                 return;
             }
             document.getElementById('god-help-modal').style.display = 'flex';
@@ -1018,13 +909,12 @@
         function openStationModal() { document.getElementById('station-modal').style.display = 'flex'; }
         function closeStationModal() { document.getElementById('station-modal').style.display = 'none'; }
 
-        // 🌀 觸發時空穿越特效動畫
         function triggerTimeWarp(idx) {
             closeStationModal();
-            incrementGlobalStat('banished'); // 雲端記錄邊疆流放人次
+            incrementGlobalStat('banished');
             let t = i18n[currentLang];
-            document.getElementById('warp-title-txt').innerText = (currentLang === 'en' ? "Time-Warping to Historical Era..." : "⏳ 時空隧道穿越中...");
-            document.getElementById('warp-sub-txt').innerText = t.warpTexts[idx] || (currentLang === 'en' ? "Banishment to historical trade post!" : "正被流放至古代邊疆打工賺取機票！");
+            document.getElementById('warp-title-txt').innerText = "⏳ 時空隧道穿越中...";
+            document.getElementById('warp-sub-txt').innerText = t.warpTexts[idx] || "正被流放至古代邊疆打工賺取機票！";
             
             let warpScreen = document.getElementById('time-warp-screen');
             warpScreen.style.display = 'flex';
@@ -1101,9 +991,7 @@
             }
             offSafeSpaces.sort(() => Math.random() - 0.5);
 
-            // 🌟 隨關卡難度遞增與累積解鎖路阻危機
-            if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 7; // 💵 現金寶物 (每關必備)
-
+            if (offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 7; // 💵 現金寶物
             if (offSafeSpaces.length > 0 && currentLevel >= 1) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 2; // 🐺 惡狼
             if (offSafeSpaces.length > 0 && currentLevel >= 3) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 3; // 🦠 瘟疫
             if (offSafeSpaces.length > 0 && currentLevel >= 5) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 4; // 🚢 船難
@@ -1119,12 +1007,9 @@
         }
 
         function updateUI() {
-            let lvlPrefix = (currentLang === 'en' ? "Level: " : "關卡: ");
-            let scorePrefix = (currentLang === 'en' ? "Score: " : "總分: ");
-            let targetPrefix = (currentLang === 'en' ? "Target: " : "目標：");
-            document.getElementById('ui-level').innerText = lvlPrefix + currentLevel + "/10";
-            document.getElementById('ui-score').innerText = scorePrefix + totalScore;
-            document.getElementById('ui-target').innerText = targetPrefix + currentTarget.n;
+            document.getElementById('ui-level').innerText = "關卡: " + currentLevel + "/10";
+            document.getElementById('ui-score').innerText = "總分: " + totalScore;
+            document.getElementById('ui-target').innerText = "目標：" + currentTarget.n;
         }
 
         window.addEventListener('keydown', function(e) {
@@ -1202,70 +1087,13 @@
                 undoHistory.push({x: playerPos.x, y: playerPos.y});
                 if(undoHistory.length > 10) undoHistory.shift();
 
-                // 🐺 惡狼（土地公）：扣 300 分
-                if (cell === 2) {
-                    trapHitThisLevel = true;
-                    totalScore -= 300; updateUI();
-                    playSound('wolf'); vibrate([80, 40, 80]); maze[ny][nx] = 0;
-                    playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🐺 Attacked by a wild wolf! (Seek Tudi Gong), -300 pts!" : (currentLang === 'zh-CN' ? "🐺 遭遇野狼袭击！(宜祈求土地公指路)，扣除 300 点！" : "🐺 遭遇野狼襲擊！(宜祈求土地公指路)，扣除 300 點！"));
-                    return;
-                }
-                // 🦠 瘟疫（溫王爺）：扣 400 分
-                if (cell === 3) {
-                    trapHitThisLevel = true;
-                    totalScore -= 400; updateUI();
-                    playSound('bump'); vibrate([60, 60, 60]); maze[ny][nx] = 0;
-                    playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🦠 Infected by plague! (Seek Wen Wangye), -400 pts!" : (currentLang === 'zh-CN' ? "🦠 遭遇瘟疫侵袭！(宜祈求温王爷驱除)，扣除 400 点！" : "🦠 遭遇瘟疫侵襲！(宜祈求溫王爺驅除)，扣除 400 點！"));
-                    return;
-                }
-                // 🚢 船難（媽祖）：扣 500 分
-                if (cell === 4) {
-                    trapHitThisLevel = true;
-                    totalScore -= 500; updateUI();
-                    playSound('bump'); vibrate([100, 50, 100]); maze[ny][nx] = 0;
-                    playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🚢 Encountered a shipwreck! (Seek Mazu), -500 pts!" : (currentLang === 'zh-CN' ? "🚢 遭遇海上船难！(宜祈求妈祖护航)，扣除 500 点！" : "🚢 遭遇海上船難！(宜祈求媽祖護航)，扣除 500 點！"));
-                    return;
-                }
-                // 🦹‍♂️ 歹徒（觀世音）：扣 600 分
-                if (cell === 5) {
-                    trapHitThisLevel = true;
-                    totalScore -= 600; updateUI();
-                    playSound('bump'); vibrate([120, 60, 120]); maze[ny][nx] = 0;
-                    playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🦹‍♂️ Ambushed by a bandit! (Seek Guanyin), -600 pts!" : (currentLang === 'zh-CN' ? "🦹‍♂️ 遭遇歹徒袭击！(宜祈求观世音收服)，扣除 600 点！" : "🦹‍♂️ 遭遇歹徒襲擊！(宜祈求觀世音收服)，扣除 600 點！"));
-                    return;
-                }
-                // 🤒 惡疾（藥師佛）：扣 800 分
-                if (cell === 6) {
-                    trapHitThisLevel = true;
-                    totalScore -= 800; updateUI();
-                    playSound('bump'); vibrate([140, 70, 140]); maze[ny][nx] = 0;
-                    playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🤒 Contracted a severe illness! (Seek Medicine Buddha), -800 pts!" : (currentLang === 'zh-CN' ? "🤒 身体染上恶疾！(宜祈求药师佛拔除)，扣除 800 点！" : "🤒 身體染上惡疾！(宜祈求藥師佛拔除)，扣除 800 點！"));
-                    return;
-                }
-                // 🧨 炸藥：扣 1000 分
-                if (cell === 8) {
-                    trapHitThisLevel = true;
-                    totalScore -= 1000; updateUI();
-                    playSound('dynamite'); vibrate([150, 80, 150]); maze[ny][nx] = 0;
-                    playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🧨 Triggered dynamite explosion, -1000 pts!" : (currentLang === 'zh-CN' ? "🧨 误触炸药爆炸，重罚扣除 1000 点！" : "🧨 誤觸炸藥爆炸，重罰扣除 1000 點！"));
-                    return;
-                }
-                // 💵 現金寶物：加 300 分
-                if (cell === 7) {
-                    treasureCollectedThisLevel = true;
-                    totalScore += 300; updateUI();
-                    playSound('item'); maze[ny][nx] = 0;
-                    playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "💵 Found cash treasure, +300 pts!" : (currentLang === 'zh-CN' ? "💵 获得现金宝物 300 点！" : "💵 獲得現金寶物 300 點！"));
-                    checkWin();
-                    return;
-                }
+                if (cell === 2) { trapHitThisLevel = true; totalScore -= 300; updateUI(); playSound('wolf'); vibrate([80, 40, 80]); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze(); alert("🐺 遭遇野狼襲擊！(宜祈求土地公指路)，扣除 300 點！"); return; }
+                if (cell === 3) { trapHitThisLevel = true; totalScore -= 400; updateUI(); playSound('bump'); vibrate([60, 60, 60]); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze(); alert("🦠 遭遇瘟疫侵襲！(宜祈求溫王爺驅除)，扣除 400 點！"); return; }
+                if (cell === 4) { trapHitThisLevel = true; totalScore -= 500; updateUI(); playSound('bump'); vibrate([100, 50, 100]); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze(); alert("🚢 遭遇海上船難！(宜祈求媽祖護航)，扣除 500 點！"); return; }
+                if (cell === 5) { trapHitThisLevel = true; totalScore -= 600; updateUI(); playSound('bump'); vibrate([120, 60, 120]); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze(); alert("🦹‍♂️ 遭遇歹徒襲擊！(宜祈求觀世音收服)，扣除 600 點！"); return; }
+                if (cell === 6) { trapHitThisLevel = true; totalScore -= 800; updateUI(); playSound('bump'); vibrate([140, 70, 140]); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze(); alert("🤒 身體染上惡疾！(宜祈求藥師佛拔除)，扣除 800 點！"); return; }
+                if (cell === 8) { trapHitThisLevel = true; totalScore -= 1000; updateUI(); playSound('dynamite'); vibrate([150, 80, 150]); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze(); alert("🧨 誤觸炸藥爆炸，重罰扣除 1000 點！"); return; }
+                if (cell === 7) { treasureCollectedThisLevel = true; totalScore += 300; updateUI(); playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze(); alert("💵 獲得現金寶物 300 點！"); checkWin(); return; }
 
                 playSound('move');
                 playerPos.x = nx; playerPos.y = ny; drawMaze(); checkWin();
@@ -1273,20 +1101,12 @@
         }
 
         function undoMove() {
-            if (undoCountLeft <= 0) {
-                alert(currentLang === 'en' ? "⚠️ Undo limit reached for this level!" : (currentLang === 'zh-CN' ? "⚠️ 本关的反悔次数已用完！" : "⚠️ 本關的反悔次數已用完！"));
-                return;
-            }
-            if (undoHistory.length === 0) {
-                alert(currentLang === 'en' ? "⚠️ No moves to undo!" : (currentLang === 'zh-CN' ? "⚠️ 目前没有可撤回的步骤！" : "⚠️ 目前沒有可撤回的步驟！"));
-                return;
-            }
+            if (undoCountLeft <= 0) { alert("⚠️ 本關的反悔次數已用完！"); return; }
+            if (undoHistory.length === 0) { alert("⚠️ 目前沒有可撤回的步驟！"); return; }
             let prev = undoHistory.pop();
-            playerPos = prev;
-            undoCountLeft--;
+            playerPos = prev; undoCountLeft--;
             document.getElementById('undo-count').innerText = undoCountLeft;
-            playSound('item');
-            drawMaze();
+            playSound('item'); drawMaze();
         }
 
         function checkWin() {
@@ -1303,34 +1123,20 @@
                 document.getElementById('ui-stars').innerText = starStr;
 
                 let shippingFee = currentLevel * 500;
-                let t = i18n[currentLang];
-
-                let msg = (currentLang === 'en' ? 
-                    `Completed [Level ${currentLevel}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n}\nEarned Score: +${currentTarget.s}\nStars: ${starStr}\nCurrent Total Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
-                    (currentLang === 'zh-CN' ?
-                        `通关【第 ${currentLevel} 关：${currentTarget.station}】！\n代号：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n获得积分：${currentTarget.s} 点\n本关星等：${starStr}\n目前总分：${totalScore} 点\n\n💡 知识小百科：\n${currentTarget.knowledge}` :
-                        `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n目前總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
-                    )
-                );
+                let msg = `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n目前總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`;
                 document.getElementById('win-message').innerText = msg;
 
                 document.getElementById('purchase-area').style.display = 'block';
-                let buyDescText = (currentLang === 'en' ? 
-                    `🛍️ Souvenir & Shipping Fee for Level ${currentLevel}: ${shippingFee} pts` :
-                    (currentLang === 'zh-CN' ? `🛍️ 第 ${currentLevel} 关纪念品与跨国运费：${shippingFee} 点` : `🛍️ 第 ${currentLevel} 關紀念品與跨國運費：${shippingFee} 點`)
-                );
-                document.getElementById('purchase-desc').innerText = buyDescText;
+                document.getElementById('purchase-desc').innerText = `🛍️ 第 ${currentLevel} 關紀念品與跨國運費：${shippingFee} 點`;
                 document.getElementById('nav-buttons-area').style.display = 'none';
-
                 document.getElementById('win-modal').style.display = 'flex';
             }
         }
 
         function buySouvenir() {
             let shippingFee = currentLevel * 500;
-            let t = i18n[currentLang];
             if (totalScore < shippingFee) {
-                alert(t.insufficient);
+                alert("⚠️ 旅費不足！無法支付運費將寶物買回國，即將啟動時空隧道流放至古代邊疆打工！");
                 document.getElementById('win-modal').style.display = 'none';
                 openStationModal();
                 return;
@@ -1339,47 +1145,28 @@
             totalScore -= shippingFee;
             totalScore += currentTarget.s;
             updateUI();
-            incrementGlobalStat('treasures'); // 雲端記錄寶物尋獲數
+            incrementGlobalStat('treasures');
 
-            alert(currentLang === 'en' ? "🎉 Successfully purchased souvenir and shipped home! Proceeding to next adventure." : "🎉 成功支付運費，紀念品已安全寄回國！");
-
+            alert("🎉 成功支付運費，紀念品已安全寄回國！");
             document.getElementById('purchase-area').style.display = 'none';
-            let navArea = document.getElementById('nav-buttons-area');
-            navArea.style.display = 'flex';
+            document.getElementById('nav-buttons-area').style.display = 'flex';
 
             let prevBtn = document.getElementById('btn-prev-level');
             let nextBtn = document.getElementById('btn-next-level');
             prevBtn.style.display = (currentLevel > 1) ? 'inline-block' : 'none';
-
-            if (currentLevel < 10) {
-                nextBtn.innerText = t.btnNext;
-            } else {
-                nextBtn.innerText = t.btnCert;
-            }
+            nextBtn.innerText = (currentLevel < 10) ? "➡️ 下一關" : "🏆 結業證書";
         }
 
         function goToPrevLevel() {
             document.getElementById('win-modal').style.display = 'none';
-            if (currentLevel > 1) {
-                currentLevel--;
-                loadLevel();
-            }
+            if (currentLevel > 1) { currentLevel--; loadLevel(); }
         }
         function goToNextLevel() {
             document.getElementById('win-modal').style.display = 'none';
-            if (currentLevel < 10) {
-                currentLevel++;
-                loadLevel();
-            } else {
+            if (currentLevel < 10) { currentLevel++; loadLevel(); }
+            else {
                 isPlaying = false;
-                let certText = (currentLang === 'en' ? 
-                    `This is to certify that <b>[${uniquePlayerId}]</b> has successfully completed the Global Treasure Maze Adventure!<br>Final Score: <b>${totalScore} pts</b><br>Congratulations on winning the "Master Explorer" honor!` :
-                    (currentLang === 'zh-CN' ?
-                        `特此证明 <b>[${uniquePlayerId}]</b> 探险家顺利完成世界十大宝藏迷宫探险！<br>最终总分：<b>${totalScore} 点</b><br>恭喜荣获“世界寻宝之王”最高殊荣！` :
-                        `特此證明 <b>[${uniquePlayerId}]</b> 探險家順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`
-                    )
-                );
-                document.getElementById('cert-content').innerHTML = certText;
+                document.getElementById('cert-content').innerHTML = `特此證明 <b>[${uniquePlayerId}]</b> 探險家順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`;
                 document.getElementById('certificate-modal').style.display = 'flex';
             }
         }
@@ -1390,72 +1177,30 @@
 
         function doWork() {
             let st = banishmentStations[currentStationIndex];
-            if (currentStationClicks >= st.maxClicks) {
-                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your ticket to return!" : (currentLang === 'zh-CN' ? "⚠️ 打工额度已满，请点击下方按钮支付机票费返程！" : "⚠️ 打工額度已滿，請點擊下方按鈕支付機票費返程！"));
-                return;
-            }
-
-            let activeTasks = (currentLang === 'en') ? workTasksEN : ((currentLang === 'zh-CN') ? workTasksCN : workTasksTW);
-            let wData = activeTasks[currentStationIndex];
-
-            // 觸發音效與朝天蹬高踢腿動畫
-            if (wData.isLeg) {
-                playSound('kick');
-                vibrate([40, 20, 40]);
-                let btn = document.getElementById('work-action-icon');
-                btn.classList.remove('kick-action');
-                void btn.offsetWidth; // 強制重繪
-                btn.classList.add('kick-action');
-            } else {
-                playSound('item');
-                vibrate([20]);
-            }
-
+            if (currentStationClicks >= st.maxClicks) { alert("⚠️ 打工額度已滿，請點擊下方按鈕支付機票費返程！"); return; }
+            let wData = workTasksTW[currentStationIndex];
+            if (wData.isLeg) { playSound('kick'); vibrate([40, 20, 40]); let btn = document.getElementById('work-action-icon'); btn.classList.remove('kick-action'); void btn.offsetWidth; btn.classList.add('kick-action'); }
+            else { playSound('item'); vibrate([20]); }
             currentWorkEarned += st.reward; currentStationClicks++;
-            
-            // 隨機切換名人的幽默對話
             if (wData && wData.chats) {
                 let chatItem = wData.chats[Math.floor(Math.random() * wData.chats.length)];
-                let chatText = (typeof chatItem === 'function') ? chatItem() : chatItem;
-                document.getElementById('work-chat-bubble').innerText = chatText;
+                document.getElementById('work-chat-bubble').innerHTML = (typeof chatItem === 'function') ? chatItem() : chatItem;
             }
-
             updateWorkUI();
         }
 
         function updateWorkUI() {
             let st = banishmentStations[currentStationIndex];
-            let activeTasks = (currentLang === 'en') ? workTasksEN : ((currentLang === 'zh-CN') ? workTasksCN : workTasksTW);
-            let wData = activeTasks[currentStationIndex];
-
-            // 更新流放地標題與文字（嚴格對應語系）
-            document.getElementById('ui-banish-location').innerText = "🗺️ " + (currentLang === 'en' ? "Station: " : "流放地：") + wData.name;
-            let firstChat = wData.chats[0];
-            document.getElementById('work-chat-bubble').innerText = (typeof firstChat === 'function') ? firstChat() : firstChat;
+            let wData = workTasksTW[currentStationIndex];
+            document.getElementById('ui-banish-location').innerText = "🗺️ 流放地：" + wData.name;
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
-            
-            // 渲染：如果為寧古塔（索引4），按鈕內顯示「左側朝天蹬武俠人形 + 右側甄嬛娘娘」；否則還原為大 Emoji
             let iconContainer = document.getElementById('work-inner-icon');
-            if (wData.isLeg) {
-                iconContainer.innerHTML = getKungFuPersonSVG() + zhenHuanFullSVG;
-            } else {
-                iconContainer.innerHTML = `<span style="font-size: 55px; line-height: 1;">${wData.icon}</span>`;
-            }
-            
-            let descText = (currentLang === 'en' ? 
-                `${wData.task} | Per Tap: ${st.reward} pts | Remaining: ${st.maxClicks - currentStationClicks} | Ticket: ${st.ticket} pts` :
-                (currentLang === 'zh-CN' ?
-                    `${wData.task} | 每敲一次：${st.reward}点 | 剩余次数：${st.maxClicks - currentStationClicks} | 机票费：${st.ticket}点` :
-                    `${wData.task} | 每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`
-                )
-            );
-            document.getElementById('work-rule-desc').innerText = descText;
+            if (wData.isLeg) iconContainer.innerHTML = getKungFuPersonSVG() + zhenHuanFullSVG;
+            else iconContainer.innerHTML = `<span style="font-size: 55px;">${wData.icon}</span>`;
+            document.getElementById('work-rule-desc').innerText = `${wData.task} | 每敲一次：${st.reward}點 | 剩餘：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`;
             let prog = document.getElementById('work-progress');
             prog.max = st.ticket; prog.value = Math.min(currentWorkEarned, st.ticket);
-            
-            let t = i18n[currentLang];
-            document.getElementById('ui-btn-work-return').innerText = t.workReturnBtn;
             document.getElementById('ui-btn-work-return').style.display = (currentWorkEarned >= st.ticket) ? 'block' : 'none';
         }
 
@@ -1470,30 +1215,21 @@
         function startGodBwei(godType) {
             closeGodHelpModal();
             pendingGod = godType; 
-            let godIdx = Object.keys(godsData).indexOf(godType);
-            pendingGodName = i18n[currentLang].gods[godIdx] || godsData[godType].n_tw;
+            pendingGodName = godsData[godType].n_tw;
             isEventActive = true; 
             bweiShengCount = 0;
             
-            // 依遊戲模式動態配置擲筊機會（輕鬆7次、標準6次、挑戰5次、地獄4次）
             let mode = document.getElementById('selected-mode').value;
-            if (mode === 'easy') {
-                maxBweiAttempts = 7;
-            } else if (mode === 'standard') {
-                maxBweiAttempts = 6;
-            } else if (mode === 'challenge') {
-                maxBweiAttempts = 5;
-            } else {
-                maxBweiAttempts = 4; // 地獄模式 4 次機會
-            }
+            maxBweiAttempts = (mode === 'easy') ? 7 : (mode === 'standard' ? 6 : (mode === 'challenge' ? 5 : 4));
             bweiAttemptsLeft = maxBweiAttempts;
 
-            let pTitle = (currentLang === 'en' ? "🙏 Praying to " + pendingGodName : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName));
-            document.getElementById('bwei-title').innerText = pTitle;
-            let countText = (currentLang === 'en' ? `Consecutive Sheng Jiao: 0 (Attempts left: ${bweiAttemptsLeft})` : (currentLang === 'zh-CN' ? `目前连续圣筊：0 次 (剩余机会: ${bweiAttemptsLeft} 次)` : `目前連續聖筊：0 次 (剩餘機會: ${bweiAttemptsLeft} 次)`));
-            document.getElementById('bwei-count-display').innerText = countText;
-            document.getElementById('cup1').innerText = "🌙";
-            document.getElementById('cup2').innerText = "🌙";
+            document.getElementById('bwei-title').innerText = "🙏 誠心擲筊請示 " + pendingGodName;
+            document.getElementById('bwei-count-display').innerText = `目前連續聖筊：0 次 (剩餘機會: ${bweiAttemptsLeft} 次，需連續 2 次)`;
+            
+            // 初始化顯示半月筊杯初始狀態
+            document.getElementById('cup1').className = "bwei-mu-block flat"; document.getElementById('cup1').innerText = "平";
+            document.getElementById('cup2').className = "bwei-mu-block convex"; document.getElementById('cup2').innerText = "凸";
+            
             document.getElementById('bwei-modal').style.display = 'flex';
         }
         function closeBwei() { document.getElementById('bwei-modal').style.display = 'none'; isEventActive = false; }
@@ -1503,107 +1239,86 @@
             playSound('item'); vibrate([50, 50]);
             let cup1 = document.getElementById('cup1');
             let cup2 = document.getElementById('cup2');
-            cup1.style.transform = 'rotate(360deg) scale(1.2)';
-            cup2.style.transform = 'rotate(-360deg) scale(1.2)';
+            
+            cup1.style.transform = 'rotate(720deg) scale(1.3)';
+            cup2.style.transform = 'rotate(-720deg) scale(1.3)';
 
             setTimeout(() => {
                 cup1.style.transform = 'rotate(0deg) scale(1)';
                 cup2.style.transform = 'rotate(0deg) scale(1)';
                 
-                let mode = document.getElementById('selected-mode').value;
-                let shengProb = 0.5;
-                if (mode === 'easy') shengProb = 0.6;
-                else if (mode === 'standard') shengProb = 0.5;
-                else if (mode === 'challenge') shengProb = 0.4;
-                else if (mode === 'hell') shengProb = 0.3;
-
-                let isSheng = Math.random() < shengProb;
-                cup1.innerText = isSheng ? "🌙" : "🌛";
-                cup2.innerText = isSheng ? "🌛" : "🌙";
+                // 模擬真實筊杯結果：0=聖筊(一正一反), 1=笑筊(兩正), 2=陰筊(兩反)
+                let r = Math.floor(Math.random() * 3);
+                let resultType = "";
+                
+                if (r === 0) {
+                    resultType = "sheng"; // 聖筊 (一平一凸)
+                    cup1.className = "bwei-mu-block flat"; cup1.innerText = "平";
+                    cup2.className = "bwei-mu-block convex"; cup2.innerText = "凸";
+                } else if (r === 1) {
+                    resultType = "xiao"; // 笑筊 (兩平 / 兩正)
+                    cup1.className = "bwei-mu-block flat"; cup1.innerText = "平";
+                    cup2.className = "bwei-mu-block flat"; cup2.innerText = "平";
+                } else {
+                    resultType = "yin"; // 陰筊 (兩凸 / 兩反)
+                    cup1.className = "bwei-mu-block convex"; cup1.innerText = "凸";
+                    cup2.className = "bwei-mu-block convex"; cup2.innerText = "凸";
+                }
 
                 bweiAttemptsLeft--;
 
-                if (isSheng) {
+                if (resultType === "sheng") {
                     bweiShengCount++;
-                    let sText = (currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiShengCount} (Attempts left: ${bweiAttemptsLeft})` : (currentLang === 'zh-CN' ? `目前连续圣筊：${bweiShengCount} 次 (剩余机会: ${bweiAttemptsLeft} 次)` : `目前連續聖筊：${bweiShengCount} 次 (剩餘機會: ${bweiAttemptsLeft} 次)`));
-                    document.getElementById('bwei-count-display').innerText = sText;
+                    document.getElementById('bwei-count-display').innerText = `✨ 聖筊！目前連續：${bweiShengCount}/2 次 (剩餘機會: ${bweiAttemptsLeft})`;
                     if (bweiShengCount === 2) {
                         setTimeout(() => {
                             document.getElementById('bwei-modal').style.display = 'none';
-                            
-                            // 扣除香油錢與執行神蹟
                             let cost = godsData[pendingGod].cost;
                             totalScore -= cost;
                             updateUI();
 
                             if (pendingGod === 'supreme') {
-                                // 玉皇大帝：清除迷宮中所有的路阻 (將代碼 2, 3, 4, 5, 6, 8 全部設為 0)
                                 for (let y = 0; y < mazeSize; y++) {
                                     for (let x = 0; x < mazeSize; x++) {
-                                        if ((maze[y][x] >= 2 && maze[y][x] <= 6) || maze[y][x] === 8) {
-                                            maze[y][x] = 0;
-                                        }
+                                        if ((maze[y][x] >= 2 && maze[y][x] <= 6) || maze[y][x] === 8) maze[y][x] = 0;
                                     }
                                 }
-                                alert(currentLang === 'en' ? "🌟 Jade Emperor manifests! All obstacles cleared from the maze!" : "🌟 玉皇大帝顯靈！迷宮內所有路阻皆已清除完畢！");
+                                alert("🌟 玉皇大帝顯靈！連續兩次聖筊！迷宮內所有路阻皆已清場！");
                                 drawMaze();
                             } else {
-                                alert(currentLang === 'en' ? "⛩️ Divine Blessing Successful! Path illuminated." : "⛩️ 神明聖筊顯靈，庇佑成功！前路已為您指引。");
-                                if(maze[targetPos.y-1] && maze[targetPos.y-1][targetPos.x] !== undefined) {
-                                    maze[targetPos.y-1][targetPos.x] = 0;
-                                }
+                                alert(`⛩️ ${pendingGodName} 聖筊顯靈！連續兩次聖筊，前路已為您指引。`);
+                                if(maze[targetPos.y-1] && maze[targetPos.y-1][targetPos.x] !== undefined) maze[targetPos.y-1][targetPos.x] = 0;
                                 drawMaze();
                             }
                             isEventActive = false;
-                        }, 500);
+                        }, 600);
                         return;
                     }
                 } else {
+                    // 只要中間出現兩正或兩反，連續次數立刻歸零！
                     bweiShengCount = 0;
-                    let fText = (currentLang === 'en' ? `Sheng Jiao Failed (Attempts left: ${bweiAttemptsLeft})` : (currentLang === 'zh-CN' ? `未得聖筊 (剩余机会: ${bweiAttemptsLeft} 次)` : `未得聖筊 (剩餘機會: ${bweiAttemptsLeft} 次)`));
-                    document.getElementById('bwei-count-display').innerText = fText;
+                    let descTag = (resultType === "xiao" ? "【笑筊 / 兩正】" : "【陰筊 / 兩反】");
+                    document.getElementById('bwei-count-display').innerText = `${descTag} 無效！連續歸零 (剩餘機會: ${bweiAttemptsLeft})`;
                 }
 
-                // 次數用盡仍未請到神：神明不在位（退回香油錢）
                 if (bweiAttemptsLeft <= 0 && bweiShengCount < 2) {
                     setTimeout(() => {
                         document.getElementById('bwei-modal').style.display = 'none';
-                        
-                        // 🌟 神明不在位，原封不動退回香油錢！
                         let cost = godsData[pendingGod].cost;
-                        totalScore += cost;
+                        totalScore += cost; // 🌟 神明不在位，原封不動全額退回香油錢！
                         updateUI();
                         
-                        const absentReasonsTW = [
-                            `🌴 【神明不在位】神明暫時請年休去帛琉度假了！香爐前掛著「本日公休，有事請找土地公代理」的牌子（香油錢已全額退還 ${cost} 點）。`,
-                            `🍑 【神明不在位】神明正在參加王母娘娘的蟠桃會！仙桃吃得正開心，暫時不接聽凡間急件（香油錢已全額退還 ${cost} 點）。`,
-                            `🀄 【神明不在位】神明跑去跟月老打麻將！三缺一正在血戰到底，香油錢原封不動退回（退回 ${cost} 點）。`,
-                            `🧘 【神明不在位】神明正在閉關修練九轉玄功！天機不可洩漏，香油錢已全額退還（退回 ${cost} 點）。`,
-                            `💤 【神明不在位】神明今天值班太累，正在南天門打瞌睡！呼嚕聲太大聽不到擲筊，香油錢退還（退回 ${cost} 點）。`
+                        const reasons = [
+                            `🌴 【神明不在位】神明暫時請年休度假去！香爐前掛著公休牌子，香油錢已全額退還 ${cost} 點。`,
+                            `🍑 【神明不在位】神明正在參加王母娘娘的蟠桃會！不接凡間急件，香油錢原封不動退回（退回 ${cost} 點）。`,
+                            `🀄 【神明不在位】神明跑去跟月老打麻將三缺一！沒空顯靈，香油錢已退還（退回 ${cost} 點）。`,
+                            `🧘 【神明不在位】神明正在閉關修練九轉玄功！香油錢已全額退還（退回 ${cost} 點）。`
                         ];
-                        const absentReasonsCN = [
-                            `🌴 【神明不在位】神明暂时请年休去三亚度假了！香油钱已全额退还（退回 ${cost} 点）。`,
-                            `🍑 【神明不在位】神明正在参加王母娘娘的蟠桃会！香油钱原封不动退回（退回 ${cost} 点）。`,
-                            `🀄 【神明不在位】神明跑去和月老打麻将！香油钱已退还（退回 ${cost} 点）。`,
-                            `🧘 【神明不在位】神明正在闭关修炼！香油钱退回（退回 ${cost} 点）。`,
-                            `💤 【神明不在位】神明今天值班太累在摸鱼！香油钱退回（退回 ${cost} 点）。`
-                        ];
-                        const absentReasonsEN = [
-                            `🌴 [Deity Absent] On annual leave! Offering refunded (+${cost} pts).`,
-                            `🍑 [Deity Absent] At the Peach Banquet! Offering refunded (+${cost} pts).`,
-                            `🀄 [Deity Absent] Playing mahjong! Offering refunded (+${cost} pts).`,
-                            `🧘 [Deity Absent] In deep meditation! Offering refunded (+${cost} pts).`,
-                            `💤 [Deity Absent] Taking a nap! Offering refunded (+${cost} pts).`
-                        ];
-
-                        let reasons = (currentLang === 'en') ? absentReasonsEN : ((currentLang === 'zh-CN') ? absentReasonsCN : absentReasonsTW);
-                        let randomReason = reasons[Math.floor(Math.random() * reasons.length)];
-                        
-                        alert(randomReason);
+                        alert(reasons[Math.floor(Math.random() * reasons.length)]);
                         isEventActive = false;
                     }, 600);
                 }
-            }, 500);
+            }, 600);
         }
     </script>
 </body>
