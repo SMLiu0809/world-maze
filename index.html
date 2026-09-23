@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 終極穩定修復版</title>
+    <title>世界寶藏迷宮探險 - 結算按鈕與港口修復最終版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -62,7 +62,7 @@
             border: none; display: flex; align-items: center; justify-content: center; cursor: pointer;
         }
 
-        #station-modal, #god-help-modal, #bwei-modal, #screen-work {
+        #station-modal, #god-help-modal, #bwei-modal, #screen-work, #win-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.75); align-items: center; justify-content: center; z-index: 2000;
         }
@@ -97,16 +97,16 @@
             <br><br>
             <label for="start-level-select" id="lbl-test-tool"><b>🛠️ 測試選關起始工具：</b></label><br><br>
             <select id="start-level-select" style="font-weight: 700;">
-                <option value="1">第 1 關 (臺灣・高雄)</option>
-                <option value="2">第 2 關 (日本・京都)</option>
-                <option value="3">第 3 關 (法國・巴黎)</option>
-                <option value="4">第 4 關 (埃及・吉薩)</option>
-                <option value="5">第 5 關 (希臘・雅典)</option>
-                <option value="6">第 6 關 (義大利・羅馬/神壇)</option>
-                <option value="7">第 7 關 (英國・倫敦)</option>
-                <option value="8">第 8 關 (美國・紐約)</option>
-                <option value="9">第 9 關 (澳洲・雪梨)</option>
-                <option value="10">第 10 關 (俄羅斯・莫斯科)</option>
+                <option value="1" id="opt-l1">第 1 關 (臺灣・高雄)</option>
+                <option value="2" id="opt-l2">第 2 關 (日本・京都)</option>
+                <option value="3" id="opt-l3">第 3 關 (法國・巴黎)</option>
+                <option value="4" id="opt-l4">第 4 關 (埃及・吉薩)</option>
+                <option value="5" id="opt-l5">第 5 關 (希臘・雅典)</option>
+                <option value="6" id="opt-l6">第 6 關 (義大利・羅馬/神壇)</option>
+                <option value="7" id="opt-l7">第 7 關 (英國・倫敦)</option>
+                <option value="8" id="opt-l8">第 8 關 (美國・紐約)</option>
+                <option value="9" id="opt-l9">第 9 關 (澳洲・雪梨)</option>
+                <option value="10" id="opt-l10">第 10 關 (俄羅斯・莫斯科)</option>
             </select>
         </div>
         <button id="btn-start" class="btn-large" onclick="startGame()">開始探險 🚀</button>
@@ -144,12 +144,23 @@
         </div>
     </div>
 
+    <!-- 過關結算視窗 -->
+    <div id="win-modal">
+        <div class="modal-content">
+            <h2 id="win-title" style="color: #C0392B;">🎉 尋獲城市寶物！</h2>
+            <div id="win-stars" style="font-size: 34px; margin: 8px 0;">⭐⭐⭐</div>
+            <p id="win-message" style="font-size: 15px; line-height: 1.6;"></p>
+            <button id="btn-buy-souvenir" class="btn-large" style="width:100%; margin:0; background:#F39C12;" onclick="buySouvenir()">💳 Pay Shipping Fee</button>
+            <button id="btn-next-level" class="btn-large" style="width:100%; margin:10px 0 0 0; background:#27AE60; display:none;" onclick="nextLevel()">➡️ Next Level</button>
+        </div>
+    </div>
+
     <!-- 歷史港口打工畫面 -->
     <div id="screen-work" class="screen">
         <h1 style="color:#D35400;">📜 Trade Port Work 📜</h1>
         <h2 id="work-loc-title" style="color:#C0392B;">Manila Port</h2>
         <p id="work-task-desc" style="font-weight: 700;">Task: Sort spice sacks</p>
-        <p><b>Earned Wages: <span id="work-score" style="color:green;">0</span> / 500 pts</b></p>
+        <p><b>Earned Wages: <span id="work-score" style="color:green;">0</span> / <span id="work-target-display">500</span> pts</b></p>
         <button class="btn-large" onclick="doWork()">📦 Work / Tap!</button><br>
         <button class="btn-large" style="background: #27AE60; display:none;" id="work-return-btn" onclick="returnFromWork()">✈️ Return to Game</button><br>
         <button class="btn-large btn-cancel" onclick="cancelWork()">⬅️ Back</button>
@@ -176,8 +187,8 @@
             <h2>⛩️ Divine Guidance (Level 6+)</h2>
             <p>Pray for divine assistance to clear maze hazards!</p>
             <div style="display: flex; flex-direction: column; gap: 8px; margin: 15px 0;">
-                <button class="btn-large" style="width:100%; margin:0; background:#2980B9; font-size:14px;" onclick="startBwei('Mazu', 200, 4)">🌊 Mazu (Cost: 200 pts)</button>
-                <button class="btn-large" style="width:100%; margin:0; background:#D35400; font-size:14px;" onclick="startBwei('Jade Emperor', 1200, 0)">🌟 Jade Emperor (Clear All: 1200 pts)</button>
+                <button class="btn-large" style="width:100%; margin:0; background:#2980B9; font-size:14px;" onclick="startBwei('Mazu', 200)">🌊 Mazu (Cost: 200 pts)</button>
+                <button class="btn-large" style="width:100%; margin:0; background:#D35400; font-size:14px;" onclick="startBwei('Jade Emperor', 1200)">🌟 Jade Emperor (Clear All: 1200 pts)</button>
             </div>
             <button class="btn-large btn-cancel" style="width:100%; margin:0;" onclick="closeGodHelpModal()">Close</button>
         </div>
@@ -206,7 +217,8 @@
         let playerPos = {x: 1, y: 1}, targetPos = {x: 7, y: 7};
         let isPlaying = false;
         let currentPortIdx = 0, workEarned = 0, workTarget = 500, workClicks = 0;
-        let bweiCount = 0, bweiTargetType = 0, bweiCost = 0;
+        let bweiCount = 0, bweiCost = 0;
+        const levelScoreList = [500, 800, 1000, 3500, 6000, 10000, 2500, 1500, 2000, 4500];
 
         const i18n = {
             'zh-TW': { title: "🏆 世界寶藏迷宮探險 🏆", start: "開始探險 🚀", levels: ["第 1 關 (臺灣・高雄)", "第 2 關 (日本・京都)", "第 3 關 (法國・巴黎)", "第 4 關 (埃及・吉薩)", "第 5 關 (希臘・雅典)", "第 6 關 (義大利・羅馬/神壇)", "第 7 關 (英國・倫敦)", "第 8 關 (美國・紐約)", "第 9 關 (澳洲・雪梨)", "第 10 關 (俄羅斯・莫斯科)"] },
@@ -276,11 +288,41 @@
                 playerPos.x = nx; playerPos.y = ny;
                 drawMaze();
                 if (playerPos.x === targetPos.x && playerPos.y === targetPos.y) {
-                    alert(currentLang === 'en' ? "🎉 Level Completed!" : "🎉 恭喜通關本關！");
-                    if (currentLevel < 10) { currentLevel++; loadLevel(); }
-                    else { alert("🏆 You Win the Game!"); showScreen('screen-cover'); }
+                    checkWin();
                 }
             }
+        }
+
+        function checkWin() {
+            let shippingFee = currentLevel * 500;
+            let tName = i18n[currentLang].levels[currentLevel - 1];
+            let msg = currentLang === 'en' ? `Completed [${tName}]!\nEarned Score: +${levelScoreList[currentLevel - 1]}\nShipping Fee Required: ${shippingFee} pts` : `完成【${tName}】！\n獲得積分：+${levelScoreList[currentLevel - 1]} 點\n需支付紀念品跨國運費：${shippingFee} 點`;
+            
+            document.getElementById('win-message').innerText = msg;
+            document.getElementById('btn-buy-souvenir').innerText = currentLang === 'en' ? `💳 Pay Shipping (${shippingFee} pts)` : `💳 支付運費 (${shippingFee} 點)`;
+            document.getElementById('btn-next-level').style.display = 'none';
+            document.getElementById('win-modal').style.display = 'flex';
+        }
+
+        function buySouvenir() {
+            let shippingFee = currentLevel * 500;
+            if (totalScore < shippingFee) {
+                document.getElementById('win-modal').style.display = 'none';
+                alert(currentLang === 'en' ? "⚠️ Insufficient funds! Opening Trade Port for work." : "⚠️ 旅費不足！即將開啟貿易港口打工賺取機票費！");
+                openStationModal();
+                return;
+            }
+            totalScore -= shippingFee;
+            totalScore += levelScoreList[currentLevel - 1];
+            loadLevel();
+            document.getElementById('win-modal').style.display = 'none';
+            alert(currentLang === 'en' ? "🎉 Souvenir purchased successfully!" : "🎉 紀念品成功買回國！");
+        }
+
+        function nextLevel() {
+            document.getElementById('win-modal').style.display = 'none';
+            if (currentLevel < 10) { currentLevel++; loadLevel(); }
+            else { alert("🏆 You Win the Game!"); showScreen('screen-cover'); }
         }
 
         function openStationModal() { document.getElementById('station-modal').style.display = 'flex'; }
@@ -292,6 +334,7 @@
             workEarned = 0; workClicks = 0;
             workTarget = [500, 700, 900, 1100, 1300][idx];
             document.getElementById('work-score').innerText = workEarned;
+            document.getElementById('work-target-display').innerText = workTarget;
             document.getElementById('work-return-btn').style.display = 'none';
             showScreen('screen-work');
         }
@@ -316,15 +359,15 @@
         }
 
         function openGodHelpModal() {
-            if (currentLevel < 6) { alert("Unlocked at Level 6+"); return; }
+            if (currentLevel < 6) { alert(currentLang === 'en' ? "Unlocked at Level 6+" : "第 6 關起解鎖神壇"); return; }
             document.getElementById('god-help-modal').style.display = 'flex';
         }
         function closeGodHelpModal() { document.getElementById('god-help-modal').style.display = 'none'; }
 
-        function startBwei(name, cost, targetCode) {
+        function startBwei(name, cost) {
             closeGodHelpModal();
-            bweiCount = 0; bweiCost = cost; bweiTargetType = targetCode;
-            document.getElementById('bwei-status').innerText = "Consecutive Sheng Jiao: 0 / 2";
+            bweiCount = 0; bweiCost = cost;
+            document.getElementById('bwei-status').innerText = currentLang === 'en' ? "Consecutive Sheng Jiao: 0 / 2" : "目前連續聖筊：0 / 2";
             document.getElementById('bwei-modal').style.display = 'flex';
         }
         function closeBwei() { document.getElementById('bwei-modal').style.display = 'none'; }
@@ -335,20 +378,20 @@
             let c2 = document.getElementById('cup2');
             if (r === 0) {
                 bweiCount++;
-                c1.className = "bwei-mu-block"; c1.innerText = "Ask";
+                c1.className = "bwei-mu-block"; c1.innerText = currentLang === 'en' ? "Ask" : "有求";
                 c2.className = "bwei-mu-block convex"; c2.innerText = "";
             } else if (r === 1) {
                 bweiCount = 0;
-                c1.className = "bwei-mu-block"; c1.innerText = "Ask";
-                c2.className = "bwei-mu-block"; c2.innerText = "Grant";
+                c1.className = "bwei-mu-block"; c1.innerText = currentLang === 'en' ? "Ask" : "有求";
+                c2.className = "bwei-mu-block"; c2.innerText = currentLang === 'en' ? "Grant" : "必應";
             } else {
                 bweiCount = 0;
                 c1.className = "bwei-mu-block convex"; c1.innerText = "";
                 c2.className = "bwei-mu-block convex"; c2.innerText = "";
             }
-            document.getElementById('bwei-status').innerText = `Consecutive Sheng Jiao: ${bweiCount} / 2`;
+            document.getElementById('bwei-status').innerText = currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiCount} / 2` : `目前連續聖筊：${bweiCount} / 2`;
             if (bweiCount >= 2) {
-                alert("✨ Divine Blessing Received!");
+                alert(currentLang === 'en' ? "✨ Divine Blessing Received!" : "✨ 獲得神明庇佑！");
                 totalScore -= bweiCost;
                 closeBwei();
                 loadLevel();
