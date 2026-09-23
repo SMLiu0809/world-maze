@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 關卡選單語系完全同步版</title>
+    <title>世界寶藏迷宮探險 - 最終完整旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -226,7 +226,7 @@
             <div style="margin: 12px 0; background: #FEF9E7; padding: 12px; border-radius: 16px; border: 1px solid #F9E79F;">
                 <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
                 <select id="start-level-select" style="font-size: 14px; padding: 6px 10px; border-radius: 10px; border: 1px solid #F39C12; background: white; font-weight: 700;">
-                    <!-- 動態由 JS 產生的選關下拉選單 -->
+                    <!-- 動態產生的選關下拉選單 -->
                 </select>
             </div>
 
@@ -612,7 +612,6 @@
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
                 hell: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
-                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>⛩️ Divine Oracle Prayer (Level 6+):</b> Unlocked at Level 6. Throw two consecutive <b>'Sheng Jiao' (One flat gold text 'You Qiu/Bi Ying', one convex blank)</b> to receive divine blessings[cite: 2]! Laughing Jiao (both flat) allows retries, while Yin Jiao (both convex) fails the prayer[cite: 1, 2].</p><p><b>🕹️ Historical Trade Port:</b> Trigger time-warp trade ports if funds are low to earn travel tickets!</p><p><b>⭐ Rating & Undo:</b> Earn 1-3 stars per level and use Undo to step back.</p>`,
                 stationBtn: "💰 Historical Trade Port", backCover: "⬅️ Main Menu",
                 tGod: "⛩️ Gods", tStation: "💰 Ports", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
@@ -666,7 +665,6 @@
 
             document.getElementById('btn-instructions').innerText = t.instructions;
             document.getElementById('ins-title').innerText = t.insTitle;
-            document.getElementById('ins-desc').innerHTML = t.insDesc;
             document.getElementById('btn-station').innerText = t.stationBtn;
             document.getElementById('btn-back-cover').innerText = t.backCover;
             document.getElementById('btn-start').innerText = t.start;
@@ -682,7 +680,7 @@
             document.getElementById('p-resume').innerText = t.pResume;
             document.getElementById('p-restart').innerText = t.pRestart;
             document.getElementById('p-home').innerText = t.pHome;
-            document.getElementById('knowledge-title').innerText = t.knowledgeTitle || (currentLang === 'en' ? "📖 Culture & Lore" : "📖 文化與寶藏知識");
+            document.getElementById('knowledge-title').innerText = currentLang === 'en' ? "📖 Culture & Lore" : (currentLang === 'zh-CN' ? "📖 文化与宝藏知识" : "📖 文化與寶藏知識");
             document.getElementById('k-close').innerText = currentLang === 'en' ? "Got it, Continue!" : "了解了，繼續探險！";
 
             document.getElementById('station-modal-title').innerText = (lang === 'en' ? "💰 Select Historical Trade Port" : (lang === 'zh-CN' ? "📜 选择历史贸易港口打工" : "📜 選擇歷史流放地打工"));
@@ -721,7 +719,7 @@
             document.getElementById('btn-buy-souvenir').innerText = t.buyText;
 
             document.getElementById('bwei-title').innerText = currentLang === 'en' ? "🙏 Divine Oracle Prayer" : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 神明" : "🙏 誠心擲筊請示 神明");
-            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一无字凸面）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
+            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一凸无字）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
             document.getElementById('bwei-throw-btn').innerText = currentLang === 'en' ? "🙌 Throw Jiao!" : (currentLang === 'zh-CN' ? "🙌 掷筊！" : "🙌 擲筊！");
             document.getElementById('bwei-cancel-btn').innerText = currentLang === 'en' ? "Cancel" : (currentLang === 'zh-CN' ? "取消" : "取消");
 
@@ -731,7 +729,7 @@
                 soundBtn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
             }
 
-            // 🌟 嚴格動態渲染選關下拉選單
+            // 🌟 嚴格動態渲染選關下拉選單（完美對應各語系清單）
             let levelSelect = document.getElementById('start-level-select');
             levelSelect.innerHTML = "";
             for (let i = 1; i <= 10; i++) {
