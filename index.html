@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 繁中字體校對無瑕版</title>
+    <title>世界寶藏迷宮探險 - 英文關卡 100% 純淨版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -614,7 +614,7 @@
             },
             'en': {
                 title: "🏆 World Treasure Maze Adventure 🏆", nickname: "Player ID / Unique Handle:", gender: "Select Gender:",
-                male: "Male 👨", female: "Female 👩", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode:",
+                male: "Male 👨", female: "Female Female", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode:",
                 easy: "🍵 Casual", easyDesc: "Relaxed pace, casual fun",
                 std: "⚖️ Standard", stdDesc: "Balanced challenge & fun",
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
@@ -636,9 +636,9 @@
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
                 stat1: "🌍 Global Explorers", stat2: "💎 Treasures Found", stat3: "🪵 Historical Labour",
                 levels: [
-                    "Stage 1: Taiwan・Kaohsiung", "Stage 2: Japan・Kyoto", "Stage 3: France・Paris",
-                    "Stage 4: Egypt・Giza", "Stage 5: Greece・Athens", "Stage 6: Italy・Rome",
-                    "Stage 7: UK・London", "Stage 8: USA・New York", "Stage 9: Australia・Sydney", "Stage 10: Russia・Moscow"
+                    "Stage 1: Taiwan - Kaohsiung", "Stage 2: Japan - Kyoto", "Stage 3: France - Paris",
+                    "Stage 4: Egypt - Giza", "Stage 5: Greece - Athens", "Stage 6: Italy - Rome",
+                    "Stage 7: UK - London", "Stage 8: USA - New York", "Stage 9: Australia - Sydney", "Stage 10: Russia - Moscow"
                 ]
             }
         };
@@ -728,7 +728,6 @@
             document.getElementById('btn-next-level').innerText = t.btnNext;
             document.getElementById('btn-buy-souvenir').innerText = t.buyText;
 
-            // 修正：同步更新擲筊彈跳視窗內的文字
             document.getElementById('bwei-title').innerText = currentLang === 'en' ? "🙏 Divine Oracle Prayer" : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 神明" : "🙏 誠心擲筊請示 神明");
             document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一凸无字）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
             document.getElementById('bwei-throw-btn').innerText = currentLang === 'en' ? "🙌 Throw Jiao!" : (currentLang === 'zh-CN' ? "🙌 掷筊！" : "🙌 擲筊！");
@@ -736,14 +735,14 @@
 
             let soundBtn = document.getElementById('btn-sound-toggle');
             if(soundBtn) {
-                soundBtn.innerText = soundEnabled ? (currentLang === 'en' ? "🔊 Sound On" : (currentLang === 'zh-CN' ? "🔊 音效开" : "🔊 音效開")) : (currentLang === 'en' ? "🔇 Sound Off" : (currentLang === 'zh-CN' ? "🔇 音效关" : "🔇 音效關"));
+                soundBtn.innerText = soundEnabled ? (currentLang === 'en' ? "🔊 Sound On" : (currentLang === 'zh-CN' ? "🔊 音效开" : "🔊 音效開")) : (currentLang === 'en' ? "🔇 Sound Off" : (currentLang === 'zh-CN' ? "🔊 音效关" : "🔇 音效關"));
                 soundBtn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
             }
 
             for (let i = 1; i <= 10; i++) {
                 let opt = document.getElementById('opt-lvl' + i);
                 if (opt && t.levels[i-1]) {
-                    opt.innerText = (currentLang === 'en' ? `Stage ${i}` : (currentLang === 'zh-CN' ? `第 ${i} 关 (${t.levels[i-1].split(': ')[1] || t.levels[i-1]})` : `第 ${i} 關 (${t.levels[i-1].split(': ')[1] || t.levels[i-1]})`));
+                    opt.innerText = t.levels[i-1];
                 }
             }
 
