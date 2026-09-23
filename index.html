@@ -256,13 +256,13 @@
         
         <!-- 魔法與神器道具欄 (點擊即可主動使用) -->
         <div class="inventory-bar">
-            <span>🧙‍♂️ 點擊道具使用：</span>
-            <span class="inv-item" onclick="useTool('cloak')" title="點擊防禦歹徒">🧥斗篷:<b id="inv-cloak">0</b></span>
-            <span class="inv-item" onclick="useTool('wand')" title="點擊消除炸藥">🪄魔杖:<b id="inv-wand">0</b></span>
-            <span class="inv-item">🏆金探子:<b id="inv-snitch">0</b></span>
-            <span class="inv-item" onclick="useTool('howler')" title="點擊嚇跑野狼">✉️咆哮信:<b id="inv-howler">0</b></span>
-            <span class="inv-item" onclick="useTool('fan')" title="點擊扇熄神火">🍃芭蕉扇:<b id="inv-fan">0</b></span>
-            <span class="inv-item" onclick="useTool('dipper')" title="點擊吸光大便" style="color:#B7950B;">🏺金鬥:<b id="inv-dipper">0</b></span>
+            <span id="lbl-inv-title">🧙‍♂️ 點擊道具使用：</span>
+            <span class="inv-item" onclick="useTool('cloak')"><span id="lbl-inv-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
+            <span class="inv-item" onclick="useTool('wand')"><span id="lbl-inv-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
+            <span class="inv-item"><span>🏆金探子</span>:<b id="inv-snitch">0</b></span>
+            <span class="inv-item" onclick="useTool('howler')"><span id="lbl-inv-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
+            <span class="inv-item" onclick="useTool('fan')"><span id="lbl-inv-fan">🍃芭蕉扇</span>:<b id="inv-fan">0</b></span>
+            <span class="inv-item" onclick="useTool('dipper')" style="color:#B7950B;"><span id="lbl-inv-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
         </div>
 
         <div class="target-text" id="ui-target">目標：駁二鐵件藝術公仔 🤖</div>
@@ -309,7 +309,6 @@
             <p id="work-status" style="font-size: clamp(16px, 3.5vw, 20px); font-weight: 700; color: #D35400; margin-top: 10px;">點擊互動打工！</p>
         </div>
         
-        <!-- 動態標誌物與互動按鈕 -->
         <button id="work-action-btn" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">🐊</button>
         <br>
         <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 360px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 8px 22px rgba(39, 174, 96, 0.35); margin-top: 12px;" onclick="returnFromWork()">✈️ 賺足機票費，光榮返台！</button>
@@ -320,7 +319,7 @@
     <!-- 穿越劇動畫特效彈跳視窗 -->
     <div id="timetravel-modal">
         <div class="modal-content" style="background: #1A252C; border-color: #F1C40F; color: #FFF;">
-            <h2 style="color: #F39C12; font-size: 28px;">⏳ 時空穿梭中...</h2>
+            <h2 id="tt-title" style="color: #F39C12; font-size: 28px;">⏳ 時空穿梭中...</h2>
             <div id="timetravel-desc" style="font-size: 18px; margin: 20px 0; line-height: 1.6; color: #ECF0F1;">
                 因旅費不足，您將被流放至古代歷史現場進行打工...
             </div>
@@ -380,7 +379,7 @@
         </div>
     </div>
 
-    <!-- 選擇流放地彈跳視窗 (生蠔改為 🦪) -->
+    <!-- 選擇流放地彈跳視窗 -->
     <div id="station-modal">
         <div class="modal-content">
             <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇歷史流放打工站</h2>
@@ -388,7 +387,7 @@
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
             </div>
@@ -396,7 +395,7 @@
         </div>
     </div>
 
-    <!-- 幫助與神通指南彈跳視窗（含詳細功能對照表格） -->
+    <!-- 幫助與神通指南彈跳視窗（含完整英文翻譯對照表格） -->
     <div id="god-help-modal">
         <div class="modal-content">
             <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
@@ -405,41 +404,41 @@
             <table class="god-table">
                 <thead>
                     <tr>
-                        <th>神尊名稱</th>
-                        <th>香油錢</th>
-                        <th>庇佑與消除路阻效果</th>
+                        <th id="th-god">神尊名稱</th>
+                        <th id="th-cost">香油錢</th>
+                        <th id="th-effect">庇佑與消除路阻效果</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>🏮 土地公</td>
-                        <td>300 點</td>
-                        <td>驅逐地圖上所有<b>惡狼 (🐺)</b>，並指引終點方位。</td>
+                        <td>🏮 <span id="td-g1">土地公</span></td>
+                        <td>300</td>
+                        <td id="td-e1">驅逐地圖上所有惡狼 (🐺)，並指引終點方位。</td>
                     </tr>
                     <tr>
-                        <td>⚔️ 溫王爺</td>
-                        <td>400 點</td>
-                        <td>淨化地圖上所有<b>瘟疫 (🦠)</b>。</td>
+                        <td>⚔️ <span id="td-g2">溫王爺</span></td>
+                        <td>400</td>
+                        <td id="td-e2">淨化地圖上所有瘟疫 (🦠)。</td>
                     </tr>
                     <tr>
-                        <td>🌊 媽祖</td>
-                        <td>500 點</td>
-                        <td>平息地圖上所有<b>船難 (🚢)</b>，並額外補助 800 點。</td>
+                        <td>🌊 <span id="td-g3">媽祖</span></td>
+                        <td>500</td>
+                        <td id="td-e3">平息地圖上所有船難 (🚢)，並額外補助 800 點。</td>
                     </tr>
                     <tr>
-                        <td>🌿 觀世音</td>
-                        <td>600 點</td>
-                        <td>渡化地圖上所有<b>歹徒 (🦹‍♂️)</b>，並補滿反悔次數至 5 次。</td>
+                        <td>🌿 <span id="td-g4">觀世音</span></td>
+                        <td>600</td>
+                        <td id="td-e4">渡化地圖上所有歹徒 (🦹‍♂️)，並補滿反悔次數至 5 次。</td>
                     </tr>
                     <tr>
-                        <td>🪷 藥師佛</td>
-                        <td>800 點</td>
-                        <td>治癒地圖上所有<b>惡疾 (🤒)</b>，並額外加持 1500 點。</td>
+                        <td>🪷 <span id="td-g5">藥師佛</span></td>
+                        <td>800</td>
+                        <td id="td-e5">治癒地圖上所有惡疾 (🤒)，並額外加持 1500 點。</td>
                     </tr>
                     <tr>
-                        <td>🌟 玉皇大帝</td>
-                        <td>2500 點</td>
-                        <td>萬尊降臨！全場路阻（含大便與神火）瞬間清場並直通終點！</td>
+                        <td>🌟 <span id="td-g6">玉皇大帝</span></td>
+                        <td>2500</td>
+                        <td id="td-e6">萬尊降臨！全場路阻瞬間清場並直通終點！</td>
                     </tr>
                 </tbody>
             </table>
@@ -461,7 +460,7 @@
         <div class="modal-content">
             <div class="modal-text" id="bwei-title" style="color: #C0392B;">🙏 誠心擲筊請示 神明</div>
             <div id="bwei-rule" style="font-size: 15px; color: #718096; margin-bottom: 6px;">需連續擲出兩次【聖筊】以感動神明</div>
-            <div style="font-size: 13px; color: #C0392B; font-weight: bold; margin-bottom: 12px;">聖筊(一平一凸有字) | 笑筊(兩平有字/不歸零) | 蓋筊(兩凸無字/失敗不允)</div>
+            <div id="bwei-desc-text" style="font-size: 13px; color: #C0392B; font-weight: bold; margin-bottom: 12px;">聖筊(一平一凸有字) | 笑筊(兩平有字/不歸零) | 蓋筊(兩凸無字/失敗不允)</div>
             
             <div class="bwei-cup-container">
                 <div id="cup1" class="bwei-block cup-convex">無字</div>
@@ -482,11 +481,11 @@
                 easy: "🍵 輕鬆模式", easyDesc: "步調悠閒、適合放鬆",
                 std: "⚖️ 標準模式", stdDesc: "平衡挑戰與趣味",
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
-                hell: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
+                hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
                 insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
                 stationBtn: "💰 前往點數補給站", backCover: "⬅️ 返回主選單",
-                tGod: "⛩️ 神通", tStation: "💰 補給", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
+                tGod: "⛩️ 神通", tStation: "💰 補給", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
                 knowTitle: "📖 文化與寶藏知識", kClose: "了解了，繼續探險！",
                 stationTitle: "💰 選擇歷史流放打工站", stationDesc: "點數不足時，穿越到古代協助名人賺取機票費：", stationCancel: "取消返回",
@@ -497,14 +496,24 @@
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
                 buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
+                thGod: "神尊名稱", thCost: "香油錢", thEffect: "庇佑與消除路阻效果",
+                gNames: ["土地公", "溫王爺", "媽祖", "觀世音", "藥師佛", "玉皇大帝"],
+                gEffects: [
+                    "驅逐地圖上所有惡狼 (🐺)，並指引終點方位。",
+                    "淨化地圖上所有瘟疫 (🦠)。",
+                    "平息地圖上所有船難 (🚢)，並額外補助 800 點。",
+                    "渡化地圖上所有歹徒 (🦹‍♂️)，並補滿反悔次數至 5 次。",
+                    "治癒地圖上所有惡疾 (🤒)，並額外加持 1500 點。",
+                    "萬尊降臨！全場路阻瞬間清場並直通終點！"
+                ],
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 烹煮東坡肉)｜每敲180/限7次｜機票700",
-                    "🦪 儋州 (蘇東坡 - 敲打生蠔)｜每敲150/限10次｜機票900",
+                    "🪪 儋州 (蘇東坡 - 敲打生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"], // 儋州生蠔 Logo 完美修正為 🦪
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
@@ -533,10 +542,10 @@
                     "古代埃及用來記錄神話與歷史的獨特植物纖維紙張。",
                     "展現基克拉澤斯群島風情與地中海陶藝裝飾藝術。",
                     "見證地中海羅馬帝國雄偉歷史與貿易的古幣。",
-                    "呼應英國工業革命與精密機械工藝的象征。",
+                    "呼應英國工業革命與精密機械工藝的象徵。",
                     "象徵自由、民主與移民文化的紐約精神堡壘。",
                     "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
-                    "俄罗斯帝国皇室工艺与珠宝设计的极致代表。"
+                    "俄羅斯帝國皇室工藝與珠寶設計的極致代表。"
                 ]
             },
             'zh-CN': {
@@ -560,9 +569,19 @@
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
                 buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放至边疆补给站！",
                 footer: "高雄师范大学 刘世闵 老师设计",
+                thGod: "神尊名称", thCost: "香油钱", thEffect: "庇佑与消除路阻效果",
+                gNames: ["土地公", "温王爷", "妈祖", "观世音", "药师佛", "玉皇大帝"],
+                gEffects: [
+                    "驱逐地图上所有恶狼 (🐺)，并指引终点方位。",
+                    "净化地图上所有瘟疫 (🦠)。",
+                    "平息地图上所有船难 (🚢)，并额外补助 800 点。",
+                    "渡化地图上所有歹徒 (🦹‍♂️)，并补满反悔次数至 5 次。",
+                    "治愈地图上所有恶疾 (🤒)，并额外加持 1500 点。",
+                    "万尊降临！全场路阻瞬间清场并直通终点！"
+                ],
                 stations: [
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
-                    "🥩 黄州 (苏轼 - 烹煮东坡肉)｜每敲180/限7次｜机票700",
+                    "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
                     "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
@@ -616,13 +635,23 @@
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
                 knowTitle: "📖 Culture & Treasure Lore", kClose: "Got it, Continue!",
                 stationTitle: "💰 Select Literary Banishment Station", stationDesc: "Earn tickets by helping historical literary figures:", stationCancel: "Cancel",
-                godTitle: "⛩️ Divine Guidance", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close",
+                godTitle: "⛩️ Divine Guidance & Prayer", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close Guide",
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
                 nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
                 winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
                 buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
+                thGod: "Deity", thCost: "Offering", thEffect: "Divine Blessing & Hazard Removal",
+                gNames: ["Tudi Gong", "Wen Wangye", "Mazu", "Guanyin", "Medicine Buddha", "Jade Emperor"],
+                gEffects: [
+                    "Banish all wolves (🐺) from the maze and guide you to the exit.",
+                    "Purify and clear all plagues (🦠) from the maze.",
+                    "Calm all shipwrecks (🚢) and grant an extra 800 pts bonus.",
+                    "Reform all bandits (🦹‍♂️) and refill undo limits to 5.",
+                    "Cure all illnesses (🤒) and grant an extra 1500 pts bonus.",
+                    "Supreme Descent! Clear all hazards instantly and clear path to victory!"
+                ],
                 stations: [
                     "📜 London (Shakespeare) | 200 pts / 5 taps | Ticket: 500",
                     "🎨 Paris (Victor Hugo) | 180 pts / 7 taps | Ticket: 700",
@@ -720,15 +749,18 @@
                 document.getElementById('st-' + i).innerText = t.stations[i];
             }
 
-            document.getElementById('god-modal-title').innerText = (lang === 'en' ? "⛩️ Divine Guidance & Prayer" : (lang === 'zh-CN' ? "⛩️ 神通指南与请神面板" : "⛩️ 神通指南與請神面板"));
-            document.getElementById('god-modal-desc').innerText = (lang === 'en' ? "Unlocked at Level 6. Pray for divine assistance!" : (lang === 'zh-CN' ? "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！" : "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！"));
-            document.getElementById('god-modal-close').innerText = (lang === 'en' ? "Close Guide" : (lang === 'zh-CN' ? "关闭指南" : "關閉指南"));
-            document.getElementById('g-tudi').innerText = t.gods[0];
-            document.getElementById('g-wen').innerText = t.gods[1];
-            document.getElementById('g-mazu').innerText = t.gods[2];
-            document.getElementById('g-guanyin').innerText = t.gods[3];
-            document.getElementById('g-yaoshi').innerText = t.gods[4];
-            document.getElementById('g-supreme').innerText = t.gods[5];
+            document.getElementById('god-modal-title').innerText = t.godTitle;
+            document.getElementById('god-modal-desc').innerText = t.godDesc;
+            document.getElementById('god-modal-close').innerText = t.godClose;
+            
+            // 更新神通表格語系
+            document.getElementById('th-god').innerText = t.thGod;
+            document.getElementById('th-cost').innerText = t.thCost;
+            document.getElementById('th-effect').innerText = t.thEffect;
+            for(let i=0; i<6; i++) {
+                document.getElementById('td-g' + (i+1)).innerText = t.gNames[i];
+                document.getElementById('td-e' + (i+1)).innerText = t.gEffects[i];
+            }
 
             document.getElementById('cert-title').innerText = t.certTitle;
             document.getElementById('cert-btn').innerText = t.certBtn;
@@ -1158,7 +1190,6 @@
                 undoHistory.push({x: playerPos.x, y: playerPos.y});
                 if(undoHistory.length > 10) undoHistory.shift();
 
-                // 處理路阻碰撞與道具防禦
                 if ([6, 2, 3, 4, 5, 8, 9, 15].includes(cell)) {
                     if (cell === 2 && playerInventory.howler > 0) {
                         playerInventory.howler--; updateInventoryUI();
