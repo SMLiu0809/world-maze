@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 英文港口跳開最終修復版</title>
+    <title>世界寶藏迷宮探險 - 移動控制終極修復版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -299,12 +299,12 @@
         
         <div class="controls">
             <div class="control-row">
-                <button class="arrow-btn" onmousedown="handleMove(0, -1)" ontouchstart="handleMove(0, -1); event.preventDefault();">⬆️</button>
+                <button class="arrow-btn" onclick="handleMove(0, -1)" ontouchstart="handleMove(0, -1); event.preventDefault();">⬆️</button>
             </div>
             <div class="control-row">
-                <button class="arrow-btn" onmousedown="handleMove(-1, 0)" ontouchstart="handleMove(-1, 0); event.preventDefault();">⬅️</button>
-                <button class="arrow-btn" onmousedown="handleMove(0, 1)" ontouchstart="handleMove(0, 1); event.preventDefault();">⬇️</button>
-                <button class="arrow-btn" onmousedown="handleMove(1, 0)" ontouchstart="handleMove(1, 0); event.preventDefault();">➡️</button>
+                <button class="arrow-btn" onclick="handleMove(-1, 0)" ontouchstart="handleMove(-1, 0); event.preventDefault();">⬅️</button>
+                <button class="arrow-btn" onclick="handleMove(0, 1)" ontouchstart="handleMove(0, 1); event.preventDefault();">⬇️</button>
+                <button class="arrow-btn" onclick="handleMove(1, 0)" ontouchstart="handleMove(1, 0); event.preventDefault();">➡️</button>
             </div>
         </div>
     </div>
@@ -642,7 +642,7 @@
             document.getElementById('btn-buy-souvenir').innerText = t.buyText;
 
             document.getElementById('bwei-title').innerText = currentLang === 'en' ? "🙏 Divine Oracle Prayer" : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 神明" : "🙏 誠心擲筊請示 神明");
-            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一无字凸面）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
+            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一凸无字）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
             document.getElementById('bwei-throw-btn').innerText = currentLang === 'en' ? "🙌 Throw Jiao!" : (currentLang === 'zh-CN' ? "🙌 掷筊！" : "🙌 擲筊！");
             document.getElementById('bwei-cancel-btn').innerText = currentLang === 'en' ? "Cancel" : (currentLang === 'zh-CN' ? "取消" : "取消");
 
@@ -1237,7 +1237,7 @@
                             `🌴 【神明不在位】神明暂时请年休度假去！香炉前挂着公休牌子，香油钱已全额退还 ${cost} 点。`,
                             `🍑 【神明不在位】神明正在参加王母娘娘的蟠桃会！香油钱原封不动退回（退回 ${cost} 点）。`
                         ] : [
-                            `🌴 【神明不在位】神明暫時請年休度假去！香爐前掛著公休牌子，香油錢已全額退還 ${cost} 點。`,
+                            `🌴 【神明不在位】神明暫時請年休度假去！香爐前掛著公修牌子，香油錢已全額退還 ${cost} 點。`,
                             `🍑 【神明不在位】神明正在參加王母娘娘的蟠桃會！香油錢原封不動退回（退回 ${cost} 點）。`
                         ]);
                         alert(reasons[Math.floor(Math.random() * reasons.length)]);
