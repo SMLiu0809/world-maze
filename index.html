@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 最終完整旗艦版</title>
+    <title>世界寶藏迷宮探險 - 下拉選單修復旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -226,7 +226,7 @@
             <div style="margin: 12px 0; background: #FEF9E7; padding: 12px; border-radius: 16px; border: 1px solid #F9E79F;">
                 <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
                 <select id="start-level-select" style="font-size: 14px; padding: 6px 10px; border-radius: 10px; border: 1px solid #F39C12; background: white; font-weight: 700;">
-                    <!-- 動態產生的選關下拉選單 -->
+                    <!-- 動態載入 -->
                 </select>
             </div>
 
@@ -468,7 +468,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             incrementGlobalStat('players');
             fetchGlobalStats();
-            changeLanguage('zh-TW'); // 初始化
+            changeLanguage('zh-TW'); // 確保頁面載入時立即渲染關卡選單與文字
         });
 
         function getHeroTitle() {
@@ -594,7 +594,7 @@
                 knowTitle: "📖 文化与宝藏知识", kClose: "了解了，继续探险！",
                 stationTitle: "📜 选择历史贸易港口打工", stationDesc: "旅费透支时，选择前往历史港口打工赚取路费：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！", godClose: "关闭指南",
-                bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊（一平金字、一无字凸面）】方可请神[cite: 2]", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
+                bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊（一平金字、一凸无字）】方可请神[cite: 2]", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
                 nicknameTip: "💡 支持中英文、数字，最多 12 码。",
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
@@ -719,7 +719,7 @@
             document.getElementById('btn-buy-souvenir').innerText = t.buyText;
 
             document.getElementById('bwei-title').innerText = currentLang === 'en' ? "🙏 Divine Oracle Prayer" : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 神明" : "🙏 誠心擲筊請示 神明");
-            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一凸无字）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
+            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一无字凸面）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
             document.getElementById('bwei-throw-btn').innerText = currentLang === 'en' ? "🙌 Throw Jiao!" : (currentLang === 'zh-CN' ? "🙌 掷筊！" : "🙌 擲筊！");
             document.getElementById('bwei-cancel-btn').innerText = currentLang === 'en' ? "Cancel" : (currentLang === 'zh-CN' ? "取消" : "取消");
 
@@ -729,7 +729,7 @@
                 soundBtn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
             }
 
-            // 🌟 嚴格動態渲染選關下拉選單（完美對應各語系清單）
+            // 🌟 嚴格動態渲染選關下拉選單
             let levelSelect = document.getElementById('start-level-select');
             levelSelect.innerHTML = "";
             for (let i = 1; i <= 10; i++) {
