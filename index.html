@@ -104,7 +104,6 @@
         }
         .tool-btn:active { transform: scale(0.95); }
 
-        /* 魔法與神器道具欄外觀 */
         .inventory-bar {
             display: flex; justify-content: center; gap: 5px; margin-bottom: 10px; flex-wrap: wrap;
             font-size: 11px; font-weight: 700; background: #F4ECF7; padding: 8px 10px; border-radius: 14px; border: 1px solid #D7BDE2; color: #512E5F;
@@ -126,7 +125,7 @@
 
         #screen-work { border-color: #D35400; background-color: #FDFEFE; }
         .work-btn {
-            font-size: clamp(50px, 12vw, 75px); width: clamp(110px, 28vw, 150px); height: clamp(110px, 28vw, 150px); 
+            font-size: clamp(55px, 14vw, 85px); width: clamp(120px, 30vw, 160px); height: clamp(120px, 30vw, 160px); 
             background: linear-gradient(135deg, #D35400 0%, #BA4A00 100%); color: white; border-radius: 30px; border: none; 
             box-shadow: 0 8px 20px rgba(211, 84, 0, 0.4); cursor: pointer; user-select: none; margin: 10px; transition: transform 0.1s;
         }
@@ -286,21 +285,22 @@
 
     <!-- 頁面4：流放邊疆打工區 -->
     <div id="screen-work" class="screen">
-        <h1 id="work-title" style="color:#D35400; font-size: clamp(24px, 5vw, 32px);">📜 流放打工區 📜</h1>
+        <h1 id="work-title" style="color:#D35400; font-size: clamp(24px, 5vw, 32px);">📜 歷史流放打工區 📜</h1>
         <h2 id="ui-banish-location" style="color:#C0392B; font-size: clamp(20px, 5vw, 26px); margin: 0;">流放地</h2>
         
         <div style="font-size: clamp(14px, 3.8vw, 18px); margin: 15px 0; background: #FDFEFE; padding: 16px; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <p id="work-rule-desc" style="font-weight: 700; color: #C0392B; margin: 4px 0;">每協助一次：200點 | 剩餘次數：5 | 機票費：500點</p>
-            <p id="work-narrative" style="font-size: 13px; color: #718096; margin: 6px 0; font-style: italic;"></p>
-            <p id="work-score-wrap" style="margin: 6px 0;"><span id="txt-earned-label">已賺取點數：</span><b id="work-score" style="color:#27AE60; font-size: clamp(22px, 5vw, 30px);">0</b> / <span id="work-target-display">500</span> 點</p>
+            <p id="work-rule-desc" style="font-weight: 700; color: #C0392B; font-size: 16px; margin: 4px 0;">每協助一次：200點 | 剩餘次數：5 | 機票費：500點</p>
+            <p id="work-narrative" style="font-size: 15px; color: #718096; margin: 8px 0; font-style: italic; font-weight: 600;"></p>
+            <p id="work-score-wrap" style="margin: 8px 0;"><span id="txt-earned-label">已賺取點數：</span><b id="work-score" style="color:#27AE60; font-size: clamp(22px, 5vw, 30px);">0</b> / <span id="work-target-display">500</span> 點</p>
         </div>
         
         <div style="margin: 15px 0;">
             <progress id="work-progress" value="0" max="500"></progress>
-            <p id="work-status" style="font-size: clamp(15px, 4vw, 19px); font-weight: 700; color: #D35400; margin-top: 8px;">點擊協助打工！</p>
+            <p id="work-status" style="font-size: clamp(15px, 4vw, 19px); font-weight: 700; color: #D35400; margin-top: 8px;">點擊互動打工！</p>
         </div>
         
-        <button class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">📜</button>
+        <!-- 動態標誌物與互動按鈕 -->
+        <button id="work-action-btn" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">🐊</button>
         <br>
         <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 320px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); margin-top: 10px;" onclick="returnFromWork()">✈️ 賺足機票費，光榮返台！</button>
         <br>
@@ -365,11 +365,11 @@
             <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇歷史流放打工站</h2>
             <p id="station-modal-desc" style="font-size: 14px; color: #718096;">點數不足時，穿越到古代協助名人賺取機票費：</p>
             <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0;">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 13px;" onclick="selectStation(0)"><span id="st-0">📜 潮州 (韓愈)｜每敲200/限5次｜機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="selectStation(1)"><span id="st-1">🥢 惠州 (蘇軾)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 13px;" onclick="selectStation(2)"><span id="st-2">🏮 儋州 (蘇東坡)｜每敲150/限10次｜機票900</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 13px;" onclick="selectStation(3)"><span id="st-3">⛰️ 永州 (柳宗元)｜每敲120/限15次｜機票1100</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px;" onclick="selectStation(4)"><span id="st-4">❄️ 寧古塔 (甄嬛他爹)｜每敲100/限20次｜機票1300</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 13px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 13px;" onclick="selectStation(2)"><span id="st-2">🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 13px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
             </div>
             <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 6px;" onclick="closeStationModal()">取消返回</button>
         </div>
@@ -434,18 +434,19 @@
                 buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
                 stations: [
-                    "📜 潮州 (韓愈)｜每敲200/限5次｜機票500",
-                    "🥢 惠州 (蘇軾)｜每敲180/限7次｜機票700",
-                    "🏮 儋州 (蘇東坡)｜每敲150/限10次｜機票900",
-                    "⛰️ 永州 (柳宗元)｜每敲120/限15次｜機票1100",
-                    "❄️ 寧古塔 (甄嬛他爹)｜每敲100/限20次｜機票1300"
+                    "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
+                    "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
+                    "🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
+                    "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
+                    "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
-                    "協助蘇東坡築蘇堤、品嚐荔枝與東坡肉！",
-                    "協助被貶海南儋州的蘇軾在載酒堂講學、發明生蠔吃法！",
-                    "協助柳宗元排解孤獨，尋找江雪釣魚處！",
-                    "穿越到甄嬛傳苦寒之地，協助甄遠道對抗風雪、整理古籍！"
+                    "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
+                    "用力敲打生蠔硬殼，協助蘇東坡與文人雅士品嚐美味生蠔！",
+                    "協助柳宗元在永州江雪中獨釣寒江雪！",
+                    "在寧古塔冰面破冰捕魚，將鮮魚送給甄遠道溫暖身心！"
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊媽祖(-500)", 
@@ -496,18 +497,19 @@
                 buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放至边疆补给站！",
                 footer: "高雄师范大学 刘世闵 老师设计",
                 stations: [
-                    "📜 潮州 (韩愈)｜每敲200/限5次｜机票500",
-                    "🥢 惠州 (苏轼)｜每敲180/限7次｜机票700",
-                    "🏮 儋州 (苏东坡)｜每敲150/限10次｜机票900",
-                    "⛰️ 永州 (柳宗元)｜每敲120/限15次｜机票1100",
-                    "❄️ 宁古塔 (甄嬛他爹)｜每敲100/限20次｜机票1300"
+                    "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
+                    "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
+                    "🪪 儋州 (苏东坡 - 生蚝)｜每敲150/限10次｜机票900",
+                    "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
+                    "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
-                    "协助苏东坡筑苏堤、品尝荔枝与东坡肉！",
-                    "协助被贬海南儋州的苏轼在载酒堂讲学、发明生蚝吃法！",
-                    "协助柳宗元排解孤独，寻找江雪钓鱼处！",
-                    "穿越到甄嬛传苦寒之地，协助甄远道对抗风雪、整理古籍！"
+                    "在黄州生火慢炖、细心添柴烹煮名闻天下的正宗东坡肉！",
+                    "用力敲打生蚝硬壳，协助苏东坡与文人雅士品尝美味生蚝！",
+                    "协助柳宗元在永州江雪中独钓寒江雪！",
+                    "在宁古塔冰面破冰捕鱼，将鲜鱼送给甄远道温暖身心！"
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)", 
@@ -564,6 +566,7 @@
                     "🏛️ Athens (Socrates) | 120 pts / 15 taps | Ticket: 1100",
                     "📜 Cairo (Cleopatra) | 100 pts / 20 taps | Ticket: 1300"
                 ],
+                stationLogos: ["📜", "🎨", "🔥", "🏛️", "📜"],
                 stationNarratives: [
                     "Help William Shakespeare edit scripts and rehearse Hamlet at the Globe Theatre!",
                     "Help Victor Hugo write manuscripts inside Notre-Dame de Paris!",
@@ -747,7 +750,6 @@
         let undoHistory = []; let undoCountLeft = 3;
         let trapHitThisLevel = false; let treasureCollectedThisLevel = false;
 
-        // 魔法道具與神器道具庫 (cloak, wand, snitch, howler, dipper, fan)
         let playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
 
         const banishmentStations = [
@@ -852,6 +854,7 @@
             workTargetValue = stConfig.ticket;
             document.getElementById('ui-banish-location').innerText = "🗺️ " + t.stations[idx].split('｜')[0];
             document.getElementById('work-narrative').innerText = `"${t.stationNarratives[idx]}"`;
+            document.getElementById('work-action-btn').innerText = t.stationLogos ? t.stationLogos[idx] : "📜";
             isEventActive = true;
             updateWorkUI();
             showScreen('screen-work');
@@ -914,7 +917,7 @@
             }
             offSafeSpaces.sort(() => Math.random() - 0.5);
 
-            // 路阻解鎖規則：
+            // 路阻新解鎖與分段規則：
             // 第 1-10 關：大便(6), 惡狼(2), 瘟疫(3)
             // 第 4-10 關：增加 船難(4), 歹徒(5)
             // 第 7-10 關：增加 惡疾(8), 炸藥(9), 神火(15)
@@ -933,7 +936,6 @@
                 maze[pos.y][pos.x] = 7; // 金幣
             }
 
-            // 魔法道具與神器隨機放置：斗篷(10), 魔杖(11), 金探子(12), 咆哮信(13), 混元金鬥(14), 芭蕉扇(16)
             let magicItems = [10, 11, 12, 13, 14, 16];
             for (let itemCode of magicItems) {
                 if (offSafeSpaces.length > 0 && Math.random() < 0.8) {
@@ -1014,7 +1016,6 @@
                         if (cell === 9) ctxEl.fillText("🧨", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 15) ctxEl.fillText("🔥", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 7) ctxEl.fillText("💵", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                        // 魔法道具與神器圖示
                         if (cell === 10) ctxEl.fillText("🧥", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 11) ctxEl.fillText("🪄", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 12) ctxEl.fillText("🏆", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
@@ -1045,7 +1046,6 @@
 
                 // 處理路阻碰撞與道具防禦
                 if ([6, 2, 3, 4, 5, 8, 9, 15].includes(cell)) {
-                    // 防禦道具判定
                     if (cell === 2 && playerInventory.howler > 0) {
                         playerInventory.howler--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
@@ -1071,8 +1071,8 @@
                         return;
                     }
 
-                    // 依路阻扣分懲罰
-                    let penalty = 200;
+                    // 依最新規定之精細扣分
+                    let penalty = 100;
                     let obstacleName = "";
                     if (cell === 6) { penalty = 100; obstacleName = "💩 大便"; }
                     else if (cell === 2) { penalty = 200; obstacleName = "🐺 惡狼"; }
@@ -1092,7 +1092,6 @@
                     return;
                 }
 
-                // 金幣寶物
                 if (cell === 7) {
                     treasureCollectedThisLevel = true;
                     totalScore += 300; updateUI();
@@ -1103,7 +1102,7 @@
                     return;
                 }
 
-                // 道具與神器撿取
+                // 道具撿取
                 if (cell === 10) { 
                     playerInventory.cloak++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
@@ -1116,7 +1115,7 @@
                     alert("🪄 獲得魔法道具【魔杖】！可移除炸藥一次。");
                     return;
                 }
-                if (cell === 12) { // 金探子調整為 500 分
+                if (cell === 12) { 
                     playerInventory.snitch++; updateInventoryUI();
                     totalScore += 500; updateUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
@@ -1129,9 +1128,8 @@
                     alert("✉️ 獲得魔法道具【咆哮信】！可嚇跑野狼一次。");
                     return;
                 }
-                if (cell === 14) { // 封神榜神器：混元金鬥
+                if (cell === 14) { // 混元金鬥
                     playerInventory.dipper++; updateInventoryUI();
-                    // 混元金鬥立即吸光地圖上所有大便
                     let dipperCount = 0;
                     for (let y = 0; y < mazeSize; y++) {
                         for (let x = 0; x < mazeSize; x++) {
@@ -1279,7 +1277,7 @@
             pendingGodName = i18n[currentLang].gods[godIdx] || godsData[godType].n_tw;
             isEventActive = true; bweiShengCount = 0; 
             
-            // 擲筊次數依關卡遞減：第6關=7, 第7關=6, 第8關=5, 第9關=4, 第10關=3
+            // 第6關=7, 第7關=6, 第8關=5, 第9關=4, 第10關=3
             bweiAttemptsLeft = Math.max(3, 13 - currentLevel);
 
             let bTitle = (currentLang === 'en' ? "🙏 Praying to " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName);
@@ -1323,7 +1321,6 @@
 
                 bweiAttemptsLeft--;
 
-                // 蓋筊（兩凸無字）：直接判定神明不允，結束擲筊並全額退款
                 if (!c1Flat && !c2Flat) {
                     setTimeout(() => {
                         document.getElementById('bwei-modal').style.display = 'none';
@@ -1334,12 +1331,10 @@
                     }, 500);
                     return;
                 }
-                // 笑筊（兩平有字）：笑而不答，次數維持，可繼續擲
                 else if (c1Flat && c2Flat) {
                     let msg = (currentLang === 'en' ? `Result: Xiao Jiao (Unresolved). Consecutive: ${bweiShengCount}. Attempts left: ${bweiAttemptsLeft}` : `出現【笑筊】！神明笑而不答，維持 ${bweiShengCount} 次。剩餘次數：${bweiAttemptsLeft}`);
                     document.getElementById('bwei-count-display').innerText = msg;
                 }
-                // 聖筊（一平一凸）：連續次數 +1
                 else {
                     bweiShengCount++;
                     let msg = (currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiShengCount}. Attempts left: ${bweiAttemptsLeft}` : `連續聖筊：${bweiShengCount} 次。剩餘次數：${bweiAttemptsLeft}`);
@@ -1350,7 +1345,6 @@
                             document.getElementById('bwei-modal').style.display = 'none';
                             isEventActive = false;
 
-                            // 神明應允機率大約 2/3 (66.7%)，若未應允則統一觸發「跟大甲媽祖去進香」
                             let isGodPresent = Math.random() < (2/3);
                             let cost = godsData[pendingGod].cost;
 
