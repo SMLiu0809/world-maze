@@ -380,7 +380,7 @@
         </div>
     </div>
 
-    <!-- 選擇流放地彈跳視窗 -->
+    <!-- 選擇流放地彈跳視窗 (生蠔改為 🦪) -->
     <div id="station-modal">
         <div class="modal-content">
             <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇歷史流放打工站</h2>
@@ -459,7 +459,7 @@
     <!-- 擲筊動畫彈跳視窗 -->
     <div id="bwei-modal">
         <div class="modal-content">
-            <div class="modal-text" id="bwei-title" style="color: #D35400;">🙏 誠心擲筊請示 神明</div>
+            <div class="modal-text" id="bwei-title" style="color: #C0392B;">🙏 誠心擲筊請示 神明</div>
             <div id="bwei-rule" style="font-size: 15px; color: #718096; margin-bottom: 6px;">需連續擲出兩次【聖筊】以感動神明</div>
             <div style="font-size: 13px; color: #C0392B; font-weight: bold; margin-bottom: 12px;">聖筊(一平一凸有字) | 笑筊(兩平有字/不歸零) | 蓋筊(兩凸無字/失敗不允)</div>
             
@@ -500,11 +500,11 @@
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 烹煮東坡肉)｜每敲180/限7次｜機票700",
-                    "🪪 儋州 (蘇東坡 - 敲打生蠔)｜每敲150/限10次｜機票900",
+                    "🦪 儋州 (蘇東坡 - 敲打生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
@@ -536,7 +536,7 @@
                     "呼應英國工業革命與精密機械工藝的象徵。",
                     "象徵自由、民主與移民文化的紐約精神堡壘。",
                     "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
-                    "俄羅斯帝国皇室工艺与珠宝设计的极致代表。"
+                    "俄羅斯帝國皇室工藝與珠宝设计的极致代表。"
                 ]
             },
             'zh-CN': {
@@ -563,11 +563,11 @@
                 stations: [
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
                     "🥩 黄州 (苏轼 - 烹煮东坡肉)｜每敲180/限7次｜机票700",
-                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
+                    "🦪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
                 stationNarratives: [
                     "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
                     "在黄州生火慢炖、细心添柴烹煮名闻天下的正宗东坡肉！",
@@ -1135,7 +1135,7 @@
                         if (cell === 12) ctxEl.fillText("🏆", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 13) ctxEl.fillText("✉️", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 14) ctxEl.fillText("🏺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                        if (cell === 16) ctxEl.fillText("🍃", (x + 0.5) * cellSize, (y + 0.5) * cellSize); // 芭蕉扇改用大片蕉葉 🍃
+                        if (cell === 16) ctxEl.fillText("🍃", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                     }
                 }
             }
@@ -1181,7 +1181,7 @@
                     if (cell === 15 && playerInventory.fan > 0) {
                         playerInventory.fan--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert("🍃 芭蕉扇一扇！蕉葉揮動間神火（🔥）瞬間熄滅！");
+                        alert("🍃 芭蕉扇一扇！大片蕉葉隨風一扇，順利清除了地圖上的神火威脅！");
                         return;
                     }
 
