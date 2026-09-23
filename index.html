@@ -62,22 +62,11 @@
             text-align: left;
         }
         input[type="radio"], select, input[type="text"] { accent-color: #E67E22; cursor: pointer;}
-        
-        .nickname-wrapper {
-            display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 8px;
-        }
         input[type="text"] { 
             padding: 12px 16px; font-size: 18px; border-radius: 14px; border: 2px solid #CBD5E1; 
-            flex: 1; min-width: 200px; text-align: center; background: #FFF; outline: none; transition: border-color 0.2s;
+            width: 70%; text-align: center; background: #FFF; outline: none; transition: border-color 0.2s;
         }
         input[type="text"]:focus { border-color: #E67E22; box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.15); }
-        
-        .secret-btn {
-            padding: 12px 18px; font-size: 15px; font-weight: 700; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%);
-            color: white; border: none; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
-            transition: transform 0.1s;
-        }
-        .secret-btn:active { transform: scale(0.95); }
 
         .mode-grid {
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 18px;
@@ -202,12 +191,9 @@
         </div>
         <h1 id="txt-title">🏆 世界寶藏迷宮探險 🏆</h1>
         <div class="form-group">
-            <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號：</b></p>
-            <div class="nickname-wrapper">
-                <input type="text" id="player-nickname" maxlength="24" value="" placeholder="請輸入暱稱" onkeydown="handleNicknameKey(event)">
-                <button type="button" class="secret-btn" id="btn-secret-unlock" onclick="checkSecretKey()">解鎖特權</button>
-            </div>
-            <p id="lbl-nickname-tip" style="font-size: 13px; color: #718096; margin: 6px 0;">💡 支援中英文、數字，最多 24 碼</p>
+            <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號 (保障隱私)：</b></p>
+            <input type="text" id="player-nickname" maxlength="12" value="" placeholder="請輸入暱稱">
+            <p id="lbl-nickname-tip" style="font-size: 13px; color: #718096; margin: 6px 0;">💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼</p>
             <br>
             <p id="lbl-gender"><b>請選擇您的性別：</b></p>
             <label><input type="radio" name="gender" value="male" checked> <span id="opt-male">男性 👨</span></label>
@@ -401,7 +387,7 @@
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;" id="station-buttons-container">
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🦪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
             </div>
@@ -506,7 +492,7 @@
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。請先參考下方表格，再點擊神像誠心擲筊！", godClose: "關閉指南",
                 bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
-                nicknameTip: "💡 支援中英文、數字，最多 24 碼",
+                nicknameTip: "💡 支援中英文、數字，最多 12 碼",
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
                 buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
@@ -546,7 +532,7 @@
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
                     "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
-                    "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
+                    "大本鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
                     "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
@@ -578,7 +564,7 @@
                 godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。请先参考下方表格，再点击神像诚心掷筊！", godClose: "关闭指南",
                 bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
-                nicknameTip: "💡 支持中英文、数字，最多 24 码",
+                nicknameTip: "💡 支持中英文、数字，最多 12 码",
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
                 buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放至边疆补给站！",
                 footer: "高雄师范大学 刘世闵 老师设计",
@@ -650,7 +636,7 @@
                 godTitle: "⛩️ Divine Guidance & Prayer", godDesc: "Unlocked at Level 6. Please review the table below before praying!", godClose: "Close Guide",
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
-                nicknameTip: "💡 Supports English/Chinese, up to 24 chars",
+                nicknameTip: "💡 Supports English/Chinese, up to 12 chars",
                 winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
                 buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
@@ -907,16 +893,10 @@
             let selectedLv = document.getElementById('start-level-select');
             currentLevel = selectedLv ? (parseInt(selectedLv.value) || 1) : 1;
             
-            let rawNick = document.getElementById('player-nickname').value.trim();
-            if (rawNick === 'Shih-Min@NKNU0809') {
-                totalScore = 99999;
-                playerInventory = { cloak: 10, wand: 10, snitch: 10, howler: 10, dipper: 10, fan: 10 };
-                alert("✨【設計者專屬特權已解鎖】\n歡迎 劉世閔教授！已成功啟動超級權限：99,999點與全傳奇道具！");
-            } else {
-                totalScore = 500;
-                playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
-            }
+            totalScore = 500;
+            playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
 
+            let rawNick = document.getElementById('player-nickname').value.trim();
             let displayName = rawNick || (currentLang === 'en' ? "Explorer" : "探險家");
             let randomCode = Math.floor(1000 + Math.random() * 9000);
             uniquePlayerId = `${displayName}#${randomCode}`;
