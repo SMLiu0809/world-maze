@@ -150,12 +150,10 @@
             align-items: center; justify-content: center; font-size: 15px; font-weight: bold;
             box-shadow: 0 6px 15px rgba(0,0,0,0.25); transition: transform 0.4s ease; user-select: none;
         }
-        /* 凸面：紅木色、無字、具立體陰影 */
         .cup-convex {
             background: linear-gradient(135deg, #A93226 0%, #78281F 100%);
             color: #78281F; border: 2px solid #641E16; box-shadow: inset 0 4px 8px rgba(255,255,255,0.2), 0 6px 15px rgba(0,0,0,0.3);
         }
-        /* 平面：金黃木紋、帶金字 */
         .cup-flat {
             background: linear-gradient(135deg, #F9E79F 0%, #F1C40F 100%);
             color: #7D6608; border: 2px solid #B7950B; text-shadow: 0 1px 1px rgba(255,255,255,0.6);
@@ -480,7 +478,7 @@
                     "❄️ 宁古塔 (远)｜每敲100/限20次｜机票1300"
                 ],
                 gods: [
-                    "🏮土地公(-300)", "⚔️温王爷(-500)", "🌊妈祖(-1000)", 
+                    "🏮土地公(-300)", "⚔️温王爺(-500)", "🌊妈祖(-1000)", 
                     "🌿观世音(-1500)", "🪷药师佛(-2000)", "🌟玉皇大帝 (全清场+指路 / -5000)"
                 ],
                 levels: [
@@ -861,9 +859,18 @@
             }
             offSafeSpaces.sort(() => Math.random() - 0.5);
 
-            if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 2; 
-            if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 6; 
-            if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 7; 
+            // 放置各種專屬路阻代號：2=🐺惡狼, 3=🦠瘟疫, 4=🚢船難, 5=🦹‍♂️歹徒, 8=🤒惡疾, 9=💣炸藥, 7=💵現金
+            let obstacleCodes = [2, 3, 4, 5, 8, 9];
+            for (let code of obstacleCodes) {
+                if(offSafeSpaces.length > 0) {
+                    let pos = offSafeSpaces.pop();
+                    maze[pos.y][pos.x] = code;
+                }
+            }
+            if(offSafeSpaces.length > 0) {
+                let pos = offSafeSpaces.pop();
+                maze[pos.y][pos.x] = 7; // 現金寶物
+            }
 
             maze[playerPos.y][playerPos.x] = 0;
             maze[targetPos.y][targetPos.x] = 0;
@@ -927,9 +934,14 @@
                 for (let x = 0; x < mazeSize; x++) {
                     let dist = Math.abs(x - playerPos.x) + Math.abs(y - playerPos.y);
                     if (dist <= fogRadius) {
-                        if (maze[y][x] === 2) ctxEl.fillText("🐺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                        if (maze[y][x] === 6) ctxEl.fillText("💩", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                        if (maze[y][x] === 7) ctxEl.fillText("💵", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        let cell = maze[y][x];
+                        if (cell === 2) ctxEl.fillText("🐺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (cell === 3) ctxEl.fillText("🦠", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (cell === 4) ctxEl.fillText("🚢", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (cell === 5) ctxEl.fillText("🦹‍♂️", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (cell === 8) ctxEl.fillText("🤒", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (cell === 9) ctxEl.fillText("💣", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (cell === 7) ctxEl.fillText("💵", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                     }
                 }
             }
@@ -952,20 +964,24 @@
                 undoHistory.push({x: playerPos.x, y: playerPos.y});
                 if(undoHistory.length > 10) undoHistory.shift();
 
-                if (cell === 6) {
+                // 處理各項路阻碰撞扣分
+                if ([2, 3, 4, 5, 8, 9].includes(cell)) {
                     trapHitThisLevel = true;
                     totalScore -= 200; updateUI();
                     playSound('bump'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "💩 Hit a trap, -200 pts!" : (currentLang === 'zh-CN' ? "💩 踩到大便陷阱，扣除 200 点！" : "💩 踩到大便陷阱，扣除 200 點！"));
+                    
+                    let obstacleNames = {2: "🐺 惡狼", 3: "🦠 瘟疫", 4: "🚢 船難", 5: "🦹‍♂️ 歹徒", 8: "🤒 惡疾", 9: "💣 炸藥"};
+                    alert(`⚠️ 遭遇【${obstacleNames[cell]}】路阻！扣除 200 點！`);
                     return;
                 }
+
                 if (cell === 7) {
                     treasureCollectedThisLevel = true;
                     totalScore += 300; updateUI();
                     playSound('item'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "💵 Found cash treasure, +300 pts!" : (currentLang === 'zh-CN' ? "💵 获得现金宝物 300 点！" : "💵 獲得現金寶物 300 點！"));
+                    alert(currentLang === 'en' ? "💵 Found cash treasure, +300 pts!" : "💵 獲得現金寶物 300 點！");
                     checkWin();
                     return;
                 }
@@ -977,11 +993,11 @@
 
         function undoMove() {
             if (undoCountLeft <= 0) {
-                alert(currentLang === 'en' ? "⚠️ Undo limit reached for this level!" : (currentLang === 'zh-CN' ? "⚠️ 本关的反悔次数已用完！" : "⚠️ 本關的反悔次數已用完！"));
+                alert("⚠️ 本關的反悔次數已用完！");
                 return;
             }
             if (undoHistory.length === 0) {
-                alert(currentLang === 'en' ? "⚠️ No moves to undo!" : (currentLang === 'zh-CN' ? "⚠️ 目前没有可撤回的步骤！" : "⚠️ 目前沒有可撤回的步驟！"));
+                alert("⚠️ 目前沒有可撤回的步驟！");
                 return;
             }
             let prev = undoHistory.pop();
@@ -1008,21 +1024,11 @@
                 let shippingFee = currentLevel * 500;
                 let t = i18n[currentLang];
 
-                let msg = (currentLang === 'en' ? 
-                    `Completed [Level ${currentLevel}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n}\nEarned Score: +${currentTarget.s}\nStars: ${starStr}\nCurrent Total Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
-                    (currentLang === 'zh-CN' ?
-                        `通关【第 ${currentLevel} 关：${currentTarget.station}】！\n代号：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n获得积分：${currentTarget.s} 点\n本关星等：${starStr}\n目前总分：${totalScore} 点\n\n💡 知识小百科：\n${currentTarget.knowledge}` :
-                        `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n目前總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
-                    )
-                );
+                let msg = `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n目前總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`;
                 document.getElementById('win-message').innerText = msg;
 
                 document.getElementById('purchase-area').style.display = 'block';
-                let buyDescText = (currentLang === 'en' ? 
-                    `🛍️ Souvenir & Shipping Fee for Level ${currentLevel}: ${shippingFee} pts` :
-                    (currentLang === 'zh-CN' ? `🛍️ 第 ${currentLevel} 关纪念品与跨国运费：${shippingFee} 点` : `🛍️ 第 ${currentLevel} 關紀念品與跨國運費：${shippingFee} 點`)
-                );
-                document.getElementById('purchase-desc').innerText = buyDescText;
+                document.getElementById('purchase-desc').innerText = `🛍️ 第 ${currentLevel} 關紀念品與跨國運費：${shippingFee} 點`;
                 document.getElementById('nav-buttons-area').style.display = 'none';
 
                 document.getElementById('win-modal').style.display = 'flex';
@@ -1043,7 +1049,7 @@
             totalScore += currentTarget.s;
             updateUI();
 
-            alert(currentLang === 'en' ? "🎉 Successfully purchased souvenir and shipped home! Proceeding to next adventure." : "🎉 成功支付運費，紀念品已安全寄回國！");
+            alert("🎉 成功支付運費，紀念品已安全寄回國！");
 
             document.getElementById('purchase-area').style.display = 'none';
             let navArea = document.getElementById('nav-buttons-area');
@@ -1074,13 +1080,7 @@
                 loadLevel();
             } else {
                 isPlaying = false;
-                let certText = (currentLang === 'en' ? 
-                    `This is to certify that <b>[${uniquePlayerId}]</b> has successfully completed the Global Treasure Maze Adventure!<br>Final Score: <b>${totalScore} pts</b><br>Congratulations on winning the "Master Explorer" honor!` :
-                    (currentLang === 'zh-CN' ?
-                        `特此证明 <b>[${uniquePlayerId}]</b> 探险家顺利完成世界十大宝藏迷宫探险！<br>最终总分：<b>${totalScore} 点</b><br>恭喜荣获“世界寻宝之王”最高殊荣！` :
-                        `特此證明 <b>[${uniquePlayerId}]</b> 探險家順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`
-                    )
-                );
+                let certText = `特此證明 <b>[${uniquePlayerId}]</b> 探險家順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`;
                 document.getElementById('cert-content').innerHTML = certText;
                 document.getElementById('certificate-modal').style.display = 'flex';
             }
@@ -1093,7 +1093,7 @@
         function doWork() {
             let st = banishmentStations[currentStationIndex];
             if (currentStationClicks >= st.maxClicks) {
-                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : (currentLang === 'zh-CN' ? "⚠️ 敲砖额度已满，请点击下方按钮支付机票费返程！" : "⚠️ 敲磚額度已滿，請點擊下方按鈕支付機票費返程！"));
+                alert("⚠️ 敲磚額度已滿，請點擊下方按鈕支付機票費返程！");
                 return;
             }
             playSound('item'); vibrate([20]);
@@ -1104,18 +1104,9 @@
             let st = banishmentStations[currentStationIndex];
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
-            let descText = (currentLang === 'en' ? 
-                `Per Tap: ${st.reward} pts | Remaining: ${st.maxClicks - currentStationClicks} | Ticket: ${st.ticket} pts` :
-                (currentLang === 'zh-CN' ?
-                    `每敲一次：${st.reward}点 | 剩余次数：${st.maxClicks - currentStationClicks} | 机票费：${st.ticket}点` :
-                    `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`
-                )
-            );
-            document.getElementById('work-rule-desc').innerText = descText;
+            document.getElementById('work-rule-desc').innerText = `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`;
             let prog = document.getElementById('work-progress');
             prog.max = st.ticket; prog.value = Math.min(currentWorkEarned, st.ticket);
-            let returnBtnText = (currentLang === 'en' ? "✈️ Pay Ticket & Return to Level!" : (currentLang === 'zh-CN' ? "✈️ 缴纳机票费，重返原关卡！" : "✈️ 繳交機票費，重返原關卡！"));
-            document.getElementById('ui-btn-work-return').innerText = returnBtnText;
             document.getElementById('ui-btn-work-return').style.display = (currentWorkEarned >= st.ticket) ? 'block' : 'none';
         }
         function returnFromWork() {
@@ -1130,7 +1121,7 @@
             closeGodHelpModal();
             let cost = godsData[godType].cost;
             if (totalScore < cost) {
-                alert(currentLang === 'en' ? "⚠️ Not enough score for offerings!" : "⚠️ 香油錢不足，無法請神！");
+                alert("⚠️ 香油錢不足，無法請神！");
                 return;
             }
             totalScore -= cost;
@@ -1140,10 +1131,8 @@
             let godIdx = Object.keys(godsData).indexOf(godType);
             pendingGodName = i18n[currentLang].gods[godIdx] || godsData[godType].n_tw;
             isEventActive = true; bweiShengCount = 0;
-            let pTitle = (currentLang === 'en' ? "🙏 Praying to " + pendingGodName : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName));
-            document.getElementById('bwei-title').innerText = pTitle;
-            let countText = (currentLang === 'en' ? "Consecutive Sheng Jiao: 0" : (currentLang === 'zh-CN' ? "目前连续圣筊：0 次" : "目前連續聖筊：0 次"));
-            document.getElementById('bwei-count-display').innerText = countText;
+            document.getElementById('bwei-title').innerText = "🙏 誠心擲筊請示 " + pendingGodName;
+            document.getElementById('bwei-count-display').innerText = "目前連續聖筊：0 次";
             
             let c1 = document.getElementById('cup1');
             let c2 = document.getElementById('cup2');
@@ -1172,34 +1161,27 @@
                 let c2Flat = Math.random() < 0.5;
 
                 if (c1Flat) {
-                    cup1.className = "bwei-block cup-flat";
-                    cup1.innerText = "有求";
+                    cup1.className = "bwei-block cup-flat"; cup1.innerText = "有求";
                 } else {
-                    cup1.className = "bwei-block cup-convex";
-                    cup1.innerText = "無字";
+                    cup1.className = "bwei-block cup-convex"; cup1.innerText = "無字";
                 }
 
                 if (c2Flat) {
-                    cup2.className = "bwei-block cup-flat";
-                    cup2.innerText = "必應";
+                    cup2.className = "bwei-block cup-flat"; cup2.innerText = "必應";
                 } else {
-                    cup2.className = "bwei-block cup-convex";
-                    cup2.innerText = "無字";
+                    cup2.className = "bwei-block cup-convex"; cup2.innerText = "無字";
                 }
 
-                // 判斷筊型邏輯
                 if (!c1Flat && !c2Flat) {
                     bweiShengCount = 0;
-                    document.getElementById('bwei-count-display').innerText = currentLang === 'en' ? "Result: Gai Jiao (Failure, Reset to 0)" : "出現【蓋筊／怒杯】！神明不同意，連續次數歸零。";
+                    document.getElementById('bwei-count-display').innerText = "出現【蓋筊／怒杯】！神明不同意，連續次數歸零。";
                 }
                 else if (c1Flat && c2Flat) {
-                    let sText = (currentLang === 'en' ? `Result: Xiao Jiao (Unresolved). Consecutive: ${bweiShengCount}` : `出現【笑筊】！神明笑而不答，連續次數維持：${bweiShengCount} 次`);
-                    document.getElementById('bwei-count-display').innerText = sText;
+                    document.getElementById('bwei-count-display').innerText = `出現【笑筊】！神明笑而不答，連續次數維持：${bweiShengCount} 次`;
                 }
                 else {
                     bweiShengCount++;
-                    let sText = (currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiShengCount}` : `連續聖筊：${bweiShengCount} 次`);
-                    document.getElementById('bwei-count-display').innerText = sText;
+                    document.getElementById('bwei-count-display').innerText = `連續聖筊：${bweiShengCount} 次`;
 
                     if (bweiShengCount === 2) {
                         setTimeout(() => {
@@ -1223,27 +1205,81 @@
             }, 500);
         }
 
+        // 神明與專屬路阻完美對應邏輯
         function applyGodPower(godType) {
+            let countRemoved = 0;
+
             if (godType === 'tudigong') {
-                alert("🏮 土地公指引：已為您掃除部分迷霧視野！");
-            } else if (godType === 'wen') {
-                alert("⚔️ 溫王爺神威：已為您斬妖除魔，清除當前關卡所有陷阱！");
-            } else if (godType === 'mazu') {
-                totalScore += 500;
-                updateUI();
-                alert("🌊 媽祖庇佑：賜予航海順風，額外獲得 500 點獎勵！");
-            } else if (godType === 'guanyin') {
+                // 土地公 -> 🐺 惡狼全數消失
+                for (let y = 0; y < mazeSize; y++) {
+                    for (let x = 0; x < mazeSize; x++) {
+                        if (maze[y][x] === 2) { maze[y][x] = 0; countRemoved++; }
+                    }
+                }
+                drawMaze();
+                // 同時給予土地公清晰指引方向
+                let dx = targetPos.x - playerPos.x;
+                let dy = targetPos.y - playerPos.y;
+                let dirStr = (dy < 0 ? "北方" : (dy > 0 ? "南方" : "")) + (dx < 0 ? "西方" : (dx > 0 ? "東方" : ""));
+                if(dirStr === "") dirStr = "就在您附近";
+                alert(`🏮【土地公靈籤指引】\n土地公顯靈：地圖上所有的惡狼（🐺）全數被驅逐消失！\n神明指路：終點寶藏大約在您的【${dirStr}】方向！`);
+            } 
+            else if (godType === 'wen') {
+                // 溫王爺 -> 🦠 瘟疫全數消失
+                for (let y = 0; y < mazeSize; y++) {
+                    for (let x = 0; x < mazeSize; x++) {
+                        if (maze[y][x] === 3) { maze[y][x] = 0; countRemoved++; }
+                    }
+                }
+                drawMaze();
+                alert(`⚔️【溫王爺神威顯赫】\n溫王爺駕到！地圖上所有的瘟疫（🦠）全數被淨化消失，通行無阻！`);
+            } 
+            else if (godType === 'mazu') {
+                // 媽祖 -> 🚢 船難全數消失
+                for (let y = 0; y < mazeSize; y++) {
+                    for (let x = 0; x < mazeSize; x++) {
+                        if (maze[y][x] === 4) { maze[y][x] = 0; countRemoved++; }
+                    }
+                }
+                drawMaze();
+                totalScore += 800; updateUI();
+                alert(`🌊【媽祖庇佑航海順風】\n海神庇佑：地圖上所有的船難險境（🚢）全數平息消失！並額外賜予 800 點旅費奧援！`);
+            } 
+            else if (godType === 'guanyin') {
+                // 觀世音 -> 🦹‍♂️ 歹徒全數消失
+                for (let y = 0; y < mazeSize; y++) {
+                    for (let x = 0; x < mazeSize; x++) {
+                        if (maze[y][x] === 5) { maze[y][x] = 0; countRemoved++; }
+                    }
+                }
+                drawMaze();
                 undoCountLeft = 5;
                 document.getElementById('undo-count').innerText = undoCountLeft;
-                alert("🌿 觀世音普渡：慈悲為懷，本關反悔次數補滿至 5 次！");
-            } else if (godType === 'yaoshifo') {
-                totalScore += 1000;
-                updateUI();
-                alert("🪷 藥師佛加持：身心清淨，獲得 1000 點加持！");
-            } else if (godType === 'supreme') {
-                totalScore += 3000;
-                updateUI();
-                alert("🌟 玉皇大帝降臨：全場迷霧與障礙清除，直接指引通往終點！");
+                alert(`🌿【觀世音普渡慈悲】\n慈悲為懷：地圖上所有的歹徒（🦹‍♂️）全數被渡化消失！本關反悔次數補滿至 5 次！`);
+            } 
+            else if (godType === 'yaoshifo') {
+                // 藥師佛 -> 🤒 惡疾全數消失
+                for (let y = 0; y < mazeSize; y++) {
+                    for (let x = 0; x < mazeSize; x++) {
+                        if (maze[y][x] === 8) { maze[y][x] = 0; countRemoved++; }
+                    }
+                }
+                drawMaze();
+                totalScore += 1500; updateUI();
+                alert(`🪷【藥師佛消災延壽】\n身心清淨：地圖上所有的惡疾（🤒）全數治癒消失！並賜予 1500 點大吉加持！`);
+            } 
+            else if (godType === 'supreme') {
+                // 玉皇大帝 -> 所有路阻（惡狼、瘟疫、船難、歹徒、惡疾、炸藥）一網打盡、瞬間清場
+                for (let y = 0; y < mazeSize; y++) {
+                    for (let x = 0; x < mazeSize; x++) {
+                        if ([2, 3, 4, 5, 8, 9].includes(maze[y][x])) {
+                            maze[y][x] = 0; countRemoved++;
+                        }
+                    }
+                }
+                drawMaze();
+                totalScore += 5000; updateUI();
+                alert(`🌟【玉皇大帝萬尊降臨】\n地圖上所有的路阻（惡狼、瘟疫、船難、歹徒、惡疾、炸藥）全部一網打盡、瞬間清場！直接指引通往終點！`);
                 playerPos = { x: targetPos.x, y: targetPos.y };
                 drawMaze();
                 checkWin();
