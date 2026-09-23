@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 下拉選單硬編碼終極版</title>
+    <title>世界寶藏迷宮探險 - 英文 Ports 完美修復版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -180,7 +180,6 @@
         }
         .modal-text { font-size: clamp(17px, 4.2vw, 24px); font-weight: 800; color: #C0392B; margin-bottom: 15px; line-height: 1.4;}
         
-        /* 🏮 傳統半月紅木金字筊杯樣式 */
         .bwei-cup-container { display: flex; justify-content: center; gap: 15px; margin: 15px 0; }
         .bwei-mu-block {
             width: 65px; height: 85px; background: linear-gradient(135deg, #D9534F 0%, #C9302C 100%);
@@ -198,8 +197,8 @@
     <!-- 🌀 時空穿越特效遮罩層 -->
     <div id="time-warp-screen">
         <div style="font-size: 75px; animation: spinWarp 2s linear infinite;">⏳⚡</div>
-        <div class="warp-text" id="warp-title-txt">時空隧道穿越中...</div>
-        <div class="warp-sub" id="warp-sub-txt">正被流放至古代邊疆打工賺取機票！</div>
+        <div class="warp-text" id="warp-title-txt">Time-Warping...</div>
+        <div class="warp-sub" id="warp-sub-txt">Banishment to historical trade post!</div>
     </div>
 
     <!-- 頁面1：封面 -->
@@ -216,7 +215,7 @@
         <div class="form-group">
             <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號 (保障隱私)：</b></p>
             <input type="text" id="player-nickname" maxlength="12" value="" placeholder="請輸入暱稱">
-            <p id="lbl-nickname-tip" style="font-size: 12px; color: #718096; margin: 4px 0;">💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼</p>
+            <p id="lbl-nickname-tip" style="font-size: 12px; color: #718096; margin: 4px 0;">💡 支援中英文、數字，最多 12 碼</p>
             <br>
             <p id="lbl-gender"><b>請選擇您的性別：</b></p>
             <label><input type="radio" name="gender" value="male" checked> <span id="opt-male">男性 👨</span></label>
@@ -225,7 +224,6 @@
             
             <div style="margin: 12px 0; background: #FEF9E7; padding: 12px; border-radius: 16px; border: 1px solid #F9E79F;">
                 <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
-                <!-- 🌟 硬編碼直接內建 10 個預設選項，保證絕對不會空白 -->
                 <select id="start-level-select" style="font-size: 14px; padding: 6px 10px; border-radius: 10px; border: 1px solid #F39C12; background: white; font-weight: 700;">
                     <option value="1" id="opt-l1">第 1 關 (臺灣・高雄)</option>
                     <option value="2" id="opt-l2">第 2 關 (日本・京都)</option>
@@ -275,12 +273,9 @@
         <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(14px, 3.8vw, 17px); text-align: left; line-height: 1.7; background: #EBF8FF; padding: 20px; border-radius: 18px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;" id="ins-p1"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
-            <p id="ins-p2"><b>⛩️ 第 6 關起神明請筊與次數限制：</b>解鎖神壇後可誠心擲筊請神。必須連續擲出兩次<b>聖筊（一平金字、一凸無字）</b>才能獲得神明庇佑；若擲出笑筊可繼續嘗試，若連續出現陰筊則請神無效！</p>
-            <p id="ins-p3"><b>🕹️ 歷史打工與時空穿越：</b>旅費不足時將觸發時空穿越，流放至古代邊疆打工賺取機票費！</p>
-            <p id="ins-p4"><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
         </div>
         <br>
-        <button id="btn-station" class="btn-large" style="background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); box-shadow: 0 6px 20px rgba(211, 84, 0, 0.3);" onclick="openStationModal()">💰 前往歷史流放站</button>
+        <button id="btn-station" class="btn-large" style="background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); box-shadow: 0 6px 20px rgba(211, 84, 0, 0.3);" onclick="openStationModal()">💰 Historical Trade Port</button>
         <br>
         <button id="btn-back-cover" class="btn-large btn-cancel" onclick="showScreen('screen-cover')">⬅️ 返回主選單</button>
         <button id="btn-start" class="btn-large" onclick="startGame()">開始探險 🚀</button>
@@ -299,7 +294,7 @@
         
         <div class="toolbar-top">
             <button class="tool-btn" id="t-god" style="background-color: #2980B9;" onclick="openGodHelpModal()">⛩️ 神通</button>
-            <button class="tool-btn" id="t-station" style="background-color: #D35400;" onclick="openStationModal()">💰 流放站</button>
+            <button class="tool-btn" id="t-station" style="background-color: #D35400;" onclick="openStationModal()">💰 Ports</button>
             <button class="tool-btn" id="t-know" style="background-color: #8E44AD;" onclick="openKnowledgeModal()">📖 知識</button>
             <button class="tool-btn" id="t-undo" style="background-color: #27AE60;" onclick="undoMove()">↩️ 上一步(<span id="undo-count">3</span>)</button>
             <button class="tool-btn" id="t-pause" style="background-color: #34495E;" onclick="openPauseModal()">⏸️ 暫停</button>
@@ -325,38 +320,38 @@
 
     <!-- 頁面4：歷史流放勞動與打工賺錢畫面 -->
     <div id="screen-work" class="screen">
-        <h1 id="work-title" style="color:#D35400; font-size: clamp(22px, 5vw, 30px);">📜 時空流放打工區 📜</h1>
-        <h2 id="ui-banish-location" style="color:#C0392B; font-size: clamp(18px, 4.5vw, 24px); margin: 0;">流放地：潮州（韓愈）</h2>
+        <h1 id="work-title" style="color:#D35400; font-size: clamp(22px, 5vw, 30px);">📜 Historical Trade Port 📜</h1>
+        <h2 id="ui-banish-location" style="color:#C0392B; font-size: clamp(18px, 4.5vw, 24px); margin: 0;">Station: Manila</h2>
         
         <div style="font-size: clamp(14px, 3.8vw, 17px); margin: 12px 0; background: #FDFEFE; padding: 14px; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <p id="work-rule-desc" style="font-weight: 700; color: #C0392B; margin: 4px 0;">工作任務：拿木棍幫韓愈驅趕鱷魚 | 每敲一次：200點 | 機票費：500點</p>
-            <p id="work-chat-bubble" style="font-style: italic; color: #2B6CB0; background: #EBF8FF; padding: 8px; border-radius: 10px; margin: 8px 0; font-weight: 600;">「拿木棍敲打江岸，驅趕惡獸鱷魚中...」</p>
-            <p id="work-score-wrap" style="margin: 6px 0;"><span id="work-earned-label">已賺取工資：</span><b id="work-score" style="color:#27AE60; font-size: clamp(20px, 5vw, 26px);">0</b> / <span id="work-target-display">500</span> <span id="work-unit-label">點</span></p>
+            <p id="work-rule-desc" style="font-weight: 700; color: #C0392B; margin: 4px 0;">Task: Sort cinnamon & spice sacks</p>
+            <p id="work-chat-bubble" style="font-style: italic; color: #2B6CB0; background: #EBF8FF; padding: 8px; border-radius: 10px; margin: 8px 0; font-weight: 600;">“Inventory check: Cinnamon bags count +1...”</p>
+            <p id="work-score-wrap" style="margin: 6px 0;"><span id="work-earned-label">Earned Wages: </span><b id="work-score" style="color:#27AE60; font-size: clamp(20px, 5vw, 26px);">0</b> / <span id="work-target-display">500</span> <span id="work-unit-label">pts</span></p>
         </div>
         
         <div style="margin: 12px 0;">
             <progress id="work-progress" value="0" max="500"></progress>
-            <p id="work-status" style="font-size: clamp(14px, 3.8vw, 18px); font-weight: 700; color: #D35400; margin-top: 6px;">狂點按鈕打工賺取機票！</p>
+            <p id="work-status" style="font-size: clamp(14px, 3.8vw, 18px); font-weight: 700; color: #D35400; margin-top: 6px;">Tap rapidly to earn travel ticket!</p>
         </div>
         
         <!-- 打工主按鈕 -->
         <button id="work-action-icon" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">
-            <span id="work-inner-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">🪵</span>
+            <span id="work-inner-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">📦</span>
         </button>
         <br>
-        <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 320px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); margin-top: 8px;" onclick="returnFromWork()">✈️ 賺足機票費，穿越回原關卡！</button>
+        <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 320px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); margin-top: 8px;" onclick="returnFromWork()">✈️ Pay Ticket & Return to Level!</button>
         <br>
-        <button id="work-back-btn" class="btn-large btn-cancel" style="width: 90%; max-width: 320px; margin-top: 4px;" onclick="cancelWorkToMenu()">⬅️ 返回主選單</button>
+        <button id="work-back-btn" class="btn-large btn-cancel" style="width: 90%; max-width: 320px; margin-top: 4px;" onclick="cancelWorkToMenu()">⬅️ Main Menu</button>
     </div>
 
     <!-- 暫停選單彈跳視窗 -->
     <div id="pause-modal">
         <div class="modal-content">
-            <h2 id="pause-title" style="color: #C0392B; margin-top: 0;">⏸️ 遊戲暫停</h2>
+            <h2 id="pause-title" style="color: #C0392B; margin-top: 0;">⏸️ Game Paused</h2>
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
-                <button id="p-resume" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%);" onclick="closePauseModal()">▶️ 繼續遊戲</button>
-                <button id="p-restart" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%);" onclick="restartLevel(); closePauseModal();">🔄 重新開始本關</button>
-                <button id="p-home" class="btn-large btn-cancel" style="width: 100%; max-width: 100%; margin: 0;" onclick="backToCoverFromPause()">🏠 返回主選單</button>
+                <button id="p-resume" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%);" onclick="closePauseModal()">▶️ Resume</button>
+                <button id="p-restart" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%);" onclick="restartLevel(); closePauseModal();">🔄 Restart Level</button>
+                <button id="p-home" class="btn-large btn-cancel" style="width: 100%; max-width: 100%; margin: 0;" onclick="backToCoverFromPause()">🏠 Main Menu</button>
             </div>
         </div>
     </div>
@@ -364,28 +359,28 @@
     <!-- 文化知識導覽彈跳視窗 -->
     <div id="knowledge-modal">
         <div class="modal-content">
-            <h2 id="knowledge-title" style="color: #2980B9; margin-top: 0;">📖 文化與寶藏知識</h2>
+            <h2 id="knowledge-title" style="color: #2980B9; margin-top: 0;">📖 Culture & Lore</h2>
             <p id="knowledge-text" style="font-size: 15px; color: #2D3748; text-align: left; line-height: 1.6; background: #EBF8FF; padding: 18px; border-radius: 16px; border: 1px solid #BEE3F8;"></p>
-            <button id="k-close" class="btn-large" style="width: 100%; margin-top: 12px;" onclick="closeKnowledgeModal()">了解了，繼續探險！</button>
+            <button id="k-close" class="btn-large" style="width: 100%; margin-top: 12px;" onclick="closeKnowledgeModal()">Got it, Continue!</button>
         </div>
     </div>
 
     <!-- 過關與紀念品結算彈跳視窗 -->
     <div id="win-modal">
         <div class="modal-content">
-            <h2 id="win-title" style="color: #C0392B; margin-top: 0;">🎉 尋獲城市寶物！</h2>
+            <h2 id="win-title" style="color: #C0392B; margin-top: 0;">🎉 Souvenir Found!</h2>
             <div id="win-stars" style="font-size: 34px; margin: 8px 0;">⭐⭐⭐</div>
-            <div id="win-message" style="font-size: 15px; color: #2D3748; margin: 12px 0; line-height: 1.6; white-space: pre-line;">結算中...</div>
+            <div id="win-message" style="font-size: 15px; color: #2D3748; margin: 12px 0; line-height: 1.6; white-space: pre-line;">Calculating...</div>
             
             <div id="purchase-area" style="margin: 15px 0; background: #FFF9E6; padding: 14px; border-radius: 16px; border: 1px solid #F9E79F;">
-                <p id="purchase-desc" style="font-weight: 700; color: #B7950B; margin: 0 0 10px 0;">🛍️ 購買本關紀念品與跨國運費：500 點</p>
-                <button id="btn-buy-souvenir" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); font-size: 16px; padding: 10px;" onclick="buySouvenir()">💳 支付運費，將寶物買回國！</button>
+                <p id="purchase-desc" style="font-weight: 700; color: #B7950B; margin: 0 0 10px 0;">🛍️ Souvenir & Shipping Fee: 500 pts</p>
+                <button id="btn-buy-souvenir" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); font-size: 16px; padding: 10px;" onclick="buySouvenir()">💳 Pay Shipping Fee & Bring Souvenir Home!</button>
             </div>
 
             <div id="nav-buttons-area" style="display: none; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap;">
-                <button id="btn-prev-level" class="btn-large btn-cancel" style="font-size: 13px; padding: 10px 8px; margin: 0; width: 30%; max-width: 130px;" onclick="goToPrevLevel()">⬅️ 上一關</button>
-                <button id="btn-home-level" class="btn-large" style="font-size: 13px; padding: 10px 8px; margin: 0; width: 30%; max-width: 130px; background: linear-gradient(135deg, #2980B9 0%, #1B4F72 100%); box-shadow: 0 4px 12px rgba(41, 128, 185, 0.3);" onclick="backToCoverFromPause()">🏠 回主選單</button>
-                <button id="btn-next-level" class="btn-large" style="font-size: 13px; padding: 10px 8px; margin: 0; width: 32%; max-width: 130px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);" onclick="goToNextLevel()">➡️ 下一關</button>
+                <button id="btn-prev-level" class="btn-large btn-cancel" style="font-size: 13px; padding: 10px 8px; margin: 0; width: 30%; max-width: 130px;" onclick="goToPrevLevel()">⬅️ Prev</button>
+                <button id="btn-home-level" class="btn-large" style="font-size: 13px; padding: 10px 8px; margin: 0; width: 30%; max-width: 130px; background: linear-gradient(135deg, #2980B9 0%, #1B4F72 100%); box-shadow: 0 4px 12px rgba(41, 128, 185, 0.3);" onclick="backToCoverFromPause()">🏠 Menu</button>
+                <button id="btn-next-level" class="btn-large" style="font-size: 13px; padding: 10px 8px; margin: 0; width: 32%; max-width: 130px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);" onclick="goToNextLevel()">➡️ Next</button>
             </div>
         </div>
     </div>
@@ -393,61 +388,61 @@
     <!-- 世界探險證書與成績卡彈跳視窗 -->
     <div id="certificate-modal">
         <div class="modal-content" style="border-color: #F1C40F; background: #FFFEF0;">
-            <h2 id="cert-title" style="color: #D35400; margin-top: 0;">📜 世界探險結業證書 📜</h2>
+            <h2 id="cert-title" style="color: #D35400; margin-top: 0;">📜 World Explorer Certificate 📜</h2>
             <div id="cert-content" style="font-size: 15px; color: #2D3748; text-align: center; line-height: 1.8; background: white; padding: 22px; border-radius: 18px; border: 3px double #F39C12; margin: 12px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
-                特此證明 <b>探險家</b> 順利完成世界十大寶藏迷宮探險！
+                Certified that Explorer completed the Global Treasure Maze Adventure!
             </div>
-            <button id="cert-btn" class="btn-large" style="width: 100%; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); box-shadow: 0 6px 20px rgba(230, 126, 34, 0.35);" onclick="closeCertificateModal()">🏆 載入主選單</button>
+            <button id="cert-btn" class="btn-large" style="width: 100%; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); box-shadow: 0 6px 20px rgba(230, 126, 34, 0.35);" onclick="closeCertificateModal()">🏆 Main Menu</button>
         </div>
     </div>
 
     <!-- 選擇歷史流放地彈跳視窗 -->
     <div id="station-modal">
         <div class="modal-content">
-            <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">📜 選擇歷史流放地打工</h2>
-            <p id="station-modal-desc" style="font-size: 14px; color: #718096;">旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：</p>
+            <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 Select Historical Trade Port</h2>
+            <p id="station-modal-desc" style="font-size: 14px; color: #718096;">Earn tickets by assisting historical trade posts:</p>
             <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0;" id="station-btn-container">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 13px;" onclick="triggerTimeWarp(0)"><span id="st-0">🪵 潮州｜韓愈 (拿木棍驅鱷)｜每敲200/機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="triggerTimeWarp(1)"><span id="st-1">🦪 惠州｜蘇東坡 (炭火烤生蠔)｜每敲180/機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 13px;" onclick="triggerTimeWarp(2)"><span id="st-2">🥥 儋州｜吃貨東坡 (砍椰講學)｜每敲150/機票900</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 13px;" onclick="triggerTimeWarp(3)"><span id="st-3">🪨 永州｜柳宗元 (尋小石潭)｜每敲120/機票1100</span></button>
-                <button class="btn-large" style="width: 100% !important; max-width: 100% !important; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px; white-space: normal; line-height: 1.4;" onclick="triggerTimeWarp(4)"><span id="st-4">🦵 寧古塔｜押解甄嬛老爹 (使出無影腳踢歹徒拿甄嬛賞金)｜每敲100/機票1300</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 13px;" onclick="triggerTimeWarp(0)"><span id="st-0">🏙️ Manila (Spice Market) | 200 pts / Ticket: 500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 13px;" onclick="triggerTimeWarp(1)"><span id="st-1">🏡 Singapore (Port Authority) | 180 pts / Ticket: 700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 13px;" onclick="triggerTimeWarp(2)"><span id="st-2">🌴 Sydney (Cartography Post) | 150 pts / Ticket: 900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 13px;" onclick="triggerTimeWarp(3)"><span id="st-3">⛰️ London (Globe Theatre) | 120 pts / Ticket: 1100</span></button>
+                <button class="btn-large" style="width: 100% !important; max-width: 100% !important; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 13px; white-space: normal; line-height: 1.4;" onclick="triggerTimeWarp(4)"><span id="st-4">❄️ Vancouver (Arctic Post) | 100 pts / Ticket: 1300</span></button>
             </div>
-            <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 6px;" onclick="closeStationModal()">取消返回</button>
+            <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 6px;" onclick="closeStationModal()">Cancel</button>
         </div>
     </div>
 
     <!-- 幫助與神通指南彈跳視窗 -->
     <div id="god-help-modal">
         <div class="modal-content">
-            <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
-            <p id="god-modal-desc" style="font-size: 14px; color: #718096;">第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！</p>
+            <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ Divine Guidance</h2>
+            <p id="god-modal-desc" style="font-size: 14px; color: #718096;">Unlocked at Level 6. Pray for divine assistance!</p>
             <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 15px 0;" id="god-btn-container">
-                <button style="background: #795548; flex: 1 1 30%; padding: 10px 6px; border-radius: 12px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('tudigong')"><span id="g-tudi">🏮土地公 (香油錢: 100)</span></button>
-                <button style="background: #C0392B; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('wen')"><span id="g-wen">⚔️溫王爺 (香油錢: 150)</span></button>
-                <button style="background: #2980B9; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('mazu')"><span id="g-mazu">🌊媽祖 (香油錢: 200)</span></button>
-                <button style="background: #27AE60; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('guanyin')"><span id="g-guanyin">🌿觀世音 (香油錢: 250)</span></button>
-                <button style="background: #8E44AD; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('yaoshifo')"><span id="g-yaoshi">🪷藥師佛 (香油錢: 300)</span></button>
-                <button style="flex: 1 1 100%; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); color: #FFF; padding: 12px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; font-size: 14px; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟玉皇大帝 (全路阻清場 / 香油錢: 1200)</span></button>
+                <button style="background: #795548; flex: 1 1 30%; padding: 10px 6px; border-radius: 12px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('tudigong')"><span id="g-tudi">🏮Tudi Gong (Cost: 100)</span></button>
+                <button style="background: #C0392B; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('wen')"><span id="g-wen">⚔️Wen Wangye (Cost: 150)</span></button>
+                <button style="background: #2980B9; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('mazu')"><span id="g-mazu">🌊Mazu (Cost: 200)</span></button>
+                <button style="background: #27AE60; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('guanyin')"><span id="g-guanyin">🌿Guanyin (Cost: 250)</span></button>
+                <button style="background: #8E44AD; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('yaoshifo')"><span id="g-yaoshi">🪷Medicine Buddha (Cost: 300)</span></button>
+                <button style="flex: 1 1 100%; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); color: #FFF; padding: 12px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; font-size: 14px; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟Jade Emperor (Clear All / Cost: 1200)</span></button>
             </div>
-            <button id="god-modal-close" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeGodHelpModal()">關閉指南</button>
+            <button id="god-modal-close" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeGodHelpModal()">Close</button>
         </div>
     </div>
 
     <!-- 擲筊動畫彈跳視窗 -->
     <div id="bwei-modal">
         <div class="modal-content">
-            <div class="modal-text" id="bwei-title" style="color: #C0392B;">🙏 誠心擲筊請示 神明</div>
-            <div id="bwei-rule" style="font-size: 14px; color: #718096;">需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神</div>
+            <div class="modal-text" id="bwei-title" style="color: #C0392B;">🙏 Divine Oracle Prayer</div>
+            <div id="bwei-rule" style="font-size: 14px; color: #718096;">Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed.</div>
             
             <div class="bwei-cup-container">
-                <div class="bwei-mu-block" id="cup1">有求</div>
+                <div class="bwei-mu-block" id="cup1">Ask</div>
                 <div class="bwei-mu-block convex" id="cup2"></div>
             </div>
 
-            <div class="sheng-count" id="bwei-count-display">目前連續聖筊：0 次 (需連續 2 次)</div>
-            <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);" onclick="throwBweiAnimation()">🙌 擲筊！</button>
-            <button id="bwei-cancel-btn" class="btn-large btn-cancel" style="width: 100%; margin-top: 10px;" onclick="closeBwei()">取消</button>
+            <div class="sheng-count" id="bwei-count-display">Consecutive Sheng Jiao: 0 / 2</div>
+            <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);" onclick="throwBweiAnimation()">🙌 Throw!</button>
+            <button id="bwei-cancel-btn" class="btn-large btn-cancel" style="width: 100%; margin-top: 10px;" onclick="closeBwei()">Cancel</button>
         </div>
     </div>
 
@@ -499,7 +494,7 @@
                 workHeaderTitle: "📜 時空流放打工區 📜", workEarnedLabel: "已賺取工資：", workUnitLabel: "點", workTapTip: "狂點按鈕打工賺取機票！", workReturnBtn: "✈️ 賺足機票費，穿越回原關卡！", workBackBtn: "⬅️ 返回主選單",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
                 stat1: "🌍 全球探險人次", stat2: "💎 尋獲世界寶物", stat3: "🪵 邊疆打工流放",
-                levels: ["第 1 關 (臺灣・高雄)", "第 2 關 (日本・京都)", "第 3 關 (法國・巴黎)", "第 4 關 (埃及・吉薩)", "第 5 關 (希臘・雅典)", "第 6 關 (義大利・羅馬/神壇)", "第 7 關 (英國・倫敦)", "第 8 關 (美國・紐約)", "第 9 關 (澳洲・雪梨)", "第 10 關 (俄羅斯・莫斯科)"]
+                levels: ["第 1 關 (臺灣・高雄)", "第 2 關 (日本・京都)", "第 3 關 (法國・巴黎)", "第 4 關 (埃及・吉薩)", "第 5 关 (希腊・雅典)", "第 6 关 (意大利・罗马/神坛)", "第 7 关 (英国・伦敦)", "第 8 关 (美国・纽约)", "第 9 关 (澳大利亚・悉尼)", "第 10 关 (俄罗斯・莫斯科)"]
             },
             'zh-CN': {
                 title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (保障隐私)：", gender: "请选择您的性别：",
@@ -641,8 +636,8 @@
             document.getElementById('knowledge-title').innerText = currentLang === 'en' ? "📖 Culture & Lore" : (currentLang === 'zh-CN' ? "📖 文化与宝藏知识" : "📖 文化與寶藏知識");
             document.getElementById('k-close').innerText = currentLang === 'en' ? "Got it, Continue!" : "了解了，繼續探險！";
 
-            document.getElementById('station-modal-title').innerText = (lang === 'en' ? "💰 Select Historical Trade Port" : (lang === 'zh-CN' ? "📜 选择历史贸易港口打工" : "📜 選擇歷史流放地打工"));
-            document.getElementById('station-modal-desc').innerText = (lang === 'en' ? "Earn tickets by assisting trade posts:" : (lang === 'zh-CN' ? "旅费透支时，选择前往历史港口打工赚取路费：" : "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費："));
+            document.getElementById('station-modal-title').innerText = t.stationTitle;
+            document.getElementById('station-modal-desc').innerText = t.stationDesc;
             document.getElementById('station-modal-cancel').innerText = (lang === 'en' ? "Cancel" : (lang === 'zh-CN' ? "取消返回" : "取消返回"));
             
             let stBtns = [
@@ -658,7 +653,7 @@
             }
 
             document.getElementById('god-modal-title').innerText = (lang === 'en' ? "⛩️ Divine Guidance" : (lang === 'zh-CN' ? "⛩️ 神通指南与请神面板" : "⛩️ 神通指南與請神面板"));
-            document.getElementById('god-modal-desc').innerText = (lang === 'en' ? "Unlocked at Level 6." : (lang === 'zh-CN' ? "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！" : "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！"));
+            document.getElementById('god-modal-desc').innerText = (lang === 'en' ? "Unlocked at Level 6. Pray for divine assistance!" : (lang === 'zh-CN' ? "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！" : "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！"));
             document.getElementById('god-modal-close').innerText = (lang === 'en' ? "Close" : (lang === 'zh-CN' ? "关闭指南" : "關閉指南"));
             
             document.getElementById('g-tudi').innerText = `🏮${currentLang === 'en' ? 'Tudi Gong' : (currentLang === 'zh-CN' ? '土地公' : '土地公')} (${currentLang === 'en' ? 'Cost: 100' : (currentLang === 'zh-CN' ? '香油钱: 100' : '香油錢: 100')})`;
@@ -677,7 +672,7 @@
             document.getElementById('btn-buy-souvenir').innerText = t.buyText;
 
             document.getElementById('bwei-title').innerText = currentLang === 'en' ? "🙏 Divine Oracle Prayer" : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 神明" : "🙏 誠心擲筊請示 神明");
-            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一无字凸面）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
+            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一凸无字）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
             document.getElementById('bwei-throw-btn').innerText = currentLang === 'en' ? "🙌 Throw Jiao!" : (currentLang === 'zh-CN' ? "🙌 掷筊！" : "🙌 擲筊！");
             document.getElementById('bwei-cancel-btn').innerText = currentLang === 'en' ? "Cancel" : (currentLang === 'zh-CN' ? "取消" : "取消");
 
@@ -1066,7 +1061,7 @@
         function buySouvenir() {
             let shippingFee = currentLevel * 500;
             if (totalScore < shippingFee) {
-                alert(currentLang === 'en' ? "⚠️ Insufficient funds! Time-warp banishment activated!" : (currentLang === 'zh-CN' ? "⚠️ 旅费不足！无法支付运费将宝物买回国，即将启动时空隧道流放至古代边疆打工！" : "⚠️ 旅費不足！無法支付運費將寶物買回國，即將啟動時空隧道流放至古代邊疆打工！"));
+                alert(currentLang === 'en' ? "⚠️ Insufficient funds! Time-warp trade port activated!" : (currentLang === 'zh-CN' ? "⚠️ 旅费不足！无法支付运费将宝物买回国，即将启动时空隧道前往历史贸易港口打工！" : "⚠️ 旅費不足！無法支付運費將寶物買回國，即將啟動時空隧道流放至古代邊疆打工！"));
                 document.getElementById('win-modal').style.display = 'none';
                 openStationModal();
                 return;
@@ -1273,7 +1268,7 @@
                             `🍑 【神明不在位】神明正在参加王母娘娘的蟠桃会！香油钱原封不动退回（退回 ${cost} 点）。`
                         ] : [
                             `🌴 【神明不在位】神明暫時請年休度假去！香爐前掛著公休牌子，香油錢已全額退還 ${cost} 點。`,
-                            `🍑 【神明不在位】神明正在參加王母娘娘的蟠桃會！香油錢原封不動退回（退回 ${cost} 點）。`
+                            `🍑 【神明不在位】神明正在參加王母娘娘的蟠桃會！香油錢原封不動退回（退回 ${cost}點）。`
                         ]);
                         alert(reasons[Math.floor(Math.random() * reasons.length)]);
                         isEventActive = false;
