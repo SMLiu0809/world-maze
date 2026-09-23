@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 下拉選單修復完全版</title>
+    <title>世界寶藏迷宮探險 - 下拉選單雙重保險版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -225,8 +225,18 @@
             
             <div style="margin: 12px 0; background: #FEF9E7; padding: 12px; border-radius: 16px; border: 1px solid #F9E79F;">
                 <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
+                <!-- 🌟 雙重保險：HTML 直接內建預設選項，絕不空轉 -->
                 <select id="start-level-select" style="font-size: 14px; padding: 6px 10px; border-radius: 10px; border: 1px solid #F39C12; background: white; font-weight: 700;">
-                    <!-- 動態產生的選項保證不空白 -->
+                    <option value="1">第 1 關 (臺灣・高雄)</option>
+                    <option value="2">第 2 關 (日本・京都)</option>
+                    <option value="3">第 3 關 (法國・巴黎)</option>
+                    <option value="4">第 4 關 (埃及・吉薩)</option>
+                    <option value="5">第 5 關 (希臘・雅典)</option>
+                    <option value="6">第 6 關 (義大利・羅馬/神壇)</option>
+                    <option value="7">第 7 關 (英國・倫敦)</option>
+                    <option value="8">第 8 關 (美國・紐約)</option>
+                    <option value="9">第 9 關 (澳洲・雪梨)</option>
+                    <option value="10">第 10 關 (俄羅斯・莫斯科)</option>
                 </select>
             </div>
 
@@ -465,7 +475,7 @@
                 }
             }).catch(e => {});
         }
-        
+
         const i18n = {
             'zh-TW': {
                 title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號 (保障隱私)：", gender: "請選擇您的性別：",
@@ -551,7 +561,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             incrementGlobalStat('players');
             fetchGlobalStats();
-            changeLanguage('zh-TW'); // 頁面載入時強制初始化語系與選單
+            changeLanguage('zh-TW'); // 初始化語系與選單
         });
 
         function getHeroTitle() {
@@ -709,7 +719,7 @@
             document.getElementById('g-mazu').innerText = `🌊${currentLang === 'en' ? 'Mazu' : (currentLang === 'zh-CN' ? '妈祖' : '媽祖')} (${currentLang === 'en' ? 'Cost: 200' : (currentLang === 'zh-CN' ? '香油钱: 200' : '香油錢: 200')})`;
             document.getElementById('g-guanyin').innerText = `🌿${currentLang === 'en' ? 'Guanyin' : (currentLang === 'zh-CN' ? '观世音' : '觀世音')} (${currentLang === 'en' ? 'Cost: 250' : (currentLang === 'zh-CN' ? '香油钱: 250' : '香油錢: 250')})`;
             document.getElementById('g-yaoshi').innerText = `🪷${currentLang === 'en' ? 'Medicine Buddha' : (currentLang === 'zh-CN' ? '药师佛' : '藥師佛')} (${currentLang === 'en' ? 'Cost: 300' : (currentLang === 'zh-CN' ? '香油钱: 300' : '香油錢: 300')})`;
-            document.getElementById('g-supreme').innerText = `🌟${currentLang === 'en' ? 'Jade Emperor (Clear All / Cost: 1200)' : (currentLang === 'zh-CN' ? '玉皇大帝 (全路阻清场 / 香油钱: 1200)' : '玉皇大帝 (全路阻清場 / 香油錢: 1200)')}`;
+            document.getElementById('g-supreme').innerText = `🌟${currentLang === 'en' ? 'Jade Emperor (Clear All / Cost: 1200)' : (currentLang === 'zh-CN' ? '玉皇大帝 (全路阻清场 / 香油钱: 1200)' : '玉皇大帝 (全路阻清場 / 香油錢: 1200)')})`;
 
             document.getElementById('cert-title').innerText = t.certTitle;
             document.getElementById('cert-btn').innerText = t.certBtn;
@@ -730,15 +740,17 @@
                 soundBtn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
             }
 
-            // 🌟 強制渲染關卡下拉選單，絕不空白
+            // 🌟 雙重保險：嚴格動態渲染選關下拉選單
             let levelSelect = document.getElementById('start-level-select');
-            levelSelect.innerHTML = "";
-            for (let i = 1; i <= 10; i++) {
-                let opt = document.createElement('option');
-                opt.value = i;
-                opt.innerText = t.levels[i-1];
-                if (i === currentLevel) opt.selected = true;
-                levelSelect.appendChild(opt);
+            if (levelSelect) {
+                levelSelect.innerHTML = "";
+                for (let i = 1; i <= 10; i++) {
+                    let opt = document.createElement('option');
+                    opt.value = i;
+                    opt.innerText = t.levels[i-1];
+                    if (i === currentLevel) opt.selected = true;
+                    levelSelect.appendChild(opt);
+                }
             }
 
             if (isPlaying) {
