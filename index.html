@@ -254,15 +254,15 @@
         </div>
         <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
         
-        <!-- 魔法與神器道具欄 -->
+        <!-- 魔法與神器道具欄 (點擊即可主動使用) -->
         <div class="inventory-bar">
-            <span id="txt-inv-title">🧙‍♂️ 點擊道具使用：</span>
-            <span class="inv-item" onclick="useTool('cloak')"><span id="lbl-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
-            <span class="inv-item" onclick="useTool('wand')"><span id="lbl-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
-            <span class="inv-item"><span id="lbl-snitch">🏆金探子</span>:<b id="inv-snitch">0</b></span>
-            <span class="inv-item" onclick="useTool('howler')"><span id="lbl-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
-            <span class="inv-item" onclick="useTool('fan')"><span id="lbl-fan">🪭芭蕉扇</span>:<b id="inv-fan">0</b></span>
-            <span class="inv-item" onclick="useTool('dipper')" style="color:#B7950B;"><span id="lbl-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
+            <span>🧙‍♂️ 點擊道具使用：</span>
+            <span class="inv-item" onclick="useTool('cloak')" title="點擊防禦歹徒">🧥斗篷:<b id="inv-cloak">0</b></span>
+            <span class="inv-item" onclick="useTool('wand')" title="點擊消除炸藥">🪄魔杖:<b id="inv-wand">0</b></span>
+            <span class="inv-item">🏆金探子:<b id="inv-snitch">0</b></span>
+            <span class="inv-item" onclick="useTool('howler')" title="點擊嚇跑野狼">✉️咆哮信:<b id="inv-howler">0</b></span>
+            <span class="inv-item" onclick="useTool('fan')" title="點擊扇熄神火">🪭芭蕉扇:<b id="inv-fan">0</b></span>
+            <span class="inv-item" onclick="useTool('dipper')" title="點擊吸光大便" style="color:#B7950B;">🏺金鬥:<b id="inv-dipper">0</b></span>
         </div>
 
         <div class="target-text" id="ui-target">目標：駁二鐵件藝術公仔 🤖</div>
@@ -295,7 +295,7 @@
 
     <!-- 頁面4：流放邊疆打工區 -->
     <div id="screen-work" class="screen">
-        <h1 id="work-title" style="color:#D35400; font-size: clamp(26px, 5vw, 34px);">📜 流放打工區 📜</h1>
+        <h1 id="work-title" style="color:#D35400; font-size: clamp(26px, 5vw, 34px);">📜 歷史流放打工區 📜</h1>
         <h2 id="ui-banish-location" style="color:#C0392B; font-size: clamp(22px, 4vw, 28px); margin: 0;">流放地</h2>
         
         <div style="font-size: clamp(15px, 3.5vw, 19px); margin: 18px 0; background: #FDFEFE; padding: 20px; border-radius: 20px; border: 1px solid #E2E8F0; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
@@ -309,6 +309,7 @@
             <p id="work-status" style="font-size: clamp(16px, 3.5vw, 20px); font-weight: 700; color: #D35400; margin-top: 10px;">點擊互動打工！</p>
         </div>
         
+        <!-- 動態標誌物與互動按鈕 -->
         <button id="work-action-btn" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">🐊</button>
         <br>
         <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 360px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 8px 22px rgba(39, 174, 96, 0.35); margin-top: 12px;" onclick="returnFromWork()">✈️ 賺足機票費，光榮返台！</button>
@@ -319,9 +320,9 @@
     <!-- 穿越劇動畫特效彈跳視窗 -->
     <div id="timetravel-modal">
         <div class="modal-content" style="background: #1A252C; border-color: #F1C40F; color: #FFF;">
-            <h2 style="color: #F39C12; font-size: 28px;" id="tt-title">⏳ 時空穿梭中...</h2>
+            <h2 style="color: #F39C12; font-size: 28px;">⏳ 時空穿梭中...</h2>
             <div id="timetravel-desc" style="font-size: 18px; margin: 20px 0; line-height: 1.6; color: #ECF0F1;">
-                因旅費不足，您將被流放至歷史現場進行打工...
+                因旅費不足，您將被流放至古代歷史現場進行打工...
             </div>
             <div style="font-size: 50px; margin: 15px 0;">🌀</div>
         </div>
@@ -382,14 +383,14 @@
     <!-- 選擇流放地彈跳視窗 -->
     <div id="station-modal">
         <div class="modal-content">
-            <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇流放打工站</h2>
-            <p id="station-modal-desc" style="font-size: 15px; color: #718096;">點數不足時，協助歷史名人賺取機票費：</p>
-            <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;" id="station-buttons-container">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈)｜每敲200/限5次｜機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🪪 儋州 (蘇東坡)｜每敲150/限10次｜機票900</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元)｜每敲120/限15次｜機票1100</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道)｜每敲100/限20次｜機票1300</span></button>
+            <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇歷史流放打工站</h2>
+            <p id="station-modal-desc" style="font-size: 15px; color: #718096;">點數不足時，穿越到古代協助名人賺取機票費：</p>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🦪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
             </div>
             <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeStationModal()">取消返回</button>
         </div>
@@ -401,15 +402,16 @@
             <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
             <p id="god-modal-desc" style="font-size: 15px; color: #718096;">第 6 關起解鎖神壇。請先參考下方表格，再點擊神像誠心擲筊！</p>
             
+            <!-- 神通功能對照表格 -->
             <table class="god-table">
                 <thead>
                     <tr>
-                        <th id="th-god">神尊名稱</th>
-                        <th id="th-cost">香油錢</th>
-                        <th id="th-effect">庇佑與消除路阻效果</th>
+                        <th>神尊名稱</th>
+                        <th>香油錢</th>
+                        <th>庇佑與消除路阻效果</th>
                     </tr>
                 </thead>
-                <tbody id="god-table-body">
+                <tbody>
                     <tr>
                         <td>🏮 土地公</td>
                         <td>300 點</td>
@@ -460,7 +462,7 @@
         <div class="modal-content">
             <div class="modal-text" id="bwei-title" style="color: #D35400;">🙏 誠心擲筊請示 神明</div>
             <div id="bwei-rule" style="font-size: 15px; color: #718096; margin-bottom: 6px;">需連續擲出兩次【聖筊】以感動神明</div>
-            <div style="font-size: 13px; color: #C0392B; font-weight: bold; margin-bottom: 12px;" id="bwei-desc-text">聖筊(一平一凸有字) | 笑筊(兩平有字/不歸零) | 蓋筊(兩凸無字/失敗不允)</div>
+            <div style="font-size: 13px; color: #C0392B; font-weight: bold; margin-bottom: 12px;">聖筊(一平一凸有字) | 笑筊(兩平有字/不歸零) | 蓋筊(兩凸無字/失敗不允)</div>
             
             <div class="bwei-cup-container">
                 <div id="cup1" class="bwei-block cup-convex">無字</div>
@@ -489,7 +491,7 @@
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
                 knowTitle: "📖 文化與寶藏知識", kClose: "了解了，繼續探險！",
                 stationTitle: "💰 選擇歷史流放打工站", stationDesc: "點數不足時，穿越到古代協助名人賺取機票費：", stationCancel: "取消返回",
-                godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。請先參考下方表格，再點擊神像誠心擲筊！", godClose: "關閉指南",
+                godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！", godClose: "關閉指南",
                 bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
                 nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
@@ -499,26 +501,17 @@
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🦪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
+                    "🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
-                    "用力敲打生蠔硬殼，協助蘇東坡品嚐鮮美肥碩的大生蠔！",
+                    "用力敲打生蠔硬殼，協助蘇東坡與文人雅士品嚐美味生蠔！",
                     "協助柳宗元在永州江雪中獨釣寒江雪！",
                     "在寧古塔冰面破冰捕魚，將鮮魚送給甄遠道溫暖身心！"
-                ],
-                godTableHeaders: ["神尊名稱", "香油錢", "庇佑與消除路阻效果"],
-                godTableRows: [
-                    ["🏮 土地公", "300 點", "驅逐地圖上所有<b>惡狼 (🐺)</b>，並指引終點方位。"],
-                    ["⚔️ 溫王爺", "400 點", "淨化地圖上所有<b>瘟疫 (🦠)</b>。"],
-                    ["🌊 媽祖", "500 點", "平息地圖上所有<b>船難 (🚢)</b>，並額外補助 800 點。"],
-                    ["🌿 觀世音", "600 點", "渡化地圖上所有<b>歹徒 (🦹‍♂️)</b>，並補滿反悔次數至 5 次。"],
-                    ["🪷 藥師佛", "800 點", "治癒地圖上所有<b>惡疾 (🤒)</b>，並額外加持 1500 點。"],
-                    ["🌟 玉皇大帝", "2500 點", "萬尊降臨！全場路阻（含大便與神火）瞬間清場並直通終點！"]
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊媽祖(-500)", 
@@ -561,7 +554,7 @@
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
                 knowTitle: "📖 文化与宝藏知识", kClose: "了解了，继续探险！",
                 stationTitle: "💰 选择历史流放打工站", stationDesc: "点数不足时，穿越到古代协助名人赚取机票费：", stationCancel: "取消返回",
-                godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。请先参考下方表格，再点击神像诚心掷筊！", godClose: "关闭指南",
+                godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！", godClose: "关闭指南",
                 bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
                 nicknameTip: "💡 支持中英文、数字，最多 12 码，系统将自动加上专属识别码",
@@ -579,18 +572,9 @@
                 stationNarratives: [
                     "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
                     "在黄州生火慢炖、细心添柴烹煮名闻天下的正宗东坡肉！",
-                    "用力敲打生蚝硬壳，协助苏东坡品尝鲜美肥硕的大生蚝！",
+                    "用力敲打生蚝硬壳，协助苏东坡与文人雅士品尝美味生蚝！",
                     "协助柳宗元在永州江雪中独钓寒江雪！",
                     "在宁古塔冰面破冰捕鱼，将鲜鱼送给甄远道温暖身心！"
-                ],
-                godTableHeaders: ["神尊名称", "香油钱", "庇佑与消除路阻效果"],
-                godTableRows: [
-                    ["🏮 土地公", "300 点", "驱逐地图上所有<b>恶狼 (🐺)</b>，并指引终点方位。"],
-                    ["⚔️ 温王爷", "400 点", "净化地图上所有<b>瘟疫 (🦠)</b>。"],
-                    ["🌊 妈祖", "500 点", "平息地图上所有<b>船难 (🚢)</b>，并额外补助 800 点。"],
-                    ["🌿 观世音", "600 点", "渡化地图上所有<b>歹徒 (🦹‍♂️)</b>，并补满反悔次数至 5 次。"],
-                    ["🪷 药师佛", "800 点", "治愈地图上所有<b>恶疾 (🤒)</b>，并额外加持 1500 点。"],
-                    ["🌟 玉皇大帝", "2500 点", "万尊降临！全场路阻（含大便与神火）瞬间清场并直通终点！"]
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)", 
@@ -632,8 +616,8 @@
                 tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
                 knowTitle: "📖 Culture & Treasure Lore", kClose: "Got it, Continue!",
-                stationTitle: "💰 Select Literary Banishment Station", stationDesc: "Earn tickets by helping exiled literary figures:", stationCancel: "Cancel",
-                godTitle: "⛩️ Divine Guidance & Prayer", godDesc: "Unlocked at Level 6. Please review the table below before praying!", godClose: "Close Guide",
+                stationTitle: "💰 Select Literary Banishment Station", stationDesc: "Earn tickets by helping historical literary figures:", stationCancel: "Cancel",
+                godTitle: "⛩️ Divine Guidance", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close",
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
                 nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
@@ -641,28 +625,19 @@
                 buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
                 stations: [
-                    "🟢 London (Oscar Wilde) | 200 pts / 5 taps | Ticket: 500",
-                    "✍️ Paris (Voltaire) | 180 pts / 7 taps | Ticket: 700",
+                    "📜 London (Shakespeare) | 200 pts / 5 taps | Ticket: 500",
+                    "🎨 Paris (Victor Hugo) | 180 pts / 7 taps | Ticket: 700",
                     "🔥 Florence (Dante) | 150 pts / 10 taps | Ticket: 900",
-                    "♟️ Vienna (Stefan Zweig) | 120 pts / 15 taps | Ticket: 1100",
-                    "📖 Moscow (Solzhenitsyn) | 100 pts / 20 taps | Ticket: 1300"
+                    "🏛️ Athens (Socrates) | 120 pts / 15 taps | Ticket: 1100",
+                    "📜 Cairo (Cleopatra) | 100 pts / 20 taps | Ticket: 1300"
                 ],
-                stationLogos: ["🟢", "✍️", "🔥", "♟️", "📖"],
+                stationLogos: ["📜", "🎨", "🔥", "🏛️", "📜"],
                 stationNarratives: [
-                    "Help Oscar Wilde edit classic plays and poems during his exile in London and Paris!",
-                    "Help Voltaire draft philosophical manuscripts advocating for liberty and reason in Paris!",
-                    "Help Dante Alighieri organize the verses of the Divine Comedy in Florence!",
-                    "Help Stefan Zweig write his famous chess novellas in Vienna!",
-                    "Help Alexander Solzhenitsyn compile his archival literature in Moscow!"
-                ],
-                godTableHeaders: ["God Name", "Offering", "Divine Effect & Hazard Removal"],
-                godTableRows: [
-                    ["🏮 Tudi Gong", "300 pts", "Banishes all <b>Wolves (🐺)</b> and points to the treasure direction."],
-                    ["⚔️ Wen Wangye", "400 pts", "Purifies and clears all <b>Plagues (🦠)</b>."],
-                    ["🌊 Mazu", "500 pts", "Calms all <b>Shipwrecks (🚢)</b> and grants an extra 800 pts."],
-                    ["🌿 Guanyin", "600 pts", "Reforms all <b>Bandits (🦹‍♂️)</b> and refills undos to 5."],
-                    ["🪷 Medicine Buddha", "800 pts", "Cures all <b>Illnesses (🤒)</b> and grants 1500 pts."],
-                    ["🌟 Jade Emperor", "2500 pts", "Supreme Descent! Clears all hazards instantly and secures victory!"]
+                    "Help William Shakespeare edit scripts and rehearse Hamlet at the Globe Theatre!",
+                    "Help Victor Hugo write manuscripts inside Notre-Dame de Paris!",
+                    "Help Dante Alighieri navigate the circles of the Divine Comedy!",
+                    "Help Socrates debate philosophy with citizens in the Athenian Agora!",
+                    "Help Cleopatra manage royal documents and papyrus scrolls in ancient Egypt!"
                 ],
                 gods: [
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)", 
@@ -692,6 +667,9 @@
                 ]
             }
         };
+
+        let currentLang = 'zh-TW';
+        let uniquePlayerId = "";
 
         function changeLanguage(lang) {
             currentLang = lang;
@@ -743,22 +721,9 @@
                 document.getElementById('st-' + i).innerText = t.stations[i];
             }
 
-            // 更新請神表格
-            document.getElementById('god-modal-title').innerText = t.godTitle;
-            document.getElementById('god-modal-desc').innerText = t.godDesc;
+            document.getElementById('god-modal-title').innerText = (lang === 'en' ? "⛩️ Divine Guidance & Prayer" : (lang === 'zh-CN' ? "⛩️ 神通指南与请神面板" : "⛩️ 神通指南與請神面板"));
+            document.getElementById('god-modal-desc').innerText = (lang === 'en' ? "Unlocked at Level 6. Pray for divine assistance!" : (lang === 'zh-CN' ? "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！" : "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！"));
             document.getElementById('god-modal-close').innerText = (lang === 'en' ? "Close Guide" : (lang === 'zh-CN' ? "关闭指南" : "關閉指南"));
-            document.getElementById('th-god').innerText = t.godTableHeaders[0];
-            document.getElementById('th-cost').innerText = t.godTableHeaders[1];
-            document.getElementById('th-effect').innerText = t.godTableHeaders[2];
-            
-            let tbody = document.getElementById('god-table-body');
-            tbody.innerHTML = "";
-            t.godTableRows.forEach(row => {
-                let tr = document.createElement('tr');
-                tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
-                tbody.appendChild(tr);
-            });
-
             document.getElementById('g-tudi').innerText = t.gods[0];
             document.getElementById('g-wen').innerText = t.gods[1];
             document.getElementById('g-mazu').innerText = t.gods[2];
@@ -911,6 +876,7 @@
             document.getElementById('inv-fan').innerText = playerInventory.fan;
         }
 
+        // 主動使用道具功能
         function useTool(toolName) {
             if (playerInventory[toolName] <= 0) {
                 alert(currentLang === 'en' ? "⚠️ You don't have this item!" : "⚠️ 您目前沒有這個道具！");
@@ -919,7 +885,7 @@
             if (toolName === 'fan') {
                 playerInventory.fan--; updateInventoryUI();
                 playSound('item');
-                alert(currentLang === 'en' ? "🪭 Hand fan fanned away the divine fire!" : "🪭 芭蕉扇主動施展！隨風一扇，順利清除了地圖上的神火威脅！");
+                alert("🪭 芭蕉扇主動施展！隨風一扇，順利清除了地圖上的神火威脅！");
                 let cleared = false;
                 for (let y = 0; y < mazeSize; y++) {
                     for (let x = 0; x < mazeSize; x++) {
@@ -938,19 +904,19 @@
                     }
                 }
                 drawMaze();
-                alert(currentLang === 'en' ? `🏺 Golden Dipper absorbed all ${count} traps!` : `🏺 混元金鬥施法！瞬間吸光地圖上所有 ${count} 個大便！`);
+                alert(`🏺 混元金鬥施法！瞬間吸光地圖上所有 ${count} 個大便！`);
             } else if (toolName === 'howler') {
                 playerInventory.howler--; updateInventoryUI();
                 playSound('item');
-                alert(currentLang === 'en' ? "✉️ Howler scared away the wolf!" : "✉️ 咆哮信已吼出！野狼見狀嚇得魂飛魄散！");
+                alert("✉️ 咆哮信已吼出！野狼見狀嚇得魂飛魄散！");
             } else if (toolName === 'cloak') {
                 playerInventory.cloak--; updateInventoryUI();
                 playSound('item');
-                alert(currentLang === 'en' ? "🧥 Invisibility Cloak hidden from bandits!" : "🧥 隱形斗篷穿上！身形隱匿，歹徒找不到您！");
+                alert("🧥 隱形斗篷穿上！身形隱匿，歹徒找不到您！");
             } else if (toolName === 'wand') {
                 playerInventory.wand--; updateInventoryUI();
                 playSound('item');
-                alert(currentLang === 'en' ? "🪄 Wand spell cleared the dynamite!" : "🪄 魔杖揮動！引咒解除了一處炸藥危機！");
+                alert("🪄 魔杖揮動！引咒解除了一處炸藥危機！");
             }
         }
 
@@ -989,6 +955,7 @@
         function openStationModal() { document.getElementById('station-modal').style.display = 'flex'; }
         function closeStationModal() { document.getElementById('station-modal').style.display = 'none'; }
 
+        // 穿越劇轉場動畫與流放打工站啟動 (支援精準生蠔與魚標誌)
         function selectStation(idx) {
             closeStationModal();
             let stConfig = banishmentStations[idx];
@@ -997,7 +964,7 @@
             let ttModal = document.getElementById('timetravel-modal');
             let ttDesc = document.getElementById('timetravel-desc');
             ttDesc.innerText = currentLang === 'en' ? 
-                `Time traveling to literary history... Destination: ${t.stations[idx].split('｜')[0]}\n"${t.stationNarratives[idx]}"` :
+                `Time traveling to ancient history... Banishment to station: ${t.stations[idx].split('｜')[0]}` :
                 `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${t.stations[idx].split('｜')[0]}】\n${t.stationNarratives[idx]}`;
             ttModal.style.display = 'flex';
 
@@ -1083,7 +1050,7 @@
             }
             if (offSafeSpaces.length > 0) {
                 let pos = offSafeSpaces.pop();
-                maze[pos.y][pos.x] = 7; 
+                maze[pos.y][pos.x] = 7; // 金幣
             }
 
             let magicItems = [10, 11, 12, 13, 14, 16];
@@ -1198,45 +1165,45 @@
                     if (cell === 2 && playerInventory.howler > 0) {
                         playerInventory.howler--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert(currentLang === 'en' ? "✉️ Howler scared away the wolf!" : "✉️ 咆哮信發威！成功嚇跑野狼（🐺），安然通過！");
+                        alert("✉️ 咆哮信發威！成功嚇跑野狼（🐺），安然通過！");
                         return;
                     }
                     if (cell === 5 && playerInventory.cloak > 0) {
                         playerInventory.cloak--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert(currentLang === 'en' ? "🧥 Invisibility Cloak protected you from bandits!" : "🧥 隱形斗篷生效！成功避開歹徒（🦹‍♂️）騷擾！");
+                        alert("🧥 隱形斗篷生效！成功避開歹徒（🦹‍♂️）騷擾！");
                         return;
                     }
                     if (cell === 9 && playerInventory.wand > 0) {
                         playerInventory.wand--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert(currentLang === 'en' ? "🪄 Wand cleared the dynamite!" : "🪄 魔杖施法成功！順利解除炸藥（🧨）危機！");
+                        alert("🪄 魔杖施法成功！順利解除炸藥（🧨）危機！");
                         return;
                     }
                     if (cell === 15 && playerInventory.fan > 0) {
                         playerInventory.fan--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert(currentLang === 'en' ? "🪭 Hand fan extinguished the divine fire!" : "🪭 芭蕉扇一扇！神火（🔥）瞬間熄滅化為清風！");
+                        alert("🪭 芭蕉扇一扇！神火（🔥）瞬間熄滅化為清風！");
                         return;
                     }
 
                     let penalty = 100;
-                    let obstacleName = (currentLang === 'en' ? "Hazard" : "路阻");
-                    if (cell === 6) { penalty = 100; obstacleName = (currentLang === 'en' ? "Trap" : "💩 大便"); }
-                    else if (cell === 2) { penalty = 200; obstacleName = (currentLang === 'en' ? "Wolf" : "🐺 惡狼"); }
-                    else if (cell === 3) { penalty = 300; obstacleName = (currentLang === 'en' ? "Plague" : "🦠 瘟疫"); }
-                    else if (cell === 4) { penalty = 400; obstacleName = (currentLang === 'en' ? "Shipwreck" : "🚢 船難"); }
-                    else if (cell === 5) { penalty = 500; obstacleName = (currentLang === 'en' ? "Bandit" : "🦹‍♂️ 歹徒"); }
-                    else if (cell === 8) { penalty = 700; obstacleName = (currentLang === 'en' ? "Illness" : "🤒 惡疾"); }
-                    else if (cell === 9) { penalty = 800; obstacleName = (currentLang === 'en' ? "Dynamite" : "🧨 炸藥"); }
-                    else if (cell === 15) { penalty = 1000; obstacleName = (currentLang === 'en' ? "Divine Fire" : "🔥 神火"); }
+                    let obstacleName = "";
+                    if (cell === 6) { penalty = 100; obstacleName = "💩 大便"; }
+                    else if (cell === 2) { penalty = 200; obstacleName = "🐺 惡狼"; }
+                    else if (cell === 3) { penalty = 300; obstacleName = "🦠 瘟疫"; }
+                    else if (cell === 4) { penalty = 400; obstacleName = "🚢 船難"; }
+                    else if (cell === 5) { penalty = 500; obstacleName = "🦹‍♂️ 歹徒"; }
+                    else if (cell === 8) { penalty = 700; obstacleName = "🤒 惡疾"; }
+                    else if (cell === 9) { penalty = 800; obstacleName = "🧨 炸藥"; }
+                    else if (cell === 15) { penalty = 1000; obstacleName = "🔥 神火"; }
 
                     trapHitThisLevel = true;
                     totalScore -= penalty; updateUI();
                     playSound('bump'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
                     
-                    alert(currentLang === 'en' ? `⚠️ Hit ${obstacleName}! -${penalty} pts!` : `⚠️ 遭遇【${obstacleName}】路阻！扣除 ${penalty} 點！`);
+                    alert(`⚠️ 遭遇【${obstacleName}】路阻！扣除 ${penalty} 點！`);
                     return;
                 }
 
@@ -1245,7 +1212,7 @@
                     totalScore += 300; updateUI();
                     playSound('item'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "💵 Found cash treasure, +300 pts!" : "💵 獲得現金寶物 300 點！");
+                    alert("💵 獲得現金寶物 300 點！");
                     checkWin();
                     return;
                 }
@@ -1253,26 +1220,26 @@
                 if (cell === 10) { 
                     playerInventory.cloak++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🧥 Acquired Invisibility Cloak!" : "🧥 獲得魔法道具【隱形斗篷】！可避開歹徒騷擾一次。");
+                    alert("🧥 獲得魔法道具【隱形斗篷】！可避開歹徒騷擾一次。");
                     return;
                 }
                 if (cell === 11) { 
                     playerInventory.wand++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🪄 Acquired Wand!" : "🪄 獲得魔法道具【魔杖】！可移除炸藥一次。");
+                    alert("🪄 獲得魔法道具【魔杖】！可移除炸藥一次。");
                     return;
                 }
                 if (cell === 12) { 
                     playerInventory.snitch++; updateInventoryUI();
                     totalScore += 500; updateUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🏆 Caught Golden Snitch! +500 pts!" : "🏆 捕獲【金探子】！實力大增，額外增加 500 分！");
+                    alert("🏆 捕獲【金探子】！實力大增，額外增加 500 分！");
                     return;
                 }
                 if (cell === 13) { 
                     playerInventory.howler++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "✉️ Acquired Howler!" : "✉️ 獲得魔法道具【咆哮信】！可嚇跑野狼一次。");
+                    alert("✉️ 獲得魔法道具【咆哮信】！可嚇跑野狼一次。");
                     return;
                 }
                 if (cell === 14) { 
@@ -1284,13 +1251,13 @@
                         }
                     }
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? `🏺 Acquired Golden Dipper! Absorbed ${dipperCount} traps!` : `🏺 獲得上古神器【混元金鬥】！法力無邊，瞬間吸光地圖上所有 ${dipperCount} 個大便！`);
+                    alert(`🏺 獲得上古神器【混元金鬥】！法力無邊，瞬間吸光地圖上所有 ${dipperCount} 個大便！`);
                     return;
                 }
                 if (cell === 16) { 
                     playerInventory.fan++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(currentLang === 'en' ? "🪭 Acquired Hand Fan!" : "🪭 獲得法寶【芭蕉扇】！可將神火（🔥）扇熄一次。");
+                    alert("🪭 獲得法寶【芭蕉扇】！可將神火（🔥）扇熄一次。");
                     return;
                 }
 
