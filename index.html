@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 英文港口跳開問題徹底修復版</title>
+    <title>世界寶藏迷宮探險 - 英文港口跳開最終修復版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -642,7 +642,7 @@
             document.getElementById('btn-buy-souvenir').innerText = t.buyText;
 
             document.getElementById('bwei-title').innerText = currentLang === 'en' ? "🙏 Divine Oracle Prayer" : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 神明" : "🙏 誠心擲筊請示 神明");
-            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一凸无字）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
+            document.getElementById('bwei-rule').innerText = currentLang === 'en' ? "Throw two consecutive 'Sheng Jiao' (One flat gold text, one convex blank) to succeed." : (currentLang === 'zh-CN' ? "需连续掷出两次【圣筊（一平金字、一无字凸面）】方可请神" : "需連續擲出兩次【聖筊（一平金字、一凸無字）】方可請神");
             document.getElementById('bwei-throw-btn').innerText = currentLang === 'en' ? "🙌 Throw Jiao!" : (currentLang === 'zh-CN' ? "🙌 掷筊！" : "🙌 擲筊！");
             document.getElementById('bwei-cancel-btn').innerText = currentLang === 'en' ? "Cancel" : (currentLang === 'zh-CN' ? "取消" : "取消");
 
@@ -1090,8 +1090,8 @@
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = st.ticket;
             let iconContainer = document.getElementById('work-inner-icon');
-            if (taskItem.isLeg) iconContainer.innerHTML = getKungFuPersonSVG() + zhenHuanFullSVG;
-            else iconContainer.innerHTML = `<span style="font-size: 55px;">${taskItem.icon}</span>`;
+            if (taskItem && taskItem.isLeg) iconContainer.innerHTML = getKungFuPersonSVG() + zhenHuanFullSVG;
+            else if (taskItem) iconContainer.innerHTML = `<span style="font-size: 55px;">${taskItem.icon}</span>`;
             
             let ticketLabel = currentLang === 'en' ? "Ticket" : (currentLang === 'zh-CN' ? "路费" : "機票費");
             let perTapLabel = currentLang === 'en' ? "Per Tap" : (currentLang === 'zh-CN' ? "每敲一次" : "每敲一次");
