@@ -154,7 +154,6 @@
         }
         .modal-text { font-size: clamp(19px, 4.5vw, 26px); font-weight: 800; color: #C0392B; margin-bottom: 18px; line-height: 1.4;}
         
-        /* 神通說明表格美化 */
         .god-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; text-align: left; }
         .god-table th, .god-table td { border: 1px solid #CBD5E1; padding: 10px; }
         .god-table th { background: #FEF9E7; color: #B7950B; font-weight: 700; text-align: center; }
@@ -262,7 +261,7 @@
             <span class="inv-item" onclick="useTool('wand')" title="點擊消除炸藥">🪄魔杖:<b id="inv-wand">0</b></span>
             <span class="inv-item">🏆金探子:<b id="inv-snitch">0</b></span>
             <span class="inv-item" onclick="useTool('howler')" title="點擊嚇跑野狼">✉️咆哮信:<b id="inv-howler">0</b></span>
-            <span class="inv-item" onclick="useTool('fan')" title="點擊扇熄神火">🪭芭蕉扇:<b id="inv-fan">0</b></span>
+            <span class="inv-item" onclick="useTool('fan')" title="點擊扇熄神火">🍃芭蕉扇:<b id="inv-fan">0</b></span>
             <span class="inv-item" onclick="useTool('dipper')" title="點擊吸光大便" style="color:#B7950B;">🏺金鬥:<b id="inv-dipper">0</b></span>
         </div>
 
@@ -403,7 +402,6 @@
             <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
             <p id="god-modal-desc" style="font-size: 15px; color: #718096;">第 6 關起解鎖神壇。點擊下方神像即可誠心擲筊請神！</p>
             
-            <!-- 神通功能對照表格 -->
             <table class="god-table">
                 <thead>
                     <tr>
@@ -446,13 +444,13 @@
                 </tbody>
             </table>
 
-            <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 15px 0;">
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 15px 0;">
                 <button style="background: #795548; flex: 1 1 30%; padding: 12px 6px; border-radius: 12px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('tudigong')"><span id="g-tudi">🏮土地公(-300)</span></button>
                 <button style="background: #C0392B; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('wen')"><span id="g-wen">⚔️溫王爺(-400)</span></button>
                 <button style="background: #2980B9; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('mazu')"><span id="g-mazu">🌊媽祖(-500)</span></button>
                 <button style="background: #27AE60; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('guanyin')"><span id="g-guanyin">🌿觀世音(-600)</span></button>
                 <button style="background: #8E44AD; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('yaoshifo')"><span id="g-yaoshi">🪷藥師佛(-800)</span></button>
-                <button style="flex: 1 1 100%; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); color: #FFF; padding: 12px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; font-size: 15px; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟玉皇大帝 (全清場+指路 / -2500)</span></button>
+                <button style="flex: 1 1 100%; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); color: #FFF; padding: 14px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; font-size: 15px; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟玉皇大帝 (全清場+指路 / -2500)</span></button>
             </div>
             <button id="god-modal-close" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeGodHelpModal()">關閉指南</button>
         </div>
@@ -502,11 +500,11 @@
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
+                    "🦪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"], // 儋州改為生蠔符號 🪪 (或 🦪)
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
@@ -877,7 +875,6 @@
             document.getElementById('inv-fan').innerText = playerInventory.fan;
         }
 
-        // 主動使用道具功能
         function useTool(toolName) {
             if (playerInventory[toolName] <= 0) {
                 alert(currentLang === 'en' ? "⚠️ You don't have this item!" : "⚠️ 您目前沒有這個道具！");
@@ -956,7 +953,6 @@
         function openStationModal() { document.getElementById('station-modal').style.display = 'flex'; }
         function closeStationModal() { document.getElementById('station-modal').style.display = 'none'; }
 
-        // 穿越劇轉場動畫與流放打工站啟動
         function selectStation(idx) {
             closeStationModal();
             let stConfig = banishmentStations[idx];
@@ -1139,7 +1135,7 @@
                         if (cell === 12) ctxEl.fillText("🏆", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 13) ctxEl.fillText("✉️", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 14) ctxEl.fillText("🏺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
-                        if (cell === 16) ctxEl.fillText("🪭", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (cell === 16) ctxEl.fillText("🍃", (x + 0.5) * cellSize, (y + 0.5) * cellSize); // 芭蕉扇葉片圖示
                     }
                 }
             }
@@ -1185,7 +1181,7 @@
                     if (cell === 15 && playerInventory.fan > 0) {
                         playerInventory.fan--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert("🪭 芭蕉扇一扇！神火（🔥）瞬間熄滅化為清風！");
+                        alert("🍃 芭蕉扇一扇！神火（🔥）瞬間熄滅化為清風！");
                         return;
                     }
 
@@ -1219,6 +1215,7 @@
                     return;
                 }
 
+                // 道具撿取
                 if (cell === 10) { 
                     playerInventory.cloak++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
@@ -1259,7 +1256,7 @@
                 if (cell === 16) { 
                     playerInventory.fan++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert("🪭 獲得法寶【芭蕉扇】！可將神火（🔥）扇熄一次。");
+                    alert("🍃 獲得法寶【芭蕉扇】！可將神火（🔥）扇熄一次。");
                     return;
                 }
 
@@ -1292,7 +1289,7 @@
 
                 let shippingFee = currentLevel * 500;
                 let msg = (currentLang === 'en' ? 
-                    `Completed [Level ${currentLevel}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n}\nEarned Score: +${currentTarget.s}\nStars: ${starStr}\nCurrent Total Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
+                    `Completed [Level ${level}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n}\nEarned Score: +${currentTarget.s}\nStars: ${starStr}\nCurrent Total Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
                     `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n目前總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
                 );
                 document.getElementById('win-message').innerText = msg;
