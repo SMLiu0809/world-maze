@@ -3,86 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 歷史流放地與港口打工完全修復版</title>
+    <title>世界寶藏迷宮探險 - 旅費經濟旗艦版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
+            --accent-gold: linear-gradient(135deg, #F6D365 0%, #FDA085 100%);
             --card-bg: rgba(255, 255, 255, 0.92);
             --shadow-elevation: 0 12px 32px rgba(0, 0, 0, 0.08);
             --border-radius: 24px;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, #FFF6E9 0%, #FFE0B2 100%);
             color: #2D3748; text-align: center; margin: 0; padding: 12px;
             touch-action: manipulation; -webkit-tap-highlight-color: transparent;
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        h1 { color: #C0392B; font-size: clamp(26px, 5.5vw, 38px); margin: 15px 0 8px 0; font-weight: 800; }
+        h1 { 
+            color: #C0392B; font-size: clamp(26px, 5.5vw, 38px); margin: 15px 0 8px 0; 
+            font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        h2, h3 { color: #D35400; margin: 10px 0; font-weight: 700; }
         
         .screen { 
             display: none; width: 100%; max-width: 680px; margin: 0 auto; background: var(--card-bg); 
             backdrop-filter: blur(10px); padding: clamp(20px, 5vw, 36px); border-radius: var(--border-radius); 
             box-shadow: var(--shadow-elevation); border: 1px solid rgba(255, 255, 255, 0.6); box-sizing: border-box;
+            animation: fadeIn 0.3s ease-out forwards;
         }
         .active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .lang-selector { 
+            background: #FFF3CD; padding: 8px 18px; border-radius: 30px; margin-bottom: 15px; 
+            border: 1px solid #FFEBAA; font-weight: 600; display: inline-block; font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .lang-selector select { font-size: 14px; padding: 4px 8px; border-radius: 20px; border: 1px solid #E67E22; cursor: pointer; background: #FFF; outline: none; font-weight: 600;}
 
         .btn-large {
             font-size: clamp(17px, 4.2vw, 22px); font-weight: 700; padding: 14px 28px; margin: 10px 5px; 
             width: 90%; max-width: 320px; border-radius: 30px; cursor: pointer; background: var(--primary-gradient); 
-            color: white; border: none; box-shadow: 0 6px 20px rgba(222, 49, 99, 0.3);
+            color: white; border: none; box-shadow: 0 6px 20px rgba(222, 49, 99, 0.3); transition: all 0.2s ease;
         }
-        .btn-cancel { background: #7F8C8D; }
+        .btn-large:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(222, 49, 99, 0.4); }
+        .btn-large:active { transform: translateY(2px); box-shadow: 0 2px 10px rgba(222, 49, 99, 0.2); }
+        .btn-cancel { background: linear-gradient(135deg, #7F8C8D 0%, #95A5A6 100%); box-shadow: 0 6px 20px rgba(127, 140, 141, 0.3); }
         
         .form-group { 
             font-size: clamp(15px, 3.8vw, 19px); margin: 15px 0; padding: 18px; background: #FAFAFA; 
-            border-radius: 20px; border: 1px solid #E2E8F0;
+            border-radius: 20px; border: 1px solid #E2E8F0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
-        input[type="text"], select { padding: 10px 14px; font-size: 16px; border-radius: 12px; border: 2px solid #CBD5E1; text-align: center; }
+        input[type="radio"], select, input[type="text"] { accent-color: #E67E22; cursor: pointer;}
+        input[type="text"] { 
+            padding: 10px 14px; font-size: 16px; border-radius: 12px; border: 2px solid #CBD5E1; 
+            width: 70%; text-align: center; background: #FFF; outline: none; transition: border-color 0.2s;
+        }
+        input[type="text"]:focus { border-color: #E67E22; box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15); }
+
+        .mode-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px;
+        }
+        .mode-btn {
+            background-color: #FFFFFF; border: 2px solid #E2E8F0; border-radius: 16px;
+            padding: 14px 10px; font-size: clamp(14px, 3.5vw, 17px); font-weight: 700;
+            color: #2D3748; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.03); line-height: 1.4;
+        }
+        .mode-btn:hover { border-color: #CBD5E1; transform: translateY(-2px); }
+        .mode-btn.selected {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); color: #FFFFFF; border-color: #D35400;
+            box-shadow: 0 6px 16px rgba(230, 126, 34, 0.35); transform: translateY(-2px);
+        }
 
         .status-bar { 
             font-size: clamp(13px, 3.2vw, 17px); font-weight: 700; display: flex; justify-content: space-between; flex-wrap: wrap; 
             margin-bottom: 10px; background: #FFF9E6; padding: 10px 16px; border-radius: 16px; border: 1px solid #FFEAA7; color: #7F6000; gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
-        .station-banner { font-size: 19px; font-weight: 700; background: #EBF8FF; color: #2B6CB0; padding: 10px; border-radius: 14px; margin-bottom: 10px; }
-        .target-text { font-size: 20px; color: #C0392B; font-weight: 800; margin: 8px 0; background: #FDEDEC; padding: 10px; border-radius: 14px; }
+        .station-banner {
+            font-size: clamp(15px, 4vw, 19px); font-weight: 700; background: #EBF8FF; color: #2B6CB0; padding: 10px; 
+            border-radius: 14px; margin-bottom: 10px; border: 1px solid #BEE3F8; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .target-text { 
+            font-size: clamp(15px, 3.8vw, 20px); color: #C0392B; font-weight: 800; margin: 8px 0; 
+            background: #FDEDEC; padding: 10px; border-radius: 14px; border: 1px solid #FADBD8;
+        }
         
-        .toolbar-top { display: flex; justify-content: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
-        .tool-btn { font-size: 13px; padding: 6px 10px; border-radius: 10px; font-weight: 700; border: none; color: white; cursor: pointer; }
+        .toolbar-top {
+            display: flex; justify-content: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;
+        }
+        .tool-btn {
+            font-size: clamp(11px, 2.8vw, 13px); padding: 6px 10px; border-radius: 10px; font-weight: 700; border: none; color: white; cursor: pointer; 
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1); transition: transform 0.1s;
+        }
+        .tool-btn:active { transform: scale(0.95); }
 
         #canvas-container { width: 100%; max-width: 420px; margin: 0 auto; aspect-ratio: 1 / 1; }
-        canvas { width: 100%; height: 100%; background-color: #FFF; border: 6px solid #4A3525; border-radius: 16px; }
+        canvas { width: 100%; height: 100%; background-color: #FFF; border: 6px solid #4A3525; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
         
         .controls { display: flex; flex-direction: column; align-items: center; margin-top: 12px; }
         .control-row { display: flex; justify-content: center; gap: 18px; margin-bottom: 10px; }
         .arrow-btn {
-            font-size: 32px; width: 70px; height: 70px; background: #3498DB; color: white; border-radius: 20px;
-            border: none; display: flex; align-items: center; justify-content: center; cursor: pointer;
+            font-size: clamp(28px, 7vw, 42px); width: clamp(60px, 15vw, 85px); height: clamp(60px, 15vw, 85px); 
+            background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%); color: white; border-radius: 20px;
+            border: none; box-shadow: 0 6px 16px rgba(41, 128, 185, 0.35); display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none;
+            transition: transform 0.1s;
         }
+        .arrow-btn:active { transform: translateY(4px); box-shadow: 0 2px 6px rgba(41, 128, 185, 0.2); }
 
-        #station-modal, #god-help-modal, #bwei-modal, #screen-work, #win-modal {
+        #screen-work { border-color: #D35400; background-color: #FDFEFE; }
+        .work-btn {
+            font-size: clamp(50px, 12vw, 75px); width: clamp(110px, 28vw, 150px); height: clamp(110px, 28vw, 150px); 
+            background: linear-gradient(135deg, #D35400 0%, #BA4A00 100%); color: white; border-radius: 30px; border: none; 
+            box-shadow: 0 8px 20px rgba(211, 84, 0, 0.4); cursor: pointer; user-select: none; margin: 10px; transition: transform 0.1s;
+        }
+        .work-btn:active { transform: translateY(6px); box-shadow: 0 2px 8px rgba(211, 84, 0, 0.2); }
+        progress { width: 90%; height: 22px; border-radius: 11px; accent-color: #E67E22; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
+        
+        .footer { font-size: clamp(13px, 3.2vw, 16px); font-weight: 700; color: #718096; margin-top: 18px; padding-top: 12px; border-top: 1px dashed #E2E8F0;}
+
+        #event-modal, #bwei-modal, #god-help-modal, #station-modal, #win-modal, #pause-modal, #knowledge-modal, #certificate-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.75); align-items: center; justify-content: center; z-index: 2000;
+            background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px); align-items: center; justify-content: center; z-index: 2000;
         }
         .modal-content {
-            background: #FFFFFF; padding: 25px; border-radius: 28px; width: 92%; max-width: 460px;
-            text-align: center; border: 4px solid #E67E22; max-height: 88vh; overflow-y: auto; box-sizing: border-box;
+            background: #FFFFFF; padding: clamp(22px, 5vw, 36px); border-radius: 28px; width: 92%; max-width: 460px;
+            text-align: center; border: 4px solid #E67E22; box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-height: 88vh; overflow-y: auto; box-sizing: border-box;
+            animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-        .bwei-cup-container { display: flex; justify-content: center; gap: 15px; margin: 15px 0; }
-        .bwei-mu-block {
-            width: 65px; height: 85px; background: #D9534F; border: 2px solid #F1C40F; border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
-            display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; color: #F1C40F;
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
-        .bwei-mu-block.convex { background: #A94442; color: transparent; }
+        .modal-text { font-size: clamp(17px, 4.2vw, 24px); font-weight: 800; color: #C0392B; margin-bottom: 15px; line-height: 1.4;}
+        
+        /* 筊杯正宗視覺樣式：紅木凸面無字 vs 平面金字 */
+        .bwei-cup-container { display: flex; justify-content: center; gap: 20px; margin: 15px 0; }
+        .bwei-block {
+            width: 75px; height: 110px; border-radius: 35px 35px 50px 50px; display: inline-flex;
+            align-items: center; justify-content: center; font-size: 15px; font-weight: bold;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25); transition: transform 0.4s ease; user-select: none;
+        }
+        /* 凸面：紅木色、無字、具立體陰影 */
+        .cup-convex {
+            background: linear-gradient(135deg, #A93226 0%, #78281F 100%);
+            color: #78281F; border: 2px solid #641E16; box-shadow: inset 0 4px 8px rgba(255,255,255,0.2), 0 6px 15px rgba(0,0,0,0.3);
+        }
+        /* 平面：金黃木紋、帶金字 */
+        .cup-flat {
+            background: linear-gradient(135deg, #F9E79F 0%, #F1C40F 100%);
+            color: #7D6608; border: 2px solid #B7950B; text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+        }
+
+        .sheng-count { font-size: 17px; color: #27AE60; font-weight: 700; background: #EAFAF1; padding: 10px; border-radius: 14px; margin-bottom: 16px; border: 1px solid #A9DFBF;}
     </style>
 </head>
 <body>
 
-    <!-- 封面畫面 -->
+    <!-- 頁面1：封面 -->
     <div id="screen-cover" class="screen active">
-        <div style="background: #FFF3CD; padding: 8px 18px; border-radius: 30px; margin-bottom: 15px; display: inline-block;">
+        <div class="lang-selector">
             🌐 語言 / Lang：
             <select id="languageSelect" onchange="changeLanguage(this.value)">
                 <option value="zh-TW" selected>繁體中文</option>
@@ -92,41 +178,78 @@
         </div>
         <h1 id="txt-title">🏆 世界寶藏迷宮探險 🏆</h1>
         <div class="form-group">
-            <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號：</b></p>
+            <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號 (保障隱私)：</b></p>
             <input type="text" id="player-nickname" maxlength="12" value="" placeholder="請輸入暱稱">
+            <p id="lbl-nickname-tip" style="font-size: 12px; color: #718096; margin: 4px 0;">💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼</p>
+            <br>
+            <p id="lbl-gender"><b>請選擇您的性別：</b></p>
+            <label><input type="radio" name="gender" value="male" checked> <span id="opt-male">男性 👨</span></label>
+            <label><input type="radio" name="gender" value="female"> <span id="opt-female">女性 👩</span></label>
             <br><br>
-            <label for="start-level-select" id="lbl-test-tool"><b>🛠️ 測試選關起始工具：</b></label><br><br>
-            <select id="start-level-select" style="font-weight: 700;">
-                <option value="1" id="opt-l1">第 1 關 (臺灣・高雄)</option>
-                <option value="2" id="opt-l2">第 2 關 (日本・京都)</option>
-                <option value="3" id="opt-l3">第 3 關 (法國・巴黎)</option>
-                <option value="4" id="opt-l4">第 4 關 (埃及・吉薩)</option>
-                <option value="5" id="opt-l5">第 5 關 (希臘・雅典)</option>
-                <option value="6" id="opt-l6">第 6 關 (義大利・羅馬/神壇)</option>
-                <option value="7" id="opt-l7">第 7 關 (英國・倫敦)</option>
-                <option value="8" id="opt-l8">第 8 關 (美國・紐約)</option>
-                <option value="9" id="opt-l9">第 9 關 (澳洲・雪梨)</option>
-                <option value="10" id="opt-l10">第 10 關 (俄羅斯・莫斯科)</option>
-            </select>
+            
+            <div style="margin: 12px 0; background: #FEF9E7; padding: 12px; border-radius: 16px; border: 1px solid #F9E79F;">
+                <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
+                <select id="start-level-select" style="font-size: 14px; padding: 6px 10px; border-radius: 10px; border: 1px solid #F39C12; background: white; font-weight: 700;">
+                    <option value="1" id="opt-lvl1" selected>第 1 關 (臺灣・高雄)</option>
+                    <option value="2" id="opt-lvl2">第 2 關 (日本・京都)</option>
+                    <option value="3" id="opt-lvl3">第 3 關 (法國・巴黎)</option>
+                    <option value="4" id="opt-lvl4">第 4 關 (埃及・吉薩)</option>
+                    <option value="5" id="opt-lvl5">第 5 關 (希臘・雅典)</option>
+                    <option value="6" id="opt-lvl6">第 6 關 (義大利・羅馬/神壇)</option>
+                    <option value="7" id="opt-lvl7">第 7 關 (英國・倫敦)</option>
+                    <option value="8" id="opt-lvl8">第 8 關 (美國・紐約)</option>
+                    <option value="9" id="opt-lvl9">第 9 關 (澳洲・雪梨)</option>
+                    <option value="10" id="opt-lvl10">第 10 關 (俄羅斯・莫斯科)</option>
+                </select>
+            </div>
+
+            <p id="lbl-mode"><b>選擇遊戲模式：</b></p>
+            <input type="hidden" id="selected-mode" value="standard">
+            <div id="mode-grid" class="mode-grid">
+                <button type="button" class="mode-btn" onclick="selectMode('easy', this)"><span id="m-easy">🍵 輕鬆模式</span><br><span id="md-easy" style="font-size:11px; font-weight:normal; color:#64748B;">步調悠閒、適合放鬆</span></button>
+                <button type="button" class="mode-btn selected" onclick="selectMode('standard', this)"><span id="m-std">⚖️ 標準模式</span><br><span id="md-std" style="font-size:11px; font-weight:normal; color:#64748B;">平衡挑戰與趣味</span></button>
+                <button type="button" class="mode-btn" onclick="selectMode('challenge', this)"><span id="m-cha">🎯 挑戰模式</span><br><span id="md-cha" style="font-size:11px; font-weight:normal; color:#64748B;">刁鑽迷宮、高手過招</span></button>
+                <button type="button" class="mode-btn" onclick="selectMode('hell', this)"><span id="m-hel">🔥 地獄模式</span><br><span id="md-hel" style="font-size:11px; font-weight:normal; color:#64748B;">極致難關、頂級榮耀</span></button>
+            </div>
         </div>
-        <button id="btn-start" class="btn-large" onclick="startGame()">開始探險 🚀</button>
-        <button class="btn-large btn-cancel" onclick="openStationModal()">💰 歷史港口打工 / Ports</button>
-        <div class="footer" style="margin-top: 15px; font-weight: 700; color: #718096;">國立高雄師範大學 劉世閔 老師設計</div>
+        <button id="btn-instructions" class="btn-large" onclick="goToInstructions()">遊戲說明 📖</button>
+        <div class="footer" id="txt-footer">國立高雄師範大學 劉世閔 老師設計</div>
     </div>
 
-    <!-- 遊戲主畫面 -->
+    <!-- 頁面2：說明 -->
+    <div id="screen-instructions" class="screen">
+        <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
+        <div id="ins-desc" style="font-size: clamp(14px, 3.8vw, 17px); text-align: left; line-height: 1.7; background: #EBF8FF; padding: 20px; border-radius: 18px; border: 1px solid #BEE3F8; color: #2B6CB0;">
+            <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
+            <p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p>
+            <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
+        </div>
+        <br>
+        <button id="btn-station" class="btn-large" style="background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); box-shadow: 0 6px 20px rgba(211, 84, 0, 0.3);" onclick="openStationModal()">💰 前往點數補給站</button>
+        <br>
+        <button id="btn-back-cover" class="btn-large btn-cancel" onclick="showScreen('screen-cover')">⬅️ 返回主選單</button>
+        <button id="btn-start" class="btn-large" onclick="startGame()">開始探險 🚀</button>
+    </div>
+
+    <!-- 頁面3：遊戲主畫面 -->
     <div id="screen-game" class="screen">
         <div class="status-bar">
             <span id="ui-level">關卡: 1/10</span>
-            <span id="ui-score">總分: 500</span>
+            <span id="ui-score" style="color: #C0392B;">總分: 500</span>
             <span id="ui-stars">⭐⭐⭐</span>
+            <span id="ui-time">0 秒</span>
         </div>
-        <div class="station-banner" id="ui-station-banner">📍 第一站 : 臺灣・高雄</div>
+        <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
         <div class="target-text" id="ui-target">目標：駁二鐵件藝術公仔 🤖</div>
         
         <div class="toolbar-top">
-            <button class="tool-btn" style="background-color: #2980B9;" onclick="openGodHelpModal()">⛩️ 神通</button>
-            <button class="tool-btn" style="background-color: #D35400;" onclick="openStationModal()">💰 Ports</button>
+            <button class="tool-btn" id="t-god" style="background-color: #2980B9;" onclick="openGodHelpModal()">⛩️ 神通</button>
+            <button class="tool-btn" id="t-station" style="background-color: #D35400;" onclick="openStationModal()">💰 補給</button>
+            <button class="tool-btn" id="t-know" style="background-color: #8E44AD;" onclick="openKnowledgeModal()">📖 知識</button>
+            <button class="tool-btn" id="t-undo" style="background-color: #27AE60;" onclick="undoMove()">↩️ 上一步(<span id="undo-count">3</span>)</button>
+            <button class="tool-btn" id="t-pause" style="background-color: #34495E;" onclick="openPauseModal()">⏸️ 暫停</button>
+            <button class="tool-btn" id="t-restart" style="background-color: #C0392B;" onclick="restartLevel()">🔄 重來</button>
+            <button class="tool-btn" id="btn-sound-toggle" style="background-color: #16A085;" onclick="toggleSound()">🔊 音效開</button>
         </div>
 
         <div id="canvas-container">
@@ -135,107 +258,482 @@
         
         <div class="controls">
             <div class="control-row">
-                <button class="arrow-btn" onclick="handleMove(0, -1)">⬆️</button>
+                <button class="arrow-btn" onmousedown="handleMove(0, -1)" ontouchstart="handleMove(0, -1); event.preventDefault();">⬆️</button>
             </div>
             <div class="control-row">
-                <button class="arrow-btn" onclick="handleMove(-1, 0)">⬅️</button>
-                <button class="arrow-btn" onclick="handleMove(0, 1)">⬇️</button>
-                <button class="arrow-btn" onclick="handleMove(1, 0)">➡️</button>
+                <button class="arrow-btn" onmousedown="handleMove(-1, 0)" ontouchstart="handleMove(-1, 0); event.preventDefault();">⬅️</button>
+                <button class="arrow-btn" onmousedown="handleMove(0, 1)" ontouchstart="handleMove(0, 1); event.preventDefault();">⬇️</button>
+                <button class="arrow-btn" onmousedown="handleMove(1, 0)" ontouchstart="handleMove(1, 0); event.preventDefault();">➡️</button>
             </div>
         </div>
     </div>
 
-    <!-- 過關結算視窗 -->
+    <!-- 頁面4：流放勞動與點數補給站畫面 -->
+    <div id="screen-work" class="screen">
+        <h1 id="work-title" style="color:#D35400; font-size: clamp(24px, 5vw, 32px);">🚧 流放邊疆勞動區 🚧</h1>
+        <h2 id="ui-banish-location" style="color:#C0392B; font-size: clamp(20px, 5vw, 26px); margin: 0;">流放地：潮州</h2>
+        
+        <div style="font-size: clamp(14px, 3.8vw, 18px); margin: 15px 0; background: #FDFEFE; padding: 16px; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+            <p id="work-rule-desc" style="font-weight: 700; color: #C0392B; margin: 4px 0;">每敲一次：200點 | 剩餘次數：5 | 機票費：500點</p>
+            <p id="work-score-wrap" style="margin: 6px 0;">已賺取點數：<b id="work-score" style="color:#27AE60; font-size: clamp(22px, 5vw, 30px);">0</b> / <span id="work-target-display">500</span> 點</p>
+        </div>
+        
+        <div style="margin: 15px 0;">
+            <progress id="work-progress" value="0" max="500"></progress>
+            <p id="work-status" style="font-size: clamp(15px, 4vw, 19px); font-weight: 700; color: #D35400; margin-top: 8px;">狂點按鈕勞動！</p>
+        </div>
+        
+        <button class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">⛏️</button>
+        <br>
+        <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 320px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); margin-top: 10px;" onclick="returnFromWork()">✈️ 繳交機票費，重返原關卡！</button>
+        <br>
+        <button id="work-back-btn" class="btn-large btn-cancel" style="width: 90%; max-width: 320px; margin-top: 6px;" onclick="cancelWorkToMenu()">⬅️ 返回主選單</button>
+    </div>
+
+    <!-- 暫停選單彈跳視窗 -->
+    <div id="pause-modal">
+        <div class="modal-content">
+            <h2 id="pause-title" style="color: #C0392B; margin-top: 0;">⏸️ 遊戲暫停</h2>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
+                <button id="p-resume" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%);" onclick="closePauseModal()">▶️ 繼續遊戲</button>
+                <button id="p-restart" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%);" onclick="restartLevel(); closePauseModal();">🔄 重新開始本關</button>
+                <button id="p-home" class="btn-large btn-cancel" style="width: 100%; max-width: 100%; margin: 0;" onclick="backToCoverFromPause()">🏠 返回主選單</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 文化知識導覽彈跳視窗 -->
+    <div id="knowledge-modal">
+        <div class="modal-content">
+            <h2 id="knowledge-title" style="color: #2980B9; margin-top: 0;">📖 文化與寶藏知識</h2>
+            <p id="knowledge-text" style="font-size: 15px; color: #2D3748; text-align: left; line-height: 1.6; background: #EBF8FF; padding: 18px; border-radius: 16px; border: 1px solid #BEE3F8;"></p>
+            <button id="k-close" class="btn-large" style="width: 100%; margin-top: 12px;" onclick="closeKnowledgeModal()">了解了，繼續探險！</button>
+        </div>
+    </div>
+
+    <!-- 過關與紀念品結算彈跳視窗 -->
     <div id="win-modal">
         <div class="modal-content">
-            <h2 id="win-title" style="color: #C0392B;">🎉 尋獲城市寶物！</h2>
+            <h2 id="win-title" style="color: #C0392B; margin-top: 0;">🎉 尋獲城市寶物！</h2>
             <div id="win-stars" style="font-size: 34px; margin: 8px 0;">⭐⭐⭐</div>
-            <p id="win-message" style="font-size: 15px; line-height: 1.6;"></p>
-            <button id="btn-buy-souvenir" class="btn-large" style="width:100%; margin:0; background:#F39C12;" onclick="buySouvenir()">💳 Pay Shipping Fee</button>
+            <div id="win-message" style="font-size: 15px; color: #2D3748; margin: 12px 0; line-height: 1.6; white-space: pre-line;">結算中...</div>
+            
+            <div id="purchase-area" style="margin: 15px 0; background: #FFF9E6; padding: 14px; border-radius: 16px; border: 1px solid #F9E79F;">
+                <p id="purchase-desc" style="font-weight: 700; color: #B7950B; margin: 0 0 10px 0;">🛍️ 購買本關紀念品與跨國運費：500 點</p>
+                <button id="btn-buy-souvenir" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); font-size: 16px; padding: 10px;" onclick="buySouvenir()">💳 支付運費，將寶物買回國！</button>
+            </div>
+
+            <div id="nav-buttons-area" style="display: none; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap;">
+                <button id="btn-prev-level" class="btn-large btn-cancel" style="font-size: 13px; padding: 10px 8px; margin: 0; width: 30%; max-width: 130px;" onclick="goToPrevLevel()">⬅️ 上一關</button>
+                <button id="btn-home-level" class="btn-large" style="font-size: 13px; padding: 10px 8px; margin: 0; width: 30%; max-width: 130px; background: linear-gradient(135deg, #2980B9 0%, #1B4F72 100%); box-shadow: 0 4px 12px rgba(41, 128, 185, 0.3);" onclick="backToCoverFromPause()">🏠 回主選單</button>
+                <button id="btn-next-level" class="btn-large" style="font-size: 13px; padding: 10px 8px; margin: 0; width: 32%; max-width: 130px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);" onclick="goToNextLevel()">➡️ 下一關</button>
+            </div>
         </div>
     </div>
 
-    <!-- 歷史港口打工畫面 -->
-    <div id="screen-work" class="screen">
-        <h1 style="color:#D35400;">📜 Trade Port Work 📜</h1>
-        <h2 id="work-loc-title" style="color:#C0392B;">Manila Port</h2>
-        <p id="work-task-desc" style="font-weight: 700;">Task: Sort spice sacks</p>
-        <p><b>Earned Wages: <span id="work-score" style="color:green;">0</span> / <span id="work-target-display">500</span> pts</b></p>
-        <button class="btn-large" onclick="doWork()">📦 Work / Tap!</button><br>
-        <button class="btn-large" style="background: #27AE60; display:none;" id="work-return-btn" onclick="returnFromWork()">✈️ Return to Game</button><br>
-        <button class="btn-large btn-cancel" onclick="cancelWork()">⬅️ Back</button>
+    <!-- 世界探險證書與成績卡彈跳視窗 -->
+    <div id="certificate-modal">
+        <div class="modal-content" style="border-color: #F1C40F; background: #FFFEF0;">
+            <h2 id="cert-title" style="color: #D35400; margin-top: 0;">📜 世界探險結業證書 📜</h2>
+            <div id="cert-content" style="font-size: 15px; color: #2D3748; text-align: center; line-height: 1.8; background: white; padding: 22px; border-radius: 18px; border: 3px double #F39C12; margin: 12px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+                特此證明 <b>探險家</b> 順利完成世界十大寶藏迷宮探險！
+            </div>
+            <button id="cert-btn" class="btn-large" style="width: 100%; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); box-shadow: 0 6px 20px rgba(230, 126, 34, 0.35);" onclick="closeCertificateModal()">🏆 載入主選單</button>
+        </div>
     </div>
 
-    <!-- 選擇港口視窗 -->
+    <!-- 選擇流放地彈跳視窗 -->
     <div id="station-modal">
         <div class="modal-content">
-            <h2>💰 Select Historical Trade Port</h2>
+            <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇流放地與補給站</h2>
+            <p id="station-modal-desc" style="font-size: 14px; color: #718096;">點數不足時，選擇流放地敲磚賺取機票費：</p>
             <div style="display: flex; flex-direction: column; gap: 10px; margin: 15px 0;">
-                <button class="btn-large" style="width:100%; margin:0; font-size:14px;" onclick="selectPort(0)">🏙️ Manila (200 pts / Ticket: 500)</button>
-                <button class="btn-large" style="width:100%; margin:0; font-size:14px;" onclick="selectPort(1)">🏡 Singapore (180 pts / Ticket: 700)</button>
-                <button class="btn-large" style="width:100%; margin:0; font-size:14px;" onclick="selectPort(2)">🌴 Sydney (150 pts / Ticket: 900)</button>
-                <button class="btn-large" style="width:100%; margin:0; font-size:14px;" onclick="selectPort(3)">⛰️ London (120 pts / Ticket: 1100)</button>
-                <button class="btn-large" style="width:100%; margin:0; font-size:14px;" onclick="selectPort(4)">❄️ Vancouver (100 pts / Ticket: 1300)</button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 14px;" onclick="selectStation(0)"><span id="st-0">🏙️ 潮州 (近)｜每敲200/限5次｜機票500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 14px;" onclick="selectStation(1)"><span id="st-1">🏡 惠州 (二)｜每敲180/限7次｜機票700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 14px;" onclick="selectStation(2)"><span id="st-2">🌴 儋州 (三)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 14px;" onclick="selectStation(3)"><span id="st-3">⛰️ 永州 (四)｜每敲120/限15次｜機票1100</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 14px;" onclick="selectStation(4)"><span id="st-4">❄️ 寧古塔 (遠)｜每敲100/限20次｜機票1300</span></button>
             </div>
-            <button class="btn-large btn-cancel" style="width:100%; margin:0;" onclick="closeStationModal()">Cancel</button>
+            <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 6px;" onclick="closeStationModal()">取消返回</button>
         </div>
     </div>
 
-    <!-- 神通導引與請神視窗 -->
+    <!-- 幫助與神通指南彈跳視窗 -->
     <div id="god-help-modal">
         <div class="modal-content">
-            <h2>⛩️ Divine Guidance (Level 6+)</h2>
-            <p>Pray for divine assistance to clear maze hazards!</p>
-            <div style="display: flex; flex-direction: column; gap: 8px; margin: 15px 0;">
-                <button class="btn-large" style="width:100%; margin:0; background:#2980B9; font-size:14px;" onclick="startBwei('Mazu', 200)">🌊 Mazu (Cost: 200 pts)</button>
-                <button class="btn-large" style="width:100%; margin:0; background:#D35400; font-size:14px;" onclick="startBwei('Jade Emperor', 1200)">🌟 Jade Emperor (Clear All: 1200 pts)</button>
+            <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
+            <p id="god-modal-desc" style="font-size: 14px; color: #718096;">第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！</p>
+            <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 15px 0;">
+                <button style="background: #795548; flex: 1 1 30%; padding: 10px 6px; border-radius: 12px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('tudigong')"><span id="g-tudi">🏮土地公(-300)</span></button>
+                <button style="background: #C0392B; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('wen')"><span id="g-wen">⚔️溫王爺(-500)</span></button>
+                <button style="background: #2980B9; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('mazu')"><span id="g-mazu">🌊媽祖(-1000)</span></button>
+                <button style="background: #27AE60; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('guanyin')"><span id="g-guanyin">🌿觀世音(-1500)</span></button>
+                <button style="background: #8E44AD; flex: 1 1 30%; padding: 10px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 13px;" onclick="startGodBwei('yaoshifo')"><span id="g-yaoshi">🪷藥師佛(-2000)</span></button>
+                <button style="flex: 1 1 100%; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); color: #FFF; padding: 12px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; font-size: 14px; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟玉皇大帝 (全清場+指路 / -5000)</span></button>
             </div>
-            <button class="btn-large btn-cancel" style="width:100%; margin:0;" onclick="closeGodHelpModal()">Close</button>
+            <button id="god-modal-close" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeGodHelpModal()">關閉指南</button>
         </div>
     </div>
 
-    <!-- 擲筊視窗 -->
+    <!-- 擲筊動畫彈跳視窗 -->
     <div id="bwei-modal">
         <div class="modal-content">
-            <h2 id="bwei-modal-title">🙏 Divine Oracle Prayer</h2>
-            <p>Throw two consecutive 'Sheng Jiao' to succeed!</p>
+            <div class="modal-text" id="bwei-title" style="color: #D35400;">🙏 誠心擲筊請示 神明</div>
+            <div id="bwei-rule" style="font-size: 14px; color: #718096; margin-bottom: 5px;">需連續擲出兩次【聖筊】以感動神明</div>
+            <div style="font-size: 12px; color: #C0392B; font-weight: bold; margin-bottom: 10px;">聖筊(一平一凸有字) | 笑筊(兩平有字/不歸零) | 蓋筊(兩凸無字/失敗)</div>
+            
+            <!-- 正宗筊杯外形區 -->
             <div class="bwei-cup-container">
-                <div class="bwei-mu-block" id="cup1">Ask</div>
-                <div class="bwei-mu-block convex" id="cup2"></div>
+                <div id="cup1" class="bwei-block cup-convex">無字</div>
+                <div id="cup2" class="bwei-block cup-convex">無字</div>
             </div>
-            <p id="bwei-status" style="font-weight:700; color:green;">Consecutive Sheng Jiao: 0 / 2</p>
-            <button class="btn-large" style="background:#E74C3C; width:100%; margin:0;" onclick="throwBwei()">🙌 Throw Jiao!</button>
-            <button class="btn-large btn-cancel" style="width:100%; margin-top:10px;" onclick="closeBwei()">Cancel</button>
+
+            <div class="sheng-count" id="bwei-count-display">目前連續聖筊：0 次</div>
+            <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);" onclick="throwBweiAnimation()">🙌 擲筊！</button>
+            <button id="bwei-cancel-btn" class="btn-large btn-cancel" style="width: 100%; margin-top: 10px;" onclick="closeBwei()">取消</button>
         </div>
     </div>
 
     <script>
-        let currentLang = 'zh-TW';
-        let currentLevel = 1;
-        let totalScore = 500;
-        let maze = [], mazeSize = 9;
-        let playerPos = {x: 1, y: 1}, targetPos = {x: 7, y: 7};
-        let isPlaying = false;
-        let currentPortIdx = 0, workEarned = 0, workTarget = 500, workClicks = 0;
-        let bweiCount = 0, bweiCost = 0;
-        const levelScoreList = [500, 800, 1000, 3500, 6000, 10000, 2500, 1500, 2000, 4500];
-
         const i18n = {
-            'zh-TW': { title: "🏆 世界寶藏迷宮探險 🏆", start: "開始探險 🚀", levels: ["第 1 關 (臺灣・高雄)", "第 2 關 (日本・京都)", "第 3 關 (法國・巴黎)", "第 4 關 (埃及・吉薩)", "第 5 關 (希臘・雅典)", "第 6 關 (義大利・羅馬/神壇)", "第 7 關 (英國・倫敦)", "第 8 關 (美國・紐約)", "第 9 關 (澳洲・雪梨)", "第 10 關 (俄羅斯・莫斯科)"] },
-            'zh-CN': { title: "🏆 世界宝藏迷宫探险 🏆", start: "开始探险 🚀", levels: ["第 1 关 (中国台湾・高雄)", "第 2 关 (日本・京都)", "第 3 关 (法国・巴黎)", "第 4 关 (埃及・吉萨)", "第 5 关 (希腊・雅典)", "第 6 关 (意大利・罗马/神坛)", "第 7 关 (英国・伦敦)", "第 8 关 (美国・纽约)", "第 9 关 (澳大利亚・悉尼)", "第 10 关 (俄罗斯・莫斯科)"] },
-            'en': { title: "🏆 World Treasure Maze Adventure 🏆", start: "Start Adventure 🚀", levels: ["Stage 1: Taiwan - Kaohsiung", "Stage 2: Japan - Kyoto", "Stage 3: France - Paris", "Stage 4: Egypt - Giza", "Stage 5: Greece - Athens", "Stage 6: Italy - Rome", "Stage 7: UK - London", "Stage 8: USA - New York", "Stage 9: Australia - Sydney", "Stage 10: Russia - Moscow"] }
+            'zh-TW': {
+                title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號 (保障隱私)：", gender: "請選擇您的性別：",
+                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 測試選關起始工具：", modeLabel: "選擇遊戲模式：",
+                easy: "🍵 輕鬆模式", easyDesc: "步調悠閒、適合放鬆",
+                std: "⚖️ 標準模式", stdDesc: "平衡挑戰與趣味",
+                cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
+                hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
+                instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                stationBtn: "💰 前往點數補給站", backCover: "⬅️ 返回主選單",
+                tGod: "⛩️ 神通", tStation: "💰 補給", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
+                pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
+                knowTitle: "📖 文化與寶藏知識", kClose: "了解了，繼續探險！",
+                stationTitle: "💰 選擇流放地與補給站", stationDesc: "點數不足時，選擇流放地敲磚賺取機票費：", stationCancel: "取消返回",
+                godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！", godClose: "關閉指南",
+                bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
+                certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
+                nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
+                winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
+                buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
+                footer: "國立高雄師範大學 劉世閔 老師設計",
+                stations: [
+                    "🏙️ 潮州 (近)｜每敲200/限5次｜機票500",
+                    "🏡 惠州 (二)｜每敲180/限7次｜機票700",
+                    "🌴 儋州 (三)｜每敲150/限10次｜機票900",
+                    "⛰️ 永州 (四)｜每敲120/限15次｜機票1100",
+                    "❄️ 寧古塔 (遠)｜每敲100/限20次｜機票1300"
+                ],
+                gods: [
+                    "🏮土地公(-300)", "⚔️溫王爺(-500)", "🌊媽祖(-1000)", 
+                    "🌿觀世音(-1500)", "🪷藥師佛(-2000)", "🌟玉皇大帝 (全清場+指路 / -5000)"
+                ],
+                levels: [
+                    "第一站：臺灣・高雄", "第二站：日本・京都", "第三站：法國・巴黎",
+                    "第四站：埃及・吉薩", "第五站：希臘・雅典", "第六站：義大利・羅馬",
+                    "第七站：英國・倫敦", "第八站：美國・紐約", "第九站：澳洲・雪梨", "第十站：俄羅斯・莫斯科"
+                ],
+                targets: [
+                    "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
+                    "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
+                    "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
+                ],
+                lores: [
+                    "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
+                    "代表日本茶道精神與京都精緻細膩的職人生活美學。",
+                    "象徵塞納河畔咖啡館與印象派畫家們的浪漫藝術日常。",
+                    "古代埃及用來記錄神話與歷史的獨特植物纖維紙張。",
+                    "展現基克拉澤斯群島風情與地中海陶藝裝飾藝術。",
+                    "見證地中海羅馬帝國雄偉歷史與貿易的古幣。",
+                    "呼應英國工業革命與精密機械工藝的象徵。",
+                    "象徵自由、民主與移民文化的紐約精神堡壘。",
+                    "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
+                    "俄羅斯帝國皇室工藝與珠寶設計的極致代表。"
+                ]
+            },
+            'zh-CN': {
+                title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (保障隐私)：", gender: "请选择您的性别：",
+                male: "男性 👨", female: "女性 👩", testTool: "🛠️ 测试选关起始工具：", modeLabel: "选择游戏模式：",
+                easy: "🍵 轻松模式", easyDesc: "步调悠闲、适合放松",
+                std: "⚖️ 标准模式", stdDesc: "平衡挑战与趣味",
+                cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
+                hel: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
+                instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付等差级数纪念品运费（每关递增500点）。旅费不足将被流放至边疆补给站赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
+                stationBtn: "💰 前往点数补给站", backCover: "⬅️ 返回主菜单",
+                tGod: "⛩️ 神通", tStation: "💰 补给", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
+                pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
+                knowTitle: "📖 文化与宝藏知识", kClose: "了解了，继续探险！",
+                stationTitle: "💰 选择流放地与补给站", stationDesc: "点数不足时，选择流放地敲砖赚取机票费：", stationCancel: "取消返回",
+                godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！", godClose: "关闭指南",
+                bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
+                certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
+                nicknameTip: "💡 支持中英文、数字，最多 12 码，系统将自动加上专属识别码",
+                winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
+                buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放至边疆补给站！",
+                footer: "高雄师范大学 刘世闵 老师设计",
+                stations: [
+                    "🏙️ 潮州 (近)｜每敲200/限5次｜机票500",
+                    "🏡 惠州 (二)｜每敲180/限7次｜机票700",
+                    "🌴 儋州 (三)｜每敲150/限10次｜机票900",
+                    "⛰️ 永州 (四)｜每敲120/限15次｜机票1100",
+                    "❄️ 宁古塔 (远)｜每敲100/限20次｜机票1300"
+                ],
+                gods: [
+                    "🏮土地公(-300)", "⚔️温王爷(-500)", "🌊妈祖(-1000)", 
+                    "🌿观世音(-1500)", "🪷药师佛(-2000)", "🌟玉皇大帝 (全清场+指路 / -5000)"
+                ],
+                levels: [
+                    "第一站：台湾・高雄", "第二站：日本・京都", "第三站：法国・巴黎",
+                    "第四站：埃及・吉萨", "第五站：希腊・雅典", "第六站：意大利・罗马",
+                    "第七站：英国・伦敦", "第八站：美国・纽约", "第九站：澳大利亚・悉尼", "第十站：俄罗斯・莫斯科"
+                ],
+                targets: [
+                    "驳二铁件艺术公仔 🤖", "宇治抹茶茶道组 🍵", "塞纳河畔手绘油画 🎨",
+                    "尼罗河莎草纸画卷 📜", "爱琴海蓝白陶壶 🏺", "罗马竞技场古金币 🪙",
+                    "大本钟精钢齿轮 ⚙️", "自由女神圣火微雕 🗽", "悉尼港湾大贝壳珍珠 🐚", "克里姆林宫彩蛋宝石 🥚"
+                ],
+                lores: [
+                    "展现高雄由工业港口转型为当代艺术创意的文创精神。",
+                    "代表日本茶道精神与京都精致细腻的职人生活美学。",
+                    "象征塞纳河畔咖啡馆与印象派画家们的浪漫艺术日常。",
+                    "古代埃及用来记录神话与历史的独特植物纤维纸张。",
+                    "展现基克拉泽斯群岛风情与地中海陶艺装饰艺术。",
+                    "见证地中海罗马帝国雄伟历史与贸易的古币。",
+                    "呼应英国工业革命与精密机械工艺的象征。",
+                    "象征自由、民主与移民文化的纽约精神堡垒。",
+                    "结合悉尼歌剧院独特贝壳结构与南半球海洋生态。",
+                    "俄罗斯帝国皇室工艺与珠宝设计的极致代表。"
+                ]
+            },
+            'en': {
+                title: "🏆 World Treasure Maze Adventure 🏆", nickname: "Player ID / Unique Handle:", gender: "Select Gender:",
+                male: "Male 👨", female: "Female 👩", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode:",
+                easy: "🍵 Casual", easyDesc: "Relaxed pace, casual fun",
+                std: "⚖️ Standard", stdDesc: "Balanced challenge & fun",
+                cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
+                hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
+                instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
+                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
+                stationBtn: "💰 Point Supply Station", backCover: "⬅️ Main Menu",
+                tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
+                pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
+                knowTitle: "📖 Culture & Treasure Lore", kClose: "Got it, Continue!",
+                stationTitle: "💰 Select Banishment Station", stationDesc: "Earn tickets by tapping at supply stations:", stationCancel: "Cancel",
+                godTitle: "⛩️ Divine Guidance", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close",
+                bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
+                certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
+                nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
+                winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
+                buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
+                footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
+                stations: [
+                    "🏙️ Manila (Near) | 200 pts / 5 taps | Ticket: 500",
+                    "🏡 Singapore (II) | 180 pts / 7 taps | Ticket: 700",
+                    "🌴 Sydney (III) | 150 pts / 10 taps | Ticket: 900",
+                    "⛰️ London (IV) | 120 pts / 15 taps | Ticket: 1100",
+                    "❄️ Vancouver (Far) | 100 pts / 20 taps | Ticket: 1300"
+                ],
+                gods: [
+                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-500)", "🌊Mazu (-1000)", 
+                    "🌿Guanyin (-1500)", "🪷Medicine Buddha (-2000)", "🌟Jade Emperor (Clear All / -5000)"
+                ],
+                levels: [
+                    "Stage 1: Taiwan・Kaohsiung", "Stage 2: Japan・Kyoto", "Stage 3: France・Paris",
+                    "Stage 4: Egypt・Giza", "Stage 5: Greece・Athens", "Stage 6: Italy・Rome",
+                    "Stage 7: UK・London", "Stage 8: USA・New York", "Stage 9: Australia・Sydney", "Stage 10: Russia・Moscow"
+                ],
+                targets: [
+                    "Pier-2 Iron Art Toy 🤖", "Uji Matcha Tea Set 🍵", "Seine Oil Painting 🎨",
+                    "Nile Papyrus Scroll 📜", "Aegean Ceramic Pot 🏺", "Colosseum Ancient Coin 🪙",
+                    "Big Ben Steel Gear ⚙️", "Statue of Liberty Torch 🗽", "Sydney Harbour Pearl 🐚", "Kremlin Faberge Egg 🥚"
+                ],
+                lores: [
+                    "Showcasing Kaohsiung's transformation from an industrial port to a hub of contemporary creative arts.",
+                    "Representing the spirit of Japanese tea ceremonies and Kyoto's refined artisan lifestyle.",
+                    "Symbolizing the romantic artistic routine of cafes along the Seine and Impressionist painters.",
+                    "Unique plant-fiber paper used by ancient Egyptians to record mythology and history.",
+                    "Showcasing the charm of the Cyclades islands and Mediterranean decorative ceramic art.",
+                    "Ancient coins witnessing the magnificent history and trade of the Mediterranean Roman Empire.",
+                    "Echoing the symbol of the British Industrial Revolution and precision mechanical craftsmanship.",
+                    "Standing as a bastion of freedom, democracy, and immigrant culture in New York.",
+                    "Combining the Sydney Opera House's unique shell structure with southern marine ecology.",
+                    "The ultimate masterpiece of Russian imperial royal craft and jewelry design."
+                ]
+            }
         };
+
+        let currentLang = 'zh-TW';
+        let uniquePlayerId = "";
 
         function changeLanguage(lang) {
             currentLang = lang;
-            let t = i18n[lang];
+            let t = i18n[lang] || i18n['zh-TW'];
             document.getElementById('txt-title').innerText = t.title;
+            document.getElementById('lbl-nickname').innerHTML = `<b>${t.nickname}</b>`;
+            document.getElementById('player-nickname').placeholder = (lang === 'en' ? "Enter nickname" : "請輸入暱稱");
+            document.getElementById('lbl-nickname-tip').innerText = t.nicknameTip;
+            document.getElementById('lbl-gender').innerHTML = `<b>${t.gender}</b>`;
+            document.getElementById('opt-male').innerText = t.male;
+            document.getElementById('opt-female').innerText = t.female;
+            document.getElementById('lbl-test-tool').innerText = t.testTool;
+            document.getElementById('lbl-mode').innerHTML = `<b>${t.modeLabel}</b>`;
+            
+            document.getElementById('m-easy').innerText = t.easy;
+            document.getElementById('md-easy').innerText = t.easyDesc;
+            document.getElementById('m-std').innerText = t.std;
+            document.getElementById('md-std').innerText = t.stdDesc;
+            document.getElementById('m-cha').innerText = t.cha;
+            document.getElementById('md-cha').innerText = t.chaDesc;
+            document.getElementById('m-hel').innerText = t.hel;
+            document.getElementById('md-hel').innerText = t.helDesc;
+
+            document.getElementById('btn-instructions').innerText = t.instructions;
+            document.getElementById('ins-title').innerText = t.insTitle;
+            document.getElementById('ins-desc').innerHTML = t.insDesc;
+            document.getElementById('btn-station').innerText = t.stationBtn;
+            document.getElementById('btn-back-cover').innerText = t.backCover;
             document.getElementById('btn-start').innerText = t.start;
+            document.getElementById('txt-footer').innerText = t.footer;
+
+            document.getElementById('t-god').innerText = t.tGod;
+            document.getElementById('t-station').innerText = t.tStation;
+            document.getElementById('t-know').innerText = t.tKnow;
+            document.getElementById('t-undo').innerHTML = `${t.tUndo}(<span id="undo-count">${undoCountLeft}</span>)`;
+            document.getElementById('t-pause').innerText = t.tPause;
+            document.getElementById('t-restart').innerText = t.tRestart;
+            document.getElementById('pause-title').innerText = t.pauseTitle;
+            document.getElementById('p-resume').innerText = t.pResume;
+            document.getElementById('p-restart').innerText = t.pRestart;
+            document.getElementById('p-home').innerText = t.pHome;
+            document.getElementById('knowledge-title').innerText = t.knowTitle;
+            document.getElementById('k-close').innerText = t.kClose;
+
+            document.getElementById('station-modal-title').innerText = (lang === 'en' ? "💰 Select Banishment Station" : (lang === 'zh-CN' ? "💰 选择流放地与补给站" : "💰 選擇流放地與補給站"));
+            document.getElementById('station-modal-desc').innerText = (lang === 'en' ? "Earn tickets by tapping at supply stations:" : (lang === 'zh-CN' ? "点数不足时，选择流放地敲砖赚取机票费：" : "點數不足時，選擇流放地敲磚賺取機票費："));
+            document.getElementById('station-modal-cancel').innerText = (lang === 'en' ? "Cancel" : (lang === 'zh-CN' ? "取消返回" : "取消返回"));
+            for(let i=0; i<5; i++) {
+                document.getElementById('st-' + i).innerText = t.stations[i];
+            }
+
+            document.getElementById('god-modal-title').innerText = (lang === 'en' ? "⛩️ Divine Guidance & Prayer" : (lang === 'zh-CN' ? "⛩️ 神通指南与请神面板" : "⛩️ 神通指南與請神面板"));
+            document.getElementById('god-modal-desc').innerText = (lang === 'en' ? "Unlocked at Level 6. Pray for divine assistance!" : (lang === 'zh-CN' ? "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！" : "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！"));
+            document.getElementById('god-modal-close').innerText = (lang === 'en' ? "Close Guide" : (lang === 'zh-CN' ? "关闭指南" : "關閉指南"));
+            document.getElementById('g-tudi').innerText = t.gods[0];
+            document.getElementById('g-wen').innerText = t.gods[1];
+            document.getElementById('g-mazu').innerText = t.gods[2];
+            document.getElementById('g-guanyin').innerText = t.gods[3];
+            document.getElementById('g-yaoshi').innerText = t.gods[4];
+            document.getElementById('g-supreme').innerText = t.gods[5];
+
+            document.getElementById('cert-title').innerText = t.certTitle;
+            document.getElementById('cert-btn').innerText = t.certBtn;
+
+            document.getElementById('win-title').innerText = t.winTitle;
+            document.getElementById('btn-prev-level').innerText = t.btnPrev;
+            document.getElementById('btn-home-level').innerText = t.btnHome;
+            document.getElementById('btn-next-level').innerText = t.btnNext;
+            document.getElementById('btn-buy-souvenir').innerText = t.buyText;
+
+            let soundBtn = document.getElementById('btn-sound-toggle');
+            if(soundBtn) {
+                soundBtn.innerText = soundEnabled ? t.tSound : t.tSoundOff;
+            }
+
             for (let i = 1; i <= 10; i++) {
-                let opt = document.getElementById('opt-l' + i);
-                if (opt && t.levels[i-1]) opt.innerText = t.levels[i-1];
+                let opt = document.getElementById('opt-lvl' + i);
+                if (opt && t.levels[i-1]) {
+                    opt.innerText = (currentLang === 'en' ? `Level ${i} (${t.levels[i-1].split(': ')[1] || t.levels[i-1]})` : `第 ${i} 關 (${t.levels[i-1]})`);
+                }
+            }
+
+            if (isPlaying) {
+                updateUI();
             }
         }
+
+        function selectMode(mode, btnEl) {
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('selected'));
+            if(btnEl) btnEl.classList.add('selected');
+            document.getElementById('selected-mode').value = mode;
+        }
+
+        let audioCtx = null; let soundEnabled = true;
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            let t = i18n[currentLang];
+            let btn = document.getElementById('btn-sound-toggle');
+            if(btn) {
+                btn.innerText = soundEnabled ? t.tSound : t.tSoundOff;
+                btn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
+            }
+        }
+        function initAudio() {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+            } catch(e) {}
+        }
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) return;
+                let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination); let now = audioCtx.currentTime;
+                if (type === 'move') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(600, now);
+                    gain.gain.setValueAtTime(0.08, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                    osc.start(now); osc.stop(now + 0.08);
+                } else if (type === 'bump') {
+                    osc.type = 'square'; osc.frequency.setValueAtTime(150, now); osc.frequency.exponentialRampToValueAtTime(50, now + 0.1);
+                    gain.gain.setValueAtTime(0.15, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+                } else if (type === 'item') {
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(400, now); osc.frequency.setValueAtTime(800, now + 0.15);
+                    gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now); osc.stop(now + 0.25);
+                } else if (type === 'win') {
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                        let o = audioCtx.createOscillator(); let g = audioCtx.createGain();
+                        o.connect(g); g.connect(audioCtx.destination);
+                        o.type = 'square'; o.frequency.value = freq;
+                        g.gain.setValueAtTime(0.1, now + i*0.08); g.gain.linearRampToValueAtTime(0, now + i*0.08 + 0.15);
+                        o.start(now + i*0.08); o.stop(now + i*0.08 + 0.15);
+                    });
+                }
+            } catch(e) {}
+        }
+        function vibrate(pattern) { try { if (navigator.vibrate) navigator.vibrate(pattern); } catch(e) {} }
+
+        let isPlaying = false; let levelStartTime = 0;
+        let undoHistory = []; let undoCountLeft = 3;
+        let trapHitThisLevel = false; let treasureCollectedThisLevel = false;
+
+        const banishmentStations = [
+            { name: '潮州', reward: 200, maxClicks: 5, ticket: 500 },
+            { name: '惠州', reward: 180, maxClicks: 7, ticket: 700 },
+            { name: '儋州', reward: 150, maxClicks: 10, ticket: 900 },
+            { name: '永州', reward: 120, maxClicks: 15, ticket: 1100 },
+            { name: '寧古塔', reward: 100, maxClicks: 20, ticket: 1300 }
+        ];
+        let currentStationIndex = 0; let currentStationClicks = 0; let currentWorkEarned = 0; let workTargetValue = 500;
+
+        const godsData = {
+            'tudigong': { cost: 300, n_tw: '土地公' },
+            'wen': { cost: 500, n_tw: '溫王爺' },
+            'mazu': { cost: 1000, n_tw: '媽祖' },
+            'guanyin': { cost: 1500, n_tw: '觀世音' },
+            'yaoshifo': { cost: 2000, n_tw: '藥師佛' },
+            'supreme': { cost: 5000, n_tw: '玉皇大帝' }
+        };
+
+        let currentLevel = 1; let totalScore = 500; let isEventActive = false;
+        let maze = [], mazeSize = 9; let playerPos = {x: 1, y: 1}, targetPos = {x: 7, y: 7}; 
+        let currentTarget = {n:"駁二鐵件藝術公仔 🤖", s:500, i:"🤖", station:"第一站：臺灣・高雄", knowledge:"展現高雄由工業港口轉型為當代藝術創意的文創精神。"};
+        let bweiShengCount = 0; let pendingGod = '', pendingGodName = '';
+
+        const levelScoreList = [500, 800, 1000, 3500, 6000, 10000, 2500, 1500, 2000, 4500];
 
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -243,160 +741,512 @@
             if (targetEl) targetEl.classList.add('active');
         }
 
+        function goToInstructions() {
+            let selectedLv = document.getElementById('start-level-select');
+            currentLevel = selectedLv ? (parseInt(selectedLv.value) || 1) : 1;
+            showScreen('screen-instructions');
+        }
+
         function startGame() {
-            isPlaying = true;
-            let sel = document.getElementById('start-level-select');
-            currentLevel = sel ? parseInt(sel.value) : 1;
-            showScreen('screen-game');
+            initAudio(); isPlaying = true;
+            let rawNick = document.getElementById('player-nickname').value.trim() || (currentLang === 'en' ? "Explorer" : "探險家");
+            let randomCode = Math.floor(1000 + Math.random() * 9000);
+            uniquePlayerId = `${rawNick}#${randomCode}`;
+
+            showScreen('screen-game'); 
             loadLevel();
         }
 
-        function loadLevel() {
+        function restartLevel() {
+            closePauseModal();
+            loadLevel();
+        }
+
+        function openPauseModal() { document.getElementById('pause-modal').style.display = 'flex'; }
+        function closePauseModal() { document.getElementById('pause-modal').style.display = 'none'; }
+        function backToCoverFromPause() { 
+            closePauseModal(); 
+            let winModal = document.getElementById('win-modal');
+            if(winModal) winModal.style.display = 'none';
+            isPlaying = false; 
+            showScreen('screen-cover'); 
+        }
+
+        function openKnowledgeModal() {
             let t = i18n[currentLang];
-            document.getElementById('ui-level').innerText = (currentLang === 'en' ? "Level: " : "關卡: ") + currentLevel + "/10";
-            document.getElementById('ui-score').innerText = (currentLang === 'en' ? "Score: " : "總分: ") + totalScore;
-            document.getElementById('ui-station-banner').innerText = "📍 " + t.levels[currentLevel - 1];
-
-            maze = Array(mazeSize).fill().map(() => Array(mazeSize).fill(0));
-            playerPos = {x: 1, y: 1};
-            targetPos = {x: mazeSize - 2, y: mazeSize - 2};
-            drawMaze();
+            document.getElementById('knowledge-title').innerText = "📖 " + t.levels[currentLevel-1] + " - " + (currentLang === 'en' ? "Culture & Lore" : "文化與寶藏知識");
+            document.getElementById('knowledge-text').innerText = t.lores[currentLevel-1];
+            document.getElementById('knowledge-modal').style.display = 'flex';
         }
-
-        function drawMaze() {
-            let canvas = document.getElementById('mazeCanvas');
-            if (!canvas) return;
-            let ctx = canvas.getContext('2d');
-            let sz = canvas.width / mazeSize;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            for (let y = 0; y < mazeSize; y++) {
-                for (let x = 0; x < mazeSize; x++) {
-                    ctx.fillStyle = (x === playerPos.x && y === playerPos.y) ? '#3498DB' : ((x === targetPos.x && y === targetPos.y) ? '#E74C3C' : '#FFF8E1');
-                    ctx.fillRect(x * sz, y * sz, sz, sz);
-                    ctx.strokeRect(x * sz, y * sz, sz, sz);
-                }
-            }
-            ctx.font = `${sz * 0.7}px Arial`;
-            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-            ctx.fillText("🤠", (playerPos.x + 0.5) * sz, (playerPos.y + 0.5) * sz);
-            ctx.fillText("🎁", (targetPos.x + 0.5) * sz, (targetPos.y + 0.5) * sz);
-        }
-
-        function handleMove(dx, dy) {
-            let nx = playerPos.x + dx, ny = playerPos.y + dy;
-            if (nx >= 0 && nx < mazeSize && ny >= 0 && ny < mazeSize) {
-                playerPos.x = nx; playerPos.y = ny;
-                drawMaze();
-                if (playerPos.x === targetPos.x && playerPos.y === targetPos.y) {
-                    checkWin();
-                }
-            }
-        }
-
-        function checkWin() {
-            let shippingFee = currentLevel * 500;
-            let tName = i18n[currentLang].levels[currentLevel - 1];
-            let msg = currentLang === 'en' ? `Completed [${tName}]!\nEarned Score: +${levelScoreList[currentLevel - 1]}\nShipping Fee Required: ${shippingFee} pts` : `完成【${tName}】！\n獲得積分：+${levelScoreList[currentLevel - 1]} 點\n需支付紀念品跨國運費：${shippingFee} 點`;
-            
-            document.getElementById('win-message').innerText = msg;
-            document.getElementById('btn-buy-souvenir').innerText = currentLang === 'en' ? `💳 Pay Shipping (${shippingFee} pts)` : `💳 支付運費 (${shippingFee} 點)`;
-            document.getElementById('win-modal').style.display = 'flex';
-        }
-
-        function buySouvenir() {
-            let shippingFee = currentLevel * 500;
-            if (totalScore < shippingFee) {
-                document.getElementById('win-modal').style.display = 'none';
-                alert(currentLang === 'en' ? "⚠️ Insufficient funds! Opening Trade Port for work." : "⚠️ 旅費不足！即將開啟貿易港口打工賺取機票費！");
-                openStationModal();
-                return;
-            }
-            totalScore -= shippingFee;
-            totalScore += levelScoreList[currentLevel - 1];
-            document.getElementById('win-modal').style.display = 'none';
-            alert(currentLang === 'en' ? "🎉 Souvenir purchased successfully!" : "🎉 紀念品成功買回國！");
-            if (currentLevel < 10) { currentLevel++; loadLevel(); }
-            else { alert("🏆 You Win the Game!"); showScreen('screen-cover'); }
-        }
-
-        function openStationModal() { 
-            let modal = document.getElementById('station-modal');
-            if (modal) modal.style.display = 'flex'; 
-        }
-        function closeStationModal() { 
-            let modal = document.getElementById('station-modal');
-            if (modal) modal.style.display = 'none'; 
-        }
-
-        function selectPort(idx) {
-            closeStationModal();
-            currentPortIdx = idx;
-            workEarned = 0; workClicks = 0;
-            workTarget = [500, 700, 900, 1100, 1300][idx];
-            document.getElementById('work-score').innerText = workEarned;
-            document.getElementById('work-target-display').innerText = workTarget;
-            document.getElementById('work-return-btn').style.display = 'none';
-            showScreen('screen-work');
-        }
-
-        function doWork() {
-            workEarned += 100;
-            workClicks++;
-            document.getElementById('work-score').innerText = workEarned;
-            if (workEarned >= workTarget) {
-                document.getElementById('work-return-btn').style.display = 'block';
-            }
-        }
-
-        function returnFromWork() {
-            totalScore += (workEarned - workTarget);
-            showScreen('screen-game');
-            loadLevel();
-        }
-
-        function cancelWork() {
-            if (isPlaying) showScreen('screen-game');
-            else showScreen('screen-cover');
-        }
+        function closeKnowledgeModal() { document.getElementById('knowledge-modal').style.display = 'none'; }
 
         function openGodHelpModal() {
-            if (currentLevel < 6) { alert(currentLang === 'en' ? "Unlocked at Level 6+" : "第 6 關起解鎖神壇"); return; }
+            if (currentLevel < 6) {
+                alert(currentLang === 'en' ? "⛩️ Divine Guidance unlocks at Level 6!" : "⛩️ 神壇與請神神通將於【第 6 關】正式解鎖！");
+                return;
+            }
             document.getElementById('god-help-modal').style.display = 'flex';
         }
         function closeGodHelpModal() { document.getElementById('god-help-modal').style.display = 'none'; }
 
-        function startBwei(name, cost) {
-            closeGodHelpModal();
-            bweiCount = 0; bweiCost = cost;
-            document.getElementById('bwei-status').innerText = currentLang === 'en' ? "Consecutive Sheng Jiao: 0 / 2" : "目前連續聖筊：0 / 2";
-            document.getElementById('bwei-modal').style.display = 'flex';
-        }
-        function closeBwei() { document.getElementById('bwei-modal').style.display = 'none'; }
+        function openStationModal() { document.getElementById('station-modal').style.display = 'flex'; }
+        function closeStationModal() { document.getElementById('station-modal').style.display = 'none'; }
 
-        function throwBwei() {
-            let r = Math.floor(Math.random() * 3);
+        function selectStation(idx) {
+            closeStationModal();
+            currentStationIndex = idx; currentStationClicks = 0; currentWorkEarned = 0;
+            let st = banishmentStations[idx];
+            workTargetValue = st.ticket;
+            let stName = i18n[currentLang].stations[idx].split(' ')[1] || st.name;
+            document.getElementById('ui-banish-location').innerText = "🗺️ " + (currentLang === 'en' ? "Station: " : "流放地：") + stName;
+            isEventActive = true;
+            updateWorkUI();
+            showScreen('screen-work');
+        }
+
+        function cancelWorkToMenu() {
+            isEventActive = false;
+            if (isPlaying) showScreen('screen-game');
+            else showScreen('screen-cover');
+        }
+
+        function loadLevel() {
+            isEventActive = false; 
+            undoHistory = []; undoCountLeft = 3;
+            trapHitThisLevel = false; treasureCollectedThisLevel = false;
+            document.getElementById('undo-count').innerText = undoCountLeft;
+
+            let mode = document.getElementById('selected-mode').value;
+            if (mode === 'easy') mazeSize = 7;
+            else if (mode === 'standard') mazeSize = 9;
+            else if (mode === 'challenge') mazeSize = 11;
+            else if (mode === 'hell') mazeSize = 13;
+
+            let t = i18n[currentLang];
+            currentTarget = { 
+                n: t.targets[currentLevel - 1], 
+                s: levelScoreList[currentLevel - 1], 
+                i: t.targets[currentLevel - 1].split(' ').pop(), 
+                station: t.levels[currentLevel - 1], 
+                knowledge: t.lores[currentLevel - 1] 
+            };
+
+            document.getElementById('ui-station-banner').innerText = "📍 " + currentTarget.station;
+            updateUI();
+            
+            maze = Array(mazeSize).fill().map(() => Array(mazeSize).fill(1)); 
+            function carve(x, y) {
+                maze[y][x] = 0; 
+                let dirs = [[0, -2], [0, 2], [-2, 0], [2, 0]].sort(() => Math.random() - 0.5);
+                for (let dir of dirs) {
+                    let nx = x + dir[0], ny = y + dir[1];
+                    if (nx > 0 && nx < mazeSize-1 && ny > 0 && ny < mazeSize-1 && maze[ny][nx] === 1) { 
+                        maze[y + dir[1]/2][x + dir[0]/2] = 0; 
+                        carve(nx, ny); 
+                    }
+                }
+            }
+            carve(1, 1); 
+            playerPos = {x: 1, y: 1}; targetPos = {x: mazeSize - 2, y: mazeSize - 2};
+            maze[1][1] = 0; maze[1][2] = 0; maze[2][1] = 0;
+            maze[mazeSize - 2][mazeSize - 2] = 0; maze[mazeSize - 2][mazeSize - 3] = 0; maze[mazeSize - 3][mazeSize - 2] = 0;
+
+            let offSafeSpaces = [];
+            for (let y = 1; y < mazeSize - 1; y++) {
+                for (let x = 1; x < mazeSize - 1; x++) {
+                    if (maze[y][x] === 0 && !((x <= 2 && y <= 2) || (x >= mazeSize - 3 && y >= mazeSize - 3))) {
+                        offSafeSpaces.push({x, y});
+                    }
+                }
+            }
+            offSafeSpaces.sort(() => Math.random() - 0.5);
+
+            if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 2; 
+            if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 6; 
+            if(offSafeSpaces.length > 0) maze[offSafeSpaces.pop().y][offSafeSpaces.pop().x] = 7; 
+
+            maze[playerPos.y][playerPos.x] = 0;
+            maze[targetPos.y][targetPos.x] = 0;
+
+            drawMaze();
+            levelStartTime = Date.now();
+        }
+
+        function updateUI() {
+            let lvlPrefix = (currentLang === 'en' ? "Level: " : "關卡: ");
+            let scorePrefix = (currentLang === 'en' ? "Score: " : "總分: ");
+            let targetPrefix = (currentLang === 'en' ? "Target: " : "目標：");
+            document.getElementById('ui-level').innerText = lvlPrefix + currentLevel + "/10";
+            document.getElementById('ui-score').innerText = scorePrefix + totalScore;
+            document.getElementById('ui-target').innerText = targetPrefix + currentTarget.n;
+        }
+
+        window.addEventListener('keydown', function(e) {
+            let gameScreen = document.getElementById('screen-game');
+            if (gameScreen && gameScreen.classList.contains('active')) {
+                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' ', 'w', 'W', 's', 'S', 'a', 'A', 'd', 'D'].includes(e.key)) {
+                    e.preventDefault();
+                }
+                if (['ArrowUp', 'w', 'W'].includes(e.key)) handleMove(0, -1);
+                if (['ArrowDown', 's', 'S'].includes(e.key)) handleMove(0, 1);
+                if (['ArrowLeft', 'a', 'A'].includes(e.key)) handleMove(-1, 0);
+                if (['ArrowRight', 'd', 'D'].includes(e.key)) handleMove(1, 0);
+            }
+        });
+
+        function drawMaze() {
+            let canvasEl = document.getElementById('mazeCanvas');
+            if (!canvasEl) return;
+            let ctxEl = canvasEl.getContext('2d');
+            let cellSize = canvasEl.width / mazeSize; 
+            ctxEl.clearRect(0, 0, canvasEl.width, canvasEl.height);
+
+            let fogRadius = 2; 
+
+            for (let y = 0; y < mazeSize; y++) {
+                for (let x = 0; x < mazeSize; x++) {
+                    let dist = Math.abs(x - playerPos.x) + Math.abs(y - playerPos.y);
+                    let isVisible = (dist <= fogRadius);
+
+                    if (!isVisible) {
+                        ctxEl.fillStyle = '#3E2723'; 
+                        ctxEl.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                    } else {
+                        if (maze[y][x] === 1) {
+                            ctxEl.fillStyle = '#8D6E63'; ctxEl.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                            ctxEl.strokeStyle = '#5D4037'; ctxEl.lineWidth = 2; ctxEl.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                        } else { 
+                            ctxEl.fillStyle = '#FFF8E1'; ctxEl.fillRect(x * cellSize, y * cellSize, cellSize, cellSize); 
+                        }
+                    }
+                }
+            }
+
+            ctxEl.font = `${cellSize * 0.8}px Arial`; ctxEl.textAlign = 'center'; ctxEl.textBaseline = 'middle';
+            for (let y = 0; y < mazeSize; y++) {
+                for (let x = 0; x < mazeSize; x++) {
+                    let dist = Math.abs(x - playerPos.x) + Math.abs(y - playerPos.y);
+                    if (dist <= fogRadius) {
+                        if (maze[y][x] === 2) ctxEl.fillText("🐺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (maze[y][x] === 6) ctxEl.fillText("💩", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (maze[y][x] === 7) ctxEl.fillText("💵", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                    }
+                }
+            }
+
+            let targetDist = Math.abs(targetPos.x - playerPos.x) + Math.abs(targetPos.y - playerPos.y);
+            if (targetDist <= fogRadius && currentTarget && currentTarget.i) {
+                ctxEl.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
+            }
+            ctxEl.fillText("🤠", (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
+        }
+
+        function handleMove(dx, dy) {
+            if (isEventActive) return;
+            initAudio(); 
+            let nx = playerPos.x + dx, ny = playerPos.y + dy;
+            if (nx >= 0 && nx < mazeSize && ny >= 0 && ny < mazeSize) {
+                let cell = maze[ny][nx];
+                if (cell === 1) { playSound('bump'); vibrate([30]); return; }
+                
+                undoHistory.push({x: playerPos.x, y: playerPos.y});
+                if(undoHistory.length > 10) undoHistory.shift();
+
+                if (cell === 6) {
+                    trapHitThisLevel = true;
+                    totalScore -= 200; updateUI();
+                    playSound('bump'); maze[ny][nx] = 0;
+                    playerPos.x = nx; playerPos.y = ny; drawMaze();
+                    alert(currentLang === 'en' ? "💩 Hit a trap, -200 pts!" : (currentLang === 'zh-CN' ? "💩 踩到大便陷阱，扣除 200 点！" : "💩 踩到大便陷阱，扣除 200 點！"));
+                    return;
+                }
+                if (cell === 7) {
+                    treasureCollectedThisLevel = true;
+                    totalScore += 300; updateUI();
+                    playSound('item'); maze[ny][nx] = 0;
+                    playerPos.x = nx; playerPos.y = ny; drawMaze();
+                    alert(currentLang === 'en' ? "💵 Found cash treasure, +300 pts!" : (currentLang === 'zh-CN' ? "💵 获得现金宝物 300 点！" : "💵 獲得現金寶物 300 點！"));
+                    checkWin();
+                    return;
+                }
+
+                playSound('move');
+                playerPos.x = nx; playerPos.y = ny; drawMaze(); checkWin();
+            }
+        }
+
+        function undoMove() {
+            if (undoCountLeft <= 0) {
+                alert(currentLang === 'en' ? "⚠️ Undo limit reached for this level!" : (currentLang === 'zh-CN' ? "⚠️ 本关的反悔次数已用完！" : "⚠️ 本關的反悔次數已用完！"));
+                return;
+            }
+            if (undoHistory.length === 0) {
+                alert(currentLang === 'en' ? "⚠️ No moves to undo!" : (currentLang === 'zh-CN' ? "⚠️ 目前没有可撤回的步骤！" : "⚠️ 目前沒有可撤回的步驟！"));
+                return;
+            }
+            let prev = undoHistory.pop();
+            playerPos = prev;
+            undoCountLeft--;
+            document.getElementById('undo-count').innerText = undoCountLeft;
+            playSound('item');
+            drawMaze();
+        }
+
+        function checkWin() {
+            if (playerPos.x === targetPos.x && playerPos.y === targetPos.y) {
+                isEventActive = true; 
+                playSound('win'); vibrate([100, 50, 100]);
+                
+                let stars = 3;
+                if (trapHitThisLevel) stars--;
+                if (!treasureCollectedThisLevel) stars--;
+                stars = Math.max(1, stars);
+
+                let starStr = "⭐".repeat(stars);
+                document.getElementById('ui-stars').innerText = starStr;
+
+                let shippingFee = currentLevel * 500;
+                let t = i18n[currentLang];
+
+                let msg = (currentLang === 'en' ? 
+                    `Completed [Level ${currentLevel}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n}\nEarned Score: +${currentTarget.s}\nStars: ${starStr}\nCurrent Total Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
+                    (currentLang === 'zh-CN' ?
+                        `通关【第 ${currentLevel} 关：${currentTarget.station}】！\n代号：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n获得积分：${currentTarget.s} 点\n本关星等：${starStr}\n目前总分：${totalScore} 点\n\n💡 知识小百科：\n${currentTarget.knowledge}` :
+                        `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n目前總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
+                    )
+                );
+                document.getElementById('win-message').innerText = msg;
+
+                document.getElementById('purchase-area').style.display = 'block';
+                let buyDescText = (currentLang === 'en' ? 
+                    `🛍️ Souvenir & Shipping Fee for Level ${currentLevel}: ${shippingFee} pts` :
+                    (currentLang === 'zh-CN' ? `🛍️ 第 ${currentLevel} 关纪念品与跨国运费：${shippingFee} 点` : `🛍️ 第 ${currentLevel} 關紀念品與跨國運費：${shippingFee} 點`)
+                );
+                document.getElementById('purchase-desc').innerText = buyDescText;
+                document.getElementById('nav-buttons-area').style.display = 'none';
+
+                document.getElementById('win-modal').style.display = 'flex';
+            }
+        }
+
+        function buySouvenir() {
+            let shippingFee = currentLevel * 500;
+            let t = i18n[currentLang];
+            if (totalScore < shippingFee) {
+                alert(t.insufficient);
+                document.getElementById('win-modal').style.display = 'none';
+                openStationModal();
+                return;
+            }
+
+            totalScore -= shippingFee;
+            totalScore += currentTarget.s;
+            updateUI();
+
+            alert(currentLang === 'en' ? "🎉 Successfully purchased souvenir and shipped home! Proceeding to next adventure." : "🎉 成功支付運費，紀念品已安全寄回國！");
+
+            document.getElementById('purchase-area').style.display = 'none';
+            let navArea = document.getElementById('nav-buttons-area');
+            navArea.style.display = 'flex';
+
+            let prevBtn = document.getElementById('btn-prev-level');
+            let nextBtn = document.getElementById('btn-next-level');
+            prevBtn.style.display = (currentLevel > 1) ? 'inline-block' : 'none';
+
+            if (currentLevel < 10) {
+                nextBtn.innerText = t.btnNext;
+            } else {
+                nextBtn.innerText = t.btnCert;
+            }
+        }
+
+        function goToPrevLevel() {
+            document.getElementById('win-modal').style.display = 'none';
+            if (currentLevel > 1) {
+                currentLevel--;
+                loadLevel();
+            }
+        }
+        function goToNextLevel() {
+            document.getElementById('win-modal').style.display = 'none';
+            if (currentLevel < 10) {
+                currentLevel++;
+                loadLevel();
+            } else {
+                isPlaying = false;
+                let certText = (currentLang === 'en' ? 
+                    `This is to certify that <b>[${uniquePlayerId}]</b> has successfully completed the Global Treasure Maze Adventure!<br>Final Score: <b>${totalScore} pts</b><br>Congratulations on winning the "Master Explorer" honor!` :
+                    (currentLang === 'zh-CN' ?
+                        `特此证明 <b>[${uniquePlayerId}]</b> 探险家顺利完成世界十大宝藏迷宫探险！<br>最终总分：<b>${totalScore} 点</b><br>恭喜荣获“世界寻宝之王”最高殊荣！` :
+                        `特此證明 <b>[${uniquePlayerId}]</b> 探險家順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`
+                    )
+                );
+                document.getElementById('cert-content').innerHTML = certText;
+                document.getElementById('certificate-modal').style.display = 'flex';
+            }
+        }
+        function closeCertificateModal() {
+            document.getElementById('certificate-modal').style.display = 'none';
+            showScreen('screen-cover');
+        }
+
+        function doWork() {
+            let st = banishmentStations[currentStationIndex];
+            if (currentStationClicks >= st.maxClicks) {
+                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : (currentLang === 'zh-CN' ? "⚠️ 敲砖额度已满，请点击下方按钮支付机票费返程！" : "⚠️ 敲磚額度已滿，請點擊下方按鈕支付機票費返程！"));
+                return;
+            }
+            playSound('item'); vibrate([20]);
+            currentWorkEarned += st.reward; currentStationClicks++;
+            updateWorkUI();
+        }
+        function updateWorkUI() {
+            let st = banishmentStations[currentStationIndex];
+            document.getElementById('work-score').innerText = currentWorkEarned;
+            document.getElementById('work-target-display').innerText = st.ticket;
+            let descText = (currentLang === 'en' ? 
+                `Per Tap: ${st.reward} pts | Remaining: ${st.maxClicks - currentStationClicks} | Ticket: ${st.ticket} pts` :
+                (currentLang === 'zh-CN' ?
+                    `每敲一次：${st.reward}点 | 剩余次数：${st.maxClicks - currentStationClicks} | 机票费：${st.ticket}点` :
+                    `每敲一次：${st.reward}點 | 剩餘次數：${st.maxClicks - currentStationClicks} | 機票費：${st.ticket}點`
+                )
+            );
+            document.getElementById('work-rule-desc').innerText = descText;
+            let prog = document.getElementById('work-progress');
+            prog.max = st.ticket; prog.value = Math.min(currentWorkEarned, st.ticket);
+            let returnBtnText = (currentLang === 'en' ? "✈️ Pay Ticket & Return to Level!" : (currentLang === 'zh-CN' ? "✈️ 缴纳机票费，重返原关卡！" : "✈️ 繳交機票費，重返原關卡！"));
+            document.getElementById('ui-btn-work-return').innerText = returnBtnText;
+            document.getElementById('ui-btn-work-return').style.display = (currentWorkEarned >= st.ticket) ? 'block' : 'none';
+        }
+        function returnFromWork() {
+            let st = banishmentStations[currentStationIndex];
+            if (currentWorkEarned < st.ticket) return;
+            totalScore += (currentWorkEarned - st.ticket);
+            isEventActive = false; updateUI(); drawMaze();
+            showScreen('screen-game');
+        }
+
+        function startGodBwei(godType) {
+            closeGodHelpModal();
+            let cost = godsData[godType].cost;
+            if (totalScore < cost) {
+                alert(currentLang === 'en' ? "⚠️ Not enough score for offerings!" : "⚠️ 香油錢不足，無法請神！");
+                return;
+            }
+            totalScore -= cost;
+            updateUI();
+
+            pendingGod = godType; 
+            let godIdx = Object.keys(godsData).indexOf(godType);
+            pendingGodName = i18n[currentLang].gods[godIdx] || godsData[godType].n_tw;
+            isEventActive = true; bweiShengCount = 0;
+            let pTitle = (currentLang === 'en' ? "🙏 Praying to " + pendingGodName : (currentLang === 'zh-CN' ? "🙏 诚心掷筊请示 " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName));
+            document.getElementById('bwei-title').innerText = pTitle;
+            let countText = (currentLang === 'en' ? "Consecutive Sheng Jiao: 0" : (currentLang === 'zh-CN' ? "目前连续圣筊：0 次" : "目前連續聖筊：0 次"));
+            document.getElementById('bwei-count-display').innerText = countText;
+            
             let c1 = document.getElementById('cup1');
             let c2 = document.getElementById('cup2');
-            if (r === 0) {
-                bweiCount++;
-                c1.className = "bwei-mu-block"; c1.innerText = currentLang === 'en' ? "Ask" : "有求";
-                c2.className = "bwei-mu-block convex"; c2.innerText = "";
-            } else if (r === 1) {
-                bweiCount = 0;
-                c1.className = "bwei-mu-block"; c1.innerText = currentLang === 'en' ? "Ask" : "有求";
-                c2.className = "bwei-mu-block"; c2.innerText = currentLang === 'en' ? "Grant" : "必應";
-            } else {
-                bweiCount = 0;
-                c1.className = "bwei-mu-block convex"; c1.innerText = "";
-                c2.className = "bwei-mu-block convex"; c2.innerText = "";
-            }
-            document.getElementById('bwei-status').innerText = currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiCount} / 2` : `目前連續聖筊：${bweiCount} / 2`;
-            if (bweiCount >= 2) {
-                alert(currentLang === 'en' ? "✨ Divine Blessing Received!" : "✨ 獲得神明庇佑！");
-                totalScore -= bweiCost;
-                closeBwei();
-                loadLevel();
+            c1.className = "bwei-block cup-convex"; c1.innerText = "無字";
+            c2.className = "bwei-block cup-convex"; c2.innerText = "無字";
+
+            document.getElementById('bwei-modal').style.display = 'flex';
+        }
+        function closeBwei() { 
+            document.getElementById('bwei-modal').style.display = 'none'; 
+            isEventActive = false; 
+        }
+        
+        function throwBweiAnimation() {
+            playSound('item'); vibrate([50, 50]);
+            let cup1 = document.getElementById('cup1');
+            let cup2 = document.getElementById('cup2');
+            cup1.style.transform = 'rotate(360deg) scale(1.2)';
+            cup2.style.transform = 'rotate(-360deg) scale(1.2)';
+
+            setTimeout(() => {
+                cup1.style.transform = 'rotate(0deg) scale(1)';
+                cup2.style.transform = 'rotate(0deg) scale(1)';
+                
+                let c1Flat = Math.random() < 0.5;
+                let c2Flat = Math.random() < 0.5;
+
+                if (c1Flat) {
+                    cup1.className = "bwei-block cup-flat";
+                    cup1.innerText = "有求";
+                } else {
+                    cup1.className = "bwei-block cup-convex";
+                    cup1.innerText = "無字";
+                }
+
+                if (c2Flat) {
+                    cup2.className = "bwei-block cup-flat";
+                    cup2.innerText = "必應";
+                } else {
+                    cup2.className = "bwei-block cup-convex";
+                    cup2.innerText = "無字";
+                }
+
+                // 判斷筊型邏輯
+                if (!c1Flat && !c2Flat) {
+                    bweiShengCount = 0;
+                    document.getElementById('bwei-count-display').innerText = currentLang === 'en' ? "Result: Gai Jiao (Failure, Reset to 0)" : "出現【蓋筊／怒杯】！神明不同意，連續次數歸零。";
+                }
+                else if (c1Flat && c2Flat) {
+                    let sText = (currentLang === 'en' ? `Result: Xiao Jiao (Unresolved). Consecutive: ${bweiShengCount}` : `出現【笑筊】！神明笑而不答，連續次數維持：${bweiShengCount} 次`);
+                    document.getElementById('bwei-count-display').innerText = sText;
+                }
+                else {
+                    bweiShengCount++;
+                    let sText = (currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiShengCount}` : `連續聖筊：${bweiShengCount} 次`);
+                    document.getElementById('bwei-count-display').innerText = sText;
+
+                    if (bweiShengCount === 2) {
+                        setTimeout(() => {
+                            document.getElementById('bwei-modal').style.display = 'none';
+                            isEventActive = false;
+
+                            let isGodAbsent = Math.random() < 0.2;
+                            let cost = godsData[pendingGod].cost;
+
+                            if (isGodAbsent) {
+                                totalScore += cost;
+                                updateUI();
+                                alert(`⛩️【神明不在位通知】\n真不巧！${pendingGodName} 目前正在度假或打麻將不在位！\n系統已將香油錢 ${cost} 點原封不動全額退回，請探險家靠實力闖關！`);
+                            } else {
+                                alert(`⛩️ 聖筊連續兩次！${pendingGodName} 顯靈庇佑成功！`);
+                                applyGodPower(pendingGod);
+                            }
+                        }, 600);
+                    }
+                }
+            }, 500);
+        }
+
+        function applyGodPower(godType) {
+            if (godType === 'tudigong') {
+                alert("🏮 土地公指引：已為您掃除部分迷霧視野！");
+            } else if (godType === 'wen') {
+                alert("⚔️ 溫王爺神威：已為您斬妖除魔，清除當前關卡所有陷阱！");
+            } else if (godType === 'mazu') {
+                totalScore += 500;
+                updateUI();
+                alert("🌊 媽祖庇佑：賜予航海順風，額外獲得 500 點獎勵！");
+            } else if (godType === 'guanyin') {
+                undoCountLeft = 5;
+                document.getElementById('undo-count').innerText = undoCountLeft;
+                alert("🌿 觀世音普渡：慈悲為懷，本關反悔次數補滿至 5 次！");
+            } else if (godType === 'yaoshifo') {
+                totalScore += 1000;
+                updateUI();
+                alert("🪷 藥師佛加持：身心清淨，獲得 1000 點加持！");
+            } else if (godType === 'supreme') {
+                totalScore += 3000;
+                updateUI();
+                alert("🌟 玉皇大帝降臨：全場迷霧與障礙清除，直接指引通往終點！");
+                playerPos = { x: targetPos.x, y: targetPos.y };
+                drawMaze();
+                checkWin();
             }
         }
     </script>
