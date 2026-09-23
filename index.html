@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 終極旗艦完美版</title>
+    <title>世界寶藏迷宮探險 - 十關全開完美對齊版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -226,8 +226,7 @@
             <div style="margin: 12px 0; background: #FEF9E7; padding: 12px; border-radius: 16px; border: 1px solid #F9E79F;">
                 <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
                 <select id="start-level-select" style="font-size: 14px; padding: 6px 10px; border-radius: 10px; border: 1px solid #F39C12; background: white; font-weight: 700;">
-                    <!-- 預設選項，開機將由 JS 動態填充 -->
-                    <option value="1">第 1 關 (臺灣・高雄)</option>
+                    <!-- 動態產生的選關下拉選單 -->
                 </select>
             </div>
 
@@ -345,7 +344,7 @@
         <div class="modal-content">
             <h2 id="pause-title" style="color: #C0392B; margin-top: 0;">⏸️ 遊戲暫停</h2>
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
-                <button id="p-resume" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%);" onclick="closePauseModal()">▶️ 繼續遊戲</button>
+                <button id="p-resume" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%;" onclick="closePauseModal()">▶️ 繼續遊戲</button>
                 <button id="p-restart" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%);" onclick="restartLevel(); closePauseModal();">🔄 重新開始本關</button>
                 <button id="p-home" class="btn-large btn-cancel" style="width: 100%; max-width: 100%; margin: 0;" onclick="backToCoverFromPause()">🏠 返回主選單</button>
             </div>
@@ -467,7 +466,6 @@
             }).catch(e => {});
         }
 
-        // 🌟 絕對確保頁面載入時立即執行語系與下拉選單初始化！
         window.addEventListener('DOMContentLoaded', () => {
             incrementGlobalStat('players');
             fetchGlobalStats();
@@ -570,6 +568,7 @@
                 stationBtn: "💰 前往歷史流放站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
+                knowledgeTitle: "📖 文化與寶藏知識",
                 knowTitle: "📖 文化與寶藏知識", kClose: "了解了，繼續探險！",
                 stationTitle: "📜 選擇歷史流放地打工", stationDesc: "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。點擊神像即可誠心擲筊請神！", godClose: "關閉指南",
@@ -581,7 +580,11 @@
                 workHeaderTitle: "📜 時空流放打工區 📜", workEarnedLabel: "已賺取工資：", workUnitLabel: "點", workTapTip: "狂點按鈕打工賺取機票！", workReturnBtn: "✈️ 賺足機票費，穿越回原關卡！", workBackBtn: "⬅️ 返回主選單",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
                 stat1: "🌍 全球探險人次", stat2: "💎 尋獲世界寶物", stat3: "🪵 邊疆打工流放",
-                levels: ["第 1 關 (臺灣・高雄)", "第 2 關 (日本・京都)", "第 3 關 (法國・巴黎)", "第 4 關 (埃及・吉薩)", "第 5 關 (希臘・雅典)", "第 6 關 (義大利・羅馬/神壇)", "第 7 關 (英國・倫敦)", "第 8 關 (美國・紐約)", "第 9 關 (澳洲・雪梨)", "第 10 關 (俄羅斯・莫斯科)"]
+                levels: [
+                    "第 1 關 (臺灣・高雄)", "第 2 關 (日本・京都)", "第 3 關 (法國・巴黎)",
+                    "第 4 關 (埃及・吉薩)", "第 5 關 (希臘・雅典)", "第 6 關 (義大利・羅馬/神壇)",
+                    "第 7 關 (英國・倫敦)", "第 8 關 (美國・紐約)", "第 9 關 (澳洲・雪梨)", "第 10 關 (俄羅斯・莫斯科)"
+                ]
             },
             'zh-CN': {
                 title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (保障隐私)：", gender: "请选择您的性别：",
@@ -594,10 +597,11 @@
                 stationBtn: "💰 前往历史流放站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
+                knowledgeTitle: "📖 文化与宝藏知识",
                 knowTitle: "📖 文化与宝藏知识", kClose: "了解了，继续探险！",
                 stationTitle: "📜 选择历史贸易港口打工", stationDesc: "旅费透支时，选择前往历史港口打工赚取路费：", stationCancel: "取消返回",
                 godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。点击神像即可诚心掷筊请神！", godClose: "关闭指南",
-                bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊（一平金字、一凸无字）】方可请神[cite: 2]", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
+                bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊（一平金字、一无字凸面）】方可请神[cite: 2]", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
                 nicknameTip: "💡 支持中英文、数字，最多 12 码。",
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
@@ -605,7 +609,11 @@
                 workHeaderTitle: "📜 历史贸易港口打工区 📜", workEarnedLabel: "已赚取工资：", workUnitLabel: "点", workTapTip: "狂点按钮打工赚取路费！", workReturnBtn: "✈️ 缴纳路费，重返原关卡！", workBackBtn: "⬅️ 返回主菜单",
                 footer: "高雄师范大学 刘世闵 老师设计",
                 stat1: "🌍 全球探险人次", stat2: "💎 寻获世界宝物", stat3: "🪵 历史贸易打工",
-                levels: ["第 1 关 (中国台湾・高雄)", "第 2 关 (日本・京都)", "第 3 关 (法国・巴黎)", "第 4 关 (埃及・吉萨)", "第 5 关 (希腊・雅典)", "第 6 关 (意大利・罗马/神坛)", "第 7 关 (英国・伦敦)", "第 8 关 (美国・纽约)", "第 9 关 (澳大利亚・悉尼)", "第 10 关 (俄罗斯・莫斯科)"]
+                levels: [
+                    "第 1 关 (中国台湾・高雄)", "第 2 关 (日本・京都)", "第 3 关 (法国・巴黎)",
+                    "第 4 关 (埃及・吉萨)", "第 5 关 (希腊・雅典)", "第 6 关 (意大利・罗马/神坛)",
+                    "第 7 关 (英国・伦敦)", "第 8 关 (美国・纽约)", "第 9 关 (澳大利亚・悉尼)", "第 10 关 (俄罗斯・莫斯科)"
+                ]
             },
             'en': {
                 title: "🏆 World Treasure Maze Adventure 🏆", nickname: "Player ID / Unique Handle:", gender: "Select Gender:",
@@ -615,9 +623,11 @@
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
                 hell: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
+                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>⛩️ Divine Oracle Prayer (Level 6+):</b> Unlocked at Level 6. Throw two consecutive <b>'Sheng Jiao' (One flat gold text 'You Qiu/Bi Ying', one convex blank)</b> to receive divine blessings[cite: 2]! Laughing Jiao (both flat) allows retries, while Yin Jiao (both convex) fails the prayer[cite: 1, 2].</p><p><b>🕹️ Historical Trade Port:</b> Trigger time-warp trade ports if funds are low to earn travel tickets!</p><p><b>⭐ Rating & Undo:</b> Earn 1-3 stars per level and use Undo to step back.</p>`,
                 stationBtn: "💰 Historical Trade Port", backCover: "⬅️ Main Menu",
                 tGod: "⛩️ Gods", tStation: "💰 Ports", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
+                knowledgeTitle: "📖 Culture & Treasure Lore",
                 knowTitle: "📖 Culture & Treasure Lore", kClose: "Got it, Continue!",
                 stationTitle: "💰 Select Historical Trade Port", stationDesc: "Earn tickets by assisting historical trade posts:", stationCancel: "Cancel",
                 godTitle: "⛩️ Divine Guidance", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close",
@@ -668,6 +678,7 @@
 
             document.getElementById('btn-instructions').innerText = t.instructions;
             document.getElementById('ins-title').innerText = t.insTitle;
+            document.getElementById('ins-desc').innerHTML = t.insDesc;
             document.getElementById('btn-station').innerText = t.stationBtn;
             document.getElementById('btn-back-cover').innerText = t.backCover;
             document.getElementById('btn-start').innerText = t.start;
@@ -683,8 +694,8 @@
             document.getElementById('p-resume').innerText = t.pResume;
             document.getElementById('p-restart').innerText = t.pRestart;
             document.getElementById('p-home').innerText = t.pHome;
-            document.getElementById('knowledge-title').innerText = currentLang === 'en' ? "📖 Culture & Lore" : (currentLang === 'zh-CN' ? "📖 文化与宝藏知识" : "📖 文化與寶藏知識");
-            document.getElementById('k-close').innerText = currentLang === 'en' ? "Got it, Continue!" : "了解了，繼續探險！";
+            document.getElementById('knowledge-title').innerText = t.knowledgeTitle;
+            document.getElementById('k-close').innerText = t.kClose;
 
             document.getElementById('station-modal-title').innerText = (lang === 'en' ? "💰 Select Historical Trade Port" : (lang === 'zh-CN' ? "📜 选择历史贸易港口打工" : "📜 選擇歷史流放地打工"));
             document.getElementById('station-modal-desc').innerText = (lang === 'en' ? "Earn tickets by assisting trade posts:" : (lang === 'zh-CN' ? "旅费透支时，选择前往历史港口打工赚取路费：" : "旅費透支時，選擇前往古代/歷史名人處打工賺取機票費："));
@@ -728,11 +739,11 @@
 
             let soundBtn = document.getElementById('btn-sound-toggle');
             if(soundBtn) {
-                soundBtn.innerText = soundEnabled ? (currentLang === 'en' ? "🔊 Sound On" : (currentLang === 'zh-CN' ? "🔊 音效开" : "🔊 音效開")) : (currentLang === 'en' ? "🔇 Sound Off" : (currentLang === 'zh-CN' ? "🔊 音效关" : "🔇 音效關"));
+                soundBtn.innerText = soundEnabled ? (currentLang === 'en' ? "🔊 Sound On" : (currentLang === 'zh-CN' ? "🔊 音效开" : "🔊 音效開")) : (currentLang === 'en' ? "🔇 Sound Off" : (currentLang === 'zh-CN' ? "🔇 音效关" : "🔇 音效關"));
                 soundBtn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
             }
 
-            // 🌟 嚴格動態渲染選關下拉選單
+            // 🌟 嚴格確保 10 個關卡完整渲染進下拉選單
             let levelSelect = document.getElementById('start-level-select');
             levelSelect.innerHTML = "";
             for (let i = 1; i <= 10; i++) {
