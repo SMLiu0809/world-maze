@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 快取清除強制版 v9.9</title>
+    <title>世界寶藏迷宮探險 - 語系與選單完全同步版 v10.0</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -226,7 +226,7 @@
             <div style="margin: 12px 0; background: #FEF9E7; padding: 12px; border-radius: 16px; border: 1px solid #F9E79F;">
                 <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
                 <select id="start-level-select" style="font-size: 14px; padding: 6px 10px; border-radius: 10px; border: 1px solid #F39C12; background: white; font-weight: 700;">
-                    <!-- 動態渲染選單項目 -->
+                    <!-- 動態由 JS 渲染 -->
                 </select>
             </div>
 
@@ -519,7 +519,7 @@
 
         const workTasksTW = [
             { name: "潮州（韓愈）", task: "工作任務：拿木棍幫韓愈驅趕鱷魚", icon: "🪵", isLeg: false, chats: ["「用木棍大力敲擊江岸，鱷魚嚇得直發抖！」", "韓愈大喊：「好棒的棍法！快幫本官把這群惡獸趕跑！」"] },
-            { name: "惠州（蘇東坡）", task: "工作任務：炭火炙烤新鮮生蠔，鮮美蚌肉直冒湯汁", icon: "🦪", isLeg: false, chats: ["東坡口水直流：「生蠔殼冒汁了！快灑上蒜蓉與蔥花！」", "東坡大讚：『鮮美無比，此味只應天上有！』"] },
+            { name: "惠州（蘇東坡）", task: "工作任務：炭火炙烤新鮮生蠔，鮮美蚌肉直冒湯汁", icon: "🦪", isLeg: false, chats: ["東坡口水直流：「生蠔殼冒汁了！快灑上蒜蓉與蔥花！」", "東坡大讚: '鮮美無比，此味只應天上有！'"] },
             { name: "儋州（吃貨東坡）", task: "工作任務：拿斧頭砍椰子、搬運茅草講學", icon: "🥥", isLeg: false, chats: ["東坡大笑：「海南島沒肉吃，但椰子水喝到飽！」", "「茅草屋板凳搬好，準備聽吃貨東坡開講！」"] },
             { name: "永州（柳宗元）", task: "工作任務：拿竹杖隨柳宗元尋找小石潭與奇石", icon: "🪨", isLeg: false, chats: ["柳宗元嘆氣：「此地寂寞，幸好有你陪我找小石潭。」", "「潭中魚可百許頭，皆若空游無所依。」"] },
             { name: "寧古塔（押解甄遠道）", task: "工作任務：押解甄嬛老爹，使出朝天蹬踢歹徒拿甄嬛賞金", icon: "🦵", isLeg: true, chats: [
@@ -581,7 +581,7 @@
                 easy: "🍵 輕鬆模式", easyDesc: "步調悠閒、適合放鬆",
                 std: "⚖️ 標準模式", stdDesc: "平衡挑戰與趣味",
                 cha: "🎯 挑戰模式", mChaDesc: "刁鑽迷宮、高手過招",
-                hel: "🔥 地獄模式", mHelDesc: "極致難關、頂級榮耀",
+                hell: "🔥 地獄模式", mHelDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
                 stationBtn: "💰 前往歷史流放站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 流放站", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
@@ -653,6 +653,10 @@
             currentLang = lang;
             let t = i18n[lang] || i18n['zh-TW'];
             let levelsArr = levelsData[lang] || levelsData['zh-TW'];
+
+            // 🌟 確保語言選單的狀態與當前傳入的 lang 同步
+            let langSelectEl = document.getElementById('languageSelect');
+            if (langSelectEl) langSelectEl.value = lang;
 
             document.getElementById('txt-title').innerText = t.title;
             document.getElementById('lbl-nickname').innerHTML = `<b>${t.nickname}</b>`;
@@ -743,7 +747,7 @@
                 soundBtn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
             }
 
-            // 🌟 絕對關鍵：完整清空並重新填充當前語言的 10 個選項
+            // 🌟 絕對萬無一失：重新清空並渲染 10 個正確語系的下拉選項
             let levelSelect = document.getElementById('start-level-select');
             levelSelect.innerHTML = "";
             for (let i = 1; i <= 10; i++) {
