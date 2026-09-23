@@ -154,6 +154,7 @@
         }
         .modal-text { font-size: clamp(19px, 4.5vw, 26px); font-weight: 800; color: #C0392B; margin-bottom: 18px; line-height: 1.4;}
         
+        /* 神通說明表格美化 */
         .god-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; text-align: left; }
         .god-table th, .god-table td { border: 1px solid #CBD5E1; padding: 10px; }
         .god-table th { background: #FEF9E7; color: #B7950B; font-weight: 700; text-align: center; }
@@ -388,7 +389,7 @@
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🦪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
             </div>
@@ -400,7 +401,7 @@
     <div id="god-help-modal">
         <div class="modal-content">
             <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
-            <p id="god-modal-desc" style="font-size: 15px; color: #718096;">第 6 關起解鎖神壇。請先參考下方表格，再點擊神像誠心擲筊！</p>
+            <p id="god-modal-desc" style="font-size: 15px; color: #718096;">第 6 關起解鎖神壇。點擊下方神像即可誠心擲筊請神！</p>
             
             <!-- 神通功能對照表格 -->
             <table class="god-table">
@@ -445,15 +446,15 @@
                 </tbody>
             </table>
 
-            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 15px 0;">
-                <button style="background: #795548; flex: 1 1 30%; padding: 12px 8px; border-radius: 14px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('tudigong')"><span id="g-tudi">🏮土地公(-300)</span></button>
-                <button style="background: #C0392B; flex: 1 1 30%; padding: 12px 8px; border-radius: 14px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('wen')"><span id="g-wen">⚔️溫王爺(-400)</span></button>
-                <button style="background: #2980B9; flex: 1 1 30%; padding: 12px 8px; border-radius: 14px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('mazu')"><span id="g-mazu">🌊媽祖(-500)</span></button>
-                <button style="background: #27AE60; flex: 1 1 30%; padding: 12px 8px; border-radius: 14px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('guanyin')"><span id="g-guanyin">🌿觀世音(-600)</span></button>
-                <button style="background: #8E44AD; flex: 1 1 30%; padding: 12px 8px; border-radius: 14px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('yaoshifo')"><span id="g-yaoshi">🪷藥師佛(-800)</span></button>
-                <button style="flex: 1 1 100%; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); color: #FFF; padding: 14px; border-radius: 14px; border: none; font-weight: 700; cursor: pointer; font-size: 15px; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟玉皇大帝 (全清場+指路 / -2500)</span></button>
+            <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 15px 0;">
+                <button style="background: #795548; flex: 1 1 30%; padding: 12px 6px; border-radius: 12px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('tudigong')"><span id="g-tudi">🏮土地公(-300)</span></button>
+                <button style="background: #C0392B; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('wen')"><span id="g-wen">⚔️溫王爺(-400)</span></button>
+                <button style="background: #2980B9; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('mazu')"><span id="g-mazu">🌊媽祖(-500)</span></button>
+                <button style="background: #27AE60; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('guanyin')"><span id="g-guanyin">🌿觀世音(-600)</span></button>
+                <button style="background: #8E44AD; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('yaoshifo')"><span id="g-yaoshi">🪷藥師佛(-800)</span></button>
+                <button style="flex: 1 1 100%; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); color: #FFF; padding: 12px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; font-size: 15px; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟玉皇大帝 (全清場+指路 / -2500)</span></button>
             </div>
-            <button id="god-modal-close" class="btn-large btn-cancel" style="width: 100%; margin-top: 10px;" onclick="closeGodHelpModal()">關閉指南</button>
+            <button id="god-modal-close" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeGodHelpModal()">關閉指南</button>
         </div>
     </div>
 
@@ -537,7 +538,7 @@
                     "呼應英國工業革命與精密機械工藝的象徵。",
                     "象徵自由、民主與移民文化的紐約精神堡壘。",
                     "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
-                    "俄罗斯帝国皇室工艺与珠宝设计的极致代表。"
+                    "俄羅斯帝國皇室工藝與珠寶設計的極致代表。"
                 ]
             },
             'zh-CN': {
@@ -955,7 +956,7 @@
         function openStationModal() { document.getElementById('station-modal').style.display = 'flex'; }
         function closeStationModal() { document.getElementById('station-modal').style.display = 'none'; }
 
-        // 穿越劇轉場動畫與流放打工站啟動 (支援精準生蠔與魚標誌)
+        // 穿越劇轉場動畫與流放打工站啟動
         function selectStation(idx) {
             closeStationModal();
             let stConfig = banishmentStations[idx];
@@ -1161,6 +1162,7 @@
                 undoHistory.push({x: playerPos.x, y: playerPos.y});
                 if(undoHistory.length > 10) undoHistory.shift();
 
+                // 處理路阻碰撞與道具防禦
                 if ([6, 2, 3, 4, 5, 8, 9, 15].includes(cell)) {
                     if (cell === 2 && playerInventory.howler > 0) {
                         playerInventory.howler--; updateInventoryUI();
