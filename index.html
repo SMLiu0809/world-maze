@@ -191,9 +191,9 @@
         </div>
         <h1 id="txt-title">🏆 世界寶藏迷宮探險 🏆</h1>
         <div class="form-group">
-            <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號 (保障隱私)：</b></p>
-            <input type="text" id="player-nickname" maxlength="12" value="" placeholder="請輸入暱稱">
-            <p id="lbl-nickname-tip" style="font-size: 13px; color: #718096; margin: 6px 0;">💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼</p>
+            <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號 (設計者密碼解鎖特權)：</b></p>
+            <input type="text" id="player-nickname" maxlength="20" value="" placeholder="請輸入暱稱 (輸入 Shih-Min@NKNU 開啟特權)">
+            <p id="lbl-nickname-tip" style="font-size: 13px; color: #718096; margin: 6px 0;">💡 設計者密碼：<b>Shih-Min@NKNU</b> (解鎖99999點與全道具)</p>
             <br>
             <p id="lbl-gender"><b>請選擇您的性別：</b></p>
             <label><input type="radio" name="gender" value="male" checked> <span id="opt-male">男性 👨</span></label>
@@ -201,7 +201,7 @@
             <br><br>
             
             <div style="margin: 14px 0; background: #FEF9E7; padding: 14px; border-radius: 16px; border: 1px solid #F9E79F;">
-                <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
+                <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具 (可直達任意關卡)：</label>
                 <select id="start-level-select" style="font-size: 15px; padding: 8px 12px; border-radius: 12px; border: 1px solid #F39C12; background: white; font-weight: 700;">
                     <option value="1" id="opt-lvl1" selected>第 1 關 (臺灣・高雄)</option>
                     <option value="2" id="opt-lvl2">第 2 關 (日本・京都)</option>
@@ -235,7 +235,7 @@
         <div id="ins-desc" style="font-size: clamp(15px, 3.5vw, 19px); text-align: left; line-height: 1.8; background: #EBF8FF; padding: 22px; border-radius: 20px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
             <p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p>
-            <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
+            <p><b>⚠️ 破產機制：</b>若總分負債達到 <b>-3000 點</b>，將宣告破產並強制重回第一關！</p>
         </div>
         <br>
         <button id="btn-station" class="btn-large" style="background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); box-shadow: 0 6px 20px rgba(211, 84, 0, 0.3);" onclick="openStationModal()">💰 前往點數補給站</button>
@@ -257,12 +257,12 @@
         <!-- 魔法與神器道具欄 -->
         <div class="inventory-bar">
             <span id="txt-inv-title">🧙‍♂️ 點擊道具使用：</span>
-            <span class="inv-item" onclick="useTool('cloak')"><span id="lbl-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
-            <span class="inv-item" onclick="useTool('wand')"><span id="lbl-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
+            <span class="inv-item" onclick="useTool('cloak')" title="Click to use"><span id="lbl-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
+            <span class="inv-item" onclick="useTool('wand')" title="Click to use"><span id="lbl-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
             <span class="inv-item"><span id="lbl-snitch">🏆金探子</span>:<b id="inv-snitch">0</b></span>
-            <span class="inv-item" onclick="useTool('howler')"><span id="lbl-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
-            <span class="inv-item" onclick="useTool('fan')"><span id="lbl-fan">🪭芭蕉扇</span>:<b id="inv-fan">0</b></span>
-            <span class="inv-item" onclick="useTool('dipper')" style="color:#B7950B;"><span id="lbl-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
+            <span class="inv-item" onclick="useTool('howler')" title="Click to use"><span id="lbl-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
+            <span class="inv-item" onclick="useTool('fan')" title="Click to use"><span id="lbl-fan">🪭芭蕉扇</span>:<b id="inv-fan">0</b></span>
+            <span class="inv-item" onclick="useTool('dipper')" title="Click to use" style="color:#B7950B;"><span id="lbl-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
         </div>
 
         <div class="target-text" id="ui-target">目標：駁二鐵件藝術公仔 🤖</div>
@@ -387,7 +387,7 @@
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;" id="station-buttons-container">
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🦪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
             </div>
@@ -395,7 +395,7 @@
         </div>
     </div>
 
-    <!-- 幫助與神通指南彈跳視窗（含詳細功能對照表格） -->
+    <!-- 幫助與神通指南彈跳視窗 -->
     <div id="god-help-modal">
         <div class="modal-content">
             <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
@@ -476,14 +476,14 @@
     <script>
         const i18n = {
             'zh-TW': {
-                title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號 (保障隱私)：", gender: "請選擇您的性別：",
+                title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號 (設計者密碼解鎖特權)：", gender: "請選擇您的性別：",
                 male: "男性 👨", female: "女性 👩", testTool: "🛠️ 測試選關起始工具：", modeLabel: "選擇遊戲模式：",
                 easy: "🍵 輕鬆模式", easyDesc: "步調悠閒、適合放鬆",
                 std: "⚖️ 標準模式", stdDesc: "平衡挑戰與趣味",
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p><p><b>⚠️ 破產機制：</b>若總分負債達到 <b>-3000 點</b>，將宣告破產並強制重回第一關！</p>`,
                 stationBtn: "💰 前往點數補給站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 補給", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效關",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
@@ -492,18 +492,18 @@
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。請先參考下方表格，再點擊神像誠心擲筊！", godClose: "關閉指南",
                 bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
-                nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
+                nicknameTip: "💡 設計者密碼：Shih-Min@NKNU (解鎖99999點與全道具)",
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
                 buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🦪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
+                    "🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
@@ -541,21 +541,21 @@
                     "古代埃及用來記錄神話與歷史的獨特植物纖維紙張。",
                     "展現基克拉澤斯群島風情與地中海陶藝裝飾藝術。",
                     "見證地中海羅馬帝國雄偉歷史與貿易的古幣。",
-                    "呼應英國工業革命與精密機械工藝的象徵。",
-                    "象徵自由、民主與移民文化的紐約精神堡壘。",
+                    "呼應英國工業革命與精密機械工藝的象征。",
+                    "象征自由、民主與移民文化的紐約精神堡壘。",
                     "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
                     "俄羅斯帝国皇室工艺与珠宝设计的极致代表。"
                 ]
             },
             'zh-CN': {
-                title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (保障隐私)：", gender: "请选择您的性别：",
+                title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (设计师密码解锁特权)：", gender: "请选择您的性别：",
                 male: "男性 👨", female: "女性 👩", testTool: "🛠️ 测试选关起始工具：", modeLabel: "选择游戏模式：",
                 easy: "🍵 轻松模式", easyDesc: "步调悠闲、适合放松",
                 std: "⚖️ 标准模式", stdDesc: "平衡挑战与趣味",
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
                 hel: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付等差级数纪念品运费（每关递增500点）。旅费不足将被流放至边疆补给站赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付等差级数纪念品运费（每关递增500点）。旅费不足将被流放至边疆补给站赚取机票费！</p><p><b>⚠️ 破产机制：</b>若总分负债达到 <b>-3000 点</b>，将宣告破产并强制重回第一关！</p>`,
                 stationBtn: "💰 前往点数补给站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 补给", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
@@ -564,7 +564,7 @@
                 godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。请先参考下方表格，再点击神像诚心掷筊！", godClose: "关闭指南",
                 bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
-                nicknameTip: "💡 支持中英文、数字，最多 12 码，系统将自动加上专属识别码",
+                nicknameTip: "💡 设计者密码：Shih-Min@NKNU (解锁99999点与全道具)",
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
                 buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放至边疆补给站！",
                 footer: "高雄师范大学 刘世闵 老师设计",
@@ -627,7 +627,7 @@
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
                 hell: "🔥 Hell", hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
-                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations!</p><p><b>⚠️ Bankruptcy Rule:</b> If your total score drops to <b>-3000 pts</b>, you will declare bankruptcy and be forced back to Level 1!</p>`,
                 stationBtn: "💰 Point Supply Station", backCover: "⬅️ Main Menu",
                 tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
@@ -636,7 +636,7 @@
                 godTitle: "⛩️ Divine Guidance & Prayer", godDesc: "Unlocked at Level 6. Please review the table below before praying!", godClose: "Close Guide",
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
-                nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
+                nicknameTip: "💡 Dev Password: Shih-Min@NKNU (Unlocks 99999 pts & all items)",
                 winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
                 buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
@@ -698,7 +698,7 @@
             let t = i18n[lang] || i18n['zh-TW'];
             document.getElementById('txt-title').innerText = t.title;
             document.getElementById('lbl-nickname').innerHTML = `<b>${t.nickname}</b>`;
-            document.getElementById('player-nickname').placeholder = (lang === 'en' ? "Enter nickname" : "請輸入暱稱");
+            document.getElementById('player-nickname').placeholder = (lang === 'en' ? "Enter nickname (Shih-Min@NKNU)" : "請輸入暱稱 (輸入 Shih-Min@NKNU 開啟特權)");
             document.getElementById('lbl-nickname-tip').innerText = t.nicknameTip;
             document.getElementById('lbl-gender').innerHTML = `<b>${t.gender}</b>`;
             document.getElementById('opt-male').innerText = t.male;
@@ -890,13 +890,24 @@
 
         function startGame() {
             initAudio(); isPlaying = true;
-            let rawNick = document.getElementById('player-nickname').value.trim() || (currentLang === 'en' ? "Explorer" : "探險家");
+            let selectedLv = document.getElementById('start-level-select');
+            currentLevel = selectedLv ? (parseInt(selectedLv.value) || 1) : 1;
+            
+            let rawNick = document.getElementById('player-nickname').value.trim();
+            if (rawNick === 'Shih-Min@NKNU') {
+                totalScore = 99999;
+                playerInventory = { cloak: 10, wand: 10, snitch: 10, howler: 10, dipper: 10, fan: 10 };
+                alert("✨【設計者專屬特權已啟動】\n歡迎 劉世閔教授！已自動解鎖 99,999 點與全傳奇道具！");
+            } else {
+                totalScore = 500;
+                playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
+            }
+
+            let displayName = rawNick || (currentLang === 'en' ? "Explorer" : "探險家");
             let randomCode = Math.floor(1000 + Math.random() * 9000);
-            uniquePlayerId = `${rawNick}#${randomCode}`;
+            uniquePlayerId = `${displayName}#${randomCode}`;
 
-            playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
             updateInventoryUI();
-
             showScreen('screen-game'); 
             loadLevel();
         }
@@ -908,6 +919,24 @@
             document.getElementById('inv-howler').innerText = playerInventory.howler;
             document.getElementById('inv-dipper').innerText = playerInventory.dipper;
             document.getElementById('inv-fan').innerText = playerInventory.fan;
+        }
+
+        // 檢查破產機制 (-3000 點宣告破產重回第一關)
+        function checkBankruptcy() {
+            if (totalScore <= -3000) {
+                alert(currentLang === 'en' ? 
+                    "⚠️ [BANKRUPTCY DECLARED]\nYour total score has dropped to -3000 pts! You are completely broke and forced back to Level 1!" : 
+                    "⚠️【信用破產公告】\n您的總分已負債達到 -3000 點！宣告破產，強制重回【第一站：臺灣・高雄】重新開始！"
+                );
+                currentLevel = 1;
+                totalScore = 500;
+                playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
+                updateInventoryUI();
+                loadLevel();
+                showScreen('screen-game');
+                return true;
+            }
+            return false;
         }
 
         function useTool(toolName) {
@@ -995,16 +1024,17 @@
             
             let ttModal = document.getElementById('timetravel-modal');
             let ttDesc = document.getElementById('timetravel-desc');
+            let rawStationText = t.stations[idx].split('｜')[0] || t.stations[idx].split('|')[0];
             ttDesc.innerText = currentLang === 'en' ? 
-                `Time traveling to literary history... Destination: ${t.stations[idx].split('｜')[0]}\n"${t.stationNarratives[idx]}"` :
-                `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${t.stations[idx].split('｜')[0]}】\n${t.stationNarratives[idx]}`;
+                `Time traveling to literary history... Destination: ${rawStationText}\n"${t.stationNarratives[idx]}"` :
+                `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${rawStationText}】\n${t.stationNarratives[idx]}`;
             ttModal.style.display = 'flex';
 
             setTimeout(() => {
                 ttModal.style.display = 'none';
                 currentStationIndex = idx; currentStationClicks = 0; currentWorkEarned = 0;
                 workTargetValue = stConfig.ticket;
-                document.getElementById('ui-banish-location').innerText = "🗺️ " + t.stations[idx].split('｜')[0];
+                document.getElementById('ui-banish-location').innerText = "🗺️ " + rawStationText;
                 document.getElementById('work-narrative').innerText = `"${t.stationNarratives[idx]}"`;
                 document.getElementById('work-action-btn').innerText = t.stationLogos ? t.stationLogos[idx] : "📜";
                 isEventActive = true;
@@ -1232,6 +1262,9 @@
 
                     trapHitThisLevel = true;
                     totalScore -= penalty; updateUI();
+                    
+                    if (checkBankruptcy()) return;
+
                     playSound('bump'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
                     
@@ -1343,7 +1376,14 @@
                 openStationModal();
                 return;
             }
-            totalScore -= shippingFee; totalScore += currentTarget.s;
+            totalScore -= shippingFee; 
+            
+            if (checkBankruptcy()) {
+                document.getElementById('win-modal').style.display = 'none';
+                return;
+            }
+
+            totalScore += currentTarget.s;
             updateUI();
             alert(currentLang === 'en' ? "🎉 Successfully purchased souvenir and shipped home!" : "🎉 成功支付運費，紀念品已安全寄回國！");
             document.getElementById('purchase-area').style.display = 'none';
@@ -1405,6 +1445,9 @@
             let stConfig = banishmentStations[currentStationIndex];
             if (currentWorkEarned < stConfig.ticket) return;
             totalScore += (currentWorkEarned - stConfig.ticket);
+            
+            if (checkBankruptcy()) return;
+
             isEventActive = false; updateUI(); drawMaze();
             showScreen('screen-game');
         }
@@ -1416,7 +1459,10 @@
                 alert(currentLang === 'en' ? "⚠️ Not enough score for offerings!" : "⚠️ 香油錢不足，無法請神！"); 
                 return; 
             }
-            totalScore -= cost; updateUI();
+            totalScore -= cost; 
+            
+            if (checkBankruptcy()) return;
+            updateUI();
 
             pendingGod = godType; 
             let godIdx = Object.keys(godsData).indexOf(godType);
@@ -1497,7 +1543,7 @@
                                 totalScore += cost; updateUI();
                                 alert(currentLang === 'en' ? `⛩️ [God Unavailable]\n${pendingGodName} is currently away on pilgrimage with Dajia Mazu! Your offering of ${cost} pts has been fully refunded.` : `⛩️【神明不在位】\n真不巧！${pendingGodName} 目前跟大甲媽祖去進香參拜了，不在神壇！香油錢 ${cost} 點已全額退回！`);
                             } else {
-                                alert(currentLang === 'en' ? `⛩️ Two consecutive Sheng Jiao! ${pendingGodName} has agreed to help!` : `⛩️ 聖筊連續兩次！${pendingGodName} 顯靈庇佑成功！`);
+                                alert(currentLang === 'en' ? `⛩️ Two consecutive Sheng Jiao! ${pendingGodName} has agreed to help!` : `⛩️ 聖筊連續兩次！${pendingGodName} 應允幫忙，顯靈庇佑！`);
                                 applyGodPower(pendingGod);
                             }
                         }, 500);
@@ -1531,10 +1577,7 @@
                 let dirStr = (dy < 0 ? (currentLang === 'en' ? "North" : "北方") : (dy > 0 ? (currentLang === 'en' ? "South" : "南方") : "")) + (dx < 0 ? (currentLang === 'en' ? "West" : "西方") : (dx > 0 ? (currentLang === 'en' ? "East" : "東方") : ""));
                 if(dirStr === "") dirStr = (currentLang === 'en' ? "nearby" : "就在您附近");
                 
-                alert(currentLang === 'en' ? 
-                    `🏮 [Tudi Gong's Blessing]\nAll wolves (🐺) have been banished! The treasure is roughly to the [${dirStr}].` : 
-                    `🏮【土地公應允】\n地圖上所有的惡狼（🐺）全數驅逐消失！終點寶藏大約在您的【${dirStr}】方向！`
-                );
+                alert(`🏮【土地公應允】\n地圖上所有的惡狼（🐺）全數驅逐消失！終點寶藏大約在您的【${dirStr}】方向！`);
             } 
             else if (godType === 'wen') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1543,7 +1586,7 @@
                     }
                 }
                 drawMaze();
-                alert(currentLang === 'en' ? "⚔️ [Wen Wangye's Blessing]\nAll plagues (🦠) have been purified!" : "⚔️【溫王爺應允】\n地圖上所有的瘟疫（🦠）全數被淨化消失！");
+                alert(`⚔️【溫王爺應允】\n地圖上所有的瘟疫（🦠）全數被淨化消失！`);
             } 
             else if (godType === 'mazu') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1553,7 +1596,7 @@
                 }
                 drawMaze();
                 totalScore += 800; updateUI();
-                alert(currentLang === 'en' ? "🌊 [Mazu's Blessing]\nAll shipwrecks (🚢) have been calmed! Received 800 pts!" : "🌊【媽祖應允】\n地圖上所有的船難險境（🚢）全數平息消失！額外獲得 800 點奧援！");
+                alert(`🌊【媽祖應允】\n地圖上所有的船難險境（🚢）全數平息消失！額外獲得 800 點奧援！`);
             } 
             else if (godType === 'guanyin') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1563,7 +1606,7 @@
                 }
                 drawMaze();
                 undoCountLeft = 5; document.getElementById('undo-count').innerText = undoCountLeft;
-                alert(currentLang === 'en' ? "🌿 [Guanyin's Blessing]\nAll bandits (🦹‍♂️) have been reformed! Undos refilled to 5!" : "🌿【觀世音應允】\n地圖上所有的歹徒（🦹‍♂️）全數被渡化消失！反悔次數補滿至 5 次！");
+                alert(`🌿【觀世音應允】\n地圖上所有的歹徒（🦹‍♂️）全數被渡化消失！反悔次數補滿至 5 次！`);
             } 
             else if (godType === 'yaoshifo') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1573,7 +1616,7 @@
                 }
                 drawMaze();
                 totalScore += 1500; updateUI();
-                alert(currentLang === 'en' ? "🪷 [Medicine Buddha's Blessing]\nAll illnesses (🤒) cured! Received 1500 pts!" : "🪷【藥師佛應允】\n地圖上所有的惡疾（🤒）全數治癒消失！獲得 1500 點加持！");
+                alert(`🪷【藥師佛應允】\n地圖上所有的惡疾（🤒）全數治癒消失！獲得 1500 點加持！`);
             } 
             else if (godType === 'supreme') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1585,7 +1628,7 @@
                 }
                 drawMaze();
                 totalScore += 5000; updateUI();
-                alert(currentLang === 'en' ? "🌟 [Jade Emperor's Blessing]\nAll hazards cleared instantly! Direct path to victory!" : "🌟【玉皇大帝應允】\n玉帝聖恩！地圖上所有的路阻全數一網打盡、瞬間清場！直接直通終點獲勝！");
+                alert(`🌟【玉皇大帝應允】\n玉帝聖恩！地圖上所有的路阻（含大便與神火）全數一網打盡、瞬間清場！直接直通終點獲勝！`);
                 playerPos = { x: targetPos.x, y: targetPos.y };
                 drawMaze(); checkWin();
             }
