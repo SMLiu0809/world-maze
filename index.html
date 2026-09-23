@@ -62,22 +62,11 @@
             text-align: left;
         }
         input[type="radio"], select, input[type="text"] { accent-color: #E67E22; cursor: pointer;}
-        
-        .nickname-wrapper {
-            display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 8px;
-        }
         input[type="text"] { 
             padding: 12px 16px; font-size: 18px; border-radius: 14px; border: 2px solid #CBD5E1; 
-            flex: 1; min-width: 200px; text-align: center; background: #FFF; outline: none; transition: border-color 0.2s;
+            width: 100%; text-align: center; background: #FFF; outline: none; transition: border-color 0.2s;
         }
         input[type="text"]:focus { border-color: #E67E22; box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.15); }
-        
-        .secret-btn {
-            padding: 12px 18px; font-size: 15px; font-weight: 700; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%);
-            color: white; border: none; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
-            transition: transform 0.1s;
-        }
-        .secret-btn:active { transform: scale(0.95); }
 
         .mode-grid {
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 18px;
@@ -203,10 +192,7 @@
         <h1 id="txt-title">🏆 世界寶藏迷宮探險 🏆</h1>
         <div class="form-group">
             <p id="lbl-nickname"><b>玩家暱稱 / 專屬代號：</b></p>
-            <div class="nickname-wrapper">
-                <input type="text" id="player-nickname" maxlength="24" value="" placeholder="請輸入暱稱" onkeydown="handleNicknameKey(event)">
-                <button type="button" class="secret-btn" id="btn-secret-unlock" onclick="checkSecretKey()">解鎖特權</button>
-            </div>
+            <input type="text" id="player-nickname" maxlength="24" value="" placeholder="請輸入暱稱">
             <p id="lbl-nickname-tip" style="font-size: 13px; color: #718096; margin: 6px 0;">💡 支援中英文、數字，最多 24 碼</p>
             <br>
             <p id="lbl-gender"><b>請選擇您的性別：</b></p>
@@ -513,11 +499,11 @@
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🦪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
+                    "🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
@@ -680,7 +666,7 @@
                 ],
                 gods: [
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)", 
-                    "🌿Guanyin (-600)", "🪷Medicine Buddha(-800)", "🌟Jade Emperor (Clear All / -2500)"
+                    "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
                 ],
                 levels: [
                     "Stage 1: Taiwan・Kaohsiung", "Stage 2: Japan・Kyoto", "Stage 3: France・Paris",
@@ -723,7 +709,7 @@
             document.getElementById('m-easy').innerText = t.easy;
             document.getElementById('md-easy').innerText = t.easyDesc;
             document.getElementById('m-std').innerText = t.std;
-            document.getElementById('md-std').innerText = t.md-std || t.stdDesc;
+            document.getElementById('md-std').innerText = t.stdDesc;
             document.getElementById('m-cha').innerText = t.cha;
             document.getElementById('md-cha').innerText = t.chaDesc;
             document.getElementById('m-hel').innerText = t.hel;
