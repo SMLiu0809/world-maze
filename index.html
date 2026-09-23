@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>世界寶藏迷宮探險 - 絕對穩定終極版</title>
+    <title>世界寶藏迷宮探險 - 下拉選項完全同步最終版</title>
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FF6F61 0%, #DE3163 100%);
@@ -225,18 +225,8 @@
             
             <div style="margin: 12px 0; background: #FEF9E7; padding: 12px; border-radius: 16px; border: 1px solid #F9E79F;">
                 <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
-                <!-- 🌟 寫死 10 個選項在 HTML 中，確保絕對不會空白！ -->
+                <!-- 🌟 保持乾淨的 select，交由 JS 進行 100% 絕對控制 -->
                 <select id="start-level-select" style="font-size: 14px; padding: 6px 10px; border-radius: 10px; border: 1px solid #F39C12; background: white; font-weight: 700;">
-                    <option value="1">第 1 關 (臺灣・高雄)</option>
-                    <option value="2">第 2 關 (日本・京都)</option>
-                    <option value="3">第 3 關 (法國・巴黎)</option>
-                    <option value="4">第 4 關 (埃及・吉薩)</option>
-                    <option value="5">第 5 關 (希臘・雅典)</option>
-                    <option value="6">第 6 關 (義大利・羅馬/神壇)</option>
-                    <option value="7">第 7 關 (英國・倫敦)</option>
-                    <option value="8">第 8 關 (美國・紐約)</option>
-                    <option value="9">第 9 關 (澳洲・雪梨)</option>
-                    <option value="10">第 10 關 (俄羅斯・莫斯科)</option>
                 </select>
             </div>
 
@@ -354,7 +344,7 @@
         <div class="modal-content">
             <h2 id="pause-title" style="color: #C0392B; margin-top: 0;">⏸️ 遊戲暫停</h2>
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
-                <button id="p-resume" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%;" onclick="closePauseModal()">▶️ 繼續遊戲</button>
+                <button id="p-resume" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%);" onclick="closePauseModal()">▶️ 繼續遊戲</button>
                 <button id="p-restart" class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%);" onclick="restartLevel(); closePauseModal();">🔄 重新開始本關</button>
                 <button id="p-home" class="btn-large btn-cancel" style="width: 100%; max-width: 100%; margin: 0;" onclick="backToCoverFromPause()">🏠 返回主選單</button>
             </div>
@@ -753,7 +743,7 @@
                 soundBtn.style.backgroundColor = soundEnabled ? "#16A085" : "#7F8C8D";
             }
 
-            // 🌟 直接重新渲染選關下拉選單
+            // 🌟 絕對徹底：清空並重新填充當前語言的關卡選項
             let levelSelect = document.getElementById('start-level-select');
             levelSelect.innerHTML = "";
             for (let i = 1; i <= 10; i++) {
