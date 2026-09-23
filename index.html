@@ -201,7 +201,7 @@
             <br><br>
             
             <div style="margin: 14px 0; background: #FEF9E7; padding: 14px; border-radius: 16px; border: 1px solid #F9E79F;">
-                <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具 (可直達任意關卡)：</label>
+                <label for="start-level-select" id="lbl-test-tool" style="font-weight: 700; color: #B7950B;">🛠️ 測試選關起始工具：</label>
                 <select id="start-level-select" style="font-size: 15px; padding: 8px 12px; border-radius: 12px; border: 1px solid #F39C12; background: white; font-weight: 700;">
                     <option value="1" id="opt-lvl1" selected>第 1 關 (臺灣・高雄)</option>
                     <option value="2" id="opt-lvl2">第 2 關 (日本・京都)</option>
@@ -257,12 +257,12 @@
         <!-- 魔法與神器道具欄 -->
         <div class="inventory-bar">
             <span id="txt-inv-title">🧙‍♂️ 點擊道具使用：</span>
-            <span class="inv-item" onclick="useTool('cloak')" title="Click to use"><span id="lbl-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
-            <span class="inv-item" onclick="useTool('wand')" title="Click to use"><span id="lbl-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
+            <span class="inv-item" onclick="useTool('cloak')"><span id="lbl-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
+            <span class="inv-item" onclick="useTool('wand')"><span id="lbl-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
             <span class="inv-item"><span id="lbl-snitch">🏆金探子</span>:<b id="inv-snitch">0</b></span>
-            <span class="inv-item" onclick="useTool('howler')" title="Click to use"><span id="lbl-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
-            <span class="inv-item" onclick="useTool('fan')" title="Click to use"><span id="lbl-fan">🪭芭蕉扇</span>:<b id="inv-fan">0</b></span>
-            <span class="inv-item" onclick="useTool('dipper')" title="Click to use" style="color:#B7950B;"><span id="lbl-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
+            <span class="inv-item" onclick="useTool('howler')"><span id="lbl-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
+            <span class="inv-item" onclick="useTool('fan')"><span id="lbl-fan">🪭芭蕉扇</span>:<b id="inv-fan">0</b></span>
+            <span class="inv-item" onclick="useTool('dipper')" style="color:#B7950B;"><span id="lbl-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
         </div>
 
         <div class="target-text" id="ui-target">目標：駁二鐵件藝術公仔 🤖</div>
@@ -382,20 +382,20 @@
     <!-- 選擇流放地彈跳視窗 -->
     <div id="station-modal">
         <div class="modal-content">
-            <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇歷史流放打工站</h2>
-            <p id="station-modal-desc" style="font-size: 15px; color: #718096;">點數不足時，穿越到古代協助名人賺取機票費：</p>
+            <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇流放打工站</h2>
+            <p id="station-modal-desc" style="font-size: 15px; color: #718096;">點數不足時，協助歷史名人賺取機票費：</p>
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;" id="station-buttons-container">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈)｜每敲200/限5次｜機票500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾)｜每敲180/限7次｜機票700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🪪 儋州 (蘇東坡)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元)｜每敲120/限15次｜機票1100</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道)｜每敲100/限20次｜機票1300</span></button>
             </div>
             <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeStationModal()">取消返回</button>
         </div>
     </div>
 
-    <!-- 幫助與神通指南彈跳視窗 -->
+    <!-- 幫助與神通指南彈跳視窗（含詳細功能對照表格） -->
     <div id="god-help-modal">
         <div class="modal-content">
             <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
@@ -476,7 +476,7 @@
     <script>
         const i18n = {
             'zh-TW': {
-                title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號：", gender: "請選擇您的性別：",
+                title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號 (保障隱私)：", gender: "請選擇您的性別：",
                 male: "男性 👨", female: "女性 👩", testTool: "🛠️ 測試選關起始工具：", modeLabel: "選擇遊戲模式：",
                 easy: "🍵 輕鬆模式", easyDesc: "步調悠閒、適合放鬆",
                 std: "⚖️ 標準模式", stdDesc: "平衡挑戰與趣味",
@@ -492,18 +492,18 @@
                 godTitle: "⛩️ 神通指南與請神面板", godDesc: "第 6 關起解鎖神壇。請先參考下方表格，再點擊神像誠心擲筊！", godClose: "關閉指南",
                 bweiTitle: "🙏 誠心擲筊請示 神明", bweiRule: "需連續擲出兩次【聖筊】以感動神明", bweiBtn: "🙌 擲筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探險結業證書 📜", certBtn: "🏆 載入主選單",
-                nicknameTip: "💡 支援中英文、數字，最多 12 碼",
+                nicknameTip: "💡 支援中英文、數字，最多 12 碼，系統將自動加上專屬識別碼",
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
                 buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🪪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
+                    "🦪 儋州 (蘇東坡 - 生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
@@ -544,11 +544,11 @@
                     "呼應英國工業革命與精密機械工藝的象徵。",
                     "象徵自由、民主與移民文化的紐約精神堡壘。",
                     "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
-                    "俄羅斯帝国皇室工艺与珠宝设计的极致代表。"
+                    "俄罗斯帝国皇室工艺与珠宝设计的极致代表。"
                 ]
             },
             'zh-CN': {
-                title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号：", gender: "请选择您的性别：",
+                title: "🏆 世界宝藏迷宫探险 🏆", nickname: "玩家昵称 / 专属代号 (保障隐私)：", gender: "请选择您的性别：",
                 male: "男性 👨", female: "女性 👩", testTool: "🛠️ 测试选关起始工具：", modeLabel: "选择游戏模式：",
                 easy: "🍵 轻松模式", easyDesc: "步调悠闲、适合放松",
                 std: "⚖️ 标准模式", stdDesc: "平衡挑战与趣味",
@@ -564,7 +564,7 @@
                 godTitle: "⛩️ 神通指南与请神面板", godDesc: "第 6 关起解锁神坛。请先参考下方表格，再点击神像诚心掷筊！", godClose: "关闭指南",
                 bweiTitle: "🙏 诚心掷筊请示 神明", bweiRule: "需连续掷出两次【圣筊】以感动神明", bweiBtn: "🙌 掷筊！", bweiCancel: "取消",
                 certTitle: "📜 世界探险结业证书 📜", certBtn: "🏆 载入主菜单",
-                nicknameTip: "💡 支持中英文、数字，最多 12 码",
+                nicknameTip: "💡 支持中英文、数字，最多 12 码，系统将自动加上专属识别码",
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
                 buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放至边疆补给站！",
                 footer: "高雄师范大学 刘世闵 老师设计",
@@ -636,7 +636,7 @@
                 godTitle: "⛩️ Divine Guidance & Prayer", godDesc: "Unlocked at Level 6. Please review the table below before praying!", godClose: "Close Guide",
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
-                nicknameTip: "💡 Supports English/Chinese, up to 12 chars",
+                nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
                 winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
                 buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
@@ -743,6 +743,7 @@
                 document.getElementById('st-' + i).innerText = t.stations[i];
             }
 
+            // 更新請神表格
             document.getElementById('god-modal-title').innerText = t.godTitle;
             document.getElementById('god-modal-desc').innerText = t.godDesc;
             document.getElementById('god-modal-close').innerText = (lang === 'en' ? "Close Guide" : (lang === 'zh-CN' ? "关闭指南" : "關閉指南"));
@@ -890,18 +891,13 @@
 
         function startGame() {
             initAudio(); isPlaying = true;
-            let selectedLv = document.getElementById('start-level-select');
-            currentLevel = selectedLv ? (parseInt(selectedLv.value) || 1) : 1;
-            
-            totalScore = 500;
-            playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
-
-            let rawNick = document.getElementById('player-nickname').value.trim();
-            let displayName = rawNick || (currentLang === 'en' ? "Explorer" : "探險家");
+            let rawNick = document.getElementById('player-nickname').value.trim() || (currentLang === 'en' ? "Explorer" : "探險家");
             let randomCode = Math.floor(1000 + Math.random() * 9000);
-            uniquePlayerId = `${displayName}#${randomCode}`;
+            uniquePlayerId = `${rawNick}#${randomCode}`;
 
+            playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
             updateInventoryUI();
+
             showScreen('screen-game'); 
             loadLevel();
         }
@@ -1000,17 +996,16 @@
             
             let ttModal = document.getElementById('timetravel-modal');
             let ttDesc = document.getElementById('timetravel-desc');
-            let rawStationText = t.stations[idx].split('｜')[0] || t.stations[idx].split('|')[0];
             ttDesc.innerText = currentLang === 'en' ? 
-                `Time traveling to literary history... Destination: ${rawStationText}\n"${t.stationNarratives[idx]}"` :
-                `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${rawStationText}】\n${t.stationNarratives[idx]}`;
+                `Time traveling to literary history... Destination: ${t.stations[idx].split('｜')[0]}\n"${t.stationNarratives[idx]}"` :
+                `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${t.stations[idx].split('｜')[0]}】\n${t.stationNarratives[idx]}`;
             ttModal.style.display = 'flex';
 
             setTimeout(() => {
                 ttModal.style.display = 'none';
                 currentStationIndex = idx; currentStationClicks = 0; currentWorkEarned = 0;
                 workTargetValue = stConfig.ticket;
-                document.getElementById('ui-banish-location').innerText = "🗺️ " + rawStationText;
+                document.getElementById('ui-banish-location').innerText = "🗺️ " + t.stations[idx].split('｜')[0];
                 document.getElementById('work-narrative').innerText = `"${t.stationNarratives[idx]}"`;
                 document.getElementById('work-action-btn').innerText = t.stationLogos ? t.stationLogos[idx] : "📜";
                 isEventActive = true;
@@ -1473,13 +1468,20 @@
                 bweiAttemptsLeft--;
 
                 if (!c1Flat && !c2Flat) {
-                    bweiShengCount = 0;
-                    let msg = (currentLang === 'en' ? `Result: Gai Jiao (Failure, reset to 0). Attempts left: ${bweiAttemptsLeft}` : `出現【蓋筊】！神明不同意，歸零。剩餘次數：${bweiAttemptsLeft}`);
-                    document.getElementById('bwei-count-display').innerText = msg;
-                } else if (c1Flat && c2Flat) {
+                    setTimeout(() => {
+                        document.getElementById('bwei-modal').style.display = 'none';
+                        isEventActive = false;
+                        let cost = godsData[pendingGod].cost;
+                        totalScore += cost; updateUI();
+                        alert(currentLang === 'en' ? `⛩️ [Gai Jiao / Denied]\nGods say no! Please overcome the difficulties yourself. Your offering of ${cost} pts is fully refunded.` : `⛩️【蓋筊／神明不允】\n出現蓋筊！神明表示不同意，請您自行克服困難。香油錢 ${cost} 點已全額退回！`);
+                    }, 500);
+                    return;
+                }
+                else if (c1Flat && c2Flat) {
                     let msg = (currentLang === 'en' ? `Result: Xiao Jiao (Unresolved). Consecutive: ${bweiShengCount}. Attempts left: ${bweiAttemptsLeft}` : `出現【笑筊】！神明笑而不答，維持 ${bweiShengCount} 次。剩餘次數：${bweiAttemptsLeft}`);
                     document.getElementById('bwei-count-display').innerText = msg;
-                } else {
+                }
+                else {
                     bweiShengCount++;
                     let msg = (currentLang === 'en' ? `Consecutive Sheng Jiao: ${bweiShengCount}. Attempts left: ${bweiAttemptsLeft}` : `連續聖筊：${bweiShengCount} 次。剩餘次數：${bweiAttemptsLeft}`);
                     document.getElementById('bwei-count-display').innerText = msg;
@@ -1488,10 +1490,11 @@
                         setTimeout(() => {
                             document.getElementById('bwei-modal').style.display = 'none';
                             isEventActive = false;
-                            let isGodAbsent = Math.random() < 0.2;
+
+                            let isGodPresent = Math.random() < (2/3);
                             let cost = godsData[pendingGod].cost;
 
-                            if (isGodAbsent) {
+                            if (!isGodPresent) {
                                 totalScore += cost; updateUI();
                                 alert(currentLang === 'en' ? `⛩️ [God Unavailable]\n${pendingGodName} is currently away on pilgrimage with Dajia Mazu! Your offering of ${cost} pts has been fully refunded.` : `⛩️【神明不在位】\n真不巧！${pendingGodName} 目前跟大甲媽祖去進香參拜了，不在神壇！香油錢 ${cost} 點已全額退回！`);
                             } else {
