@@ -468,8 +468,8 @@
             </div>
 
             <div class="sheng-count" id="bwei-count-display">目前連續聖筊：0 次</div>
-            <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 8px 22px rgba(231, 76, 60, 0.35);" onclick="throwBweiAnimation()">🙌 擲筊！</button>
-            <button id="bwei-cancel-btn" class="btn-large btn-cancel" style="width: 100%; margin-top: 12px;" onclick="closeBwei()">取消</button>
+            <button id="bwei-throw-btn" class="btn-large" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); width: 100%; box-shadow: 0 8px 22px rgba(231, 76, 60, 0.35);" onclick="throwBweiAnimation()"><span id="lbl-bwei-throw">🙌 擲筊！</span></button>
+            <button id="bwei-cancel-btn" class="btn-large btn-cancel" style="width: 100%; margin-top: 12px;" onclick="closeBwei()"><span id="lbl-bwei-cancel">取消</span></button>
         </div>
     </div>
 
@@ -480,7 +480,7 @@
                 male: "男性 👨", female: "女性 👩", testTool: "🛠️ 測試選關起始工具：", modeLabel: "選擇遊戲模式：",
                 easy: "🍵 輕鬆模式", easyDesc: "步調悠閒、適合放鬆",
                 std: "⚖️ 標準模式", stdDesc: "平衡挑戰與趣味",
-                cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宫、高手過招",
+                cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
                 insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
@@ -504,6 +504,8 @@
                 ttTitle: "⏳ 時空穿梭中...",
                 ttDesc: "因旅費不足，您將被流放至古代歷史現場進行打工...",
                 earnedLabel: "已賺取點數：",
+                bweiThrowText: "🙌 擲筊！",
+                bweiCancelText: "取消",
 
                 invTitle: "🧙‍♂️ 點擊道具使用：",
                 invCloak: "🧥斗篷", invWand: "🪄魔杖", invSnitch: "🏆金探子",
@@ -520,6 +522,10 @@
                     "渡化地圖上所有歹徒 (🦹‍♂️)，並補滿反悔次數至 5 次。",
                     "治癒地圖上所有惡疾 (🤒)，並額外加持 1500 點。",
                     "萬尊降臨！全場路阻瞬間清場並直通終點！"
+                ],
+                godBtnTexts: [
+                    "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊媽祖(-500)",
+                    "🌿觀世音(-600)", "🪷藥師佛(-800)", "🌟玉皇大帝 (全清場+指路 / -2500)"
                 ],
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
@@ -540,10 +546,6 @@
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊媽祖(-500)", 
                     "🌿觀世音(-600)", "🪷藥師佛(-800)", "🌟玉皇大帝 (全清場+指路 / -2500)"
                 ],
-                godBtnTexts: [
-                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)",
-                    "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
-                ],
                 levels: [
                     "第一站：臺灣・高雄", "第二站：日本・京都", "第三站：法國・巴黎",
                     "第四站：埃及・吉薩", "第五站：希臘・雅典", "第六站：義大利・羅馬",
@@ -551,7 +553,7 @@
                 ],
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
-                    "尼羅河莎草紙画卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
+                    "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
                     "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
@@ -596,6 +598,8 @@
                 ttTitle: "⏳ 时空穿梭中...",
                 ttDesc: "因旅费不足，您将被流放至古代历史现场进行打工...",
                 earnedLabel: "已赚取点数：",
+                bweiThrowText: "🙌 掷筊！",
+                bweiCancelText: "取消",
 
                 invTitle: "🧙‍♂️ 点击道具使用：",
                 invCloak: "🧥斗篷", invWand: "🪄魔杖", invSnitch: "🏆金探子",
@@ -613,6 +617,10 @@
                     "治愈地图上所有恶疾 (🤒)，并额外加持 1500 点。",
                     "万尊降临！全场路阻瞬间清场并直通终点！"
                 ],
+                godBtnTexts: [
+                    "🏮土地公(-300)", "⚔️温王爷(-400)", "🌊妈祖(-500)",
+                    "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
+                ],
                 stations: [
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
                     "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
@@ -620,7 +628,7 @@
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
                     "在黄州生火慢炖、细心添柴烹煮名闻天下的正宗东坡肉！",
@@ -630,10 +638,6 @@
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)", 
-                    "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
-                ],
-                godBtnTexts: [
-                    "🏮土地公(-300)", "⚔️温王爷(-400)", "🌊妈祖(-500)",
                     "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
                 ],
                 levels: [
@@ -674,7 +678,7 @@
                 knowTitle: "📖 Culture & Treasure Lore", kClose: "Got it, Continue!",
                 stationTitle: "💰 Select Literary Banishment Station", stationDesc: "Earn tickets by helping historical literary figures:", stationCancel: "Cancel",
                 godTitle: "⛩️ Divine Guidance & Prayer", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close Guide",
-                bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw!", bweiCancel: "Cancel",
+                bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw Jiao!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
                 nicknameTip: "💡 Supports English/Chinese, up to 12 chars. System will attach a random suffix.",
                 winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
@@ -688,6 +692,8 @@
                 ttTitle: "⏳ Time Traveling...",
                 ttDesc: "Due to insufficient funds, you are banished to ancient history to work...",
                 earnedLabel: "Earned Points: ",
+                bweiThrowText: "🙌 Throw Jiao!",
+                bweiCancelText: "Cancel",
 
                 invTitle: "🧙‍♂️ Click to Use:",
                 invCloak: "🧥Cloak", invWand: "🪄Wand", invSnitch: "🏆Snitch",
@@ -826,7 +832,7 @@
                 });
             }
 
-            // 更新流放打工區文字
+            // 更新流放打工區與擲筊按鈕文字
             document.getElementById('work-title').innerText = t.workTitle;
             document.getElementById('work-status').innerText = t.workStatus;
             document.getElementById('ui-btn-work-return').innerText = t.workReturn;
@@ -834,6 +840,8 @@
             document.getElementById('tt-title').innerText = t.ttTitle;
             document.getElementById('timetravel-desc').innerText = t.ttDesc;
             document.getElementById('txt-earned-label').innerText = t.earnedLabel;
+            document.getElementById('lbl-bwei-throw').innerText = t.bweiThrowText;
+            document.getElementById('lbl-bwei-cancel').innerText = t.bweiCancelText;
 
             // 更新道具列標題與懸停提示
             document.getElementById('lbl-inv-title').innerText = t.invTitle;
