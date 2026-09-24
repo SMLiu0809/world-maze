@@ -259,7 +259,7 @@
             <span id="lbl-inv-title">🧙‍♂️ 點擊道具使用：</span>
             <span class="inv-item" onclick="useTool('cloak')"><span id="lbl-inv-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
             <span class="inv-item" onclick="useTool('wand')"><span id="lbl-inv-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
-            <span class="inv-item"><span>🏆金探子</span>:<b id="inv-snitch">0</b></span>
+            <span class="inv-item"><span id="lbl-inv-snitch">🏆金探子</span>:<b id="inv-snitch">0</b></span>
             <span class="inv-item" onclick="useTool('howler')"><span id="lbl-inv-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
             <span class="inv-item" onclick="useTool('fan')"><span id="lbl-inv-fan">🍃芭蕉扇</span>:<b id="inv-fan">0</b></span>
             <span class="inv-item" onclick="useTool('dipper')" style="color:#B7950B;"><span id="lbl-inv-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
@@ -387,7 +387,7 @@
             <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
             </div>
@@ -395,7 +395,7 @@
         </div>
     </div>
 
-    <!-- 幫助與神通指南彈跳視窗（含完整英文翻譯對照表格） -->
+    <!-- 幫助與神通指南彈跳視窗 -->
     <div id="god-help-modal">
         <div class="modal-content">
             <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
@@ -508,12 +508,12 @@
                 ],
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
-                    "🥩 黃州 (蘇軾 - 烹煮東坡肉)｜每敲180/限7次｜機票700",
-                    "🪪 儋州 (蘇東坡 - 敲打生蠔)｜每敲150/限10次｜機票900",
+                    "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
+                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
@@ -582,11 +582,11 @@
                 stations: [
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
                     "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
-                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
+                    "🦪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
                 stationNarratives: [
                     "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
                     "在黄州生火慢炖、细心添柴烹煮名闻天下的正宗东坡肉！",
@@ -753,7 +753,6 @@
             document.getElementById('god-modal-desc').innerText = t.godDesc;
             document.getElementById('god-modal-close').innerText = t.godClose;
             
-            // 更新神通表格語系
             document.getElementById('th-god').innerText = t.thGod;
             document.getElementById('th-cost').innerText = t.thCost;
             document.getElementById('th-effect').innerText = t.thEffect;
@@ -915,7 +914,7 @@
             if (toolName === 'fan') {
                 playerInventory.fan--; updateInventoryUI();
                 playSound('item');
-                alert("🍃 芭蕉扇主動施展！大片蕉葉隨風一扇，順利清除了地圖上的神火威脅！");
+                alert(currentLang === 'en' ? "🍃 Plantain Fan activated! The divine flame has been extinguished!" : "🍃 芭蕉扇主動施展！大片蕉葉隨風一扇，順利清除了地圖上的神火威脅！");
                 let cleared = false;
                 for (let y = 0; y < mazeSize; y++) {
                     for (let x = 0; x < mazeSize; x++) {
@@ -934,19 +933,19 @@
                     }
                 }
                 drawMaze();
-                alert(`🏺 混元金鬥施法！瞬間吸光地圖上所有 ${count} 個大便！`);
+                alert(currentLang === 'en' ? `🏺 Golden Dipper used! Cleared all ${count} waste traps instantly!` : `🏺 混元金鬥施法！瞬間吸光地圖上所有 ${count} 個大便！`);
             } else if (toolName === 'howler') {
                 playerInventory.howler--; updateInventoryUI();
                 playSound('item');
-                alert("✉️ 咆哮信已吼出！野狼見狀嚇得魂飛魄散！");
+                alert(currentLang === 'en' ? "✉️ Howler sent! The wolves ran away in fear!" : "✉️ 咆哮信已吼出！野狼見狀嚇得魂飛魄散！");
             } else if (toolName === 'cloak') {
                 playerInventory.cloak--; updateInventoryUI();
                 playSound('item');
-                alert("🧥 隱形斗篷穿上！身形隱匿，歹徒找不到您！");
+                alert(currentLang === 'en' ? "🧥 Invisibility Cloak worn! Bandits cannot see you!" : "🧥 隱形斗篷穿上！身形隱匿，歹徒找不到您！");
             } else if (toolName === 'wand') {
                 playerInventory.wand--; updateInventoryUI();
                 playSound('item');
-                alert("🪄 魔杖揮動！引咒解除了一處炸藥危機！");
+                alert(currentLang === 'en' ? "🪄 Wand waved! Explosive hazard safely removed!" : "🪄 魔杖揮動！引咒解除了一處炸藥危機！");
             }
         }
 
@@ -1190,49 +1189,53 @@
                 undoHistory.push({x: playerPos.x, y: playerPos.y});
                 if(undoHistory.length > 10) undoHistory.shift();
 
+                // 處理路阻碰撞與道具防禦
                 if ([6, 2, 3, 4, 5, 8, 9, 15].includes(cell)) {
                     if (cell === 2 && playerInventory.howler > 0) {
                         playerInventory.howler--; updateInventoryUI();
-                        playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert("✉️ 咆哮信發威！成功嚇跑野狼（🐺），安然通過！");
+                        playSound('item'); 
+                        // 咆哮信發威時，將地圖上的該隻野狼永久消除
+                        maze[ny][nx] = 0; 
+                        playerPos.x = nx; playerPos.y = ny; drawMaze();
+                        alert(currentLang === 'en' ? "Howler activated! The wolf (🐺) was terrified and ran away, vanishing completely!" : "✉️ 咆哮信發威！成功嚇跑野狼（🐺），野狼已真正從地圖上消失！");
                         return;
                     }
                     if (cell === 5 && playerInventory.cloak > 0) {
                         playerInventory.cloak--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert("🧥 隱形斗篷生效！成功避開歹徒（🦹‍♂️）騷擾！");
+                        alert(currentLang === 'en' ? "Invisibility Cloak active! Evaded the bandit (🦹‍♂️)." : "🧥 隱形斗篷生效！成功避開歹徒（🦹‍♂️）騷擾！");
                         return;
                     }
                     if (cell === 9 && playerInventory.wand > 0) {
                         playerInventory.wand--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert("🪄 魔杖施法成功！順利解除炸藥（🧨）危機！");
+                        alert(currentLang === 'en' ? "Wand spell cast! Explosive hazard (🧨) safely removed." : "🪄 魔杖施法成功！順利解除炸藥（🧨）危機！");
                         return;
                     }
                     if (cell === 15 && playerInventory.fan > 0) {
                         playerInventory.fan--; updateInventoryUI();
                         playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert("🍃 芭蕉扇一扇！大片蕉葉隨風一扇，順利清除了地圖上的神火威脅！");
+                        alert(currentLang === 'en' ? "Plantain Fan fanned! Divine fire (🔥) extinguished." : "🍃 芭蕉扇一扇！大片蕉葉隨風一扇，順利清除了地圖上的神火威脅！");
                         return;
                     }
 
                     let penalty = 100;
-                    let obstacleName = "";
-                    if (cell === 6) { penalty = 100; obstacleName = "💩 大便"; }
-                    else if (cell === 2) { penalty = 200; obstacleName = "🐺 惡狼"; }
-                    else if (cell === 3) { penalty = 300; obstacleName = "🦠 瘟疫"; }
-                    else if (cell === 4) { penalty = 400; obstacleName = "🚢 船難"; }
-                    else if (cell === 5) { penalty = 500; obstacleName = "🦹‍♂️ 歹徒"; }
-                    else if (cell === 8) { penalty = 700; obstacleName = "🤒 惡疾"; }
-                    else if (cell === 9) { penalty = 800; obstacleName = "🧨 炸藥"; }
-                    else if (cell === 15) { penalty = 1000; obstacleName = "🔥 神火"; }
+                    let obstacleName = (currentLang === 'en' ? "Hazard" : "路阻");
+                    if (cell === 6) { penalty = 100; obstacleName = (currentLang === 'en' ? "Waste Trap (💩)" : "💩 大便"); }
+                    else if (cell === 2) { penalty = 200; obstacleName = (currentLang === 'en' ? "Wolf (🐺)" : "🐺 惡狼"); }
+                    else if (cell === 3) { penalty = 300; obstacleName = (currentLang === 'en' ? "Plague (🦠)" : "🦠 瘟疫"); }
+                    else if (cell === 4) { penalty = 400; obstacleName = (currentLang === 'en' ? "Shipwreck (🚢)" : "🚢 船難"); }
+                    else if (cell === 5) { penalty = 500; obstacleName = (currentLang === 'en' ? "Bandit (🦹‍♂️)" : "🦹‍♂️ 歹徒"); }
+                    else if (cell === 8) { penalty = 700; obstacleName = (currentLang === 'en' ? "Illness (🤒)" : "🤒 惡疾"); }
+                    else if (cell === 9) { penalty = 800; obstacleName = (currentLang === 'en' ? "Explosive (🧨)" : "🧨 炸藥"); }
+                    else if (cell === 15) { penalty = 1000; obstacleName = (currentLang === 'en' ? "Divine Fire (🔥)" : "🔥 神火"); }
 
                     trapHitThisLevel = true;
                     totalScore -= penalty; updateUI();
                     playSound('bump'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
                     
-                    alert(`⚠️ 遭遇【${obstacleName}】路阻！扣除 ${penalty} 點！`);
+                    alert(currentLang === 'en' ? `Encountered [${obstacleName}]! Penalty: -${penalty} pts` : `⚠️ 遭遇【${obstacleName}】路阻！扣除 ${penalty} 點！`);
                     return;
                 }
 
@@ -1241,7 +1244,7 @@
                     totalScore += 300; updateUI();
                     playSound('item'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert("💵 獲得現金寶物 300 點！");
+                    alert(currentLang === 'en' ? "Found cash treasure, +300 pts!" : "💵 獲得現金寶物 300 點！");
                     checkWin();
                     return;
                 }
@@ -1249,26 +1252,26 @@
                 if (cell === 10) { 
                     playerInventory.cloak++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert("🧥 獲得魔法道具【隱形斗篷】！可避開歹徒騷擾一次。");
+                    alert(currentLang === 'en' ? "Obtained Invisibility Cloak (🧥)!" : "🧥 獲得魔法道具【隱形斗篷】！可避開歹徒騷擾一次。");
                     return;
                 }
                 if (cell === 11) { 
                     playerInventory.wand++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert("🪄 獲得魔法道具【魔杖】！可移除炸藥一次。");
+                    alert(currentLang === 'en' ? "Obtained Wand (🪄)!" : "🪄 獲得魔法道具【魔杖】！可移除炸藥一次。");
                     return;
                 }
                 if (cell === 12) { 
                     playerInventory.snitch++; updateInventoryUI();
                     totalScore += 500; updateUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert("🏆 捕獲【金探子】！實力大增，額外增加 500 分！");
+                    alert(currentLang === 'en' ? "Caught Golden Snitch (🏆), +500 pts!" : "🏆 捕獲【金探子】！實力大增，額外增加 500 分！");
                     return;
                 }
                 if (cell === 13) { 
                     playerInventory.howler++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert("✉️ 獲得魔法道具【咆哮信】！可嚇跑野狼一次。");
+                    alert(currentLang === 'en' ? "Obtained Howler (✉️)!" : "✉️ 獲得魔法道具【咆哮信】！可嚇跑野狼一次。");
                     return;
                 }
                 if (cell === 14) { 
@@ -1280,13 +1283,13 @@
                         }
                     }
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert(`🏺 獲得上古神器【混元金鬥】！法力無邊，瞬間吸光地圖上所有 ${dipperCount} 個大便！`);
+                    alert(currentLang === 'en' ? `Obtained Golden Dipper (🏺)! Cleared ${dipperCount} waste traps!` : `🏺 獲得上古神器【混元金鬥】！法力無邊，瞬間吸光地圖上所有 ${dipperCount} 個大便！`);
                     return;
                 }
                 if (cell === 16) { 
                     playerInventory.fan++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                    alert("🍃 獲得法寶【芭蕉扇】！可將神火（🔥）扇熄一次。");
+                    alert(currentLang === 'en' ? "Obtained Plantain Fan (🍃)!" : "🍃 獲得法寶【芭蕉扇】！可將神火（🔥）扇熄一次。");
                     return;
                 }
 
@@ -1296,8 +1299,8 @@
         }
 
         function undoMove() {
-            if (undoCountLeft <= 0) { alert(currentLang === 'en' ? "⚠️ Undo limit reached!" : "⚠️ 本關反悔次數已用完！"); return; }
-            if (undoHistory.length === 0) { alert(currentLang === 'en' ? "⚠️ No moves to undo!" : "⚠️ 目前沒有可撤回的步驟！"); return; }
+            if (undoCountLeft <= 0) { alert(currentLang === 'en' ? "Undo limit reached!" : "⚠️ 本關反悔次數已用完！"); return; }
+            if (undoHistory.length === 0) { alert(currentLang === 'en' ? "No moves to undo!" : "⚠️ 目前沒有可撤回的步驟！"); return; }
             let prev = undoHistory.pop();
             playerPos = prev; undoCountLeft--;
             document.getElementById('undo-count').innerText = undoCountLeft;
@@ -1342,7 +1345,7 @@
             }
             totalScore -= shippingFee; totalScore += currentTarget.s;
             updateUI();
-            alert(currentLang === 'en' ? "🎉 Successfully purchased souvenir and shipped home!" : "🎉 成功支付運費，紀念品已安全寄回國！");
+            alert(currentLang === 'en' ? "Successfully purchased souvenir and shipped home!" : "🎉 成功支付運費，紀念品已安全寄回國！");
             document.getElementById('purchase-area').style.display = 'none';
             document.getElementById('nav-buttons-area').style.display = 'flex';
             document.getElementById('btn-prev-level').style.display = (currentLevel > 1) ? 'inline-block' : 'none';
@@ -1371,7 +1374,7 @@
         function doWork() {
             let stConfig = banishmentStations[currentStationIndex];
             if (currentStationClicks >= stConfig.maxClicks) { 
-                alert(currentLang === 'en' ? "⚠️ Tapping limit reached. Please pay for your flight return!" : "⚠️ 打工次數已用額滿，請支付機票費返程！"); 
+                alert(currentLang === 'en' ? "Tapping limit reached. Please pay for your flight return!" : "⚠️ 打工次數已用額滿，請支付機票費返程！"); 
                 return; 
             }
             playSound('item'); vibrate([20]);
@@ -1393,7 +1396,7 @@
             let prog = document.getElementById('work-progress');
             prog.max = stConfig.ticket; prog.value = Math.min(currentWorkEarned, stConfig.ticket);
             
-            let returnText = (currentLang === 'en' ? "✈️ Pay Ticket & Return!" : "✈️ 賺足機票費，光榮返台！");
+            let returnText = (currentLang === 'en' ? "Pay Ticket & Return!" : "✈️ 賺足機票費，光榮返台！");
             let btnReturn = document.getElementById('ui-btn-work-return');
             btnReturn.innerText = returnText;
             btnReturn.style.display = (currentWorkEarned >= stConfig.ticket) ? 'block' : 'none';
@@ -1410,7 +1413,7 @@
             closeGodHelpModal();
             let cost = godsData[godType].cost;
             if (totalScore < cost) { 
-                alert(currentLang === 'en' ? "⚠️ Not enough score for offerings!" : "⚠️ 香油錢不足，無法請神！"); 
+                alert(currentLang === 'en' ? "Not enough score for offerings!" : "⚠️ 香油錢不足，無法請神！"); 
                 return; 
             }
             totalScore -= cost; updateUI();
@@ -1422,7 +1425,7 @@
             
             bweiAttemptsLeft = Math.max(3, 13 - currentLevel);
 
-            let bTitle = (currentLang === 'en' ? "🙏 Praying to " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName);
+            let bTitle = (currentLang === 'en' ? "Praying to " + pendingGodName : "🙏 誠心擲筊請示 " + pendingGodName);
             document.getElementById('bwei-title').innerText = bTitle;
             
             let countMsg = (currentLang === 'en' ? `Consecutive Sheng Jiao: 0 (Attempts left: ${bweiAttemptsLeft})` : `目前連續聖筊：0 次 (剩餘次數：${bweiAttemptsLeft})`);
@@ -1469,12 +1472,12 @@
                         isEventActive = false;
                         let cost = godsData[pendingGod].cost;
                         totalScore += cost; updateUI();
-                        alert(currentLang === 'en' ? `⛩️ [Gai Jiao / Denied]\nGods say no! Please overcome the difficulties yourself. Your offering of ${cost} pts is fully refunded.` : `⛩️【蓋筊／神明不允】\n出現蓋筊！神明表示不同意，請您自行克服困難。香油錢 ${cost} 點已全額退回！`);
+                        alert(currentLang === 'en' ? `Gai Jiao / Denied! Offering of ${cost} pts fully refunded.` : `⛩️【蓋筊／神明不允】\n出現蓋筊！神明表示不同意，請您自行克服困難。香油錢 ${cost} 點已全額退回！`);
                     }, 500);
                     return;
                 }
                 else if (c1Flat && c2Flat) {
-                    let msg = (currentLang === 'en' ? `Result: Xiao Jiao (Unresolved). Consecutive: ${bweiShengCount}. Attempts left: ${bweiAttemptsLeft}` : `出現【笑筊】！神明笑而不答，維持 ${bweiShengCount} 次。剩餘次數：${bweiAttemptsLeft}`);
+                    let msg = (currentLang === 'en' ? `Xiao Jiao (Unresolved). Consecutive: ${bweiShengCount}. Attempts left: ${bweiAttemptsLeft}` : `出現【笑筊】！神明笑而不答，維持 ${bweiShengCount} 次。剩餘次數：${bweiAttemptsLeft}`);
                     document.getElementById('bwei-count-display').innerText = msg;
                 }
                 else {
@@ -1492,9 +1495,9 @@
 
                             if (!isGodPresent) {
                                 totalScore += cost; updateUI();
-                                alert(currentLang === 'en' ? `⛩️ [God Unavailable]\n${pendingGodName} is currently away on pilgrimage with Dajia Mazu! Your offering of ${cost} pts has been fully refunded.` : `⛩️【神明不在位】\n真不巧！${pendingGodName} 目前跟大甲媽祖去進香參拜了，不在神壇！香油錢 ${cost} 點已全額退回！`);
+                                alert(currentLang === 'en' ? `God Unavailable: ${pendingGodName} is away on pilgrimage with Dajia Mazu! Offering of ${cost} pts refunded.` : `⛩️【神明不在位】\n真不巧！${pendingGodName} 目前跟大甲媽祖去進香參拜了，不在神壇！香油錢 ${cost} 點已全額退回！`);
                             } else {
-                                alert(currentLang === 'en' ? `⛩️ Two consecutive Sheng Jiao! ${pendingGodName} has agreed to help!` : `⛩️ 聖筊連續兩次！${pendingGodName} 應允幫忙，顯靈庇佑！`);
+                                alert(currentLang === 'en' ? `Two consecutive Sheng Jiao! ${pendingGodName} has agreed to help!` : `⛩️ 聖筊連續兩次！${pendingGodName} 應允幫忙，顯靈庇佑！`);
                                 applyGodPower(pendingGod);
                             }
                         }, 500);
@@ -1508,7 +1511,7 @@
                         isEventActive = false;
                         let cost = godsData[pendingGod].cost;
                         totalScore += cost; updateUI();
-                        alert(currentLang === 'en' ? `⛩️ [Attempts Exhausted]\nAttempts used up. Your offering of ${cost} pts has been fully refunded.` : `⛩️【擲筊次數用盡】\n擲筊次數已用完未獲兩次聖筊。香油錢 ${cost} 點已全額退回！`);
+                        alert(currentLang === 'en' ? `Attempts exhausted. Offering of ${cost} pts fully refunded.` : `⛩️【擲筊次數用盡】\n擲筊次數已用完未獲兩次聖筊。香油錢 ${cost} 點已全額退回！`);
                     }, 600);
                 }
             }, 500);
@@ -1525,10 +1528,10 @@
                 }
                 drawMaze();
                 let dx = targetPos.x - playerPos.x; let dy = targetPos.y - playerPos.y;
-                let dirStr = (dy < 0 ? (currentLang === 'en' ? "North" : "北方") : (dy > 0 ? (currentLang === 'en' ? "South" : "南方") : "")) + (dx < 0 ? (currentLang === 'en' ? "West" : "西方") : (dx > 0 ? (currentLang === 'en' ? "East" : "東方") : ""));
-                if(dirStr === "") dirStr = (currentLang === 'en' ? "nearby" : "就在您附近");
+                let dirStr = (dy < 0 ? "North" : "South") + (dx < 0 ? "West" : "East");
+                if(dirStr === "") dirStr = "nearby";
                 
-                alert(`🏮【土地公應允】\n地圖上所有的惡狼（🐺）全數驅逐消失！終點寶藏大約在您的【${dirStr}】方向！`);
+                alert(currentLang === 'en' ? `Tudi Gong's Blessing: All wolves (🐺) cleared! Treasure is to the [${dirStr}].` : `🏮【土地公應允】\n地圖上所有的惡狼（🐺）全數驅逐消失！終點寶藏大約在您的方向！`);
             } 
             else if (godType === 'wen') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1537,7 +1540,7 @@
                     }
                 }
                 drawMaze();
-                alert(`⚔️【溫王爺應允】\n地圖上所有的瘟疫（🦠）全數被淨化消失！`);
+                alert(currentLang === 'en' ? "Wen Wangye's Blessing: All plagues (🦠) purified!" : "⚔️【溫王爺應允】\n地圖上所有的瘟疫（🦠）全數被淨化消失！");
             } 
             else if (godType === 'mazu') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1547,7 +1550,7 @@
                 }
                 drawMaze();
                 totalScore += 800; updateUI();
-                alert(`🌊【媽祖應允】\n地圖上所有的船難險境（🚢）全數平息消失！額外獲得 800 點奧援！`);
+                alert(currentLang === 'en' ? "Mazu's Blessing: Shipwrecks (🚢) cleared! +800 pts bonus!" : "🌊【媽祖應允】\n地圖上所有的船難險境（🚢）全數平息消失！額外獲得 800 點奧援！");
             } 
             else if (godType === 'guanyin') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1557,7 +1560,7 @@
                 }
                 drawMaze();
                 undoCountLeft = 5; document.getElementById('undo-count').innerText = undoCountLeft;
-                alert(`🌿【觀世音應允】\n地圖上所有的歹徒（🦹‍♂️）全數被渡化消失！反悔次數補滿至 5 次！`);
+                alert(currentLang === 'en' ? "Guanyin's Blessing: Bandits (🦹‍♂️) reformed! Undo refilled to 5!" : "🌿【觀世音應允】\n地圖上所有的歹徒（🦹‍♂️）全數被渡化消失！反悔次數補滿至 5 次！");
             } 
             else if (godType === 'yaoshifo') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1567,7 +1570,7 @@
                 }
                 drawMaze();
                 totalScore += 1500; updateUI();
-                alert(`🪷【藥師佛應允】\n地圖上所有的惡疾（🤒）全數治癒消失！獲得 1500 點加持！`);
+                alert(currentLang === 'en' ? "Medicine Buddha's Blessing: Illnesses (🤒) cured! +1500 pts bonus!" : "🪷【藥師佛應允】\n地圖上所有的惡疾（🤒）全數治癒消失！獲得 1500 點加持！");
             } 
             else if (godType === 'supreme') {
                 for (let y = 0; y < mazeSize; y++) {
@@ -1579,7 +1582,7 @@
                 }
                 drawMaze();
                 totalScore += 5000; updateUI();
-                alert(`🌟【玉皇大帝應允】\n玉帝聖恩！地圖上所有的路阻（含大便與神火）全數一網打盡、瞬間清場！直接直通終點獲勝！`);
+                alert(currentLang === 'en' ? "Jade Emperor's Blessing: All hazards cleared instantly! Direct victory!" : "🌟【玉皇大帝應允】\n玉帝聖恩！地圖上所有的路阻全數一網打盡、瞬間清場！直接直通終點獲勝！");
                 playerPos = { x: targetPos.x, y: targetPos.y };
                 drawMaze(); checkWin();
             }
