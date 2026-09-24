@@ -443,7 +443,7 @@
                 </tbody>
             </table>
 
-            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 15px 0;">
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 15px 0;" id="god-btns-wrap">
                 <button style="background: #795548; flex: 1 1 30%; padding: 12px 6px; border-radius: 12px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('tudigong')"><span id="g-tudi">🏮土地公(-300)</span></button>
                 <button style="background: #C0392B; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('wen')"><span id="g-wen">⚔️溫王爺(-400)</span></button>
                 <button style="background: #2980B9; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('mazu')"><span id="g-mazu">🌊媽祖(-500)</span></button>
@@ -480,7 +480,7 @@
                 male: "男性 👨", female: "女性 👩", testTool: "🛠️ 測試選關起始工具：", modeLabel: "選擇遊戲模式：",
                 easy: "🍵 輕鬆模式", easyDesc: "步調悠閒、適合放鬆",
                 std: "⚖️ 標準模式", stdDesc: "平衡挑戰與趣味",
-                cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
+                cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宫、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
                 insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
@@ -497,6 +497,14 @@
                 buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
                 
+                workTitle: "📜 歷史流放打工區 📜",
+                workStatus: "點擊互動打工！",
+                workReturn: "✈️ 賺足機票費，光榮返台！",
+                workBack: "⬅️ 返回主選單",
+                ttTitle: "⏳ 時空穿梭中...",
+                ttDesc: "因旅費不足，您將被流放至古代歷史現場進行打工...",
+                earnedLabel: "已賺取點數：",
+
                 invTitle: "🧙‍♂️ 點擊道具使用：",
                 invCloak: "🧥斗篷", invWand: "🪄魔杖", invSnitch: "🏆金探子",
                 invHowler: "✉️咆哮信", invFan: "🍃芭蕉扇", invDipper: "🏺金鬥",
@@ -532,6 +540,10 @@
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊媽祖(-500)", 
                     "🌿觀世音(-600)", "🪷藥師佛(-800)", "🌟玉皇大帝 (全清場+指路 / -2500)"
                 ],
+                godBtnTexts: [
+                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)",
+                    "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
+                ],
                 levels: [
                     "第一站：臺灣・高雄", "第二站：日本・京都", "第三站：法國・巴黎",
                     "第四站：埃及・吉薩", "第五站：希臘・雅典", "第六站：義大利・羅馬",
@@ -539,7 +551,7 @@
                 ],
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
-                    "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
+                    "尼羅河莎草紙画卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
                     "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
@@ -552,7 +564,7 @@
                     "呼應英國工業革命與精密機械工藝的象徵。",
                     "象徵自由、民主與移民文化的紐約精神堡壘。",
                     "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
-                    "俄羅斯帝國皇室工艺与珠宝设计的极致代表。"
+                    "俄羅斯帝國皇室工藝與珠寶設計的極致代表。"
                 ]
             },
             'zh-CN': {
@@ -577,6 +589,14 @@
                 buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放至边疆补给站！",
                 footer: "高雄师范大学 刘世闵 老师设计",
                 
+                workTitle: "📜 历史流放打工区 📜",
+                workStatus: "点击互动打工！",
+                workReturn: "✈️ 赚足机票费，光荣返台！",
+                workBack: "⬅️ 返回主菜单",
+                ttTitle: "⏳ 时空穿梭中...",
+                ttDesc: "因旅费不足，您将被流放至古代历史现场进行打工...",
+                earnedLabel: "已赚取点数：",
+
                 invTitle: "🧙‍♂️ 点击道具使用：",
                 invCloak: "🧥斗篷", invWand: "🪄魔杖", invSnitch: "🏆金探子",
                 invHowler: "✉️咆哮信", invFan: "🍃芭蕉扇", invDipper: "🏺金斗",
@@ -610,6 +630,10 @@
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)", 
+                    "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
+                ],
+                godBtnTexts: [
+                    "🏮土地公(-300)", "⚔️温王爷(-400)", "🌊妈祖(-500)",
                     "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
                 ],
                 levels: [
@@ -657,6 +681,14 @@
                 buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
                 
+                workTitle: "📜 Historical Banishment Work Zone 📜",
+                workStatus: "Click to work and assist!",
+                workReturn: "✈️ Earned enough for ticket, return home!",
+                workBack: "⬅️ Return to Main Menu",
+                ttTitle: "⏳ Time Traveling...",
+                ttDesc: "Due to insufficient funds, you are banished to ancient history to work...",
+                earnedLabel: "Earned Points: ",
+
                 invTitle: "🧙‍♂️ Click to Use:",
                 invCloak: "🧥Cloak", invWand: "🪄Wand", invSnitch: "🏆Snitch",
                 invHowler: "✉️Howler", invFan: "🍃Fan", invDipper: "🏺Dipper",
@@ -672,6 +704,10 @@
                     "Reform all bandits (🦹‍♂️) and refill undo limits to 5.",
                     "Cure all illnesses (🤒) and grant an extra 1500 pts bonus.",
                     "Supreme Descent! Clear all hazards instantly and clear path to victory!"
+                ],
+                godBtnTexts: [
+                    "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)",
+                    "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
                 ],
                 stations: [
                     "📜 London (Shakespeare) | 200 pts / 5 taps | Ticket: 500",
@@ -781,8 +817,25 @@
                 document.getElementById('td-g' + (i+1)).innerText = t.gNames[i];
                 document.getElementById('td-e' + (i+1)).innerText = t.gEffects[i];
             }
-            
-            // 同步更新道具列標題與懸停提示的語系綁定
+
+            // 更新神明按鈕文字
+            let godBtnSpans = document.querySelectorAll('#god-btns-wrap span');
+            if (godBtnSpans && t.godBtnTexts) {
+                godBtnSpans.forEach((sp, idx) => {
+                    if(t.godBtnTexts[idx]) sp.innerText = t.godBtnTexts[idx];
+                });
+            }
+
+            // 更新流放打工區文字
+            document.getElementById('work-title').innerText = t.workTitle;
+            document.getElementById('work-status').innerText = t.workStatus;
+            document.getElementById('ui-btn-work-return').innerText = t.workReturn;
+            document.getElementById('work-back-btn').innerText = t.workBack;
+            document.getElementById('tt-title').innerText = t.ttTitle;
+            document.getElementById('timetravel-desc').innerText = t.ttDesc;
+            document.getElementById('txt-earned-label').innerText = t.earnedLabel;
+
+            // 更新道具列標題與懸停提示
             document.getElementById('lbl-inv-title').innerText = t.invTitle;
             document.getElementById('lbl-inv-cloak').innerText = t.invCloak;
             document.getElementById('lbl-inv-wand').innerText = t.invWand;
