@@ -582,11 +582,11 @@
                 stations: [
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
                     "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
-                    "🦪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
+                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
                     "在黄州生火慢炖、细心添柴烹煮名闻天下的正宗东坡肉！",
@@ -623,7 +623,7 @@
             },
             'en': {
                 title: "🏆 World Treasure Maze Adventure 🏆", nickname: "Player ID / Unique Handle:", gender: "Select Gender:",
-                male: "Male 👨", female: "Female 👩", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode:",
+                male: "Male 👨", female: "Female Female 👩", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode:",
                 easy: "🍵 Casual", easyDesc: "Relaxed pace, casual fun",
                 std: "⚖️ Standard", stdDesc: "Balanced challenge & fun",
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
@@ -1189,15 +1189,11 @@
                 undoHistory.push({x: playerPos.x, y: playerPos.y});
                 if(undoHistory.length > 10) undoHistory.shift();
 
-                // 處理路阻碰撞與道具防禦
                 if ([6, 2, 3, 4, 5, 8, 9, 15].includes(cell)) {
                     if (cell === 2 && playerInventory.howler > 0) {
                         playerInventory.howler--; updateInventoryUI();
-                        playSound('item'); 
-                        // 咆哮信發威時，將地圖上的該隻野狼永久消除
-                        maze[ny][nx] = 0; 
-                        playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert(currentLang === 'en' ? "Howler activated! The wolf (🐺) was terrified and ran away, vanishing completely!" : "✉️ 咆哮信發威！成功嚇跑野狼（🐺），野狼已真正從地圖上消失！");
+                        playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
+                        alert(currentLang === 'en' ? "Howler activated! The wolf (🐺) ran away in fear!" : "✉️ 咆哮信發威！成功嚇跑野狼（🐺），野狼已真正從地圖上消失！");
                         return;
                     }
                     if (cell === 5 && playerInventory.cloak > 0) {
@@ -1431,6 +1427,7 @@
             let countMsg = (currentLang === 'en' ? `Consecutive Sheng Jiao: 0 (Attempts left: ${bweiAttemptsLeft})` : `目前連續聖筊：0 次 (剩餘次數：${bweiAttemptsLeft})`);
             document.getElementById('bwei-count-display').innerText = countMsg;
             document.getElementById('bwei-rule').innerText = (currentLang === 'en' ? `Throw two consecutive 'Sheng Jiao' (Max ${bweiAttemptsLeft} attempts)` : `需連續擲出兩次【聖筊】以感動神明（本關最高可擲 ${bweiAttemptsLeft} 次）`);
+            document.getElementById('bwei-desc-text').innerText = (currentLang === 'en' ? `Sheng Jiao (One flat/one convex) | Xiao Jiao (Two flat) | Gai Jiao (Two convex)` : `聖筊(一平一凸有字) | 笑筊(兩平有字/不歸零) | 蓋筊(兩凸無字/失敗不允)`);
             
             let c1 = document.getElementById('cup1'); let c2 = document.getElementById('cup2');
             c1.className = "bwei-block cup-convex"; c1.innerText = (currentLang === 'en' ? "Blank" : "無字");
