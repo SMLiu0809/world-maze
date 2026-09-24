@@ -254,7 +254,7 @@
         </div>
         <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
         
-        <!-- 魔法與神器道具欄 (支援中英切換) -->
+        <!-- 魔法與神器道具欄 (點擊即可主動使用) -->
         <div class="inventory-bar">
             <span id="lbl-inv-title">🧙‍♂️ 點擊道具使用：</span>
             <span class="inv-item" id="btn-inv-cloak" onclick="useTool('cloak')" title="點擊防禦歹徒"><span id="lbl-inv-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
@@ -309,7 +309,6 @@
             <p id="work-status" style="font-size: clamp(16px, 3.5vw, 20px); font-weight: 700; color: #D35400; margin-top: 10px;">點擊互動打工！</p>
         </div>
         
-        <!-- 動態標誌物與互動按鈕 -->
         <button id="work-action-btn" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">🐊</button>
         <br>
         <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 360px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 8px 22px rgba(39, 174, 96, 0.35); margin-top: 12px;" onclick="returnFromWork()">✈️ 賺足機票費，光榮返台！</button>
@@ -385,7 +384,7 @@
         <div class="modal-content">
             <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇歷史流放打工站</h2>
             <p id="station-modal-desc" style="font-size: 15px; color: #718096;">點數不足時，穿越到古代協助名人賺取機票費：</p>
-            <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;">
+            <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;" id="station-btns-wrap">
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
                 <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900</span></button>
@@ -396,7 +395,7 @@
         </div>
     </div>
 
-    <!-- 幫助與神通指南彈跳視窗（含詳細功能對照表格） -->
+    <!-- 幫助與神通指南彈跳視窗 -->
     <div id="god-help-modal">
         <div class="modal-content">
             <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
@@ -498,7 +497,6 @@
                 buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
                 
-                // 道具列翻譯
                 invTitle: "🧙‍♂️ 點擊道具使用：",
                 invCloak: "🧥斗篷", invWand: "🪄魔杖", invSnitch: "🏆金探子",
                 invHowler: "✉️咆哮信", invFan: "🍃芭蕉扇", invDipper: "🏺金鬥",
@@ -517,8 +515,8 @@
                 ],
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
-                    "🥩 黃州 (蘇軾 - 烹煮東坡肉)｜每敲180/限7次｜機票700",
-                    "🦪 儋州 (蘇東坡 - 敲打生蠔)｜每敲150/限10次｜機票900",
+                    "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
+                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
@@ -554,7 +552,7 @@
                     "呼應英國工業革命與精密機械工藝的象徵。",
                     "象徵自由、民主與移民文化的紐約精神堡壘。",
                     "結合雪梨歌劇院獨特貝殼結構與南半球海洋生態。",
-                    "俄羅斯帝國皇室工藝與珠寶設計的極致代表。"
+                    "俄羅斯帝國皇室工艺与珠宝设计的极致代表。"
                 ]
             },
             'zh-CN': {
@@ -597,8 +595,8 @@
                 ],
                 stations: [
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
-                    "🥩 黄州 (苏轼 - 烹煮东坡肉)｜每敲180/限7次｜机票700",
-                    "🦪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
+                    "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
+                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
@@ -776,7 +774,6 @@
             document.getElementById('god-modal-desc').innerText = t.godDesc;
             document.getElementById('god-modal-close').innerText = t.godClose;
             
-            // 更新神通表格標題與內容
             document.getElementById('th-god').innerText = t.thGod;
             document.getElementById('th-cost').innerText = t.thCost;
             document.getElementById('th-effect').innerText = t.thEffect;
@@ -785,7 +782,7 @@
                 document.getElementById('td-e' + (i+1)).innerText = t.gEffects[i];
             }
             
-            // 更新道具列標題與懸停提示
+            // 同步更新道具列標題與懸停提示的語系綁定
             document.getElementById('lbl-inv-title').innerText = t.invTitle;
             document.getElementById('lbl-inv-cloak').innerText = t.invCloak;
             document.getElementById('lbl-inv-wand').innerText = t.invWand;
@@ -1032,7 +1029,7 @@
             let ttModal = document.getElementById('timetravel-modal');
             let ttDesc = document.getElementById('timetravel-desc');
             ttDesc.innerText = currentLang === 'en' ? 
-                `Time traveling to ancient history... Banishment to station: ${t.stations[idx].split(' | ')[0].split('｜')[0]}` :
+                `Time traveling to ancient history... Banishment to station: ${t.stations[idx].split(' | ')[0]}` :
                 `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${t.stations[idx].split('｜')[0]}】\n${t.stationNarratives[idx]}`;
             ttModal.style.display = 'flex';
 
@@ -1229,14 +1226,10 @@
                 undoHistory.push({x: playerPos.x, y: playerPos.y});
                 if(undoHistory.length > 10) undoHistory.shift();
 
-                // 處理路阻碰撞與道具防禦
                 if ([6, 2, 3, 4, 5, 8, 9, 15].includes(cell)) {
                     if (cell === 2 && playerInventory.howler > 0) {
                         playerInventory.howler--; updateInventoryUI();
-                        playSound('item'); 
-                        // 咆哮信發威時，將地圖上的該隻野狼永久消除
-                        maze[ny][nx] = 0; 
-                        playerPos.x = nx; playerPos.y = ny; drawMaze();
+                        playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
                         alert(currentLang === 'en' ? "Howler activated! The wolf (🐺) was terrified and ran away, vanishing completely!" : "✉️ 咆哮信發威！成功嚇跑野狼（🐺），野狼已真正從地圖上消失！");
                         return;
                     }
