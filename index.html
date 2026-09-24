@@ -254,15 +254,15 @@
         </div>
         <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
         
-        <!-- 魔法與神器道具欄 (點擊即可主動使用) -->
+        <!-- 魔法與神器道具欄 (支援中英切換) -->
         <div class="inventory-bar">
             <span id="lbl-inv-title">🧙‍♂️ 點擊道具使用：</span>
-            <span class="inv-item" onclick="useTool('cloak')"><span id="lbl-inv-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
-            <span class="inv-item" onclick="useTool('wand')"><span id="lbl-inv-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
-            <span class="inv-item"><span id="lbl-inv-snitch">🏆金探子</span>:<b id="inv-snitch">0</b></span>
-            <span class="inv-item" onclick="useTool('howler')"><span id="lbl-inv-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
-            <span class="inv-item" onclick="useTool('fan')"><span id="lbl-inv-fan">🍃芭蕉扇</span>:<b id="inv-fan">0</b></span>
-            <span class="inv-item" onclick="useTool('dipper')" style="color:#B7950B;"><span id="lbl-inv-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
+            <span class="inv-item" id="btn-inv-cloak" onclick="useTool('cloak')" title="點擊防禦歹徒"><span id="lbl-inv-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
+            <span class="inv-item" id="btn-inv-wand" onclick="useTool('wand')" title="點擊消除炸藥"><span id="lbl-inv-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
+            <span class="inv-item" id="btn-inv-snitch" title="金探子加分"><span id="lbl-inv-snitch">🏆金探子</span>:<b id="inv-snitch">0</b></span>
+            <span class="inv-item" id="btn-inv-howler" onclick="useTool('howler')" title="點擊嚇跑野狼"><span id="lbl-inv-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
+            <span class="inv-item" id="btn-inv-fan" onclick="useTool('fan')" title="點擊扇熄神火"><span id="lbl-inv-fan">🍃芭蕉扇</span>:<b id="inv-fan">0</b></span>
+            <span class="inv-item" id="btn-inv-dipper" onclick="useTool('dipper')" title="點擊吸光大便" style="color:#B7950B;"><span id="lbl-inv-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
         </div>
 
         <div class="target-text" id="ui-target">目標：駁二鐵件藝術公仔 🤖</div>
@@ -309,6 +309,7 @@
             <p id="work-status" style="font-size: clamp(16px, 3.5vw, 20px); font-weight: 700; color: #D35400; margin-top: 10px;">點擊互動打工！</p>
         </div>
         
+        <!-- 動態標誌物與互動按鈕 -->
         <button id="work-action-btn" class="work-btn" onclick="doWork()" ontouchstart="doWork(); event.preventDefault();">🐊</button>
         <br>
         <button id="ui-btn-work-return" class="btn-large" style="display:none; width: 90%; max-width: 360px; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); box-shadow: 0 8px 22px rgba(39, 174, 96, 0.35); margin-top: 12px;" onclick="returnFromWork()">✈️ 賺足機票費，光榮返台！</button>
@@ -395,7 +396,7 @@
         </div>
     </div>
 
-    <!-- 幫助與神通指南彈跳視窗 -->
+    <!-- 幫助與神通指南彈跳視窗（含詳細功能對照表格） -->
     <div id="god-help-modal">
         <div class="modal-content">
             <h2 id="god-modal-title" style="color: #C0392B; margin-top: 0;">⛩️ 神通指南與請神面板</h2>
@@ -496,6 +497,14 @@
                 winTitle: "🎉 尋獲城市寶物！", btnPrev: "⬅️ 上一關", btnHome: "🏠 回主選單", btnNext: "➡️ 下一關", btnCert: "🏆 結業證書",
                 buyText: "💳 支付運費，將寶物買回國！", insufficient: "⚠️ 旅費不足！無法支付運費將寶物買回國，將被強制流放至邊疆補給站！",
                 footer: "國立高雄師範大學 劉世閔 老師設計",
+                
+                // 道具列翻譯
+                invTitle: "🧙‍♂️ 點擊道具使用：",
+                invCloak: "🧥斗篷", invWand: "🪄魔杖", invSnitch: "🏆金探子",
+                invHowler: "✉️咆哮信", invFan: "🍃芭蕉扇", invDipper: "🏺金鬥",
+                titCloak: "點擊防禦歹徒", titWand: "點擊消除炸藥", titHowler: "點擊嚇跑野狼",
+                titFan: "點擊扇熄神火", titDipper: "點擊吸光大便", titSnitch: "金探子自動加分",
+
                 thGod: "神尊名稱", thCost: "香油錢", thEffect: "庇佑與消除路阻效果",
                 gNames: ["土地公", "溫王爺", "媽祖", "觀世音", "藥師佛", "玉皇大帝"],
                 gEffects: [
@@ -508,8 +517,8 @@
                 ],
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
-                    "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
+                    "🥩 黃州 (蘇軾 - 烹煮東坡肉)｜每敲180/限7次｜機票700",
+                    "🦪 儋州 (蘇東坡 - 敲打生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
@@ -569,6 +578,13 @@
                 winTitle: "🎉 寻获城市宝物！", btnPrev: "⬅️ 上一关", btnHome: "🏠 回主菜单", btnNext: "➡️ 下一关", btnCert: "🏆 结业证书",
                 buyText: "💳 支付运费，将宝物买回国！", insufficient: "⚠️ 旅费不足！无法支付运费将宝物买回国，将被强制流放至边疆补给站！",
                 footer: "高雄师范大学 刘世闵 老师设计",
+                
+                invTitle: "🧙‍♂️ 点击道具使用：",
+                invCloak: "🧥斗篷", invWand: "🪄魔杖", invSnitch: "🏆金探子",
+                invHowler: "✉️咆哮信", invFan: "🍃芭蕉扇", invDipper: "🏺金斗",
+                titCloak: "点击防御歹徒", titWand: "点击消除炸药", titHowler: "点击吓跑野狼",
+                titFan: "点击扇熄神火", titDipper: "点击吸光大便", titSnitch: "金探子自动加分",
+
                 thGod: "神尊名称", thCost: "香油钱", thEffect: "庇佑与消除路阻效果",
                 gNames: ["土地公", "温王爷", "妈祖", "观世音", "药师佛", "玉皇大帝"],
                 gEffects: [
@@ -581,12 +597,12 @@
                 ],
                 stations: [
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
-                    "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
-                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
+                    "🥩 黄州 (苏轼 - 烹煮东坡肉)｜每敲180/限7次｜机票700",
+                    "🦪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
                 stationNarratives: [
                     "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
                     "在黄州生火慢炖、细心添柴烹煮名闻天下的正宗东坡肉！",
@@ -623,7 +639,7 @@
             },
             'en': {
                 title: "🏆 World Treasure Maze Adventure 🏆", nickname: "Player ID / Unique Handle:", gender: "Select Gender:",
-                male: "Male 👨", female: "Female Female 👩", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode:",
+                male: "Male 👨", female: "Female 👩", testTool: "🛠️ Level Select Tool:", modeLabel: "Select Game Mode:",
                 easy: "🍵 Casual", easyDesc: "Relaxed pace, casual fun",
                 std: "⚖️ Standard", stdDesc: "Balanced challenge & fun",
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
@@ -642,6 +658,13 @@
                 winTitle: "🎉 Souvenir Found!", btnPrev: "⬅️ Prev", btnHome: "🏠 Menu", btnNext: "➡️ Next", btnCert: "🏆 Certificate",
                 buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
+                
+                invTitle: "🧙‍♂️ Click to Use:",
+                invCloak: "🧥Cloak", invWand: "🪄Wand", invSnitch: "🏆Snitch",
+                invHowler: "✉️Howler", invFan: "🍃Fan", invDipper: "🏺Dipper",
+                titCloak: "Click to evade bandit", titWand: "Click to clear explosive", titHowler: "Click to scare wolf",
+                titFan: "Click to extinguish fire", titDipper: "Click to absorb waste", titSnitch: "Auto bonus points",
+
                 thGod: "Deity", thCost: "Offering", thEffect: "Divine Blessing & Hazard Removal",
                 gNames: ["Tudi Gong", "Wen Wangye", "Mazu", "Guanyin", "Medicine Buddha", "Jade Emperor"],
                 gEffects: [
@@ -753,6 +776,7 @@
             document.getElementById('god-modal-desc').innerText = t.godDesc;
             document.getElementById('god-modal-close').innerText = t.godClose;
             
+            // 更新神通表格標題與內容
             document.getElementById('th-god').innerText = t.thGod;
             document.getElementById('th-cost').innerText = t.thCost;
             document.getElementById('th-effect').innerText = t.thEffect;
@@ -760,6 +784,22 @@
                 document.getElementById('td-g' + (i+1)).innerText = t.gNames[i];
                 document.getElementById('td-e' + (i+1)).innerText = t.gEffects[i];
             }
+            
+            // 更新道具列標題與懸停提示
+            document.getElementById('lbl-inv-title').innerText = t.invTitle;
+            document.getElementById('lbl-inv-cloak').innerText = t.invCloak;
+            document.getElementById('lbl-inv-wand').innerText = t.invWand;
+            document.getElementById('lbl-inv-snitch').innerText = t.invSnitch;
+            document.getElementById('lbl-inv-howler').innerText = t.invHowler;
+            document.getElementById('lbl-inv-fan').innerText = t.invFan;
+            document.getElementById('lbl-inv-dipper').innerText = t.invDipper;
+            
+            document.getElementById('btn-inv-cloak').title = t.titCloak;
+            document.getElementById('btn-inv-wand').title = t.titWand;
+            document.getElementById('btn-inv-snitch').title = t.titSnitch;
+            document.getElementById('btn-inv-howler').title = t.titHowler;
+            document.getElementById('btn-inv-fan').title = t.titFan;
+            document.getElementById('btn-inv-dipper').title = t.titDipper;
 
             document.getElementById('cert-title').innerText = t.certTitle;
             document.getElementById('cert-btn').innerText = t.certBtn;
@@ -992,7 +1032,7 @@
             let ttModal = document.getElementById('timetravel-modal');
             let ttDesc = document.getElementById('timetravel-desc');
             ttDesc.innerText = currentLang === 'en' ? 
-                `Time traveling to ancient history... Banishment to station: ${t.stations[idx].split('｜')[0]}` :
+                `Time traveling to ancient history... Banishment to station: ${t.stations[idx].split(' | ')[0].split('｜')[0]}` :
                 `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${t.stations[idx].split('｜')[0]}】\n${t.stationNarratives[idx]}`;
             ttModal.style.display = 'flex';
 
@@ -1000,7 +1040,7 @@
                 ttModal.style.display = 'none';
                 currentStationIndex = idx; currentStationClicks = 0; currentWorkEarned = 0;
                 workTargetValue = stConfig.ticket;
-                document.getElementById('ui-banish-location').innerText = "🗺️ " + t.stations[idx].split('｜')[0];
+                document.getElementById('ui-banish-location').innerText = "🗺️ " + t.stations[idx].split('｜')[0].split(' | ')[0];
                 document.getElementById('work-narrative').innerText = `"${t.stationNarratives[idx]}"`;
                 document.getElementById('work-action-btn').innerText = t.stationLogos ? t.stationLogos[idx] : "📜";
                 isEventActive = true;
@@ -1189,11 +1229,15 @@
                 undoHistory.push({x: playerPos.x, y: playerPos.y});
                 if(undoHistory.length > 10) undoHistory.shift();
 
+                // 處理路阻碰撞與道具防禦
                 if ([6, 2, 3, 4, 5, 8, 9, 15].includes(cell)) {
                     if (cell === 2 && playerInventory.howler > 0) {
                         playerInventory.howler--; updateInventoryUI();
-                        playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
-                        alert(currentLang === 'en' ? "Howler activated! The wolf (🐺) ran away in fear!" : "✉️ 咆哮信發威！成功嚇跑野狼（🐺），野狼已真正從地圖上消失！");
+                        playSound('item'); 
+                        // 咆哮信發威時，將地圖上的該隻野狼永久消除
+                        maze[ny][nx] = 0; 
+                        playerPos.x = nx; playerPos.y = ny; drawMaze();
+                        alert(currentLang === 'en' ? "Howler activated! The wolf (🐺) was terrified and ran away, vanishing completely!" : "✉️ 咆哮信發威！成功嚇跑野狼（🐺），野狼已真正從地圖上消失！");
                         return;
                     }
                     if (cell === 5 && playerInventory.cloak > 0) {
