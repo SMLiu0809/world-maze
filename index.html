@@ -530,11 +530,11 @@
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
+                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
@@ -618,7 +618,7 @@
                     "万尊降临！全场路阻瞬间清场并直通终点！"
                 ],
                 godBtnTexts: [
-                    "🏮土地公(-300)", "⚔️温王爷(-400)", "🌊妈祖(-500)",
+                    "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)",
                     "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
                 ],
                 stations: [
@@ -648,7 +648,7 @@
                 targets: [
                     "驳二铁件艺术公仔 🤖", "宇治抹茶茶道组 🍵", "塞纳河畔手绘油画 🎨",
                     "尼罗河莎草纸画卷 📜", "爱琴海蓝白陶壶 🏺", "罗马竞技场古金币 🪙",
-                    "大本钟精钢齿轮 ⚙️", "自由女神圣火微雕 🗽", "悉尼港湾大贝壳珍珠 🐚", "克里姆林宫彩蛋宝石 🥚"
+                    "大笨钟精钢齿轮 ⚙️", "自由女神圣火微雕 🗽", "悉尼港湾大贝壳珍珠 🐚", "克里姆林宫彩蛋宝石 🥚"
                 ],
                 lores: [
                     "展现高雄由工业港口转型为当代艺术创意的文创精神。",
@@ -1032,7 +1032,16 @@
             } else if (toolName === 'howler') {
                 playerInventory.howler--; updateInventoryUI();
                 playSound('item');
-                alert(currentLang === 'en' ? "✉️ Howler sent! The wolves ran away in fear!" : "✉️ 咆哮信已吼出！野狼見狀嚇得魂飛魄散！");
+                // 主動點擊咆哮信，自動清除地圖上第一隻遇到的野狼
+                let clearedWolf = false;
+                for (let y = 0; y < mazeSize; y++) {
+                    for (let x = 0; x < mazeSize; x++) {
+                        if (maze[y][x] === 2) { maze[y][x] = 0; clearedWolf = true; break; }
+                    }
+                    if (clearedWolf) break;
+                }
+                drawMaze();
+                alert(currentLang === 'en' ? "✉️ Howler sent! A wolf in the maze was terrified and vanished completely!" : "✉️ 咆哮信發威！成功嚇跑一隻野狼，野狼已真正從地圖上消失！");
             } else if (toolName === 'cloak') {
                 playerInventory.cloak--; updateInventoryUI();
                 playSound('item');
@@ -1337,8 +1346,8 @@
                     trapHitThisLevel = true;
                     totalScore -= penalty; 
                     updateUI();
-                    checkBankruptcy(); // 檢查是否破產
-                    if (!isPlaying) return; // 如果破產已重置，直接返回
+                    checkBankruptcy(); 
+                    if (!isPlaying) return;
 
                     playSound('bump'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
