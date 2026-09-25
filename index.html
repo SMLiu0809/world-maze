@@ -114,6 +114,7 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: all 0.15s; user-select: none;
         }
         .inv-item:hover { background: #E8DAEF; transform: translateY(-2px); }
+        .inv-item.active-tool { background: #FFD700; border-color: #FF8C00; box-shadow: 0 0 10px rgba(255, 140, 0, 0.6); }
 
         #canvas-container { width: 100%; max-width: 520px; margin: 0 auto; aspect-ratio: 1 / 1; }
         canvas { width: 100%; height: 100%; background-color: #FFF; border: 6px solid #4A3525; border-radius: 20px; box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
@@ -254,7 +255,7 @@
         </div>
         <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
         
-        <!-- 魔法與神器道具欄 (點擊即可主動使用) -->
+        <!-- 魔法與神器道具欄 (點擊可主動使用道具消除威脅) -->
         <div class="inventory-bar">
             <span id="lbl-inv-title">🧙‍♂️ 點擊道具使用：</span>
             <span class="inv-item" id="btn-inv-cloak" onclick="useTool('cloak')" title="點擊防禦歹徒"><span id="lbl-inv-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
@@ -824,7 +825,6 @@
                 document.getElementById('td-e' + (i+1)).innerText = t.gEffects[i];
             }
 
-            // 更新神明按鈕文字
             let godBtnSpans = document.querySelectorAll('#god-btns-wrap span');
             if (godBtnSpans && t.godBtnTexts) {
                 godBtnSpans.forEach((sp, idx) => {
@@ -832,7 +832,6 @@
                 });
             }
 
-            // 更新流放打工區與擲筊按鈕文字
             document.getElementById('work-title').innerText = t.workTitle;
             document.getElementById('work-status').innerText = t.workStatus;
             document.getElementById('ui-btn-work-return').innerText = t.workReturn;
@@ -843,7 +842,6 @@
             document.getElementById('lbl-bwei-throw').innerText = t.bweiThrowText;
             document.getElementById('lbl-bwei-cancel').innerText = t.bweiCancelText;
 
-            // 更新道具列標題與懸停提示
             document.getElementById('lbl-inv-title').innerText = t.invTitle;
             document.getElementById('lbl-inv-cloak').innerText = t.invCloak;
             document.getElementById('lbl-inv-wand').innerText = t.invWand;
