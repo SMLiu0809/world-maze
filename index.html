@@ -114,7 +114,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: all 0.15s; user-select: none;
         }
         .inv-item:hover { background: #E8DAEF; transform: translateY(-2px); }
-        .inv-item.active-tool { background: #FFD700; border-color: #FF8C00; box-shadow: 0 0 10px rgba(255, 140, 0, 0.6); }
 
         #canvas-container { width: 100%; max-width: 520px; margin: 0 auto; aspect-ratio: 1 / 1; }
         canvas { width: 100%; height: 100%; background-color: #FFF; border: 6px solid #4A3525; border-radius: 20px; box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
@@ -235,7 +234,7 @@
         <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(15px, 3.5vw, 19px); text-align: left; line-height: 1.8; background: #EBF8FF; padding: 22px; border-radius: 20px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
-            <p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p>
+            <p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產，強制重回第 1 關！</p>
             <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
         </div>
         <br>
@@ -255,7 +254,7 @@
         </div>
         <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
         
-        <!-- 魔法與神器道具欄 (點擊可主動使用道具消除威脅) -->
+        <!-- 魔法與神器道具欄 -->
         <div class="inventory-bar">
             <span id="lbl-inv-title">🧙‍♂️ 點擊道具使用：</span>
             <span class="inv-item" id="btn-inv-cloak" onclick="useTool('cloak')" title="點擊防禦歹徒"><span id="lbl-inv-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
@@ -484,7 +483,7 @@
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產，強制重回第 1 關！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
                 stationBtn: "💰 前往點數補給站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 補給", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
@@ -531,11 +530,11 @@
                 stations: [
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
+                    "🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
+                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
@@ -578,7 +577,7 @@
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
                 hel: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付等差级数纪念品运费（每关递增500点）。旅费不足将被流放至边疆补给站赚取机票费！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付等差级数纪念品运费（每关递增500点）。旅费不足将被流放至边疆补给站赚取机票费！累计扣分达 <b>-3000 点</b>将宣告破产，强制重回第 1 关！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
                 stationBtn: "💰 前往点数补给站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 补给", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
@@ -632,7 +631,7 @@
                 stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
                 stationNarratives: [
                     "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
-                    "在黄州生火慢炖、细心添柴烹煮名闻天下的正宗东坡肉！",
+                    "在黄州生火慢燉、细心添柴烹煮名闻天下的正宗东坡肉！",
                     "用力敲打生蚝硬壳，协助苏东坡与文人雅士品尝美味生蚝！",
                     "协助柳宗元在永州江雪中独钓寒江雪！",
                     "在宁古塔冰面破冰捕鱼，将鲜鱼送给甄远道温暖身心！"
@@ -672,7 +671,7 @@
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
                 hell: "🔥 Hell", hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
-                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations! Reaching a total score of <b>-3000 pts</b> triggers bankruptcy and restarts the game from Stage 1!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
                 stationBtn: "💰 Point Supply Station", backCover: "⬅️ Main Menu",
                 tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
@@ -1111,6 +1110,19 @@
             else showScreen('screen-cover');
         }
 
+        function checkBankruptcy() {
+            if (totalScore <= -3000) {
+                alert(currentLang === 'en' ? 
+                    "🚨 BANKRUPTCY! Your total score has dropped to -3000 points or lower! You are officially bankrupt and forced back to Stage 1!" : 
+                    "🚨【宣告破產】！您的總分已跌至 -3000 點以下！負債累累宣告破產，所有進度歸零，強制重回第 1 關重新開始！");
+                currentLevel = 1;
+                totalScore = 500;
+                isEventActive = false;
+                showScreen('screen-game');
+                loadLevel();
+            }
+        }
+
         function loadLevel() {
             isEventActive = false; 
             undoHistory = []; undoCountLeft = 3;
@@ -1323,7 +1335,11 @@
                     else if (cell === 15) { penalty = 1000; obstacleName = (currentLang === 'en' ? "Divine Fire (🔥)" : "🔥 神火"); }
 
                     trapHitThisLevel = true;
-                    totalScore -= penalty; updateUI();
+                    totalScore -= penalty; 
+                    updateUI();
+                    checkBankruptcy(); // 檢查是否破產
+                    if (!isPlaying) return; // 如果破產已重置，直接返回
+
                     playSound('bump'); maze[ny][nx] = 0;
                     playerPos.x = nx; playerPos.y = ny; drawMaze();
                     
