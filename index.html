@@ -482,20 +482,20 @@
             { reward: 180, maxClicks: 7, ticket: 700 }, // 黃州
             { reward: 160, maxClicks: 9, ticket: 800 }, // 惠州
             { reward: 200, maxClicks: 5, ticket: 500 }, // 潮州
+            { reward: 160, maxClicks: 10, ticket: 800 },// 和州 (新加入：劉禹錫修陋室)
             { reward: 120, maxClicks: 15, ticket: 1100 },// 永州
             { reward: 150, maxClicks: 10, ticket: 900 },// 儋州
-            { reward: 100, maxClicks: 20, ticket: 1300 },// 寧古塔
-            { reward: 80, maxClicks: 30, ticket: 1500 } // 倫敦塔
+            { reward: 100, maxClicks: 20, ticket: 1300 }// 寧古塔
         ];
 
-        // 英文版的打工站參數 (依距離遠近：新加坡 -> 紐西蘭 -> 澳洲 -> 印度 -> 愛爾蘭 -> 英國 -> 美國，點數由低到高，票價隨距離遞增)
+        // 英文版的打工站參數 (依距離由近到遠，點數與機票費隨距離遞增)
         const banishmentStations_en = [
             { reward: 100, maxClicks: 10, ticket: 500 },  // Singapore
             { reward: 120, maxClicks: 10, ticket: 600 },  // New Zealand
             { reward: 140, maxClicks: 10, ticket: 700 },  // Australia
             { reward: 160, maxClicks: 10, ticket: 800 },  // India
             { reward: 180, maxClicks: 10, ticket: 900 },  // Ireland
-            { reward: 200, maxClicks: 10, ticket: 1000 }, // United Kingdom
+            { reward: 200, maxClicks: 10, ticket: 1000 }, // London Tower (Shakespeare)
             { reward: 220, maxClicks: 10, ticket: 1100 }  // United States
         ];
 
@@ -560,29 +560,29 @@
                     "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
                     "🌿🍒🍒🍒 惠州 (蘇軾 - 品荔枝)｜每敲160/限9次｜機票800",
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
+                    "🏚️ 和州 (劉禹錫 - 修陋室)｜每敲160/限10次｜機票800",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
                     "🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900".replace("🪪", "🦪"),
-                    "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300",
-                    "📜 倫敦塔 (莎士比亞 - 劇本)｜每敲80/限30次｜機票1500"
+                    "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🥩", "🌿🍒🍒🍒", "🐊", "🎣", "🦪", "🐟", "📜"],
+                stationLogos: ["🥩", "🌿🍒🍒🍒", "🐊", "🏚️", "🪪".replace("🪪", "🦪"), "🐟"],
                 stationNarratives: [
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
                     "在惠州品嚐嶺南鮮甜荔枝（日啖荔枝三百顆，不辭長作嶺南人），享受隨風微醺的貶謫時光！",
                     "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
+                    "在安徽和州協助劉禹錫修葺陋室（斯是陋室，惟吾德馨），體驗安貧樂道的高雅情操！",
                     "協助柳宗元在永州江雪中獨釣寒江雪！",
                     "用力敲打生蠔硬殼，協助蘇東坡與文人雅士品嚐鮮美生蠔！",
-                    "在寧古塔冰面破冰捕魚，將鮮魚送給甄遠道溫暖身心！",
-                    "在英國倫敦塔協助大文豪莎士比亞編修經典劇本！"
+                    "在寧古塔冰面破冰捕魚，將鮮魚送給甄遠道溫暖身心！"
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊媽祖(-500)", 
                     "🌿觀世音(-600)", "🪷藥師佛(-800)", "🌟玉皇大帝 (全清場+指路 / -2500)"
                 ],
                 levels: [
-                    "第一站：臺灣・高雄", "第二站：日本・京都", "第三站：法國・巴黎",
-                    "第四站：埃及・吉薩", "第五站：希臘・雅典", "第六站：義大利・羅馬",
-                    "第七站：英國・倫敦", "第八站：美國・紐約", "第九站：澳洲・雪梨", "第十站：俄羅斯・莫斯科"
+                    "第一站 : 臺灣・高雄", "第二站 : 日本・京都", "第三站 : 法國・巴黎",
+                    "第四站 : 埃及・吉薩", "第五站 : 希臘・雅典", "第六站 : 義大利・羅馬",
+                    "第七站 : 英國・倫敦", "第八站 : 美國・紐約", "第九站 : 澳洲・雪梨", "第十站 : 俄羅斯・莫斯科"
                 ],
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
@@ -658,20 +658,20 @@
                     "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
                     "🍒🍒🍒 惠州 (苏轼 - 品荔枝)｜每敲160/限9次｜机票800",
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
+                    "🏚️ 和州 (刘禹锡 - 修陋室)｜每敲160/限10次｜机票800",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
                     "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900".replace("🪪", "🦪"),
-                    "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300",
-                    "📜 伦敦塔 (莎士比亚 - 剧本)｜每敲80/限30次｜机票1500"
+                    "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
-                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🎣", "🦪", "🐟", "📜"],
+                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🦪", "🐟"],
                 stationNarratives: [
                     "在黄州生火慢燉、细心添柴烹煮名闻天下的正宗东坡肉！",
                     "在惠州品尝岭南鲜甜荔枝（日啖荔枝三百颗，不辞长作岭南人），享受随风微醺的贬谪时光！",
                     "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
+                    "在安徽和州协助刘禹锡修葺陋室（斯是陋室，惟吾德馨），体验安贫乐道的高雅情操！",
                     "协助柳宗元在永州江雪中独钓寒江雪！",
                     "用力敲打生蚝硬壳，协助苏东坡与文人雅士品尝美味生蚝！",
-                    "在宁古塔冰面破冰捕鱼，将鲜鱼送给甄远道温暖身心！",
-                    "在英国伦敦塔协助大文豪莎士比亚编修经典剧本！"
+                    "在宁古塔冰面破冰捕鱼，将鲜鱼送给甄远道温暖身心！"
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)", 
@@ -752,14 +752,14 @@
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)",
                     "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
                 ],
-                // 英文版 7 大英語系國家 (新加坡 -> 紐西蘭 -> 澳洲 -> 印度 -> 愛爾蘭 -> 英國 -> 美國)，距離由近到遠，點數由低到高
+                // 英文版 7 大英語系國家 (距離由近到遠，點數由低到高)
                 stations: [
                     "🚢 Singapore (Sir Stamford Raffles - Port Trade) | 100 pts | Ticket: 500",
                     "📝 New Zealand (Katherine Mansfield - Manuscript) | 120 pts | Ticket: 600",
                     "🦘 Australia (Banjo Paterson - Shearing) | 140 pts | Ticket: 700",
                     "🪷 India (Rabindranath Tagore - Poetry) | 160 pts | Ticket: 800",
                     "🍀 Ireland (James Joyce - Proofreading) | 180 pts | Ticket: 900",
-                    "📜 United Kingdom (William Shakespeare - Theatre) | 200 pts | Ticket: 1000",
+                    "📜 London Tower (Shakespeare - Play) | 200 pts | Ticket: 1000",
                     "🗽 United States (Mark Twain - Painting Fence) | 220 pts | Ticket: 1100"
                 ],
                 stationLogos: ["🚢", "📝", "🦘", "🪷", "🍀", "📜", "🗽"],
@@ -783,8 +783,8 @@
                 ],
                 targets: [
                     "Pier-2 Iron Art Toy 🤖", "Uji Matcha Tea Set 🍵", "Seine Oil Painting 🎨",
-                    "Nile Papyrus Scroll 📜", "Aegean Ceramic Pot 🏺", "Colosseum Ancient Coin 🪙",
-                    "Big Ben Steel Gear ⚙️", "Sydney Harbour Pearl 🐚", "Kremlin Faberge Egg 🥚"
+                    "Nile Papyrus Scroll 📜", "爱琴海蓝白陶壶 🏺", "罗马竞技场古金币 🪙",
+                    "大本钟精钢齿轮 ⚙️", "自由女神圣火微雕 🗽", "悉尼港湾大贝壳珍珠 🐚", "克里姆林宫彩蛋宝石 🥚"
                 ],
                 lores: [
                     "Showcasing Kaohsiung's transformation from an industrial port to a hub of contemporary creative arts.",
@@ -999,7 +999,7 @@
 
         let currentLevel = 1; let totalScore = 500; let isEventActive = false;
         let maze = [], mazeSize = 9; let playerPos = {x: 1, y: 1}, targetPos = {x: 7, y: 7}; 
-        let currentTarget = {n:"駁二鐵件藝術公仔 🤖", s:500, i:"🤖", station:"第一站：臺灣・高雄", knowledge:"展現高雄由工業港口轉型為當代藝術創意的文創精神。"};
+        let currentTarget = {n:"駁二鐵件藝術公仔 🤖", s:500, i:"🤖", station:"第一站 : 臺灣・高雄", knowledge:"展現高雄由工業港口轉型為當代藝術創意的文創精神。"};
         let bweiShengCount = 0; let bweiAttemptsLeft = 3; let pendingGod = '', pendingGodName = '';
 
         const levelScoreList = [500, 800, 1000, 3500, 6000, 10000, 2500, 1500, 2000, 4500];
