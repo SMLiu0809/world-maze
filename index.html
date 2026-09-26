@@ -380,19 +380,19 @@
         </div>
     </div>
 
-    <!-- 選擇流放地彈跳視窗 (依距離由近到遠排序，惠州使用 🌿🍒🍒🍒) -->
+    <!-- 選擇流放地彈跳視窗 -->
     <div id="station-modal">
         <div class="modal-content">
             <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇歷史流放打工站</h2>
             <p id="station-modal-desc" style="font-size: 15px; color: #718096;">點數不足時，穿越到古代協助名人賺取機票費：</p>
             <div style="display: flex; flex-direction: column; gap: 8px; margin: 18px 0;" id="station-btns-wrap">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 14px;" onclick="selectStation(0)"><span id="st-0">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #BA4A00 100%); font-size: 14px;" onclick="selectStation(1)"><span id="st-1">🌿🍒🍒🍒 惠州 (蘇軾 - 品荔枝)｜每敲160/限9次｜機票800</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2980B9 0%, #1F618D 100%); font-size: 14px;" onclick="selectStation(2)"><span id="st-2">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 14px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #D35400 0%, #A04000 100%); font-size: 14px;" onclick="selectStation(4)"><span id="st-4">🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #34495E 0%, #2C3E50 100%); font-size: 14px;" onclick="selectStation(5)"><span id="st-5">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #7F8C8D 0%, #616A6B 100%); font-size: 14px;" onclick="selectStation(6)"><span id="st-6">📜 倫敦塔 (莎士比亞 - 劇本)｜每敲80/限30次｜機票1500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 14px;" onclick="selectStation(0)"><span id="st-0">打工站 1</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #BA4A00 100%); font-size: 14px;" onclick="selectStation(1)"><span id="st-1">打工站 2</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2980B9 0%, #1F618D 100%); font-size: 14px;" onclick="selectStation(2)"><span id="st-2">打工站 3</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 14px;" onclick="selectStation(3)"><span id="st-3">打工站 4</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #D35400 0%, #A04000 100%); font-size: 14px;" onclick="selectStation(4)"><span id="st-4">打工站 5</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #34495E 0%, #2C3E50 100%); font-size: 14px;" onclick="selectStation(5)"><span id="st-5">打工站 6</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #7F8C8D 0%, #616A6B 100%); font-size: 14px;" onclick="selectStation(6)"><span id="st-6">打工站 7</span></button>
             </div>
             <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeStationModal()">取消返回</button>
         </div>
@@ -477,15 +477,31 @@
     </div>
 
     <script>
-        const banishmentStations = [
-            { reward: 180, maxClicks: 7, ticket: 700 },
-            { reward: 160, maxClicks: 9, ticket: 800 },
-            { reward: 200, maxClicks: 5, ticket: 500 },
-            { reward: 120, maxClicks: 15, ticket: 1100 },
-            { reward: 150, maxClicks: 10, ticket: 900 },
-            { reward: 100, maxClicks: 20, ticket: 1300 },
-            { reward: 80, maxClicks: 30, ticket: 1500 }
+        // 繁中與簡中版的打工站參數 (由近到遠)
+        const banishmentStations_zh = [
+            { reward: 180, maxClicks: 7, ticket: 700 }, // 黃州
+            { reward: 160, maxClicks: 9, ticket: 800 }, // 惠州
+            { reward: 200, maxClicks: 5, ticket: 500 }, // 潮州
+            { reward: 120, maxClicks: 15, ticket: 1100 },// 永州
+            { reward: 150, maxClicks: 10, ticket: 900 },// 儋州
+            { reward: 100, maxClicks: 20, ticket: 1300 },// 寧古塔
+            { reward: 80, maxClicks: 30, ticket: 1500 } // 倫敦塔
         ];
+
+        // 英文版的打工站參數 (依距離遠近：新加坡 -> 紐西蘭 -> 澳洲 -> 印度 -> 愛爾蘭 -> 英國 -> 美國，點數由低到高，票價隨距離遞增)
+        const banishmentStations_en = [
+            { reward: 100, maxClicks: 10, ticket: 500 },  // Singapore
+            { reward: 120, maxClicks: 10, ticket: 600 },  // New Zealand
+            { reward: 140, maxClicks: 10, ticket: 700 },  // Australia
+            { reward: 160, maxClicks: 10, ticket: 800 },  // India
+            { reward: 180, maxClicks: 10, ticket: 900 },  // Ireland
+            { reward: 200, maxClicks: 10, ticket: 1000 }, // United Kingdom
+            { reward: 220, maxClicks: 10, ticket: 1100 }  // United States
+        ];
+
+        function getActiveStationConfig() {
+            return (currentLang === 'en') ? banishmentStations_en[currentStationIndex] : banishmentStations_zh[currentStationIndex];
+        }
 
         const i18n = {
             'zh-TW': {
@@ -640,14 +656,14 @@
                 ],
                 stations: [
                     "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
-                    "🌿🍒🍒🍒 惠州 (苏轼 - 品荔枝)｜每敲160/限9次｜机票800",
+                    "🍒🍒🍒 惠州 (苏轼 - 品荔枝)｜每敲160/限9次｜机票800",
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
                     "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900".replace("🪪", "🦪"),
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300",
                     "📜 伦敦塔 (莎士比亚 - 剧本)｜每敲80/限30次｜机票1500"
                 ],
-                stationLogos: ["🥩", "🌿🍒🍒🍒", "🐊", "🎣", "🦪", "🐟", "📜"],
+                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🎣", "🦪", "🐟", "📜"],
                 stationNarratives: [
                     "在黄州生火慢燉、细心添柴烹煮名闻天下的正宗东坡肉！",
                     "在惠州品尝岭南鲜甜荔枝（日啖荔枝三百颗，不辞长作岭南人），享受随风微醺的贬谪时光！",
@@ -697,7 +713,7 @@
                 tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
                 knowTitle: "📖 Culture & Treasure Lore", kClose: "Got it, Continue!",
-                stationTitle: "💰 Select Literary Banishment Station", stationDesc: "Earn tickets by helping historical literary figures:", stationCancel: "Cancel",
+                stationTitle: "💰 Select English-Speaking Banishment Station", stationDesc: "Earn tickets by helping literary and historical figures across 7 English-speaking nations:", stationCancel: "Cancel",
                 godTitle: "⛩️ Divine Guidance & Prayer", godDesc: "Unlocked at Level 6. Pray for divine assistance!", godClose: "Close Guide",
                 bweiTitle: "🙏 Divine Oracle Prayer", bweiRule: "Throw two consecutive 'Sheng Jiao' to succeed", bweiBtn: "🙌 Throw Jiao!", bweiCancel: "Cancel",
                 certTitle: "📜 World Explorer Certificate 📜", certBtn: "🏆 Main Menu",
@@ -706,12 +722,12 @@
                 buyText: "💳 Pay Shipping Fee & Bring Souvenir Home!", insufficient: "⚠️ Insufficient Funds! Cannot afford shipping fee. You are banished to the supply station!",
                 footer: "Designed by Dr. Shih-Min Liu, National Kaohsiung Normal University",
                 
-                workTitle: "📜 Historical Banishment Work Zone 📜",
+                workTitle: "📜 English-Speaking Banishment Work Zone 📜",
                 workStatus: "Click to work and assist!",
-                workReturn: "✈️ Earned enough for ticket, return home!",
+                workReturn: "✈️ Earned enough for ticket, return home to Kaohsiung!",
                 workBack: "⬅️ Return to Main Menu",
                 ttTitle: "⏳ Time Traveling...",
-                ttDesc: "Due to insufficient funds, you are banished to ancient history to work...",
+                ttDesc: "Due to insufficient funds, you are banished to an English-speaking nation to work...",
                 earnedLabel: "Earned Points: ",
                 bweiThrowText: "🙌 Throw Jiao!",
                 bweiCancelText: "Cancel",
@@ -736,24 +752,25 @@
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)",
                     "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
                 ],
+                // 英文版 7 大英語系國家 (新加坡 -> 紐西蘭 -> 澳洲 -> 印度 -> 愛爾蘭 -> 英國 -> 美國)，距離由近到遠，點數由低到高
                 stations: [
-                    "🥩 Huangzhou (Su Shi - Dongpo Pork) | 180 pts / 7 taps | Ticket: 700",
-                    "🌿🍒🍒🍒 Huizhou (Su Shi - Lychee Tasting) | 160 pts / 9 taps | Ticket: 800",
-                    "🐊 Chaozhou (Han Yu - Crocodiles) | 200 pts / 5 taps | Ticket: 500",
-                    "🎣 Yongzhou (Liu Zongyuan - Snow) | 120 pts / 15 taps | Ticket: 1100",
-                    "🦪 Danzhou (Su Shi - Oysters) | 150 pts / 10 taps | Ticket: 900",
-                    "🐟 Ningguta (Zhen Yuandao - Fishing) | 100 pts / 20 taps | Ticket: 1300",
-                    "📜 London Tower (Shakespeare - Play) | 80 pts / 30 taps | Ticket: 1500"
+                    "🚢 Singapore (Sir Stamford Raffles - Port Trade) | 100 pts | Ticket: 500",
+                    "📝 New Zealand (Katherine Mansfield - Manuscript) | 120 pts | Ticket: 600",
+                    "🦘 Australia (Banjo Paterson - Shearing) | 140 pts | Ticket: 700",
+                    "🪷 India (Rabindranath Tagore - Poetry) | 160 pts | Ticket: 800",
+                    "🍀 Ireland (James Joyce - Proofreading) | 180 pts | Ticket: 900",
+                    "📜 United Kingdom (William Shakespeare - Theatre) | 200 pts | Ticket: 1000",
+                    "🗽 United States (Mark Twain - Painting Fence) | 220 pts | Ticket: 1100"
                 ],
-                stationLogos: ["🥩", "🌿🍒🍒🍒", "🐊", "🎣", "🦪", "🐟", "📜"],
+                stationLogos: ["🚢", "📝", "🦘", "🪷", "🍀", "📜", "🗽"],
                 stationNarratives: [
-                    "Slow-cook the legendary Dongpo Pork over a warm fire in Huangzhou!",
-                    "Taste sweet lychees in Huizhou and enjoy the leisurely exile vibe!",
-                    "Help literary master Han Yu exorcise crocodiles in Chaozhou!",
-                    "Help Liu Zongyuan fish alone in the cold river snow of Yongzhou!",
-                    "Shuck oyster shells to help Su Shi enjoy delicious fresh oysters in Danzhou!",
-                    "Break the ice in Ningguta to catch fresh fish and warm Zhen Yuandao's heart!",
-                    "Edit classic scripts for William Shakespeare inside the Tower of London!"
+                    "Audit port trade records and colonial documents for Sir Stamford Raffles in Singapore!",
+                    "Edit short story manuscripts and polish prose for Katherine Mansfield in Wellington, New Zealand!",
+                    "Head into the outback with Banjo Paterson to shear sheep and write bush poetry in Australia!",
+                    "Help Rabindranath Tagore copy poems and musical scores from Gitanjali in New Delhi, India!",
+                    "Troll the streets of Dublin proofreading pages of Ulysses for James Joyce in Ireland!",
+                    "Rehearse Hamlet and edit classic scripts for William Shakespeare at the Globe in London!",
+                    "Paint the endless white fence along the Mississippi River for Mark Twain in New York, USA!"
                 ],
                 gods: [
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)", 
@@ -1110,13 +1127,13 @@
 
         function selectStation(idx) {
             closeStationModal();
-            let stConfig = banishmentStations[idx];
+            let stConfig = getActiveStationConfig();
             let t = i18n[currentLang];
             
             let ttModal = document.getElementById('timetravel-modal');
             let ttDesc = document.getElementById('timetravel-desc');
             ttDesc.innerText = currentLang === 'en' ? 
-                `Time traveling to ancient history... Banishment to station: ${t.stations[idx].split(' | ')[0]}` :
+                `Time traveling to international history... Banishment to station: ${t.stations[idx].split(' | ')[0]}` :
                 `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${t.stations[idx].split('｜')[0]}】\n${t.stationNarratives[idx]}`;
             ttModal.style.display = 'flex';
 
@@ -1530,7 +1547,7 @@
         function closeCertificateModal() { document.getElementById('certificate-modal').style.display = 'none'; showScreen('screen-cover'); }
 
         function doWork() {
-            let stConfig = banishmentStations[currentStationIndex];
+            let stConfig = getActiveStationConfig();
             if (currentStationClicks >= stConfig.maxClicks) { 
                 alert(currentLang === 'en' ? "Tapping limit reached. Please pay for your flight return!" : "⚠️ 打工次數已用額滿，請支付機票費返程！"); 
                 return; 
@@ -1540,7 +1557,7 @@
             updateWorkUI();
         }
         function updateWorkUI() {
-            let stConfig = banishmentStations[currentStationIndex];
+            let stConfig = getActiveStationConfig();
             document.getElementById('work-score').innerText = currentWorkEarned;
             document.getElementById('work-target-display').innerText = stConfig.ticket;
             
@@ -1554,13 +1571,13 @@
             let prog = document.getElementById('work-progress');
             prog.max = stConfig.ticket; prog.value = Math.min(currentWorkEarned, stConfig.ticket);
             
-            let returnText = (currentLang === 'en' ? "Pay Ticket & Return!" : "✈️ 賺足機票費，光榮返台！");
+            let returnText = (currentLang === 'en' ? "Pay Ticket & Return to Kaohsiung!" : "✈️ 賺足機票費，光榮返台！");
             let btnReturn = document.getElementById('ui-btn-work-return');
             btnReturn.innerText = returnText;
             btnReturn.style.display = (currentWorkEarned >= stConfig.ticket) ? 'block' : 'none';
         }
         function returnFromWork() {
-            let stConfig = banishmentStations[currentStationIndex];
+            let stConfig = getActiveStationConfig();
             if (currentWorkEarned < stConfig.ticket) return;
             totalScore += (currentWorkEarned - stConfig.ticket);
             isEventActive = false; updateUI(); drawMaze();
