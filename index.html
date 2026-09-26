@@ -106,11 +106,11 @@
         .tool-btn:active { transform: scale(0.95); }
 
         .inventory-bar {
-            display: flex; justify-content: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;
-            font-size: 14px; font-weight: 700; background: #F4ECF7; padding: 10px 14px; border-radius: 16px; border: 1px solid #D7BDE2; color: #512E5F;
+            display: flex; justify-content: center; gap: 5px; margin-bottom: 12px; flex-wrap: wrap;
+            font-size: 12px; font-weight: 700; background: #F4ECF7; padding: 8px 10px; border-radius: 16px; border: 1px solid #D7BDE2; color: #512E5F;
         }
         .inv-item { 
-            background: white; padding: 4px 10px; border-radius: 10px; border: 2px solid #C39BD3; cursor: pointer; 
+            background: white; padding: 3px 6px; border-radius: 8px; border: 2px solid #C39BD3; cursor: pointer; 
             box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: all 0.15s; user-select: none;
         }
         .inv-item:hover { background: #E8DAEF; transform: translateY(-2px); }
@@ -234,7 +234,7 @@
         <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(15px, 3.5vw, 19px); text-align: left; line-height: 1.8; background: #EBF8FF; padding: 22px; border-radius: 20px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
-            <p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產，強制重回第 1 關！</p>
+            <p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產（若擁有「重生石」可自動觸發免疫破產並歸零復活）。</p>
             <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
         </div>
         <br>
@@ -254,15 +254,16 @@
         </div>
         <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
         
-        <!-- 魔法與神器道具欄 -->
+        <!-- 魔法與神器道具欄 (含重生石 💎) -->
         <div class="inventory-bar">
-            <span id="lbl-inv-title">🧙‍♂️ 點擊道具使用：</span>
+            <span id="lbl-inv-title">🧙‍♂️ 道具：</span>
             <span class="inv-item" id="btn-inv-cloak" onclick="useTool('cloak')" title="點擊防禦歹徒"><span id="lbl-inv-cloak">🧥斗篷</span>:<b id="inv-cloak">0</b></span>
             <span class="inv-item" id="btn-inv-wand" onclick="useTool('wand')" title="點擊消除炸藥"><span id="lbl-inv-wand">🪄魔杖</span>:<b id="inv-wand">0</b></span>
             <span class="inv-item" id="btn-inv-snitch" title="金探子加分"><span id="lbl-inv-snitch">🏆金探子</span>:<b id="inv-snitch">0</b></span>
             <span class="inv-item" id="btn-inv-howler" onclick="useTool('howler')" title="點擊嚇跑野狼"><span id="lbl-inv-howler">✉️咆哮信</span>:<b id="inv-howler">0</b></span>
             <span class="inv-item" id="btn-inv-fan" onclick="useTool('fan')" title="點擊扇熄神火"><span id="lbl-inv-fan">🍃芭蕉扇</span>:<b id="inv-fan">0</b></span>
             <span class="inv-item" id="btn-inv-dipper" onclick="useTool('dipper')" title="點擊吸光大便" style="color:#B7950B;"><span id="lbl-inv-dipper">🏺金鬥</span>:<b id="inv-dipper">0</b></span>
+            <span class="inv-item" id="btn-inv-stone" title="防破產免死金牌" style="color:#27AE60;"><span id="lbl-inv-stone">💎重生石</span>:<b id="inv-stone">0</b></span>
         </div>
 
         <div class="target-text" id="ui-target">目標：駁二鐵件藝術公仔 🤖</div>
@@ -379,17 +380,19 @@
         </div>
     </div>
 
-    <!-- 選擇流放地彈跳視窗 -->
+    <!-- 選擇流放地彈跳視窗 (依距離由近到遠排序) -->
     <div id="station-modal">
         <div class="modal-content">
             <h2 id="station-modal-title" style="color: #C0392B; margin-top: 0;">💰 選擇歷史流放打工站</h2>
             <p id="station-modal-desc" style="font-size: 15px; color: #718096;">點數不足時，穿越到古代協助名人賺取機票費：</p>
-            <div style="display: flex; flex-direction: column; gap: 12px; margin: 18px 0;" id="station-btns-wrap">
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 15px;" onclick="selectStation(0)"><span id="st-0">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); font-size: 15px;" onclick="selectStation(1)"><span id="st-1">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); font-size: 15px;" onclick="selectStation(2)"><span id="st-2">🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); font-size: 15px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
-                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 15px;" onclick="selectStation(4)"><span id="st-4">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin: 18px 0;" id="station-btns-wrap">
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #27AE60 0%, #219653 100%); font-size: 14px;" onclick="selectStation(0)"><span id="st-0">🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #E67E22 0%, #BA4A00 100%); font-size: 14px;" onclick="selectStation(1)"><span id="st-1">🍒🍒🍒 惠州 (蘇軾 - 品荔枝)｜每敲160/限9次｜機票800</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #2980B9 0%, #1F618D 100%); font-size: 14px;" onclick="selectStation(2)"><span id="st-2">🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); font-size: 14px;" onclick="selectStation(3)"><span id="st-3">🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #D35400 0%, #A04000 100%); font-size: 14px;" onclick="selectStation(4)"><span id="st-4">🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #34495E 0%, #2C3E50 100%); font-size: 14px;" onclick="selectStation(5)"><span id="st-5">🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300</span></button>
+                <button class="btn-large" style="width: 100%; max-width: 100%; margin: 0; background: linear-gradient(135deg, #7F8C8D 0%, #616A6B 100%); font-size: 14px;" onclick="selectStation(6)"><span id="st-6">📜 倫敦塔 (莎士比亞 - 劇本)｜每敲80/限30次｜機票1500</span></button>
             </div>
             <button id="station-modal-cancel" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeStationModal()">取消返回</button>
         </div>
@@ -474,6 +477,16 @@
     </div>
 
     <script>
+        const banishmentStations = [
+            { reward: 180, maxClicks: 7, ticket: 700 },
+            { reward: 160, maxClicks: 9, ticket: 800 },
+            { reward: 200, maxClicks: 5, ticket: 500 },
+            { reward: 120, maxClicks: 15, ticket: 1100 },
+            { reward: 150, maxClicks: 10, ticket: 900 },
+            { reward: 100, maxClicks: 20, ticket: 1300 },
+            { reward: 80, maxClicks: 30, ticket: 1500 }
+        ];
+
         const i18n = {
             'zh-TW': {
                 title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號 (保障隱私)：", gender: "請選擇您的性別：",
@@ -483,7 +496,7 @@
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產，強制重回第 1 關！</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產（若擁有「重生石」可自動觸發免疫破產並歸零復活）。</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
                 stationBtn: "💰 前往點數補給站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 補給", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
@@ -507,11 +520,11 @@
                 bweiThrowText: "🙌 擲筊！",
                 bweiCancelText: "取消",
 
-                invTitle: "🧙‍♂️ 點擊道具使用：",
+                invTitle: "🧙‍♂️ 道具：",
                 invCloak: "🧥斗篷", invWand: "🪄魔杖", invSnitch: "🏆金探子",
-                invHowler: "✉️咆哮信", invFan: "🍃芭蕉扇", invDipper: "🏺金鬥",
+                invHowler: "✉️咆哮信", invFan: "🍃芭蕉扇", invDipper: "🏺金鬥", invStone: "💎重生石",
                 titCloak: "點擊防禦歹徒", titWand: "點擊消除炸藥", titHowler: "點擊嚇跑野狼",
-                titFan: "點擊扇熄神火", titDipper: "點擊吸光大便", titSnitch: "金探子自動加分",
+                titFan: "點擊扇熄神火", titDipper: "點擊吸光大便", titSnitch: "金探子自動加分", titStone: "自動觸發重生防破產",
 
                 thGod: "神尊名稱", thCost: "香油錢", thEffect: "庇佑與消除路阻效果",
                 gNames: ["土地公", "溫王爺", "媽祖", "觀世音", "藥師佛", "玉皇大帝"],
@@ -528,19 +541,23 @@
                     "🌿觀世音(-600)", "🪷藥師佛(-800)", "🌟玉皇大帝 (全清場+指路 / -2500)"
                 ],
                 stations: [
-                    "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
+                    "🍒🍒🍒 惠州 (蘇軾 - 品荔枝)｜每敲160/限9次｜機票800",
+                    "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
-                    "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
+                    "🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900".replace("🪪", "🦪"),
+                    "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300",
+                    "📜 倫敦塔 (莎士比亞 - 劇本)｜每敲80/限30次｜機票1500"
                 ],
-                stationLogos: ["🐊", "🥩", "🦪", "🎣", "🐟"],
+                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🎣", "🦪", "🐟", "📜"],
                 stationNarratives: [
-                    "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
-                    "用力敲打生蠔硬殼，協助蘇東坡與文人雅士品嚐鮮美生蠔！",
+                    "在惠州品嚐嶺南鮮甜荔枝，享受隨風微醺的貶謫時光！",
+                    "協助唐代大文豪韓愈驅逐惡鱷、治理潮州水患！",
                     "協助柳宗元在永州江雪中獨釣寒江雪！",
-                    "在寧古塔冰面破冰捕魚，將鮮魚送給甄遠道溫暖身心！"
+                    "用力敲打生蠔硬殼，協助蘇東坡與文人雅士品嚐鮮美生蠔！",
+                    "在寧古塔冰面破冰捕魚，將鮮魚送給甄遠道溫暖身心！",
+                    "在英國倫敦塔協助大文豪莎士比亞編修經典劇本！"
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊媽祖(-500)", 
@@ -577,7 +594,7 @@
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
                 hel: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付等差级数纪念品运费（每关递增500点）。旅费不足将被流放至边疆补给站赚取机票费！累计扣分达 <b>-3000 点</b>将宣告破产，强制重回第 1 关！</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付等差级数纪念品运费（每关递增500点）。旅费不足将被流放至边疆补给站赚取机票费！累计扣分达 <b>-3000 点</b>将宣告破产（若拥有“重生石”可自动触发免疫破产并归零复活）。</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
                 stationBtn: "💰 前往点数补给站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 补给", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
@@ -601,11 +618,11 @@
                 bweiThrowText: "🙌 掷筊！",
                 bweiCancelText: "取消",
 
-                invTitle: "🧙‍♂️ 点击道具使用：",
+                invTitle: "🧙‍♂️ 道具：",
                 invCloak: "🧥斗篷", invWand: "🪄魔杖", invSnitch: "🏆金探子",
-                invHowler: "✉️咆哮信", invFan: "🍃芭蕉扇", invDipper: "🏺金斗",
+                invHowler: "✉️咆哮信", invFan: "🍃芭蕉扇", invDipper: "🏺金斗", invStone: "💎重生石",
                 titCloak: "点击防御歹徒", titWand: "点击消除炸药", titHowler: "点击吓跑野狼",
-                titFan: "点击扇熄神火", titDipper: "点击吸光大便", titSnitch: "金探子自动加分",
+                titFan: "点击扇熄神火", titDipper: "点击吸光大便", titSnitch: "金探子自动加分", titStone: "自动触发重生防破产",
 
                 thGod: "神尊名称", thCost: "香油钱", thEffect: "庇佑与消除路阻效果",
                 gNames: ["土地公", "温王爷", "妈祖", "观世音", "药师佛", "玉皇大帝"],
@@ -622,19 +639,23 @@
                     "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
                 ],
                 stations: [
-                    "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
                     "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
-                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
+                    "🍒🍒🍒 惠州 (苏轼 - 品荔枝)｜每敲160/限9次｜机票800",
+                    "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
-                    "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
+                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900".replace("🪪", "🦪"),
+                    "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300",
+                    "📜 伦敦塔 (莎士比亚 - 剧本)｜每敲80/限30次｜机票1500"
                 ],
-                stationLogos: ["🐊", "🥩", "🪪", "🎣", "🐟"],
+                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🎣", "🦪", "🐟", "📜"],
                 stationNarratives: [
-                    "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
                     "在黄州生火慢燉、细心添柴烹煮名闻天下的正宗东坡肉！",
-                    "用力敲打生蚝硬壳，协助苏东坡与文人雅士品尝美味生蚝！",
+                    "在惠州品尝岭南鲜甜荔枝，享受随风微醺的贬谪时光！",
+                    "协助唐代大文豪韩愈驱逐恶鳄、治理潮州水患！",
                     "协助柳宗元在永州江雪中独钓寒江雪！",
-                    "在宁古塔冰面破冰捕鱼，将鲜鱼送给甄远道温暖身心！"
+                    "用力敲打生蚝硬壳，协助苏东坡与文人雅士品尝美味生蚝！",
+                    "在宁古塔冰面破冰捕鱼，将鲜鱼送给甄远道温暖身心！",
+                    "在英国伦敦塔协助大文豪莎士比亚编修经典剧本！"
                 ],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)", 
@@ -648,7 +669,7 @@
                 targets: [
                     "驳二铁件艺术公仔 🤖", "宇治抹茶茶道组 🍵", "塞纳河畔手绘油画 🎨",
                     "尼罗河莎草纸画卷 📜", "爱琴海蓝白陶壶 🏺", "罗马竞技场古金币 🪙",
-                    "大笨钟精钢齿轮 ⚙️", "自由女神圣火微雕 🗽", "悉尼港湾大贝壳珍珠 🐚", "克里姆林宫彩蛋宝石 🥚"
+                    "大本钟精钢齿轮 ⚙️", "自由女神圣火微雕 🗽", "悉尼港湾大贝壳珍珠 🐚", "克里姆林宫彩蛋宝石 🥚"
                 ],
                 lores: [
                     "展现高雄由工业港口转型为当代艺术创意的文创精神。",
@@ -671,7 +692,7 @@
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
                 hell: "🔥 Hell", hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
-                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations! Reaching a total score of <b>-3000 pts</b> triggers bankruptcy and restarts the game from Stage 1!</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations! Reaching a total score of <b>-3000 pts</b> triggers bankruptcy (if you hold a Resurrection Stone, it auto-revives you and resets your score to 0).</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
                 stationBtn: "💰 Point Supply Station", backCover: "⬅️ Main Menu",
                 tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
@@ -695,11 +716,11 @@
                 bweiThrowText: "🙌 Throw Jiao!",
                 bweiCancelText: "Cancel",
 
-                invTitle: "🧙‍♂️ Click to Use:",
+                invTitle: "🧙‍♂️ Items:",
                 invCloak: "🧥Cloak", invWand: "🪄Wand", invSnitch: "🏆Snitch",
-                invHowler: "✉️Howler", invFan: "🍃Fan", invDipper: "🏺Dipper",
+                invHowler: "✉️Howler", invFan: "🍃Fan", invDipper: "🏺Dipper", invStone: "💎Stone",
                 titCloak: "Click to evade bandit", titWand: "Click to clear explosive", titHowler: "Click to scare wolf",
-                titFan: "Click to extinguish fire", titDipper: "Click to absorb waste", titSnitch: "Auto bonus points",
+                titFan: "Click to extinguish fire", titDipper: "Click to absorb waste", titSnitch: "Auto bonus points", titStone: "Auto rebirth preventing bankruptcy",
 
                 thGod: "Deity", thCost: "Offering", thEffect: "Divine Blessing & Hazard Removal",
                 gNames: ["Tudi Gong", "Wen Wangye", "Mazu", "Guanyin", "Medicine Buddha", "Jade Emperor"],
@@ -716,19 +737,23 @@
                     "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
                 ],
                 stations: [
-                    "📜 London (Shakespeare) | 200 pts / 5 taps | Ticket: 500",
-                    "🎨 Paris (Victor Hugo) | 180 pts / 7 taps | Ticket: 700",
-                    "🔥 Florence (Dante) | 150 pts / 10 taps | Ticket: 900",
-                    "🏛️ Athens (Socrates) | 120 pts / 15 taps | Ticket: 1100",
-                    "📜 Cairo (Cleopatra) | 100 pts / 20 taps | Ticket: 1300"
+                    "🥩 Huangzhou (Su Shi - Dongpo Pork) | 180 pts / 7 taps | Ticket: 700",
+                    "🍒🍒🍒 Huizhou (Su Shi - Lychee Tasting) | 160 pts / 9 taps | Ticket: 800",
+                    "🐊 Chaozhou (Han Yu - Crocodiles) | 200 pts / 5 taps | Ticket: 500",
+                    "🎣 Yongzhou (Liu Zongyuan - Snow) | 120 pts / 15 taps | Ticket: 1100",
+                    "🦪 Danzhou (Su Shi - Oysters) | 150 pts / 10 taps | Ticket: 900",
+                    "🐟 Ningguta (Zhen Yuandao - Fishing) | 100 pts / 20 taps | Ticket: 1300",
+                    "📜 London Tower (Shakespeare - Play) | 80 pts / 30 taps | Ticket: 1500"
                 ],
-                stationLogos: ["📜", "🎨", "🔥", "🏛️", "📜"],
+                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🎣", "🦪", "🐟", "📜"],
                 stationNarratives: [
-                    "Help William Shakespeare edit scripts and rehearse Hamlet at the Globe Theatre!",
-                    "Help Victor Hugo write manuscripts inside Notre-Dame de Paris!",
-                    "Help Dante Alighieri navigate the circles of the Divine Comedy!",
-                    "Help Socrates debate philosophy with citizens in the Athenian Agora!",
-                    "Help Cleopatra manage royal documents and papyrus scrolls in ancient Egypt!"
+                    "Slow-cook the legendary Dongpo Pork over a warm fire in Huangzhou!",
+                    "Taste sweet lychees in Huizhou and enjoy the leisurely exile vibe!",
+                    "Help literary master Han Yu exorcise crocodiles in Chaozhou!",
+                    "Help Liu Zongyuan fish alone in the cold river snow of Yongzhou!",
+                    "Shuck oyster shells to help Su Shi enjoy delicious fresh oysters in Danzhou!",
+                    "Break the ice in Ningguta to catch fresh fish and warm Zhen Yuandao's heart!",
+                    "Edit classic scripts for William Shakespeare inside the Tower of London!"
                 ],
                 gods: [
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)", 
@@ -808,7 +833,7 @@
             document.getElementById('station-modal-title').innerText = t.stationTitle;
             document.getElementById('station-modal-desc').innerText = t.stationDesc;
             document.getElementById('station-modal-cancel').innerText = (lang === 'en' ? "Cancel" : (lang === 'zh-CN' ? "取消返回" : "取消返回"));
-            for(let i=0; i<5; i++) {
+            for(let i=0; i<7; i++) {
                 document.getElementById('st-' + i).innerText = t.stations[i];
             }
 
@@ -848,6 +873,7 @@
             document.getElementById('lbl-inv-howler').innerText = t.invHowler;
             document.getElementById('lbl-inv-fan').innerText = t.invFan;
             document.getElementById('lbl-inv-dipper').innerText = t.invDipper;
+            document.getElementById('lbl-inv-stone').innerText = t.invStone;
             
             document.getElementById('btn-inv-cloak').title = t.titCloak;
             document.getElementById('btn-inv-wand').title = t.titWand;
@@ -855,6 +881,7 @@
             document.getElementById('btn-inv-howler').title = t.titHowler;
             document.getElementById('btn-inv-fan').title = t.titFan;
             document.getElementById('btn-inv-dipper').title = t.titDipper;
+            document.getElementById('btn-inv-stone').title = t.titStone;
 
             document.getElementById('cert-title').innerText = t.certTitle;
             document.getElementById('cert-btn').innerText = t.certBtn;
@@ -940,15 +967,8 @@
         let undoHistory = []; let undoCountLeft = 3;
         let trapHitThisLevel = false; let treasureCollectedThisLevel = false;
 
-        let playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
+        let playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0, stone: 0 };
 
-        const banishmentStations = [
-            { reward: 200, maxClicks: 5, ticket: 500 },
-            { reward: 180, maxClicks: 7, ticket: 700 },
-            { reward: 150, maxClicks: 10, ticket: 900 },
-            { reward: 120, maxClicks: 15, ticket: 1100 },
-            { reward: 100, maxClicks: 20, ticket: 1300 }
-        ];
         let currentStationIndex = 0; let currentStationClicks = 0; let currentWorkEarned = 0; let workTargetValue = 500;
 
         const godsData = {
@@ -985,7 +1005,7 @@
             let randomCode = Math.floor(1000 + Math.random() * 9000);
             uniquePlayerId = `${rawNick}#${randomCode}`;
 
-            playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0 };
+            playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0, stone: 0 };
             updateInventoryUI();
 
             showScreen('screen-game'); 
@@ -997,8 +1017,9 @@
             document.getElementById('inv-wand').innerText = playerInventory.wand;
             document.getElementById('inv-snitch').innerText = playerInventory.snitch;
             document.getElementById('inv-howler').innerText = playerInventory.howler;
-            document.getElementById('inv-dipper').innerText = playerInventory.dipper;
             document.getElementById('inv-fan').innerText = playerInventory.fan;
+            document.getElementById('inv-dipper').innerText = playerInventory.dipper;
+            document.getElementById('inv-stone').innerText = playerInventory.stone;
         }
 
         function useTool(toolName) {
@@ -1032,7 +1053,6 @@
             } else if (toolName === 'howler') {
                 playerInventory.howler--; updateInventoryUI();
                 playSound('item');
-                // 主動點擊咆哮信，自動清除地圖上第一隻遇到的野狼
                 let clearedWolf = false;
                 for (let y = 0; y < mazeSize; y++) {
                     for (let x = 0; x < mazeSize; x++) {
@@ -1121,9 +1141,19 @@
 
         function checkBankruptcy() {
             if (totalScore <= -3000) {
+                if (playerInventory.stone > 0) {
+                    playerInventory.stone--;
+                    updateInventoryUI();
+                    totalScore = 0;
+                    updateUI();
+                    alert(currentLang === 'en' ? 
+                        "💎 Resurrection Stone activated! Your bankruptcy was prevented, score reset to 0, and you continue your adventure!" : 
+                        "💎【重生石顯靈】！您觸發了第 8 關起獲得的重生石，直接免疫破產危機，總分重置為 0 點，原地復活繼續冒險！");
+                    return;
+                }
                 alert(currentLang === 'en' ? 
                     "🚨 BANKRUPTCY! Your total score has dropped to -3000 points or lower! You are officially bankrupt and forced back to Stage 1!" : 
-                    "🚨【宣告破產】！您的總分已跌至 -3000 點以下！負債累累宣告破產，所有進度歸零，強制重回第 1 關重新開始！");
+                    "🚨【宣告破產】！您的總分已跌至 -3000 點以下且沒有重生石！負債累累宣告破產，強制重回第 1 關重新開始！");
                 currentLevel = 1;
                 totalScore = 500;
                 isEventActive = false;
@@ -1199,6 +1229,10 @@
             }
 
             let magicItems = [10, 11, 12, 13, 14, 16];
+            if (currentLevel >= 8 && Math.random() < 0.2725) {
+                magicItems.push(17);
+            }
+
             for (let itemCode of magicItems) {
                 if (offSafeSpaces.length > 0 && Math.random() < 0.8) {
                     let pos = offSafeSpaces.pop();
@@ -1284,6 +1318,7 @@
                         if (cell === 13) ctxEl.fillText("✉️", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 14) ctxEl.fillText("🏺", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                         if (cell === 16) ctxEl.fillText("🍃", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
+                        if (cell === 17) ctxEl.fillText("💎", (x + 0.5) * cellSize, (y + 0.5) * cellSize);
                     }
                 }
             }
@@ -1407,6 +1442,12 @@
                     playerInventory.fan++; updateInventoryUI();
                     playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
                     alert(currentLang === 'en' ? "Obtained Plantain Fan (🍃)!" : "🍃 獲得法寶【芭蕉扇】！可將神火（🔥）扇熄一次。");
+                    return;
+                }
+                if (cell === 17) { 
+                    playerInventory.stone++; updateInventoryUI();
+                    playSound('item'); maze[ny][nx] = 0; playerPos.x = nx; playerPos.y = ny; drawMaze();
+                    alert(currentLang === 'en' ? "💎 Obtained Resurrection Stone! You are now protected against bankruptcy!" : "💎 獲得傳說中的【重生石】！獲得免死金牌，可自動防禦一次破產危機！");
                     return;
                 }
 
