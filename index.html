@@ -482,7 +482,7 @@
             { reward: 180, maxClicks: 7, ticket: 700 }, // 黃州
             { reward: 160, maxClicks: 9, ticket: 800 }, // 惠州
             { reward: 200, maxClicks: 5, ticket: 500 }, // 潮州
-            { reward: 160, maxClicks: 10, ticket: 800 },// 和州 (新加入：劉禹錫修陋室)
+            { reward: 160, maxClicks: 10, ticket: 800 },// 和州
             { reward: 120, maxClicks: 15, ticket: 1100 },// 永州
             { reward: 150, maxClicks: 10, ticket: 900 },// 儋州
             { reward: 100, maxClicks: 20, ticket: 1300 }// 寧古塔
@@ -562,10 +562,10 @@
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🏚️ 和州 (劉禹錫 - 修陋室)｜每敲160/限10次｜機票800",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
-                    "🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900".replace("🪪", "🦪"),
+                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900".replace("🪪", "🦪"),
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
-                stationLogos: ["🥩", "🌿🍒🍒🍒", "🐊", "🏚️", "🪪".replace("🪪", "🦪"), "🐟"],
+                stationLogos: ["🥩", "🌿🍒🍒🍒", "🐊", "🏚️", "🎣", "🦪", "🐟"],
                 stationNarratives: [
                     "在黃州生火慢燉、細心添柴烹煮名聞天下的正宗東坡肉！",
                     "在惠州品嚐嶺南鮮甜荔枝（日啖荔枝三百顆，不辭長作嶺南人），享受隨風微醺的貶謫時光！",
@@ -663,7 +663,7 @@
                     "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900".replace("🪪", "🦪"),
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
-                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🦪", "🐟"],
+                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🎣", "🦪", "🐟"],
                 stationNarratives: [
                     "在黄州生火慢燉、细心添柴烹煮名闻天下的正宗东坡肉！",
                     "在惠州品尝岭南鲜甜荔枝（日啖荔枝三百颗，不辞长作岭南人），享受随风微醺的贬谪时光！",
@@ -752,7 +752,6 @@
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)",
                     "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
                 ],
-                // 英文版 7 大英語系國家 (距離由近到遠，點數由低到高)
                 stations: [
                     "🚢 Singapore (Sir Stamford Raffles - Port Trade) | 100 pts | Ticket: 500",
                     "📝 New Zealand (Katherine Mansfield - Manuscript) | 120 pts | Ticket: 600",
@@ -1498,7 +1497,7 @@
                 let shippingFee = currentLevel * 500;
                 let msg = (currentLang === 'en' ? 
                     `Completed [Level ${currentLevel}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n}\nEarned Score: +${currentTarget.s}\nStars: ${starStr}\nCurrent Total Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
-                    `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【${currentTarget.n}】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n目前總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
+                    `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【<b>${currentTarget.n}</b>】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n目前總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
                 );
                 document.getElementById('win-message').innerText = msg;
 
