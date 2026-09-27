@@ -620,7 +620,7 @@
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
                     "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
-                    "大本鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
+                    "大本鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "悉尼港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
                     "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
@@ -774,7 +774,7 @@
                 ],
                 godBtnTexts: [
                     "🏮Tudi Gong (-300)", "⚔️Wen Wangye (-400)", "🌊Mazu (-500)",
-                    "🌿Guanyin (-600)", "🪷Medicine Buddha(-800)", "🌟Jade Emperor (Clear All / -2500)"
+                    "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
                 ],
                 stations: [
                     "🚢 Singapore (Sir Stamford Raffles - Port Trade) | 100 pts | Ticket: 500",
@@ -835,11 +835,11 @@
             document.getElementById('m-easy').innerText = t.easy;
             document.getElementById('md-easy').innerText = t.easyDesc;
             document.getElementById('m-std').innerText = t.std;
-            document.getElementById('md-std').innerText = t.stdDesc;
+            document.getElementById('md-std').innerText = t.mdStd || t.stdDesc;
             document.getElementById('m-cha').innerText = t.cha;
-            document.getElementById('md-cha').innerText = t.chaDesc;
+            document.getElementById('md-cha').innerText = t.mdCha || t.chaDesc;
             document.getElementById('m-hel').innerText = t.hel;
-            document.getElementById('md-hel').innerText = t.helDesc;
+            document.getElementById('md-hel').innerText = t.mdHel || t.helDesc;
 
             document.getElementById('btn-instructions').innerText = t.instructions;
             document.getElementById('ins-title').innerText = t.insTitle;
@@ -1371,8 +1371,8 @@
                 }
             }
             
-            // 嚴格單一頭像渲染：絕不與終點或其他圖示重疊衝突
-            let playerAvatar = (playerGender === 'male' ? "👨‍🤠" : "👩‍🤠");
+            // 嚴格單一頭像渲染：男生為戴帽男探險家 🧢，女生為長髮女探險家 👩
+            let playerAvatar = (playerGender === 'male' ? "🧢" : "👩");
             ctxEl.fillText(playerAvatar, (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
         }
 
@@ -1565,7 +1565,7 @@
             if (currentLevel < 10) { currentLevel++; loadLevel(); }
             else {
                 isPlaying = false;
-                let genderTitle = (playerGender === 'male' ? (currentLang === 'en' ? "Elite Male Explorer 👨" : "頂尖男探險家 👨") : (currentLang === 'en' ? "Elite Female Explorer 👩" : "優秀女探險家 👩"));
+                let genderTitle = (playerGender === 'male' ? (currentLang === 'en' ? "Elite Male Explorer 🧢" : "頂尖男探險家 🧢") : (currentLang === 'en' ? "Elite Female Explorer 👩" : "優秀女探險家 👩"));
                 let certHtml = (currentLang === 'en' ? 
                     `This is to certify that <b>[${uniquePlayerId}]</b> (${genderTitle}) has successfully completed the Global Treasure Maze Adventure!<br>Final Score: <b>${totalScore} pts</b><br>Congratulations on winning the "Master Explorer" honor!` :
                     `特此證明 <b>[${uniquePlayerId}]</b> (${genderTitle}) 順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`
