@@ -452,7 +452,7 @@
                 <button style="background: #2980B9; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('mazu')"><span id="g-mazu">🌊媽祖(-500)</span></button>
                 <button style="background: #27AE60; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('guanyin')"><span id="g-guanyin">🌿觀世音(-600)</span></button>
                 <button style="background: #8E44AD; flex: 1 1 30%; padding: 12px 6px; border-radius: 10px; color: white; border: none; font-weight: 700; cursor: pointer; font-size: 14px;" onclick="startGodBwei('yaoshifo')"><span id="g-yaoshi">🪷藥師佛(-800)</span></button>
-                <button style="flex: 1 1 100%; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); color: #FFF; padding: 14px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; font-size: 15px; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟玉皇大帝 (全清場+指路 / -2500)</span></button>
+                <button style="flex: 1 1 100%; background: linear-gradient(135deg, #F39C12 0%, #D35400 100%); color: #FFF; padding: 14px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; font-size: 15px; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);" onclick="startGodBwei('supreme')"><span id="g-supreme">🌟玉皇大帝 (全清场+指路 / -2500)</span></button>
             </div>
             <button id="god-modal-close" class="btn-large btn-cancel" style="width: 100%; margin-top: 8px;" onclick="closeGodHelpModal()">關閉指南</button>
         </div>
@@ -604,7 +604,7 @@
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🏚️ 和州 (劉禹錫 - 修陋室)｜每敲160/限10次｜機票800",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
-                    "🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900".replace("🪪", "🦪"),
+                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900".replace("🪪", "🦪"),
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
                 stationLogos: ["🥩", "🌿🍒🍒🍒", "🐊", "🏚️", "🎣", "🦪", "🐟"],
@@ -620,7 +620,7 @@
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
                     "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
-                    "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
+                    "大本鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
                     "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
@@ -1365,11 +1365,13 @@
             }
 
             let targetDist = Math.abs(targetPos.x - playerPos.x) + Math.abs(targetPos.y - playerPos.y);
-            if (targetDist <= fogRadius && currentTarget && currentTarget.i) {
-                ctxEl.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
+            if (targetDist <= fogRadius && !(targetPos.x === playerPos.x && targetPos.y === playerPos.y)) {
+                if (currentTarget && currentTarget.i) {
+                    ctxEl.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
+                }
             }
             
-            // 嚴格根據所選性別繪製單一頭像（男用 👨‍🤠，女用 👩‍🤠）
+            // 嚴格單一頭像渲染：絕不與終點或其他圖示重疊衝突
             let playerAvatar = (playerGender === 'male' ? "👨‍🤠" : "👩‍🤠");
             ctxEl.fillText(playerAvatar, (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
         }
