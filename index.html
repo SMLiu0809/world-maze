@@ -369,7 +369,7 @@
         </div>
     </div>
 
-    <!-- 世界探險證書與成績卡彈跳視窗 -->
+    <!-- 世界探險證書與成績卡彈跳視窗 (融入性別頭銜) -->
     <div id="certificate-modal">
         <div class="modal-content" style="border-color: #F1C40F; background: #FFFEF0;">
             <h2 id="cert-title" style="color: #D35400; margin-top: 0;">📜 世界探險結業證書 📜</h2>
@@ -477,7 +477,6 @@
     </div>
 
     <script>
-        // 繁中與簡中版的打工站參數 (由近到遠)
         const banishmentStations_zh = [
             { reward: 180, maxClicks: 7, ticket: 700 }, // 黃州
             { reward: 160, maxClicks: 9, ticket: 800 }, // 惠州
@@ -488,14 +487,13 @@
             { reward: 100, maxClicks: 20, ticket: 1300 }// 寧古塔
         ];
 
-        // 英文版的打工站參數 (依距離由近到遠，點數與機票費隨距離遞增)
         const banishmentStations_en = [
             { reward: 100, maxClicks: 10, ticket: 500 },  // Singapore
             { reward: 120, maxClicks: 10, ticket: 600 },  // New Zealand
             { reward: 140, maxClicks: 10, ticket: 700 },  // Australia
             { reward: 160, maxClicks: 10, ticket: 800 },  // India
             { reward: 180, maxClicks: 10, ticket: 900 },  // Ireland
-            { reward: 200, maxClicks: 10, ticket: 1000 }, // London Tower (Shakespeare)
+            { reward: 200, maxClicks: 10, ticket: 1000 }, // London Tower
             { reward: 220, maxClicks: 10, ticket: 1100 }  // United States
         ];
 
@@ -663,7 +661,7 @@
                     "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900".replace("🪪", "🦪"),
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
-                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🎣", "🦪", "🐟"],
+                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🎣", "🪪".replace("🪪", "🦪"), "🐟"],
                 stationNarratives: [
                     "在黄州生火慢燉、细心添柴烹煮名闻天下的正宗东坡肉！",
                     "在惠州品尝岭南鲜甜荔枝（日啖荔枝三百颗，不辞长作岭南人），享受随风微醺的贬谪时光！",
@@ -802,6 +800,7 @@
 
         let currentLang = 'zh-TW';
         let uniquePlayerId = "";
+        let playerGender = "male";
 
         function changeLanguage(lang) {
             currentLang = lang;
@@ -848,7 +847,7 @@
 
             document.getElementById('station-modal-title').innerText = t.stationTitle;
             document.getElementById('station-modal-desc').innerText = t.stationDesc;
-            document.getElementById('station-modal-cancel').innerText = (lang === 'en' ? "Cancel" : (lang === 'zh-CN' ? "取消返回" : "取消返回"));
+            document.getElementById('station-modal-cancel').innerText = (lang === 'en' ? "Cancel" : "取消返回");
             for(let i=0; i<7; i++) {
                 document.getElementById('st-' + i).innerText = t.stations[i];
             }
@@ -1018,8 +1017,10 @@
         function startGame() {
             initAudio(); isPlaying = true;
             let rawNick = document.getElementById('player-nickname').value.trim() || (currentLang === 'en' ? "Explorer" : "探險家");
+            playerGender = document.querySelector('input[name="gender"]:checked').value;
             let randomCode = Math.floor(1000 + Math.random() * 9000);
-            uniquePlayerId = `${rawNick}#${randomCode}`;
+            let genderEmoji = (playerGender === 'male' ? '👨' : '👩');
+            uniquePlayerId = `${rawNick}${genderEmoji}#${randomCode}`;
 
             playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0, stone: 0 };
             updateInventoryUI();
@@ -1141,7 +1142,11 @@
                 currentStationIndex = idx; currentStationClicks = 0; currentWorkEarned = 0;
                 workTargetValue = stConfig.ticket;
                 document.getElementById('ui-banish-location').innerText = "🗺️ " + t.stations[idx].split('｜')[0].split(' | ')[0];
-                document.getElementById('work-narrative').innerText = `"${t.stationNarratives[idx]}"`;
+                
+                // 性別專屬打工台詞微調
+                let roleTitle = (playerGender === 'male' ? (currentLang === 'en' ? "[Male Assistant]" : "【男性探險助手】") : (currentLang === 'en' ? "[Female Scholar]" : "【女性才女雅客】"));
+                document.getElementById('work-narrative').innerText = `${roleTitle} "${t.stationNarratives[idx]}"`;
+
                 document.getElementById('work-action-btn').innerText = t.stationLogos ? t.stationLogos[idx] : "📜";
                 isEventActive = true;
                 updateWorkUI();
@@ -1343,7 +1348,8 @@
             if (targetDist <= fogRadius && currentTarget && currentTarget.i) {
                 ctxEl.fillText(currentTarget.i, (targetPos.x + 0.5) * cellSize, (targetPos.y + 0.5) * cellSize);
             }
-            ctxEl.fillText("🤠", (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
+            let playerAvatar = (playerGender === 'male' ? "👨‍🤠" : "👩‍🤠");
+            ctxEl.fillText(playerAvatar, (playerPos.x + 0.5) * cellSize, (playerPos.y + 0.5) * cellSize);
         }
 
         function handleMove(dx, dy) {
@@ -1535,9 +1541,10 @@
             if (currentLevel < 10) { currentLevel++; loadLevel(); }
             else {
                 isPlaying = false;
+                let genderTitle = (playerGender === 'male' ? (currentLang === 'en' ? "Elite Male Explorer 👨" : "頂尖男探險家 👨") : (currentLang === 'en' ? "Elite Female Explorer 👩" : "優秀女探險家 👩"));
                 let certHtml = (currentLang === 'en' ? 
-                    `This is to certify that <b>[${uniquePlayerId}]</b> has successfully completed the Global Treasure Maze Adventure!<br>Final Score: <b>${totalScore} pts</b><br>Congratulations on winning the "Master Explorer" honor!` :
-                    `特此證明 <b>[${uniquePlayerId}]</b> 探險家順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`
+                    `This is to certify that <b>[${uniquePlayerId}]</b> (${genderTitle}) has successfully completed the Global Treasure Maze Adventure!<br>Final Score: <b>${totalScore} pts</b><br>Congratulations on winning the "Master Explorer" honor!` :
+                    `特此證明 <b>[${uniquePlayerId}]</b> (${genderTitle}) 順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`
                 );
                 document.getElementById('cert-content').innerHTML = certHtml;
                 document.getElementById('certificate-modal').style.display = 'flex';
