@@ -501,6 +501,51 @@
             return (currentLang === 'en') ? banishmentStations_en[currentStationIndex] : banishmentStations_zh[currentStationIndex];
         }
 
+        // 動態性別打工敘述函式
+        function getStationNarrative(idx) {
+            if (currentLang === 'en') {
+                const enNarratives_male = [
+                    "Audit port trade records and colonial documents alongside Sir Stamford Raffles in Singapore!",
+                    "Work late into the night helping Katherine Mansfield edit short story manuscripts in Wellington!",
+                    "Ride into the outback with Banjo Paterson to shear sheep and write rugged bush poetry in Australia!",
+                    "Help Rabindranath Tagore copy poems and musical scores from Gitanjali in New Delhi, India!",
+                    "Troll the streets of Dublin proofreading pages of Ulysses alongside James Joyce in Ireland!",
+                    "Rehearse Hamlet and help William Shakespeare edit classic scripts at the Globe in London!",
+                    "Paint the endless white fence along the Mississippi River side-by-side with Mark Twain in New York!"
+                ];
+                const enNarratives_female = [
+                    "Collaborate with Sir Stamford Raffles on colonial administration and cultural archives in Singapore!",
+                    "Exchange literary insights and refine prose with Katherine Mansfield in Wellington, New Zealand!",
+                    "Assist Banjo Paterson with poetic inspiration and outback homestead organization in Australia!",
+                    "Join Rabindranath Tagore in composing and translating spiritual poetry in New Delhi, India!",
+                    "Discuss artistic nuances and polish the prose of Ulysses with James Joyce in Dublin, Ireland!",
+                    "Contribute to character staging and dramatic dialogue editing for William Shakespeare in London!",
+                    "Bring artistic flair and creative touches to the Mississippi fence-painting with Mark Twain!"
+                ];
+                return (playerGender === 'male' ? enNarratives_male[idx] : enNarratives_female[idx]);
+            } else {
+                const zhNarratives_male = [
+                    "在黃州與東坡居士挑燈夜戰、大火翻炒，細心添柴烹煮名聞天下的正宗東坡肉！",
+                    "在惠州陪伴蘇學士豪邁『日啖荔枝三百顆』，幫忙扛竹簍、暢飲山泉！",
+                    "跟隨大文豪韓愈身側，手持長棍與擊鼓吶喊，協助驅逐惡鱷、治理潮州水患！",
+                    "在安徽和州幫劉禹錫搬磚和泥、修葺陋室，體驗『斯是陋室，惟吾德馨』的堅毅汗水！",
+                    "頂著風雪協助柳宗元在永州江雪中撐傘守候、孤舟獨釣寒江雪！",
+                    "在海南儋州用力敲打生蠔硬殼，與東坡暢談海島奇景、大啖碳烤生蠔！",
+                    "在寧古塔冰面合力破冰、奮力撒網捕魚，將鮮魚送給甄遠道溫暖嚴寒身心！"
+                ];
+                const zhNarratives_female = [
+                    "與蘇東坡切磋廚藝與茶點，在灶台旁細心火候慢燉，烹調出香氣四溢的東坡肉！",
+                    "與東坡先生在嶺南庭院中品嚐鮮甜荔枝，吟詩作對，享受隨風微醺的雅致時光！",
+                    "協助韓愈安撫潮州百姓、籌辦治水物資，以智謀協助化解水患危機！",
+                    "幫劉禹錫在陋室中擺設琴棋書畫、抄寫《陋室銘》金句，點綴高雅清幽的文人居所！",
+                    "陪伴柳宗元在寒江雪景中煮茶暖身、聆聽貶謫心境並整理山水遊記！",
+                    "協助蘇東坡挑選與烹調海鮮，為文人雅士準備鮮美生蠔宴！",
+                    "在邊疆風雪中為甄遠道熬煮熱湯、挑選鮮魚，傳遞遠方家書與溫暖慰藉！"
+                ];
+                return (playerGender === 'male' ? zhNarratives_male[idx] : zhNarratives_female[idx]);
+            }
+        }
+
         const i18n = {
             'zh-TW': {
                 title: "🏆 世界寶藏迷宮探險 🏆", nickname: "玩家暱稱 / 專屬代號 (保障隱私)：", gender: "請選擇您的性別：",
@@ -560,27 +605,10 @@
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
                     "🏚️ 和州 (劉禹錫 - 修陋室)｜每敲160/限10次｜機票800",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
-                    "🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900".replace("🪪", "🦪"),
+                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
                     "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
                 ],
                 stationLogos: ["🥩", "🌿🍒🍒🍒", "🐊", "🏚️", "🎣", "🦪", "🐟"],
-                stationNarratives: (playerGender === 'male' ? [
-                    "在黃州與東坡居士挑燈夜戰、大火翻炒，細心添柴烹煮名聞天下的正宗東坡肉！",
-                    "在惠州陪伴蘇學士豪邁『日啖荔枝三百顆』，幫忙扛竹簍、暢飲山泉！",
-                    "跟隨大文豪韓愈身側，手持長棍與擊鼓吶喊，協助驅逐惡鱷、治理潮州水患！",
-                    "在安徽和州幫劉禹錫搬磚和泥、修葺陋室，體驗『斯是陋室，惟吾德馨』的堅毅汗水！",
-                    "頂著風雪協助柳宗元在永州江雪中撐傘守候、孤舟獨釣寒江雪！",
-                    "在海南儋州用力敲打生蠔硬殼，與東坡暢談海島奇景、大啖碳烤生蠔！",
-                    "在寧古塔冰面合力破冰、奮力撒網捕魚，將鮮魚送給甄遠道溫暖嚴寒身心！"
-                ] : [
-                    "與蘇東坡切磋廚藝與茶點，在灶台旁細心火候慢燉，烹調出香氣四溢的東坡肉！",
-                    "與東坡先生在嶺南庭院中品嚐鮮甜荔枝，吟詩作對，享受隨風微醺的雅致時光！",
-                    "協助韓愈安撫潮州百姓、籌辦治水物資，以智謀協助化解水患危機！",
-                    "幫劉禹錫在陋室中擺設琴棋書畫、抄寫《陋室銘》金句，點綴高雅清幽的文人居所！",
-                    "陪伴柳宗元在寒江雪景中煮茶暖身、聆聽貶謫心境並整理山水遊記！",
-                    "協助蘇東坡挑選與烹調海鮮，為文人雅士準備鮮美生蠔宴！",
-                    "在邊疆風雪中為甄遠道熬煮熱湯、挑選鮮魚，傳遞遠方家書與溫暖慰藉！"
-                ]),
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊媽祖(-500)", 
                     "🌿觀世音(-600)", "🪷藥師佛(-800)", "🌟玉皇大帝 (全清場+指路 / -2500)"
@@ -592,7 +620,7 @@
                 ],
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
-                    "尼羅河莎草紙画卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
+                    "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
                     "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
@@ -670,23 +698,6 @@
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
                 stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🎣", "🦪", "🐟"],
-                stationNarratives: (playerGender === 'male' ? [
-                    "在黄州与东坡居士挑灯夜战、大火翻炒，细心添柴烹煮名闻天下的正宗东坡肉！",
-                    "在惠州陪伴苏学士豪迈『日啖荔枝三百颗』，帮忙扛竹篓、畅饮山泉！",
-                    "跟随大文豪韩愈身侧，手持长棍与击鼓呐喊，协助驱逐恶鳄、治理潮州水患！",
-                    "在安徽和州帮刘禹锡搬砖和泥、修葺陋室，体验『斯是陋室，惟吾德馨』的坚毅汗水！",
-                    "顶着风雪协助柳宗元在永州江雪中撑伞守候、孤舟独钓寒江雪！",
-                    "在海南儋州用力敲打生蠔硬殼，与东坡畅谈海岛奇景、大啖碳烤生蠔！",
-                    "在宁古塔冰面合力破冰、奋力撒网捕鱼，将鲜鱼送给甄远道温暖严寒身心！"
-                ] : [
-                    "与苏东坡切磋厨艺与茶点，在灶台旁细心火候慢燉，烹调出香气四溢的东坡肉！",
-                    "与东坡先生在岭南庭院中品尝鲜甜荔枝，吟诗作对，享受随风微醺的雅致时光！",
-                    "协助韩愈安抚潮州百姓、筹办治水物资，以智谋协助化解水患危机！",
-                    "帮刘禹锡在陋室中摆设琴棋书画、抄写《陋室铭》金句，点缀高雅清幽的文人居所！",
-                    "陪伴柳宗元在寒江雪景中煮茶暖身、聆听贬谪心情并整理山水游记！",
-                    "协助苏东坡挑选与烹调海鲜，为文人雅士准备鲜美生蠔宴！",
-                    "在边疆风雪中为甄远道熬汤、挑选鲜鱼，传递远方家书与温暖慰藉！"
-                ]),
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)", 
                     "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
@@ -776,23 +787,6 @@
                     "🗽 United States (Mark Twain - Painting Fence) | 220 pts | Ticket: 1100"
                 ],
                 stationLogos: ["🚢", "📝", "🦘", "🪷", "🍀", "📜", "🗽"],
-                stationNarratives: (playerGender === 'male' ? [
-                    "Audit port trade records and colonial documents alongside Sir Stamford Raffles in Singapore!",
-                    "Work late into the night helping Katherine Mansfield edit short story manuscripts in Wellington!",
-                    "Ride into the outback with Banjo Paterson to shear sheep and write rugged bush poetry in Australia!",
-                    "Help Rabindranath Tagore copy poems and musical scores from Gitanjali in New Delhi, India!",
-                    "Troll the streets of Dublin proofreading pages of Ulysses alongside James Joyce in Ireland!",
-                    "Rehearse Hamlet and help William Shakespeare edit classic scripts at the Globe in London!",
-                    "Paint the endless white fence along the Mississippi River side-by-side with Mark Twain in New York!"
-                ] : [
-                    "Collaborate with Sir Stamford Raffles on colonial administration and cultural archives in Singapore!",
-                    "Exchange literary insights and refine prose with Katherine Mansfield in Wellington, New Zealand!",
-                    "Assist Banjo Paterson with poetic inspiration and outback homestead organization in Australia!",
-                    "Join Rabindranath Tagore in composing and translating spiritual poetry in New Delhi, India!",
-                    "Discuss artistic nuances and polish the prose of Ulysses with James Joyce in Dublin, Ireland!",
-                    "Contribute to character staging and dramatic dialogue editing for William Shakespeare in London!",
-                    "Bring artistic flair and creative touches to the Mississippi fence-painting with Mark Twain!"
-                ]),
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊媽祖(-500)", 
                     "🌿觀世音(-600)", "🪷藥師佛(-800)", "🌟玉皇大帝 (全清場+指路 / -2500)"
@@ -1039,9 +1033,10 @@
         }
 
         function startGame() {
-            initAudio(); isPlaying = true;
+            initAudio(); 
             let rawNick = document.getElementById('player-nickname').value.trim() || (currentLang === 'en' ? "Explorer" : "探險家");
-            playerGender = document.querySelector('input[name="gender"]:checked').value;
+            let genderRadio = document.querySelector('input[name="gender"]:checked');
+            playerGender = genderRadio ? genderRadio.value : "male";
             let randomCode = Math.floor(1000 + Math.random() * 9000);
             let genderEmoji = (playerGender === 'male' ? '👨' : '👩');
             uniquePlayerId = `${rawNick}${genderEmoji}#${randomCode}`;
@@ -1049,6 +1044,7 @@
             playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0, stone: 0 };
             updateInventoryUI();
 
+            isPlaying = true;
             showScreen('screen-game'); 
             loadLevel();
         }
@@ -1156,9 +1152,11 @@
             
             let ttModal = document.getElementById('timetravel-modal');
             let ttDesc = document.getElementById('timetravel-desc');
+            let narrativeText = getStationNarrative(idx);
+
             ttDesc.innerText = currentLang === 'en' ? 
                 `Time traveling to international history... Banishment to station: ${t.stations[idx].split(' | ')[0]}` :
-                `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${t.stations[idx].split('｜')[0]}】\n${t.stationNarratives[idx]}`;
+                `🌀 空間扭曲中... 您正穿越時空，被流放至：\n【${t.stations[idx].split('｜')[0]}】\n${narrativeText}`;
             ttModal.style.display = 'flex';
 
             setTimeout(() => {
@@ -1168,7 +1166,7 @@
                 document.getElementById('ui-banish-location').innerText = "🗺️ " + t.stations[idx].split('｜')[0].split(' | ')[0];
                 
                 let roleTitle = (playerGender === 'male' ? (currentLang === 'en' ? "[Male Assistant]" : "【男性探險助手】") : (currentLang === 'en' ? "[Female Scholar]" : "【女性才女雅客】"));
-                document.getElementById('work-narrative').innerText = `${roleTitle} "${t.stationNarratives[idx]}"`;
+                document.getElementById('work-narrative').innerText = `${roleTitle} "${narrativeText}"`;
 
                 document.getElementById('work-action-btn').innerText = t.stationLogos ? t.stationLogos[idx] : "📜";
                 isEventActive = true;
