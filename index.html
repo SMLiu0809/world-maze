@@ -144,7 +144,7 @@
             background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); align-items: center; justify-content: center; z-index: 2000;
         }
         .modal-content {
-            background: #FFFFFF; padding: clamp(26px, 5vw, 40px); border-radius: 30px; width: 92%; max-width: 520px;
+            background: #FFFFFF; padding: clamp(24px, 5vw, 36px); border-radius: 30px; width: 92%; max-width: 520px;
             text-align: center; border: 4px solid #E67E22; box-shadow: 0 24px 48px rgba(0,0,0,0.25); max-height: 88vh; overflow-y: auto; box-sizing: border-box;
             animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
@@ -252,7 +252,7 @@
             <span id="ui-stars">⭐⭐⭐</span>
             <span id="ui-time">0 秒</span>
         </div>
-        <div class="station-banner" id="ui-station-banner">📍 第一站：臺灣・高雄</div>
+        <div class="station-banner" id="ui-station-banner">📍 第一站 : 臺灣・高雄</div>
         
         <!-- 魔法與神器道具欄 (含重生石 💎) -->
         <div class="inventory-bar">
@@ -369,12 +369,12 @@
         </div>
     </div>
 
-    <!-- 世界探險證書與成績卡彈跳視窗 -->
+    <!-- 世界探險證書與成績卡彈跳視窗 (含五級積分評鑑與暖心鼓勵) -->
     <div id="certificate-modal">
         <div class="modal-content" style="border-color: #F1C40F; background: #FFFEF0;">
             <h2 id="cert-title" style="color: #D35400; margin-top: 0;">📜 世界探險結業證書 📜</h2>
-            <div id="cert-content" style="font-size: 16px; color: #2D3748; text-align: center; line-height: 1.9; background: white; padding: 24px; border-radius: 20px; border: 3px double #F39C12; margin: 14px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
-                特此證明 <b>探險家</b> 順利完成世界十大寶藏迷宮探險！
+            <div id="cert-content" style="font-size: 15px; color: #2D3748; text-align: center; line-height: 1.8; background: white; padding: 22px; border-radius: 20px; border: 3px double #F39C12; margin: 14px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+                結業資料載入中...
             </div>
             <button id="cert-btn" class="btn-large" style="width: 100%; background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); box-shadow: 0 8px 22px rgba(230, 126, 34, 0.35);" onclick="closeCertificateModal()">🏆 載入主選單</button>
         </div>
@@ -620,7 +620,7 @@
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
                     "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
-                    "大本鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
+                    "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
                     "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
@@ -693,10 +693,10 @@
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
                     "🏚️ 和州 (刘禹锡 - 修陋室)｜每敲160/限10次｜机票800",
                     "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
-                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900".replace("🪪", "🦪"),
+                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
                     "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
                 ],
-                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🎣", "🪪".replace("🪪", "🦪"), "🐟"],
+                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🎣", "🪪", "🐟"],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)", 
                     "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
@@ -730,7 +730,7 @@
                 easy: "🍵 Casual", easyDesc: "Relaxed pace, casual fun",
                 std: "⚖️ Standard", stdDesc: "Balanced challenge & fun",
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
-                hell: "🔥 Hell", hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
+                hell: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
                 insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations! Reaching a total score of <b>-3000 pts</b> triggers bankruptcy (if you hold a Resurrection Stone, it auto-revives you and resets your score to 0).</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
                 stationBtn: "💰 Point Supply Station", backCover: "⬅️ Main Menu",
@@ -1037,7 +1037,7 @@
             let genderRadio = document.querySelector('input[name="gender"]:checked');
             playerGender = genderRadio ? genderRadio.value : "male";
             let randomCode = Math.floor(1000 + Math.random() * 9000);
-            let genderEmoji = (playerGender === 'male' ? '👨' : '👩');
+            let genderEmoji = (playerGender === 'male' ? '🧢' : '👩');
             uniquePlayerId = `${rawNick}${genderEmoji}#${randomCode}`;
 
             playerInventory = { cloak: 0, wand: 0, snitch: 0, howler: 0, dipper: 0, fan: 0, stone: 0 };
@@ -1097,7 +1097,7 @@
                     if (clearedWolf) break;
                 }
                 drawMaze();
-                alert(currentLang === 'en' ? "✉️ Howler sent! A wolf in the maze was terrified and vanished completely!" : "✉️ 咆哮信發威！成功嚇跑一隻野狼，野狼已真正從地圖上消失！");
+                alert(currentLang === 'en' ? "✉️ Howler sent! A wolf in the maze was terrified and vanished completely!" : "✉️ 咆哮信發威！成功嚇跑野狼（🐺），野狼已真正從地圖上消失！");
             } else if (toolName === 'cloak') {
                 playerInventory.cloak--; updateInventoryUI();
                 playSound('item');
@@ -1511,6 +1511,104 @@
             playSound('item'); drawMaze();
         }
 
+        // 積分五級評鑑與修練成果判定函式 (含分級溫馨鼓勵)
+        function getScoreTierInfo(score) {
+            if (currentLang === 'en') {
+                if (score >= 35000) return {
+                    tier: "Tier 1",
+                    title: "👑 World Treasure King / Queen",
+                    desc: "You completed all ten global cities with supreme wisdom and wealth! A true Master Explorer!",
+                    cheer: "🌟 Legendary achievement! Your courage and intellect stand as an inspiration to explorers worldwide!"
+                };
+                if (score >= 25000) return {
+                    tier: "Tier 2",
+                    title: "🧭 Senior Global Envoy",
+                    desc: "Demonstrating exceptional adaptability and resourcefulness. You turned historical banishment into triumphs!",
+                    cheer: "💡 Outstanding work! You are just a step away from legendary status—venture forth again and conquer the world!"
+                };
+                if (score >= 15000) return {
+                    tier: "Tier 3",
+                    title: "🏛️ Global Cultural Wanderer",
+                    desc: "You deeply appreciated the art and humanities of ten major cities, overcoming challenges with resilience.",
+                    cheer: "💡 The true wealth of exploration lies not just in points, but in cultural insights and resilience. Keep shining!"
+                };
+                if (score >= 8000) return {
+                    tier: "Tier 4",
+                    title: "🎒 Joyful Novice Explorer",
+                    desc: "You enjoyed a delightful adventure collecting souvenirs and seeking divine blessings with a positive spirit!",
+                    cheer: "💡 Every great master started as an enthusiastic adventurer. Your joy and curiosity are your greatest treasures!"
+                };
+                return {
+                    tier: "Tier 5",
+                    title: "🌱 Leisurely Seeker",
+                    desc: "You completed an inspiring endurance training journey, embracing the slow-living depth of exploration!",
+                    cheer: "💡 True victory is perseverance! You never gave up despite the trials. The maze will always welcome your triumphant return!"
+                };
+            } else if (currentLang === 'zh-CN') {
+                if (score >= 35000) return {
+                    tier: "第 1 级",
+                    title: "👑 世界寻宝之王 / 女王",
+                    desc: "象征您不仅完美通关十座城市，更在各国险境中游刃有余、财富与智慧兼具！",
+                    cheer: "🌟 登峰造极！您的智慧、勇气与果决判断，堪称全球探险界的至高典范！"
+                };
+                if (score >= 25000) return {
+                    tier: "第 2 级",
+                    title: "🧭 资深世界特派员",
+                    desc: "展现出高度的探险经验与应变智慧，在历史流放站中绝处逢生、展现绝佳韧性。",
+                    cheer: "💡 极其出色！距离最高荣耀仅一步之遥，期待您下一次探险再创辉煌高峰！"
+                };
+                if (score >= 15000) return {
+                    tier: "第 3 级",
+                    title: "🏛️ 全球文化漫游者",
+                    desc: "代表您深刻体会了十座城市的艺术与人文风情，靠着反思与坚毅丰富心灵宝库。",
+                    cheer: "💡 探险的真谛不在于分数高低，而在于沿途的风景与开阔的心胸。您做得很棒！"
+                };
+                if (score >= 8000) return {
+                    tier: "第 4 级",
+                    title: "🎒 欢乐新手探险家",
+                    desc: "象征您带着轻松愉快的心情享受了找寻纪念品与神明掷筊的趣味过程！",
+                    cheer: "💡 保持好奇心是探索世界最棒的超能力！享受旅程中的每一份欢笑，期待您再次启程！"
+                };
+                return {
+                    tier: "第 5 级",
+                    title: "🌱 逍遥漫步修行者",
+                    desc: "恭喜您完成了这趟充满挑战的耐力训练，展现了绝佳的不放弃精神与慢活深度！",
+                    cheer: "💡 能够坚持到底就是最伟大的胜利！不畏跌倒、勇往直前，世界迷宫永远为您敞开大门！"
+                };
+            } else {
+                if (score >= 35000) return {
+                    tier: "第 1 級",
+                    title: "👑 世界尋寶之王 / 女王",
+                    desc: "象徵您不僅完美通關十座城市，更在各國險境中游刃有餘、財富與智慧兼具！",
+                    cheer: "🌟 登峰造極！您的智慧、勇氣與果決判斷，堪稱全球探險界的至高典範！"
+                };
+                if (score >= 25000) return {
+                    tier: "第 2 級",
+                    title: "🧭 資深世界特派員",
+                    desc: "展現出高度的探險經驗與應變智慧，在歷史流放站中絕處逢生、展現絕佳韌性。",
+                    cheer: "💡 極其出色！距離最高榮耀僅一步之遙，期待您下一次探險再創輝煌高峰！"
+                };
+                if (score >= 15000) return {
+                    tier: "第 3 級",
+                    title: "🏛️ 全球文化漫遊者",
+                    desc: "代表您深刻體會了十座城市的藝術與人文風情，靠著反思與堅毅豐富心靈寶庫。",
+                    cheer: "💡 探險的真諦不在於分數高低，而在於沿途的風景與開闊的心胸。您做得很棒！"
+                };
+                if (score >= 8000) return {
+                    tier: "第 4 級",
+                    title: "🎒 歡樂新手探險家",
+                    desc: "象徵您帶著輕鬆愉快的心情享受了找尋紀念品與神明擲筊的趣味過程！",
+                    cheer: "💡 保持好奇心是探索世界最棒的超能力！享受旅程中的每一份歡笑，期待您再次啟程！"
+                };
+                return {
+                    tier: "第 5 級",
+                    title: "🌱 逍遙漫步修行者",
+                    desc: "恭喜您完成了這趟充滿挑戰的耐力訓練，展現了絕佳的不放棄精神與慢活深度！",
+                    cheer: "💡 能夠堅持到底就是最偉大的勝利！不畏跌倒、勇往直前，世界迷宮永遠為您敞開大門！"
+                };
+            }
+        }
+
         function checkWin() {
             if (playerPos.x === targetPos.x && playerPos.y === targetPos.y) {
                 isEventActive = true; 
@@ -1566,9 +1664,24 @@
             else {
                 isPlaying = false;
                 let genderTitle = (playerGender === 'male' ? (currentLang === 'en' ? "Elite Male Explorer 🧢" : "頂尖男探險家 🧢") : (currentLang === 'en' ? "Elite Female Explorer 👩" : "優秀女探險家 👩"));
+                let tierInfo = getScoreTierInfo(totalScore);
                 let certHtml = (currentLang === 'en' ? 
-                    `This is to certify that <b>[${uniquePlayerId}]</b> (${genderTitle}) has successfully completed the Global Treasure Maze Adventure!<br>Final Score: <b>${totalScore} pts</b><br>Congratulations on winning the "Master Explorer" honor!` :
-                    `特此證明 <b>[${uniquePlayerId}]</b> (${genderTitle}) 順利完成世界十大寶藏迷宮探險！<br>最終總分：<b>${totalScore} 點</b><br>恭喜榮獲「世界尋寶之王」最高殊榮！`
+                    `This is to certify that <b>[${uniquePlayerId}]</b> (${genderTitle})<br>has successfully completed the Global Treasure Maze Adventure!<br><br>` +
+                    `🏁 Final Score: <b style="color:#C0392B; font-size:20px;">${totalScore} pts</b><br>` +
+                    `<div style="margin:12px 0; padding:10px; background:#FFF8E7; border-radius:12px; border:1px solid #FFEAA7;">` +
+                    `<b style="color:#D35400; font-size:16px;">${tierInfo.title}</b> (${tierInfo.tier})<br>` +
+                    `<span style="font-size:13px; color:#4A5568;">${tierInfo.desc}</span>` +
+                    `</div>` +
+                    `<div style="margin-top:10px; padding:10px; background:#F0FDF4; border-radius:12px; border:1px solid #BBF7D0; font-size:13px; color:#166534; text-align:left;">` +
+                    `<b>💌 Mentor's Words:</b><br>${tierInfo.cheer}</div>` :
+                    `特此證明 <b>[${uniquePlayerId}]</b> (${genderTitle})<br>順利完成世界十大寶藏迷宮探險！<br><br>` +
+                    `🏁 最終累積總分：<b style="color:#C0392B; font-size:22px;">${totalScore} 點</b><br>` +
+                    `<div style="margin:12px 0; padding:10px; background:#FFF8E7; border-radius:12px; border:1px solid #FFEAA7;">` +
+                    `<b style="color:#D35400; font-size:17px;">🌟 【${tierInfo.title}】</b> (${tierInfo.tier})<br>` +
+                    `<span style="font-size:13px; color:#4A5568;">${tierInfo.desc}</span>` +
+                    `</div>` +
+                    `<div style="margin-top:10px; padding:10px; background:#F0FDF4; border-radius:12px; border:1px solid #BBF7D0; font-size:13px; color:#166534; text-align:left;">` +
+                    `<b>💌 導師勉勵小語：</b><br>${tierInfo.cheer}</div>`
                 );
                 document.getElementById('cert-content').innerHTML = certHtml;
                 document.getElementById('certificate-modal').style.display = 'flex';
@@ -1776,7 +1889,7 @@
                 }
                 drawMaze();
                 totalScore += 1500; updateUI();
-                alert(currentLang === 'en' ? "Medicine Buddha's Blessing: Illnesses (🤒) cured! +1500 pts bonus!" : "🪷【藥師佛應允】\n地圖上所有的惡疾（🤒）全數治癒消失！獲得 1500 點加持！");
+                alert(currentLang === 'en' ? "Medicine Buddha's Blessing: Illnesses (🤒) cured! +1500 pts bonus!" : "🪷【藥師佛應允】\n地圖上所有惡疾（🤒）全數治癒消失！獲得 1500 點加持！");
             } 
             else if (godType === 'supreme') {
                 for (let y = 0; y < mazeSize; y++) {
