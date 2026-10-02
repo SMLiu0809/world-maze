@@ -234,7 +234,7 @@
         <h1 id="ins-title">📖 遊戲說明與玩法指南</h1>
         <div id="ins-desc" style="font-size: clamp(15px, 3.5vw, 19px); text-align: left; line-height: 1.8; background: #EBF8FF; padding: 22px; border-radius: 20px; border: 1px solid #BEE3F8; color: #2B6CB0;">
             <p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p>
-            <p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產（若擁有「重生石」可自動觸發免疫破產並歸零復活）。</p>
+            <p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關 300 點等差）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產（若擁有「重生石」可自動觸發免疫破產並歸零復活）。</p>
             <p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>
         </div>
         <br>
@@ -369,7 +369,7 @@
         </div>
     </div>
 
-    <!-- 世界探險證書與成績卡彈跳視窗 (含五級積分評鑑與暖心鼓勵) -->
+    <!-- 世界探險證書與成績卡彈跳視窗 (含五級評鑑與溫馨鼓勵) -->
     <div id="certificate-modal">
         <div class="modal-content" style="border-color: #F1C40F; background: #FFFEF0;">
             <h2 id="cert-title" style="color: #D35400; margin-top: 0;">📜 世界探險結業證書 📜</h2>
@@ -478,23 +478,23 @@
 
     <script>
         const banishmentStations_zh = [
-            { reward: 180, maxClicks: 7, ticket: 700 },
-            { reward: 160, maxClicks: 9, ticket: 800 },
+            { reward: 180, maxClicks: 7, ticket: 600 },
+            { reward: 160, maxClicks: 9, ticket: 700 },
             { reward: 200, maxClicks: 5, ticket: 500 },
-            { reward: 160, maxClicks: 10, ticket: 800 },
-            { reward: 120, maxClicks: 15, ticket: 1100 },
-            { reward: 150, maxClicks: 10, ticket: 900 },
-            { reward: 100, maxClicks: 20, ticket: 1300 }
+            { reward: 160, maxClicks: 10, ticket: 700 },
+            { reward: 120, maxClicks: 15, ticket: 800 },
+            { reward: 150, maxClicks: 10, ticket: 800 },
+            { reward: 100, maxClicks: 20, ticket: 900 }
         ];
 
         const banishmentStations_en = [
-            { reward: 100, maxClicks: 10, ticket: 500 },
-            { reward: 120, maxClicks: 10, ticket: 600 },
-            { reward: 140, maxClicks: 10, ticket: 700 },
-            { reward: 160, maxClicks: 10, ticket: 800 },
-            { reward: 180, maxClicks: 10, ticket: 900 },
-            { reward: 200, maxClicks: 10, ticket: 1000 },
-            { reward: 220, maxClicks: 10, ticket: 1100 }
+            { reward: 100, maxClicks: 10, ticket: 400 },
+            { reward: 120, maxClicks: 10, ticket: 500 },
+            { reward: 140, maxClicks: 10, ticket: 600 },
+            { reward: 160, maxClicks: 10, ticket: 700 },
+            { reward: 180, maxClicks: 10, ticket: 800 },
+            { reward: 200, maxClicks: 10, ticket: 900 },
+            { reward: 220, maxClicks: 10, ticket: 1000 }
         ];
 
         function getActiveStationConfig() {
@@ -554,7 +554,7 @@
                 cha: "🎯 挑戰模式", chaDesc: "刁鑽迷宮、高手過招",
                 hel: "🔥 地獄模式", helDesc: "極致難關、頂級榮耀",
                 instructions: "遊戲說明 📖", start: "開始探險 🚀", insTitle: "📖 遊戲說明與玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付等差級數紀念品運費（每關遞增500點）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產（若擁有「重生石」可自動觸發免疫破產並歸零復活）。</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 遊戲目標：</b>通過 10 個世界城市關卡，挑戰<b>迷霧探索</b>、收集寶物、獲得三星評價與探險證書！</p><p><b>🕹️ 旅費與紀念品經濟：</b>抵達終點需支付紀念品運費（每關 300 點等差）。旅費不足將被流放至邊疆補給站敲磚賺取機票費！累積扣分達 <b>-3000 點</b>將宣告破產（若擁有「重生石」可自動觸發免疫破產並歸零復活）。</p><p><b>⭐ 三星評分與反悔：</b>每關完成後給予 1~3 星，並可使用「上一步」按鈕安全撤回。</p>`,
                 stationBtn: "💰 前往點數補給站", backCover: "⬅️ 返回主選單",
                 tGod: "⛩️ 神通", tStation: "💰 補給", tKnow: "📖 知識", tUndo: "↩️ 上一步", tPause: "⏸️ 暫停", tRestart: "🔄 重來", tSound: "🔊 音效開", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 遊戲暫停", pResume: "▶️ 繼續遊戲", pRestart: "🔄 重新開始本關", pHome: "🏠 返回主選單",
@@ -571,7 +571,7 @@
                 workTitle: "📜 歷史流放打工區 📜",
                 workStatus: "點擊互動打工！",
                 workReturn: "✈️ 賺足機票費，光榮返台！",
-                workBack: "⬅️ 返回主選單",
+                workBack: "⬅️️ 返回主選單",
                 ttTitle: "⏳ 時空穿梭中...",
                 ttDesc: "因旅費不足，您將被流放至古代歷史現場進行打工...",
                 earnedLabel: "已賺取點數：",
@@ -599,13 +599,13 @@
                     "🌿觀世音(-600)", "🪷藥師佛(-800)", "🌟玉皇大帝 (全清場+指路 / -2500)"
                 ],
                 stations: [
-                    "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票700",
-                    "🌿🍒🍒🍒 惠州 (蘇軾 - 品荔枝)｜每敲160/限9次｜機票800",
+                    "🥩 黃州 (蘇軾 - 東坡肉)｜每敲180/限7次｜機票600",
+                    "🌿🍒🍒🍒 惠州 (蘇軾 - 品荔枝)｜每敲160/限9次｜機票700",
                     "🐊 潮州 (韓愈 - 驅鱷)｜每敲200/限5次｜機票500",
-                    "🏚️ 和州 (劉禹錫 - 修陋室)｜每敲160/限10次｜機票800",
-                    "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票1100",
-                    "🦪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票900",
-                    "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票1300"
+                    "🏚️ 和州 (劉禹錫 - 修陋室)｜每敲160/限10次｜機票700",
+                    "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜機票800",
+                    "🪪 儋州 (蘇東坡 - 敲生蠔)｜每敲150/限10次｜機票800",
+                    "🐟 寧古塔 (甄遠道 - 捕魚)｜每敲100/限20次｜機票900"
                 ],
                 stationLogos: ["🥩", "🌿🍒🍒🍒", "🐊", "🏚️", "🎣", "🦪", "🐟"],
                 gods: [
@@ -620,7 +620,7 @@
                 targets: [
                     "駁二鐵件藝術公仔 🤖", "宇治抹茶茶道組 🍵", "塞納河畔手繪油畫 🎨",
                     "尼羅河莎草紙畫卷 📜", "愛琴海藍白陶壺 🏺", "羅馬競技場古金幣 🪙",
-                    "大笨鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
+                    "大本鐘精鋼齒輪 ⚙️", "自由女神聖火微雕 🗽", "雪梨港灣大貝殼珍珠 🐚", "克里姆林宮彩蛋寶石 🥚"
                 ],
                 lores: [
                     "展現高雄由工業港口轉型為當代藝術創意的文創精神。",
@@ -643,7 +643,7 @@
                 cha: "🎯 挑战模式", chaDesc: "刁钻迷宫、高手过招",
                 hel: "🔥 地狱模式", helDesc: "极致难关、顶级荣耀",
                 instructions: "游戏说明 📖", start: "开始探险 🚀", insTitle: "📖 游戏说明与玩法指南",
-                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付等差级数纪念品运费（每关递增500点）。旅费不足将被流放至边疆补给站赚取机票费！累计扣分达 <b>-3000 点</b>将宣告破产（若拥有“重生石”可自动触发免疫破产并归零复活）。</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 游戏目标：</b>通过 10 个世界城市关卡，挑战<b>迷雾探索</b>、收集宝物、获得三星评价与探险证书！</p><p><b>🕹️ 旅费与纪念品经济：</b>抵达终点需支付纪念品运费（每关 300 点等差）。旅费不足将被流放至边疆补给站赚取机票费！累计扣分达 <b>-3000 点</b>将宣告破产（若拥有“重生石”可自动触发免疫破产并归零复活）。</p><p><b>⭐ 三星评分与反悔：</b>每关完成后给予 1~3 星，并可使用「上一步」按钮安全撤回。</p>`,
                 stationBtn: "💰 前往点数补给站", backCover: "⬅️ 返回主菜单",
                 tGod: "⛩️ 神通", tStation: "💰 补给", tKnow: "📖 知识", tUndo: "↩️ 上一步", tPause: "⏸️ 暂停", tRestart: "🔄 重来", tSound: "🔊 音效开", tSoundOff: "🔇 音效关",
                 pauseTitle: "⏸️ 游戏暂停", pResume: "▶️ 继续游戏", pRestart: "🔄 重新开始本关", pHome: "🏠 返回主菜单",
@@ -684,19 +684,19 @@
                     "万尊降临！全场路阻瞬间清场并直通终点！"
                 ],
                 godBtnTexts: [
-                    "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)",
+                    "🏮土地公(-300)", "⚔️️溫王爺(-400)", "🌊妈祖(-500)",
                     "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
                 ],
                 stations: [
-                    "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票700",
-                    "🍒🍒🍒 惠州 (苏轼 - 品荔枝)｜每敲160/限9次｜机票800",
+                    "🥩 黄州 (苏轼 - 东坡肉)｜每敲180/限7次｜机票600",
+                    "🍒🍒🍒 惠州 (苏轼 - 品荔枝)｜每敲160/限9次｜机票700",
                     "🐊 潮州 (韩愈 - 驱鳄)｜每敲200/限5次｜机票500",
-                    "🏚️ 和州 (刘禹锡 - 修陋室)｜每敲160/限10次｜机票800",
-                    "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票1100",
-                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票900",
-                    "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票1300"
+                    "🏚️ 和州 (刘禹锡 - 修陋室)｜每敲160/限10次｜机票700",
+                    "🎣 永州 (柳宗元 - 江雪)｜每敲120/限15次｜机票800",
+                    "🪪 儋州 (苏东坡 - 敲生蚝)｜每敲150/限10次｜机票800".replace("🪪", "🦪"),
+                    "🐟 宁古塔 (甄远道 - 捕鱼)｜每敲100/限20次｜机票900"
                 ],
-                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🎣", "🪪", "🐟"],
+                stationLogos: ["🥩", "🍒🍒🍒", "🐊", "🏚️", "🎣", "🪪".replace("🪪", "🦪"), "🐟"],
                 gods: [
                     "🏮土地公(-300)", "⚔️溫王爺(-400)", "🌊妈祖(-500)", 
                     "🌿观世音(-600)", "🪷药师佛(-800)", "🌟玉皇大帝 (全清场+指路 / -2500)"
@@ -730,9 +730,9 @@
                 easy: "🍵 Casual", easyDesc: "Relaxed pace, casual fun",
                 std: "⚖️ Standard", stdDesc: "Balanced challenge & fun",
                 cha: "🎯 Challenge", chaDesc: "Tricky mazes for pros",
-                hell: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
+                hell: "🔥 Hell", hel: "🔥 Hell", helDesc: "Ultimate difficulty & glory",
                 instructions: "Instructions 📖", start: "Start Adventure 🚀", insTitle: "📖 Game Instructions & Guide",
-                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (increases by 500 pts per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations! Reaching a total score of <b>-3000 pts</b> triggers bankruptcy (if you hold a Resurrection Stone, it auto-revives you and resets your score to 0).</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
+                insDesc: `<p style="margin-top:0;"><b>🎯 Objective:</b> Complete 10 global city levels, explore with <b>Fog of War</b>, collect treasures, and earn 3 stars!</p><p><b>🕹️ Economy & Travel:</b> Pay shipping fee (300 pts increment per level) to bring back souvenirs. Insufficient funds will result in banishment to supply stations! Reaching a total score of <b>-3000 pts</b> triggers bankruptcy (if you hold a Resurrection Stone, it auto-revives you and resets your score to 0).</p><p><b>⭐ Rating:</b> Earn 1 to 3 stars and use Undo to safely step back.</p>`,
                 stationBtn: "💰 Point Supply Station", backCover: "⬅️ Main Menu",
                 tGod: "⛩️ Gods", tStation: "💰 Supply", tKnow: "📖 Lore", tUndo: "↩️ Undo", tPause: "⏸️ Pause", tRestart: "🔄 Restart", tSound: "🔊 Sound On", tSoundOff: "🔇 Sound Off",
                 pauseTitle: "⏸️ Game Paused", pResume: "▶️ Resume", pRestart: "🔄 Restart Level", pHome: "🏠 Main Menu",
@@ -777,13 +777,13 @@
                     "🌿Guanyin (-600)", "🪷Medicine Buddha (-800)", "🌟Jade Emperor (Clear All / -2500)"
                 ],
                 stations: [
-                    "🚢 Singapore (Sir Stamford Raffles - Port Trade) | 100 pts | Ticket: 500",
-                    "📝 New Zealand (Katherine Mansfield - Manuscript) | 120 pts | Ticket: 600",
-                    "🦘 Australia (Banjo Paterson - Shearing) | 140 pts | Ticket: 700",
-                    "🪷 India (Rabindranath Tagore - Poetry) | 160 pts | Ticket: 800",
-                    "🍀 Ireland (James Joyce - Proofreading) | 180 pts | Ticket: 900",
-                    "📜 London Tower (Shakespeare - Play) | 200 pts | Ticket: 1000",
-                    "🗽 United States (Mark Twain - Painting Fence) | 220 pts | Ticket: 1100"
+                    "🚢 Singapore (Sir Stamford Raffles - Port Trade) | 100 pts | Ticket: 400",
+                    "📝 New Zealand (Katherine Mansfield - Manuscript) | 120 pts | Ticket: 500",
+                    "🦘 Australia (Banjo Paterson - Shearing) | 140 pts | Ticket: 600",
+                    "🪷 India (Rabindranath Tagore - Poetry) | 160 pts | Ticket: 700",
+                    "🍀 Ireland (James Joyce - Proofreading) | 180 pts | Ticket: 800",
+                    "📜 London Tower (Shakespeare - Play) | 200 pts | Ticket: 900",
+                    "🗽 United States (Mark Twain - Painting Fence) | 220 pts | Ticket: 1000"
                 ],
                 stationLogos: ["🚢", "📝", "🦘", "🪷", "🍀", "📜", "🗽"],
                 gods: [
@@ -1017,7 +1017,7 @@
         let currentTarget = {n:"駁二鐵件藝術公仔 🤖", s:500, i:"🤖", station:"第一站 : 臺灣・高雄", knowledge:"展現高雄由工業港口轉型為當代藝術創意的文創精神。"};
         let bweiShengCount = 0; let bweiAttemptsLeft = 3; let pendingGod = '', pendingGodName = '';
 
-        const levelScoreList = [500, 800, 1000, 3500, 6000, 10000, 2500, 1500, 2000, 4500];
+        const levelScoreList = [600, 900, 1200, 1500, 1800, 2100, 2400, 2700, 3000, 3500];
 
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -1097,7 +1097,7 @@
                     if (clearedWolf) break;
                 }
                 drawMaze();
-                alert(currentLang === 'en' ? "✉️ Howler sent! A wolf in the maze was terrified and vanished completely!" : "✉️ 咆哮信發威！成功嚇跑野狼（🐺），野狼已真正從地圖上消失！");
+                alert(currentLang === 'en' ? "✉️ Howler sent! A wolf in the maze was terrified and vanished completely!" : "✉️ 咆哮信發威！成功嚇跑一隻野狼，野狼已真正從地圖上消失！");
             } else if (toolName === 'cloak') {
                 playerInventory.cloak--; updateInventoryUI();
                 playSound('item');
@@ -1622,7 +1622,7 @@
                 let starStr = "⭐".repeat(stars);
                 document.getElementById('ui-stars').innerText = starStr;
 
-                let shippingFee = currentLevel * 500;
+                let shippingFee = currentLevel * 300;
                 let msg = (currentLang === 'en' ? 
                     `Completed [Level ${currentLevel}: ${currentTarget.station}]!\nHandle: [${uniquePlayerId}]\nTarget: ${currentTarget.n}\nEarned Score: +${currentTarget.s}\nStars: ${starStr}\nCurrent Total Score: ${totalScore}\n\n💡 Lore:\n${currentTarget.knowledge}` :
                     `通關【第 ${currentLevel} 關：${currentTarget.station}】！\n代號：[${uniquePlayerId}]\n找到【<b>${currentTarget.n}</b>】\n獲得積分：${currentTarget.s} 點\n本關星等：${starStr}\n目前總分：${totalScore} 點\n\n💡 知識小百科：\n${currentTarget.knowledge}`
@@ -1637,7 +1637,7 @@
         }
 
         function buySouvenir() {
-            let shippingFee = currentLevel * 500;
+            let shippingFee = currentLevel * 300;
             let t = i18n[currentLang];
             if (totalScore < shippingFee) {
                 alert(t.insufficient);
@@ -1889,7 +1889,7 @@
                 }
                 drawMaze();
                 totalScore += 1500; updateUI();
-                alert(currentLang === 'en' ? "Medicine Buddha's Blessing: Illnesses (🤒) cured! +1500 pts bonus!" : "🪷【藥師佛應允】\n地圖上所有惡疾（🤒）全數治癒消失！獲得 1500 點加持！");
+                alert(currentLang === 'en' ? "Medicine Buddha's Blessing: Illnesses (🤒) cured! +1500 pts bonus!" : "🪷【藥師佛應允】\n地圖上所有的惡疾（🤒）全數治癒消失！獲得 1500 點加持！");
             } 
             else if (godType === 'supreme') {
                 for (let y = 0; y < mazeSize; y++) {
